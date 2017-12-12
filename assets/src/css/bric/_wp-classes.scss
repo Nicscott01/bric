@@ -1,0 +1,94 @@
+//
+//		Styles for classes put out by WP
+//
+
+
+
+img[class*=wp-image], 
+img[class*=wp-post-image],
+figure {
+	@extend .img-fluid;
+}
+
+
+.wp-caption-text {
+	text-align: center;
+	font-size: .85rem;
+}
+
+.alignright {
+	float: right;
+	padding-left: 1em;
+}
+
+.alignleft {
+	float: left;
+	padding-right: 1em;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+.alignright,
+.alignleft {
+	max-width: 100%;
+	
+	//@include media-breakpoint-up
+	
+	@include media-breakpoint-between( sm, lg ) {
+		max-width: 50%;
+	}
+	
+}
+
+
+
+@include media-breakpoint-up( sm ) {
+	.container {
+
+		.size-medium_large,
+		.size-large {
+			&.alignright,
+			&.alignleft {
+				max-width: 50%;
+			}
+		}
+
+	}
+}
+
+
+
+
+
+
+//
+//		PAGINATION: COMMENTS
+//
+
+
+
+.page-numbers {
+	//@extend .pagination;
+    list-style: none;
+    display: flex;
+	
+	> li {
+		@extend .page-item;
+		
+		a, span {
+			@extend .page-link;
+		}
+		
+		.current {
+			z-index: 2;
+			color: $pagination-active-color;
+			background-color: $pagination-active-bg;
+			border-color: $pagination-active-border-color;
+		}
+	}
+}

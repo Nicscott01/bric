@@ -1,0 +1,5 @@
+# ignore Mac OS X Desktop Service Store
+.DS_Store
+ 
+#ignore all .txt files
+*.txt

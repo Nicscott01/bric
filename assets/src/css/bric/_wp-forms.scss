@@ -1,0 +1,103 @@
+//
+//		Search form Styling
+//
+
+
+.search-form {
+	@extend .form-inline;
+	justify-content: flex-start;
+
+	
+	.search-field {
+		@extend .form-control;
+		margin-right: .25em;
+		width: 100%;
+	}
+	
+	label {
+		flex-basis: 0;
+		flex-grow: 1;
+		max-width: 100%;
+		margin-bottom: 0;
+		margin-right: .5em;
+	}
+}
+
+
+
+
+.comment-form {
+	
+	> p[class*=comment-form] {
+		@extend .form-group;
+		
+		textarea, input {
+			@extend .form-control;
+		}
+		
+		> *:not(label) {
+			@extend .form-control;
+		}
+	}
+}
+
+
+.search-submit, .submit {
+	@extend .btn, .btn-primary;
+}
+
+
+
+
+//
+//		POST PAGINATION
+//
+
+.has-btn-primary {
+	
+	a {
+		@extend .btn, .btn-primary;
+	}
+	
+}
+
+.has-raquo {
+	
+	a {
+		&:after {
+			content: "\00BB";
+			margin-left: .25em;
+		}
+	}
+}
+
+
+.has-laquo {
+	
+	a {
+		&:before {
+			content: "\00AB";
+			margin-right: .25em;
+		}
+	}
+}
+
+
+
+
+
+//
+//		PASSWORD PROTECTED FRONT END STYLES
+//
+
+.login-password-protected {
+	
+	&, 
+	> .container, 
+	> .container > .row,
+	.main-content {
+		height:100%;
+	}
+	
+	
+}

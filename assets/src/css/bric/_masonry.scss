@@ -1,0 +1,19 @@
+//
+//		Masonry Initial Layout
+//
+
+$base-width: 25%;
+
+.gallery-masonry {
+	
+	.image-item {
+		float:left;
+		width: $base-width;
+		padding: .25em;
+		margin-bottom:0;
+	}
+	
+	.image-width-2 {
+		width: $base-width*2;
+	}
+}

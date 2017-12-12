@@ -1,0 +1,100 @@
+//
+//		NAvbar/Menu Fixes
+//
+
+
+
+.dropdown-menu {
+	
+	.menu-item {
+		
+		a {
+			@extend .dropdown-item;
+		}
+		
+	}
+	
+}
+
+
+
+
+
+.navbar-brand {
+	max-width: $custom-logo-max-width;
+	
+	img {
+		@extend .img-fluid;		
+	}
+}
+
+
+
+.navbar {
+	flex-wrap: nowrap;
+	
+	.right-side {
+		display:flex;
+		flex-direction: column;
+		flex-basis: auto;
+		
+		.navbar-collapse {
+			flex-basis: auto;
+		}
+		
+		.navbar-toggler {
+			max-width: 58px;
+			align-self: flex-end;
+		}
+	}
+	
+	
+	.widget {
+		
+		ul {
+			margin-bottom: 0;
+		}
+		
+		.d-inline-flex {
+			
+			> * {
+				padding: 0 .5em;
+			}
+		}
+		
+		.biz-info {
+			margin-bottom: 0 !important;
+		}
+	}
+	
+	
+	
+	
+	&.navbar-expand-md {
+		justify-content: space-between;
+
+		.right-side {
+			@include media-breakpoint-up( 'md' ) {
+				flex-basis: 100%;
+			}
+
+		}
+	
+	}
+	
+	
+	
+	
+
+}
+
+
+
+
+//
+//		Don't let phone numbers break
+//
+
+a[href^="tel:"] {
+	word-break: keep-all;
+}

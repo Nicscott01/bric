@@ -1,0 +1,63 @@
+//
+//		Styles for events/Calendars
+//
+
+
+
+.em-calendar-wrapper {
+	
+	table {
+		@extend .table;
+	}
+	
+	
+	.month_name {
+		text-align:center;
+		
+	}
+	
+	thead {
+		
+		td:last-child {
+			text-align:right;
+		}
+		
+	}
+	
+	
+	tbody {
+		
+		tr {
+			height: 100%;
+			
+			td {
+				width: ( 100 / 7 ) * 1%;
+				border: 1px solid $blue;
+				
+				&:hover, &:focus {
+					background-color: $gold-light;
+				}
+				
+				ul {
+					@extend .list-unstyled;
+					
+					li {
+						line-height: 1.1;
+						margin-bottom: .5em;
+					}
+				}
+			}
+		}
+		
+		
+				
+	}
+	
+	
+	.days-names {
+		text-align: center;
+		background-color: $gold-light;
+	}
+	
+	
+}

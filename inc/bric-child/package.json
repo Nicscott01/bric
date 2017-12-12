@@ -1,0 +1,29 @@
+{
+  "name": "bric",
+  "version": "0.0.2",
+  "description": "Wordpress theme developed by BRianna and nIC Scott",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^4.0.0-beta",
+    "popper.js": "^1.12.5",
+    "slideout": "^1.0.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.4",
+    "grunt": "^0.4.5",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-imagemin": "^1.0.1",
+    "grunt-contrib-sass": "^0.9.2",
+    "grunt-contrib-uglify": "^0.11.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-postcss": "^0.9.0",
+    "grunt-sass": "^2.0.0",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.12.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "BRianna and nIC Scott",
+  "license": "ISC"
+}

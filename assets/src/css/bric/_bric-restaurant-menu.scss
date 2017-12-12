@@ -1,0 +1,96 @@
+//
+//		Styles for restaurant menus
+//
+
+
+.restaurant-menu {
+	
+	
+	
+	.menu-item {
+		padding-top: 1em;
+		padding-bottom: 1em;
+		text-align: center;
+		
+		&:nth-child(even) {
+			background-color: rgba( $c2, .1 );
+		}
+		
+
+		
+		.name {
+			font-weight: bold;
+		}
+		
+		.name,
+		.description {
+			margin-bottom: .5em;
+		}
+		
+			
+		@include media-breakpoint-up( md ) {
+
+
+			.name {
+				text-align: left;
+			}
+
+			.prices {
+				text-align: right;
+			}
+			
+			.name,
+			.description {
+				margin-bottom: 0;
+			}
+			
+			
+		}
+
+
+		
+	}
+
+	
+	
+
+	.prices {
+		display: inline-flex;
+		flex-direction: row;
+		justify-content: space-around;
+		
+		
+		.size-price-group {
+			flex: 1 1 auto;
+			padding-right: 2em;
+				
+			&:last-child {
+				padding-right: 0;
+			}			
+						
+		}
+		
+		
+		.size-name {
+			margin-right:1em;
+		}
+		
+		.size-price {
+			margin-right:2em;
+			
+			&:last-child {
+				margin-right: 0;
+			}
+			
+			&:before {
+				content:"$";
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+}
