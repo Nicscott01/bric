@@ -9,13 +9,14 @@ class Navbar {
 	public $title = '';
 	public $tagline = '';
 	public $has_logo = false;
-	public $navbar_collapse_id = '';
+	public $navbar_collapse_id = 'collapse-id-not-set';
 	public $main_nav_menu = '';
 	public $main_nav_menu_obj = array();
 	public $main_nav_menu_items_wrap = '';
 	public $content_above_nav = '';
 	public $navbar_options = array();
-	
+	public $navbar_toggler = '';
+	public $wp_menus = array();
 	
 	function __construct() {
 		
@@ -47,10 +48,16 @@ class Navbar {
 		
 		
 		//Get main menu
-		$menus = get_nav_menu_locations();
-		$this->main_nav_menu_obj = wp_get_nav_menu_object( $menus['primary'] );
+		$this->wp_menus = get_nav_menu_locations();
 		
-		$this->navbar_collapse_id = $this->main_nav_menu_obj->slug.'-'.$this->main_nav_menu_obj->term_id;
+		if ( !empty( $this->wp_menus['primary'] ) ) {
+		
+			$this->main_nav_menu_obj = wp_get_nav_menu_object( $menus['primary'] );
+			$this->navbar_collapse_id = $this->main_nav_menu_obj->slug.'-'.$this->main_nav_menu_obj->term_id;
+
+		}
+		
+		
 		
 		$this->main_nav_menu_items_wrap = '<ul id="%1$s" class="%2$s">%3$s</ul>';
 		$this->main_nav_menu_container_class = 'collapse navbar-collapse';
@@ -62,36 +69,25 @@ class Navbar {
 	
 	
 	public function get_main_nav_menu() {
-			
+		
+		if ( !empty( $this->wp_menus ) ) {
+		
 				
-		$this->main_nav_menu = wp_nav_menu( array(
-			'theme_location' => 'primary',
-			'echo' => 0,
-			'menu_class' => 'navbar-nav ml-auto',
-			'container' => 'div',
-			'container_class' => $this->main_nav_menu_container_class,
-			'container_id' => $this->navbar_collapse_id,
-			'walker' => new BootstrapNavwalker(),
-			'items_wrap' => $this->main_nav_menu_items_wrap, //<ul id="%1$s" class="%2$s">%3$s</ul>
+			$this->main_nav_menu = wp_nav_menu( array(
+				'theme_location' => 'primary',
+				'echo' => 0,
+				'menu_class' => 'navbar-nav ml-auto',
+				'container' => 'div',
+				'container_class' => $this->main_nav_menu_container_class,
+				'container_id' => $this->navbar_collapse_id,
+				'walker' => new BootstrapNavwalker(),
+				'items_wrap' => $this->main_nav_menu_items_wrap, //<ul id="%1$s" class="%2$s">%3$s</ul>
+
+			));		
 			
-		));		
 			return $this->main_nav_menu;
-		
-		/*
-		if ( !empty( $this->navbar_options['content_before'] ) && !$this->navbar_options['content_before']['above_navbar'] ) {
-			
-			return $this->main_nav_menu = sprintf( '<div class="content-and-navbar"><div class="content-above-nav-menu">%s</div>%s</div>',
-						  	$this->navbar_options['content_before']['html'],
-						    $this->main_nav_menu
-						  );
-			
+
 		}
-		
-		else {
-			
-			return $this->main_nav_menu;
-			
-		} */
 		
 	}
 	

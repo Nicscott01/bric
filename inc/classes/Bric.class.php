@@ -7,7 +7,7 @@ define( 'BRIC_GOOGLE_MAPS_API_KEY', 'AIzaSyDUy-vuqQLK4APwNGoJ2MWDn04nTMzeZJ8' );
 class Bric {
 	
 	public $SiteInfo;
-	
+	public $errors = array();
 	
 	
 	function __construct() {
@@ -24,16 +24,18 @@ class Bric {
 	
 	
 	function setup_theme() {
+				
+		add_action( 'after_setup_theme', array( $this, 'theme_support') );
+		add_action( 'after_setup_theme', array( $this, 'nav_menus') );
+
+		
 		
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_footer', array( $this, 'enqueue_footer_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) ); // queue early because of jquery in footer
-		
-		add_action( 'after_setup_theme', array( $this, 'theme_support') );
-		add_action( 'after_setup_theme', array( $this, 'nav_menus') );
-		
+				
 		add_action( 'widgets_init', array( $this, 'register_sidebars') );
 		
 		add_action( 'wp', array( $this, 'get_theme_globals' ));
@@ -46,6 +48,15 @@ class Bric {
 		add_filter( 'wpseo_metabox_prio', array( $this, 'yoast_meta_box' ));
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	function easy_google_fonts_edits() {
@@ -205,22 +216,10 @@ class Bric {
 		));
 
 		
+		//Register Nav Menus
+		$this->nav_menus();
 		
-	}
-	
-	
-	
-	/**
-	 *  	Get Theme Global Variables		
-	 *
-	 */
-	
-	function get_theme_globals() {
 		
-		global $SiteInfo;
-		$this->SiteInfo = $SiteInfo;
-		
-
 	}
 	
 	
@@ -240,6 +239,25 @@ class Bric {
 	
 		
 	}
+	
+	
+	
+	
+	/**
+	 *  	Get Theme Global Variables		
+	 *
+	 */
+	
+	function get_theme_globals() {
+		
+		global $SiteInfo;
+		$this->SiteInfo = $SiteInfo;
+		
+
+	}
+	
+	
+	
 	
 	
 	
@@ -348,4 +366,5 @@ class Bric {
 global $Bric;
 
 $Bric = new Bric();
+$Bric->theme_support();
 

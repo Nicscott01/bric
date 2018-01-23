@@ -310,7 +310,7 @@ class BricLoop {
 	<div class="row footer-widgets">	
 		<?php get_sidebar('footer'); ?>
 	</div>
-	<div class="row justify-content-center justify-content-md-between">
+	<div class="row copyright-credits-wrapper justify-content-center justify-content-md-between">
 	<?php echo $this->get_copyright(); ?>
 	<?php echo $this->get_developer_credits(); ?>
 	</div>

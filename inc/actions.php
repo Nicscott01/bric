@@ -2,7 +2,7 @@
 
 global $Navbar;
 
-add_action( 'bric_header', array( $Navbar, 'get_navbar' ) );
+add_action( 'bric_header', array( $Navbar, 'get_navbar' ), 10 );
 
 //Do the loop
 global $BricLoop;

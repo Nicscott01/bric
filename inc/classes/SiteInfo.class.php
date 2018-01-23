@@ -36,6 +36,9 @@ class SiteInfo {
 		$this->email = new stdClass();
 		//$this->social = new stdClass();
 		$this->options = new stdClass();
+		$this->options->posts = new stdClass();
+		$this->options->excerpts = new stdClass();
+		$this->options->main_content = new stdClass();
 		$this->address = new stdClass();
 		$this->phone = new stdClass();
 		

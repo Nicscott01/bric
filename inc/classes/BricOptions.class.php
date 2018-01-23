@@ -203,10 +203,10 @@ class BricOptions {
 
 
 		$env = array(
-			array( 'PATH', '/home/creare2/webapps/node/bin' ),
-			array( 'PATH', '/home/creare2/webapps/sass/bin' ),
-			array( 'GEM_HOME', '/home/creare2/webapps/sass/gems' ),
-			array( 'RUBYLIB', '/home/creare2/webapps/sass/lib' ),			
+			array( 'PATH', PATH_NODE ),
+			array( 'PATH', PATH_SASS ),
+			array( 'GEM_HOME', GEM_HOME),
+			array( 'RUBYLIB', RUBYLIB ),			
 		);
 
 

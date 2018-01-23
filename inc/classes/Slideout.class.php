@@ -11,6 +11,7 @@ class Slideout {
 		
 		add_action( 'wp_enqueue_scripts', array ( $this, 'enqueue_scripts') );
 		add_action( 'wp_footer', array( $this, 'init_slideout'), 50 );
+		
 	}
 	
 	
@@ -49,7 +50,7 @@ class Slideout {
 				$('.navbar-toggler').click( function() {
 					mainmenu.toggle();
 				});
-
+				$(document).trigger('bricSlideOutComplete');
 				
 			//}
 			
@@ -60,26 +61,31 @@ class Slideout {
 	/**
 	 *		Dropdown Behavior
 	 *
+	 *		perform on doc ready to wait for any other 
+	 *		DOM manipulation by other plugins.
 	 *
 	 */
 	(function($){
-		$('.dropdown-toggle').on( 'click', function(e) {
-			if ( $(window).width() > 768 ) {
-				e.stopPropagation();
-			}
-		});			
-		$('.nav-item.dropdown').hover( function(e) {
-			$(this).addClass('hover').find('.dropdown-menu').addClass('show');			
-		},
-		function(e) {
-			$(this).removeClass('hover').find('.dropdown-menu').removeClass('show');
-		});
+		$(document).ready( function(){ 
+
+			$('.dropdown-toggle').on( 'click', function(e) {
+				if ( $(window).width() > 768 ) {
+					e.stopPropagation();
+				}
+			});	
+			
+			$('.nav-item.dropdown').hover( function(e) {
+				$(this).addClass('hover').find('.dropdown-menu').addClass('show');	
+			},
+			function(e) {
+				$(this).removeClass('hover').find('.dropdown-menu').removeClass('show');
+			});
+			
+		})
 		
 	})(jQuery);
 	
 </script>
-		
-		
 		<?php
 		
 	}

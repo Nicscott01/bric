@@ -5,7 +5,8 @@
 
 
 .dropdown-menu {
-	
+	margin: 0 !important; //fix for hover 
+
 	.menu-item {
 		
 		a {
@@ -87,6 +88,24 @@
 	
 
 }
+
+
+//
+//		Handle width when bold on hover
+//
+
+.nav-link {
+	
+	&:before {
+		display: block;
+		content: attr(data-text-content);
+		font-weight: bolder;
+		height: 0;
+		overflow: hidden;
+		visibility: hidden;		
+	}
+}
+
 
 
 

@@ -1,0 +1,234 @@
+//
+//		SCSS for Parallax scrolling (CSS only)
+//
+
+
+.slides {
+	position: relative;
+}
+
+
+.slide {
+	position: relative;
+	padding: 0;
+	height: 80vh;
+	display: flex;
+	
+	
+	&__content {
+		margin: 2em auto;
+	}
+	
+	&__text{
+		
+	}
+	
+	&__bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: -1;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position:center;
+	}
+
+	
+}
+
+
+
+
+@include media-breakpoint-up(md) {
+
+	/* parallax */
+	@supports ((perspective: 1px) and (not (-webkit-overflow-scrolling: touch))) {
+
+		body.has-parallax {
+			overflow: hidden;
+			height: 100%;
+		}
+		
+		body.has-parallax {
+			transform: translateZ(0px); /* Fix paint issues in Edge && Safari H/W acceleration */
+		}
+		
+		
+
+		$perspective: 300px;
+
+		.slides {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			overflow-x: hidden;
+			overflow-y: auto;
+			perspective: $perspective;
+			scroll-behavior: smooth;
+		}
+
+		.slide, .slide__content {
+			transform-style: preserve-3d;
+		}
+
+
+		$dist_bg: 60px;
+		.slide__text {
+			transform: translateZ(#{$dist_bg}) scale(#{1 - ($dist_bg / $perspective)});
+			transform-origin: 50% 50%;
+		}
+
+
+
+		.slide {
+			//border: 5px solid red;
+
+			.slide__content {
+				margin: -2em auto;
+			}
+
+
+			&:nth-child(2n) {
+				z-index: 1; /* ensure slides overlay correctly */
+				height: 100vh;
+
+
+				.slide__content {
+					margin: 8em auto;
+				}
+
+
+				.slide__image {
+					transform: translateZ(100px) scale(.67);
+					transform-origin: center center;
+				}
+
+				.slide__text {
+					transform-origin: center center;
+				}
+
+
+
+				$dist_bg: 35px;
+
+				.slide__bg {
+					transform: translateZ(#{$dist_bg}) scale(#{1 - ($dist_bg / $perspective)});
+				}
+
+			}
+
+			&:nth-child(2n+1) {
+
+				&:not(:first-child) {
+
+					.slide__bg {
+						top: -50%;
+					}
+				}
+
+				&:not(:last-child) {
+
+					.slide__bg {
+						bottom: -50%;
+					}
+
+				}
+
+			}
+
+
+			&:first-child {
+				//padding-top: 14%;
+			}
+
+			&:last-child {
+				//padding-bottom: 14%;
+			}
+
+
+		}
+
+	}
+
+}
+
+
+
+
+
+@include media-breakpoint-up(md) {
+	
+	@supports ((perspective: 1px) and (not (-webkit-overflow-scrolling: touch))) {
+
+		.parallax {
+			perspective: 300px;
+			height: 100vh;
+			overflow-x: hidden;
+			overflow-y: auto;
+			perspective-origin-x: 100%;
+
+			&__group {
+				position: relative;
+				height: 100vh;
+				transform-style: preserve-3d;
+				padding:3em 0;
+				z-index: 0;
+				
+				&.break {
+					height:auto;
+				}
+			}
+			
+			
+			
+			&__layer {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				perspective-origin-x: 100%;
+
+				&--fore {
+					transform: translateZ(90px) scale(.7);
+					z-index: 1;
+				}
+
+				&--base {
+					transform: translateZ(0);
+					z-index: 4;
+				}
+
+				&--back {
+					transform: translateZ(-300px) scale(2);
+					z-index: 3;
+				}
+
+				&--deep {
+					transform: translateZ(-600px) scale(3);
+					z-index: 2;
+				}
+			}
+
+
+		}
+
+	}
+}
+
+body.dp {
+	
+	.parallax__group, .slide {
+		 transform: translate3d(700px, 0, -800px) rotateY(30deg);
+	}
+}
+
+
+.fixed-bg {
+	background-position: top left;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
