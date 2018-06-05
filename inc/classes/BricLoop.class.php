@@ -31,9 +31,22 @@ class BricLoop {
 			$this->contentTemplate = 'basic';
 			
 		}
-					
 		
-		if ( is_search() || is_archive() || is_home() ) {
+		
+		
+		//Check for woocommerce 
+		if ( function_exists('is_product') ) {
+			
+			if ( is_product() ) {
+				
+				$this->contentTemplate = 'bricproduct';
+				
+			}
+			
+		}
+		
+		
+		elseif ( is_search() || is_archive() || is_home() ) {
 			
 			$this->contentTemplate = 'excerpt';
 		}
@@ -45,6 +58,20 @@ class BricLoop {
 	
 	
 	public function get_before_loop_posts() {
+		
+		
+		
+		//If woocommerce, don't do the sidebar.
+		if ( function_exists('is_product') ) {
+			
+			if ( is_product() ) {
+				
+				return;
+				
+			}
+		
+		}
+
 		
 		
 		if ( is_archive() || is_home() || is_single() || is_search() || is_404() ) {
@@ -150,6 +177,7 @@ class BricLoop {
 		$this->set_post_class();
 
 		
+		
 		if ( !is_404() ) {
 			
 			get_template_part( 'content', $this->contentTemplate );
@@ -220,6 +248,15 @@ class BricLoop {
 	
 	public function get_post_pagination() {
 		
+		if ( function_exists('is_product') ) {
+			
+			if ( is_product() ) {
+				return;		
+			}
+		}
+		
+		
+		
 		if ( is_single() ) {
 						
 			?>
@@ -277,7 +314,7 @@ class BricLoop {
 	
 	public function get_sidebar() {
 		
-		if ( ( get_post_type() == 'post' && ( is_archive() || is_home() || is_single() ) ) || is_search() || is_404() ) {
+		if ( (  ( get_post_type() == 'post' ) || ( get_post_type() == 'testimonials-widget' ) && ( is_archive() || is_home() || is_single() ) ) || is_search() || is_404() ) {
 		
 			//$this->get_pusher(); 
 
@@ -418,7 +455,10 @@ class BricLoop {
 		
 		$gallery = get_field('carousel');
 
+		
 		$Carousel = new Carousel( $gallery );
+		
+		$Carousel = apply_filters( 'bric_header_carousel', $Carousel );
 		
 		
 		if ( $this->SiteInfo->carousel['edge_to_edge'] ) {

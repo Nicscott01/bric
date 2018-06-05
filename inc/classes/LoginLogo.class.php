@@ -27,13 +27,22 @@ class LoginLogo {
 		
 		$logo = wp_get_attachment_image_url( $SiteInfo->logo, 'medium' );
 		
+		$logo_data = pathinfo( $logo );
+				
+		$bg_size = 'contain';
+		
+		if ( $logo_data['extension'] == 'svg' ) {
+			
+			$bg_size = '200px auto';
+		}
+		
 		
 	?>
 		<style type="text/css">
 			#login h1 a, .login h1 a {
 			background-image: url(<?php echo $logo; ?>);
 			width:100%;
-			background-size: contain;
+			background-size: <?php echo $bg_size; ?>;
 			background-repeat: no-repeat;
 			padding-bottom: 30px;
 			}

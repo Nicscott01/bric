@@ -6,7 +6,7 @@
 
 img[class*=wp-image], 
 img[class*=wp-post-image],
-figure {
+figure:not(.woocommerce-product-gallery__wrapper) {
 	@extend .img-fluid;
 }
 

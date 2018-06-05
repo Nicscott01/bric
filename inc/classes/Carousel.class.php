@@ -23,6 +23,8 @@ class Carousel {
 	public $pauseOnHover = true;
 	public $wrapItemInner = false;
 	public $itemInnerClass = '';
+	public $slideSpeed = '3000';
+	
 	
 	
 	function __construct( $gallery ) {
@@ -280,11 +282,12 @@ class Carousel {
 		
 		
 		
-		$this->carousel = sprintf( '<div id="%s" class="%s" %s %s>%s</div>',
+		$this->carousel = sprintf( '<div id="%s" class="%s" %s %s data-interval="%s">%s</div>',
 								 	$this->id,
 								  	( $this->bsCarousel ? 'carousel slide ' : '').$this->wrapperClass,
 								  	( $this->autoPlay ? 'data-ride="carousel"' : '' ),
 								    ( $this->pauseOnHover  ? 'data-pause="hover"' : 'data-pause="null"'),
+								    $this->slideSpeed,
 								  	$this->carouselInner.$this->carouselIndicators.$this->carouselControls
 								 );
 		

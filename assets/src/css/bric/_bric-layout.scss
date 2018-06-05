@@ -10,8 +10,20 @@
 }
 
 
-body:not( .has-header-image ) .main-content {
+.main-content {	
 	margin-top: 1.5em;
+}
+
+body {
+		
+	&.has-header-image,
+	&.has-header-carousel {
+	
+		.main-content {	
+			margin-top: 0;
+		}
+		
+	}
 }
 
 

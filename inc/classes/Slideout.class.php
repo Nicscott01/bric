@@ -10,8 +10,9 @@ class Slideout {
 	function __construct() {
 		
 		add_action( 'wp_enqueue_scripts', array ( $this, 'enqueue_scripts') );
-		add_action( 'wp_footer', array( $this, 'init_slideout'), 50 );
-		
+
+		add_action( 'wp_footer', array( $this, 'init_slideout'), 51 );
+
 	}
 	
 	

@@ -124,7 +124,7 @@ class PhotoGallery {
 
 
 				$output .= sprintf( "\t\t<a href='%s' itemprop='contentUrl' data-size='%s'>%s</a>\n",
-								$image['url'],
+								apply_filters( 'bric_photo_gallery_full_size', $image['url'], $image ),
 								$image['width'].'x'.$image['height'],
 								$img );
 
@@ -189,14 +189,27 @@ class PhotoGallery {
 	public function queueScripts() {
 		
 		
+		if ( $this->args['gallery_display'] == 'masonry' ) {
+			
+			//wp_enqueue_script( 'imagesloaded', get_template_directory_uri(). '/includes/js/imagesloaded.pkgd.min.js', '', '4.1.1', true );
+			wp_enqueue_script( 'imagesLoaded' );
+
+			//wp_enqueue_script('masonry', get_template_directory_uri().'/includes/js/masonry.pkgd.min.js', array('jquery'), '3.3.2', true );
+			wp_enqueue_script( 'masonry' );
+			
+			
+			add_action( 'wp_footer', array( $this, 'masonry_queue' ), 101 );
+			
+		}
+		
 		if ( $this->args['lightbox'] == 'photoswipe' ) {
 			
 			
-			wp_enqueue_script('photoswipe', get_template_directory_uri().'/assets/js/photoswipe.min.js', '', '4.1', true);
+			wp_enqueue_script('photoswipe', get_template_directory_uri().'/assets/js/photoswipe.min.js', '', '4.1', true );
 
-			wp_enqueue_script('photoswipe-ui', get_template_directory_uri().'/assets/js/photoswipe-ui-default.min.js', '', '4.1', true);
+			wp_enqueue_script('photoswipe-ui', get_template_directory_uri().'/assets/js/photoswipe-ui-default.min.js', 'photoswipe', '4.1', true);
 
-			wp_enqueue_script('photoswipe-thumbnail-opener', get_template_directory_uri().'/assets/js/photoswipe-thumbnail-opener.min.js', '', '', true);
+			wp_enqueue_script('photoswipe-thumbnail-opener', get_template_directory_uri().'/assets/js/photoswipe-thumbnail-opener.min.js', 'photoswipe-ui', '', true);
 
 			
 			
@@ -216,18 +229,6 @@ class PhotoGallery {
 		}
 		
 
-		if ( $this->args['gallery_display'] == 'masonry' ) {
-			
-			//wp_enqueue_script( 'imagesloaded', get_template_directory_uri(). '/includes/js/imagesloaded.pkgd.min.js', '', '4.1.1', true );
-			wp_enqueue_script( 'imagesLoaded' );
-
-			//wp_enqueue_script('masonry', get_template_directory_uri().'/includes/js/masonry.pkgd.min.js', array('jquery'), '3.3.2', true );
-			wp_enqueue_script( 'masonry' );
-			
-			
-			add_action( 'wp_footer', array( $this, 'masonry_queue' ), 101 );
-			
-		}
 		
 		
 	}
@@ -237,7 +238,7 @@ class PhotoGallery {
 	public function getPhotoSwipeHTML() {
 		
 		//include the photoswipe template in footer; need to call new instance of class because it was printing twice before
-		add_action( 'wp_footer', array( 'PhotoGallery', 'photoswipe_queue'), 90 );
+		add_action( 'wp_footer', array( 'PhotoGallery', 'photoswipe_queue'), 10 );
 		//add_action( 'wp_footer', array( $this, 'photoswipe_queue'), 90 );
 
 	}
@@ -317,12 +318,21 @@ class PhotoGallery {
 </div>	
 	<?php
 		
+	add_action( 'wp_footer', array( 'PhotoGallery', 'add_ps_class'), 50 );
+			
+		
 	}
 	
 	
 	
 	
-	
+
+	public function add_ps_class() {
+		
+		?>
+<script>jQuery('body').addClass('has-photoswipe');</script>		
+		<?php
+	}
 	
 	
 	
@@ -347,6 +357,7 @@ class PhotoGallery {
 		$masonry.imagesLoaded().progress( function() {
 		  $masonry.masonry('layout');
 		});
+		
 
 	})(jQuery);
 

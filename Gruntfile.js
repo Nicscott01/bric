@@ -109,8 +109,8 @@ module.exports = function (grunt) {
 						flatten: true,
 					},{
 						expand:true,
-						//cwd: 'assets/src/css/',
-						src: ['assets/src/css/photoswipe/default-skin/*.png'],
+						cwd: 'assets/src/css/photoswipe/default-skin/',
+						src: ['*'],
 						dest: 'assets/css/photoswipe/default-skin/',
 						filter: 'isFile',
 						flatten: true,

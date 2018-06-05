@@ -11,9 +11,23 @@ $base-width: 25%;
 		width: $base-width;
 		padding: .25em;
 		margin-bottom:0;
+		
+		img {
+			min-width: 100%;
+			max-width: 100%;
+			height: auto;
+		}
 	}
 	
 	.image-width-2 {
 		width: $base-width*2;
+	}
+}
+
+
+.has-photoswipe {
+	
+	.slideout-panel {
+		will-change:unset;
 	}
 }

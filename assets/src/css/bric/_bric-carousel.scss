@@ -43,6 +43,48 @@ body.has-header-carousel {
 }
 
 
+.carousel-fade {
+   
+	.carousel-inner {
+		
+        .carousel-item {
+			opacity: 0;
+			transition-duration: .6s;
+			transition-property: opacity;        
+		}
+		
+		.carousel-item.active,
+		.carousel-item-next.carousel-item-left,
+		.carousel-item-prev.carousel-item-right {
+		  opacity: 1;
+		}
+
+		.active.carousel-item-left,
+		.active.carousel-item-right {
+		 opacity: 0;
+		}
+
+		.carousel-item-next,
+		.carousel-item-prev,
+		.carousel-item.active,
+		.active.carousel-item-left,
+		.active.carousel-item-prev {
+			transform: translateX(0);
+			transform: translate3d(0, 0, 0);
+		}		
+		
+		
+    }
+
+    .carousel-control {
+        z-index: 2;
+    }
+	
+}
+
+
+
+
 .carousel-caption {
 	strong {
 		display: block;

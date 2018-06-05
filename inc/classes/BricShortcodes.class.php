@@ -113,13 +113,16 @@ class BricShortcodes {
 			'title' => '',
 			'image' => '',
 			'link' => '',
+			'class' => '',
+			'size' => 'medium',
 		), $atts );
 		
 		
-		return sprintf( '<div class="cta"><a href="%s"><span class="title">%s</span>%s</a></div>', 
+		return sprintf( '<div class="cta %s"><a href="%s"><span class="title">%s</span>%s</a></div>', 
+				 $atts['class'],
 			   	get_permalink( $atts['link'] ),
 				$atts['title'],
-				wp_get_attachment_image( $atts['image'], 'medium' )
+				wp_get_attachment_image( $atts['image'], $atts['size'] )
 			   );
 		
 		
