@@ -52,7 +52,7 @@ class Navbar {
 		
 		if ( !empty( $this->wp_menus['primary'] ) ) {
 		
-			$this->main_nav_menu_obj = wp_get_nav_menu_object( $menus['primary'] );
+			$this->main_nav_menu_obj = wp_get_nav_menu_object( $this->wp_menus['primary'] );
 			$this->navbar_collapse_id = $this->main_nav_menu_obj->slug.'-'.$this->main_nav_menu_obj->term_id;
 
 		}

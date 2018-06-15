@@ -205,6 +205,7 @@ class SiteInfo {
 		$contact = get_field( 'contact', 'options');
 		
 		$this->phone->main = $contact['phone'];
+		$this->phone->fax = $contact['fax'];
 		$this->email->main = $contact['email'];
 		
 		
@@ -341,6 +342,28 @@ class SiteInfo {
 	}
 	
 	
+	/**
+	 *		Format Fax 
+	 *
+	 *
+	 */
+	
+	function format_fax( $label = '' ) {
+		
+		
+		if ( !empty( $this->phone->fax ) ) {
+		
+		return sprintf( '%2$s<a href="fax:%1$s">%1$s</a>', $this->phone->fax, 
+					   ( !empty( $label) ? $label.'&nbsp;' : '' )
+					  );	
+			
+		}
+		
+		return '';
+		
+	}
+	
+	
 	
 	
 	
@@ -421,6 +444,8 @@ class SiteInfo {
 			'include' => 'address',
 			'phone_label' => '',
 			'email_label' => '',
+			'fax_label' => '',
+			'address_label' => '',
 		), $attr );
 		
 		
@@ -428,17 +453,28 @@ class SiteInfo {
 		
 		$o = '';
 		
-		if ( count( $include ) > 0 ) {
-									
+		$num_of_items = count( $include );
+		$c = 1;
+		
+		if ( $num_of_items > 0 ) {
+			
 			foreach ( $include as $k => $v ) {
+				
+				$br = '<br>';
+				
+				if ( $num_of_items == $c ) {
+					$br = '';
+				}
 							
 				$label = $attr[$v.'_label'];
 				
 				//var_dump( $v.'_label' );
 				//var_dump( $this->format_phone( $label ) );
 				
-				$o .= call_user_func( array( $this, 'format_'.$v ), $label ).'<br>';
+				$o .= call_user_func( array( $this, 'format_'.$v ), $label ).$br;
+			
 				
+				$c++;
 			}
 			
 			

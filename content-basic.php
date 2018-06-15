@@ -9,6 +9,9 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php 
 	
+	do_action( 'bric_before_page_header');
+
+	
 	if ( has_post_thumbnail() ) {
 		?>
 	<header class="page-header">
@@ -30,6 +33,8 @@
 		<?php
 		
 	}
+	
+	do_action( 'bric_after_page_header');
 	?>
 	
 	<div class="entry-content">

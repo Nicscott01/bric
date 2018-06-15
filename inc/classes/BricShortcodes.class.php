@@ -20,6 +20,10 @@ class BricShortcodes {
 		//Call to Action
 		add_shortcode( 'call_to_action', array( $this, 'call_to_action_sc') );
 		
+		
+		//Recent Posts
+		add_shortcode( 'recent_posts', array( $this, 'recent_posts_sc' ) );
+		
 	}
 	
 	
@@ -129,6 +133,76 @@ class BricShortcodes {
 		
 		
 	}
+	
+	
+	
+	
+	
+	/**
+	 *		Recent Posts Shortcode
+	 *
+	 *
+	 */
+	
+	public static function recent_posts_sc( $atts, $content ) {
+		
+		$atts = shortcode_atts( array(
+			'post_type' => 'post',
+			'posts_per_page' => 5,
+			'content_template' => 'excerpt',
+			'taxonomy' => '',
+			'terms' => '',
+			'order' => 'ASC',
+			'orderby' => 'title',
+		), $atts );
+		
+		
+		if ( !empty( $atts['taxonomy'] ) ) {
+			
+			$atts['tax_query'] = array(
+				array(
+					'taxonomy' => $atts['taxonomy'],
+					'field' => 'slug',
+					'terms' => $atts['terms'],
+				),
+			);
+		}
+		
+		
+		
+		$posts = new WP_Query( $atts );
+		
+		//var_dump( $posts->posts );
+		if ( !empty( $atts['content_template'] ) ) {
+			
+			global $post;
+			
+			ob_start();
+			
+			foreach ( $posts->posts as $post ) {
+				
+				setup_postdata( $post );
+								
+				get_template_part( 'content', $atts['content_template'] );
+				
+			}
+			
+			$content = ob_get_clean();
+			
+			wp_reset_postdata();
+		}
+		
+		return $content;
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
 	
 
 }
