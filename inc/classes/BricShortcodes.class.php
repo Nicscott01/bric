@@ -24,6 +24,11 @@ class BricShortcodes {
 		//Recent Posts
 		add_shortcode( 'recent_posts', array( $this, 'recent_posts_sc' ) );
 		
+		
+		//Frontend Login Form
+		add_shortcode( 'login_form', array( $this, 'login_form_sc') );
+		add_filter( 'login_form_bottom', array( $this, 'login_form_bottom'), 10, 2 );
+		
 	}
 	
 	
@@ -201,6 +206,44 @@ class BricShortcodes {
 		
 	}
 	
+	
+	
+	
+	
+	
+	public function login_form_sc( $args ) {
+		
+		if ( !is_user_logged_in() ) {
+			
+			$o = '<div class="login-form-wrapper">';
+			
+			//$o .= '<div class="alert alert-primary" role="alert">You must login to edit your info.</div>';
+			
+			$o .= wp_login_form( array(
+				'echo' => false,
+			));
+			
+			
+			$o .= '</div>';
+			
+			return $o;
+			
+			
+		}
+		
+		
+		
+	}
+	
+	
+	
+	public function login_form_bottom( $content, $args ) {
+		
+		$content .= sprintf( '<p>I <a href="%s">lost my password.</a></p>', wp_lostpassword_url() );
+
+		return $content;
+		
+	}
 	
 	
 	

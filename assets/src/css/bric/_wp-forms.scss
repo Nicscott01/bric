@@ -101,3 +101,56 @@
 	
 	
 }
+
+
+
+
+//
+//		Login Form
+//
+
+.login-form-wrapper {
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+.login {
+	
+	.message {
+		@extend .alert, .alert-primary;
+	}
+	
+	#login_error {
+		@extend .alert, .alert-danger;
+	}
+	
+}
+
+
+#loginform,
+#lostpasswordform {
+	
+	> p:not(.login-submit ):not(.submit) {
+		@extend .form-group;
+		
+		> input {
+			@extend .form-control;
+		}
+	}
+	
+	.button {
+		@extend .btn, .btn-primary;
+	}
+	
+	> p {
+		
+		&:last-child {
+			margin-bottom: 0 !important;
+		}
+	}
+	
+	.forgetmenot {
+		float:none;
+	}
+	
+}

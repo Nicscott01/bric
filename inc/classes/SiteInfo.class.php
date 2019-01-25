@@ -331,7 +331,7 @@ class SiteInfo {
 		
 		if ( !empty( $this->phone->main ) ) {
 		
-		return sprintf( '%2$s<a href="tel:%1$s">%1$s</a>', $this->phone->main, 
+		return sprintf( '<span class="tel-wrapper">%2$s<a href="tel:%1$s">%1$s</a></span>', $this->phone->main, 
 					   ( !empty( $label) ? $label.'&nbsp;' : '' )
 					  );	
 			
@@ -353,7 +353,7 @@ class SiteInfo {
 		
 		if ( !empty( $this->phone->fax ) ) {
 		
-		return sprintf( '%2$s<a href="fax:%1$s">%1$s</a>', $this->phone->fax, 
+		return sprintf( '<span class="fax-wrapper">%2$s<a href="fax:%1$s">%1$s</a></span>', $this->phone->fax, 
 					   ( !empty( $label) ? $label.'&nbsp;' : '' )
 					  );	
 			
@@ -377,16 +377,18 @@ class SiteInfo {
 	function get_href( $item, $label ) {
 		
 		if ( $this->is_email( $item ) ) {
-		
-			return sprintf( '%2$s<a href="mailto:%1$s">%1$s</a>', $item, 
+			
+			$class = 'email';
+			$output = sprintf( '%2$s<a href="mailto:%1$s">%1$s</a>', $item, 
 						   ( !empty( $label) ? $label.'&nbsp;' : '' )
 						  );
 			
 		}
 		
 		elseif ( $this->is_url( $item ) ) {
-		
-			return sprintf( '%2$s<a href="mailto:%1$s" target="_blank">%1$s</a>', $item, 
+			
+			$class = 'email';
+			$output = sprintf( '%2$s<a href="mailto:%1$s" target="_blank">%1$s</a>', $item, 
 						   ( !empty( $label) ? $label.'&nbsp;' : '' )
 						  );
 			
@@ -394,12 +396,15 @@ class SiteInfo {
 		
 		else {
 			
-			return sprintf( '%2$s<a href="%1$s">%1$s</a>', $item, 
+			$class = 'url';
+			$output = sprintf( '%2$s<a href="%1$s">%1$s</a>', $item, 
 						   ( !empty( $label) ? $label.'&nbsp;' : '' )
 						  );
 			
 		}
 		
+		
+		return sprintf( '<span class="%s-wrapper">%s</span>', $class, $output );
 		
 	}
 	
@@ -460,7 +465,7 @@ class SiteInfo {
 			
 			foreach ( $include as $k => $v ) {
 				
-				$br = '<br>';
+				$br = '';//'<br>';
 				
 				if ( $num_of_items == $c ) {
 					$br = '';

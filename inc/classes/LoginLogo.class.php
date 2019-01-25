@@ -36,6 +36,8 @@ class LoginLogo {
 			$bg_size = '200px auto';
 		}
 		
+		wp_enqueue_style( 'bric', get_stylesheet_directory_uri().'/assets/css/bric-style.css' );
+		
 		
 	?>
 		<style type="text/css">

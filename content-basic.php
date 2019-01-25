@@ -13,25 +13,10 @@
 
 	
 	if ( has_post_thumbnail() ) {
-		?>
-	<header class="page-header">
-		<h1 class="entry-title"><?php the_title(); ?></h1>
-		<div class="header-image-wrapper">
-			<div class="header-image">
-				<?php the_post_thumbnail( 'full' ); ?>
-			</div>
-		</div>
-	</header>
-	
-		<?php
+		get_template_part( 'template-parts/heading', 'header-image' );
 	}
 	else {
-		?>
-	<h1 class="entry-title">
-		<?php the_title(); ?>
-	</h1>
-		<?php
-		
+		get_template_part( 'template-parts/heading', 'basic' );
 	}
 	
 	do_action( 'bric_after_page_header');
@@ -40,9 +25,16 @@
 	<div class="entry-content">
 		<?php the_content(); ?>
 	</div>
+<?php 
+	
+	if ( $wp_query->max_num_pages > 1 ) {
+?>		
 	<div class="pagination">
 	<?php wp_link_pages( array(
 			'next_or_number' => 'next'
 		)); ?>
 	</div>
+<?php
+	} 
+?>
 </article>

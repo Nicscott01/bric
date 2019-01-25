@@ -70,7 +70,7 @@ class Navbar {
 	
 	public function get_main_nav_menu() {
 		
-		if ( !empty( $this->wp_menus ) ) {
+		if ( !empty( $this->wp_menus['primary'] ) ) {
 		
 				
 			$this->main_nav_menu = wp_nav_menu( array(

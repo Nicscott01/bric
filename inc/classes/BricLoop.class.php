@@ -258,15 +258,24 @@ class BricLoop {
 		
 		
 		if ( is_single() ) {
-						
+			
+			$adjacents = [];
+					
+			$adjacents[] = get_adjacent_post();
+			$adjacents[] = get_adjacent_post( false, '', false );
+			
+			
+			//var_dump( $adjacents );
+			
+			if ( !empty( $adjacents )) {
 			?>
-<div class="col-12 mb-3">
+<div class="keep-reading col-12 mb-3">
 	<h3>Keep Reading</h3>
 	<div class="nav-previous alignleft has-btn-primary has-laquo"><?php previous_post_link( '%link'); ?></div> 
 	<div class="nav-next alignright has-btn-primary has-raquo"><?php next_post_link( '%link' ); ?></div>
 </div>
 			<?php
-			
+			}
 			
 		}
 		
@@ -342,19 +351,8 @@ class BricLoop {
 	
 	public function get_footer() {
 		
-		?>
-<div class="footer-inner container">
-	<div class="row footer-widgets">	
-		<?php get_sidebar('footer'); ?>
-	</div>
-	<div class="row copyright-credits-wrapper justify-content-center justify-content-md-between">
-	<?php echo $this->get_copyright(); ?>
-	<?php echo $this->get_developer_credits(); ?>
-	</div>
-</div>
-		
-		<?php
-		
+		get_template_part( 'template-parts/footer', 'basic' );
+				
 	}
 	
 	
@@ -365,7 +363,7 @@ class BricLoop {
 		
 		$copyright_text = get_copyright_text( $this->SiteInfo->copyright_start );
 		
-		return sprintf( '<div class="copyright col-auto">%s %s</div>', $copyright_text, $this->SiteInfo->copyright_owner ); 
+		return sprintf( '<div class="copyright">%s %s</div>', $copyright_text, $this->SiteInfo->copyright_owner ); 
 		
 		
 	}
@@ -376,7 +374,7 @@ class BricLoop {
 	public function get_developer_credits() {
 		
 		
-		return sprintf( '<div class="developer-credits col-auto">Website by <a href="%s" target="_blank">%s</a></div>', DEVELOPER_URL, DEVELOPER_NAME );
+		return sprintf( '<div class="developer-credits"><a href="%s" target="_blank">Website by %s</a></div>', DEVELOPER_URL, DEVELOPER_NAME );
 		
 		
 	}

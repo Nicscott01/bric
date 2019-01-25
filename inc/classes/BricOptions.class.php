@@ -30,9 +30,12 @@ class BricOptions {
 		//add_filter( 'wp_get_custom_css', array( $this, 'override_wp_custom_css') );
 		
 		
+		add_action( 'customize_preview_init', array( $this, 'css_preview_js' ) );
+		
 		add_action( 'customize_controls_enqueue_scripts', array( $this, 'customizer_code_formatter' ) );
 	
 		add_action( 'customize_controls_print_footer_scripts', array( $this, 'behave_init'), 50);
+		
 		
 
 		
@@ -42,12 +45,24 @@ class BricOptions {
 	
 	function create_customizations( WP_Customize_Manager $wp_customize ) {
 		
+		
+		$wp_customize->add_section( 'bric_css', array(
+			'priority' => 160,
+			'title' => 'Bric CSS',
+			'description' => 'Description coming soon...',
+		
+		));
+		
+		$wp_customize->remove_section( 'custom_css' );
+
+		
 		$wp_customize->add_setting( 'custom_scss', array(
 				'type' => 'theme_mod',
 				'capability' => 'edit_theme_options',
 				'default' => '//Enter SCSS Variables here',
 				//'validate_callback' => array( $this, 'validate_scss' ),
 				'transport' => 'postMessage',
+				//'dirty' => true,
 		));
 		
 		$wp_customize->add_setting( 'custom_scss_styles', array(
@@ -56,13 +71,15 @@ class BricOptions {
 				'default' => '//Enter SCSS Styles here',
 				//'validate_callback' => array( $this, 'validate_scss' ),
 				'transport' => 'postMessage',
+				//'dirty' => true,
+				'validate_callback' => array( $this, 'scss_validation'),
 		));
 		
 		
 		$wp_customize->add_control( 'custom_scss', array(
 			'type' => 'textarea',
 			'priority' => 5,
-			'section' => 'custom_css',
+			'section' => 'bric_css',
 			'label'=> 'Theme Variables',
 			'description' => 'Enter variables for child theme',
 			'input_attrs' => array(
@@ -76,7 +93,7 @@ class BricOptions {
 		$wp_customize->add_control( 'custom_scss_styles', array(
 			'type' => 'textarea',
 			'priority' => 5,
-			'section' => 'custom_css',
+			'section' => 'bric_css',
 			'label'=> 'SCSS Styles',
 			'description' => 'Enter additional custom styles',
 			'input_attrs' => array(
@@ -92,20 +109,31 @@ class BricOptions {
 			'settings' => array( 'custom_scss', 'custom_scss_styles' ),
 			'selector' => '#bric-customizer-css',
 			'container_inclusive' => true,
-			'render_callback' => function() {
+			/*'render_callback' => function() {
 							
 				BricOptions::save_css_files();
-				BricOptions::run_grunt_task('dev');
+				$grunt_task = BricOptions::run_grunt_task('dev');
+				
+				//$grunt_task = json_encode( $grunt_task );
+				
+				if ( end( $grunt_task ) == 'Done, without errors.' ) {
+					
+					return sprintf( '<link id="%s" rel="stylesheet" href="%s">', 'bric-customizer-css', get_stylesheet_directory_uri().'/assets/css/bric-style-customizer.css' );
+					
+				}
+				else {
+					
+					return false;
+				}
+				
+				
 			
-				printf( '<link id="%s" rel="stylesheet" href="%s">', 'bric-customizer-css', get_stylesheet_directory_uri().'/assets/css/bric-style-customizer.css' );
-			
-			},
+			},*/
 			'fallback_refresh' => false,
 		));
 		
 		
-		
-		$wp_customize->remove_control( 'custom_css' );
+		//$wp_customize->remove_control( 'custom_css' );
 				
 		//$wp_customize->get_control('custom_css')->label = 'Additional S/CSS';
 		//$wp_customize->get_control('custom_css')->input_attrs['style'] = 'min-height:400px; font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:10px;';
@@ -131,7 +159,29 @@ class BricOptions {
 		) );
 		
 		*/
+		
+		
+		$this->maybe_compile_css();
+		
 	}
+	
+	
+	
+	
+	public function scss_validation( $validity, $value, $setting_object ) {
+		
+		
+		
+		
+		
+		return $validity;
+		
+	}
+	
+	
+	
+	
+	
 	
 	
 	/*
@@ -161,18 +211,44 @@ class BricOptions {
 	}
 	
 	
+	
+	
+	
+	public function maybe_compile_css() {
+		
+		$customizer_css_file = get_stylesheet_directory().'/assets/css/bric-style-customizer.css';
+		
+		if ( !file_exists( $customizer_css_file )) {
+			
+			$this->compile_css();
+			
+			
+		}
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	public function compile_css() {
 		
 		
 		if ( is_customize_preview() ) {
 			
-			$this->run_grunt_task( 'dev' );
+			return $this->run_grunt_task( 'dev' );
 						
 		}
 		
 		else {
 			
-			$this->run_grunt_task();
+			return $this->run_grunt_task();
 		
 		}
 
@@ -233,7 +309,7 @@ class BricOptions {
 
 		}
 
-
+		$output = [];
 
 		exec( $command, $output );
 
@@ -290,6 +366,17 @@ window.onload = function() {
 		
 		}
 		
+	}
+	
+	
+	/**
+ 	 * Load our Script of when to tell the customizer to run scss compile
+	 *
+	 */
+	
+	public function css_preview_js() {
+		
+		 wp_enqueue_script( 'bric_scss_preview', get_template_directory_uri().'/assets/js/bric_scss_preview.js', array( 'customize-preview', 'jquery' ) );		
 	}
 	
 	

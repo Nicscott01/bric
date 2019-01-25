@@ -92,3 +92,16 @@ figure:not(.woocommerce-product-gallery__wrapper) {
 		}
 	}
 }
+
+
+
+
+
+//
+//		WP 5.0 BLOCKS
+//
+
+.wp-block-file__button {
+	@extend .btn, .btn-primary;
+	margin-left: 1em;
+}
