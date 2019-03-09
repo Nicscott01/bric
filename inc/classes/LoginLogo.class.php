@@ -31,7 +31,7 @@ class LoginLogo {
 				
 		$bg_size = 'contain';
 		
-		if ( $logo_data['extension'] == 'svg' ) {
+		if ( isset( $logo_data['extension'] ) && ( $logo_data['extension'] == 'svg' ) ) {
 			
 			$bg_size = '200px auto';
 		}
