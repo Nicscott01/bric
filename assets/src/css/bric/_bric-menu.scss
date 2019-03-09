@@ -69,10 +69,13 @@
 	}
 	
 	
-	
-	
-	&.navbar-expand-md {
+	&.navbar-expand-md,
+	&.navbar-expand-lg {
 		justify-content: space-between;
+	}
+	
+	
+	& {
 
 		.right-side {
 			@include media-breakpoint-up( 'md' ) {
