@@ -27,13 +27,15 @@ class LoginLogo {
 		
 		$logo = wp_get_attachment_image_url( $SiteInfo->logo, 'medium' );
 		
+		$logo_meta =  wp_get_attachment_metadata( $SiteInfo->logo );
+		
 		$logo_data = pathinfo( $logo );
 				
 		$bg_size = 'contain';
 		
 		if ( isset( $logo_data['extension'] ) && ( $logo_data['extension'] == 'svg' ) ) {
 			
-			$bg_size = '200px auto';
+			$bg_size = sprintf( '%spx %spx', (string) $logo_meta['width'], (string) $logo_meta['height'] );
 		}
 		
 		wp_enqueue_style( 'bric', get_stylesheet_directory_uri().'/assets/css/bric-style.css' );
@@ -47,6 +49,7 @@ class LoginLogo {
 			background-size: <?php echo $bg_size; ?>;
 			background-repeat: no-repeat;
 			padding-bottom: 30px;
+			background-position: center center;
 			}
 		</style>
 	<?php }

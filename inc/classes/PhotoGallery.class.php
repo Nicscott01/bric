@@ -13,8 +13,8 @@
 
 class PhotoGallery {
 	
-	public static $gallery = array();
-	public static $args = array();
+	public $gallery = array();
+	public $args = array();
 	
 	
 	
@@ -68,7 +68,7 @@ class PhotoGallery {
 	
 	
 	
-	function buildGallery() {
+	public function buildGallery() {
 				
 		if ( !is_admin() ) {
 			$this->queueScripts();
@@ -88,7 +88,7 @@ class PhotoGallery {
 	
 	
 	
-	function compileGallery() {
+	public function compileGallery() {
 		
 		
 		if ( is_array( $this->gallery ) ) {
@@ -246,7 +246,7 @@ class PhotoGallery {
 	
 		
 	
-	public function photoswipe_queue() {
+	public static function photoswipe_queue() {
 			
 
 	?>
@@ -327,7 +327,7 @@ class PhotoGallery {
 	
 	
 
-	public function add_ps_class() {
+	public static function add_ps_class() {
 		
 		?>
 <script>jQuery('body').addClass('has-photoswipe');</script>		
@@ -406,5 +406,20 @@ function cc_photogallery_scripts() {
 	$gallery = new PhotoGallery;
 	
 	$gallery->queueScripts();
+	
+}
+
+
+
+
+add_filter( 'post_gallery', 'bric_post_gallery', 10, 3 );
+
+function bric_post_gallery( $output = '', $atts, $instance ) {
+		
+	$images = explode( ',', $atts['ids'] );
+	
+	$Gallery = new PhotoGallery( $images );
+		
+	return $Gallery->buildGallery();
 	
 }

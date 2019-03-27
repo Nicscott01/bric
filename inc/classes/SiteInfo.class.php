@@ -1,5 +1,8 @@
 <?php
 /**
+ *		SiteInfo Class for Bric Theme
+ *
+ *		Controls the businss info fields, options for theme.
  *	
  *	
  *
@@ -29,7 +32,10 @@ class SiteInfo {
 	
 	function __construct() {
 		
-		define( 'DEVELOPER_NAME', 'Creare Web Solutions' );
+		if ( !defined('DEVELOPER_NAME') )
+			define( 'DEVELOPER_NAME', 'Creare Web Solutions' );
+		
+		if ( !defined( 'DEVELOPER_URL' ) )
 		define( 'DEVELOPER_URL', 'https://www.crearewebsolutions.com' );
 
 		
@@ -39,6 +45,8 @@ class SiteInfo {
 		$this->options->posts = new stdClass();
 		$this->options->excerpts = new stdClass();
 		$this->options->main_content = new stdClass();
+		$this->navbar = new stdClass();
+		
 		$this->address = new stdClass();
 		$this->phone = new stdClass();
 		
@@ -57,26 +65,15 @@ class SiteInfo {
 		//Now really get the business info from the DB
 		$this->get_business_info();
 		
+		//init the options for the site
+		add_action( 'init', [ $this, 'get_site_options' ] );
+		//make sure we init the options for customizer
+		add_action( 'customize_preview_init', [ $this, 'get_site_options' ] );
 		
-		$this->get_site_options();
+		add_action( 'customize_register', [ $this, 'add_options_to_customizer'] );
 		
-		
-		$this->breadcrumbs = array(
-			'enable' => false,
-			'action' => 'bric_after_header',
-			'priority' => '10',
-			'hide_on_home' => true,
-			'classes' => array(
-				'container',
-			),
-		);
-		
-		
-		$this->carousel = array(
-			'edge_to_edge' => true,  //force out of container for edge to edge
-			'show_caption' => false,
-		);
-		
+		add_action( 'customize_preview_init', [ $this, 'customizer_preview_scripts' ] );
+
 		
 		
 		
@@ -110,21 +107,492 @@ class SiteInfo {
 	
 	function get_site_options() {
 		
-		$this->options->posts->show_post_date = true;
-		$this->options->posts->show_post_author = true;
+		//Default Options Model
+		$this->defaults = [
+			'options' => [
+				[ 'section' => 'posts',
+				  'label' => 'For Full Post Pages',
+				  'items' => [
+						[	'name' => 'show_post_date',
+							'label' => 'Show Post Date',
+							'value' => true,
+							'type' => 'checkbox', 
+						],
+						[	'name' => 'show_post_author',
+							'label' => 'Show Post Author',
+							'value' => true,
+							'type' => 'checkbox',
+						],						
+					],
+				],
+				[ 'section' => 'excerpts',
+				  'label' => 'For Excerpt of Post Page',
+				  'items' => [
+						[	'name' => 'show_post_date',
+							'label' => 'Show Post Date',
+							'value' => true,
+							'type' => 'checkbox',
+						],						
+						[	'name' => 'show_post_author',
+							'label' => 'Show Post Author',
+							'value' => true,
+							'type' => 'checkbox',
+						],						
+						
+					],
+				],
+				[ 'section' => 'layout',
+				  'label' => 'Layout Setting',
+				  'items' => [
+						[	'name' => 'main_content_container',
+							'label' => 'Main Content Container',
+							'value' => true,
+							'type' => 'checkbox',
+						],						
+						[	'name' => 'article_class',
+							'label' => 'Article Class',
+							'value' => 'col',
+							'type' => 'text',
+						],						
+						[	'name' => 'article_class_excerpt',
+							'label' => 'Excerpt Article Class',
+							'value' => 'col-12 col-md-6',
+							'type' => 'text',
+						],						
+					],
+				],
+				[ 'section' => 'homepage_slider',
+				  'label' => 'Homepage Slider',
+				  'items' => [
+					  [
+						  'name' => 'enable',
+						  'label' => 'Enable Homepage Slider',
+						  'value' => false,
+						  'type' => 'checkbox',
+					  ],
+					  [
+						  'name' => 'edge_to_edge',
+						  'label' => 'Slider should take up full width of browser window',
+						  'value' => false,
+						  'type' => 'checkbox',
+					  ],
+					  [
+						  'name' => 'caption',
+						  'label' => 'Show caption',
+						  'value' => false,
+						  'type' => 'checkbox',
+					  ],
+				  ]
+						
+				],
+			],
+			
+		];
 		
-		$this->options->excerpts->show_post_date = true;
-		$this->options->excerpts->show_post_author = true;
-		
-		
-		$this->options->main_content->container = true;
-		$this->options->article_class = 'col';
-		$this->options->article_class_excerpt = 'col-12 col-md-6';
 		
 		
 		
+
+		
+		//Set the theme mod defaults
+		
+		$defaults = array (
+			'homepage_slider' => array (
+				'enable' => true,
+				'edge_to_edge' => false,
+				'caption' => true,
+			  ),
+			'main_content_container' => true,
+			'article_class_excerpt' => 'col-12 col-md-6',
+			'show_post_date' => true,
+			'show_post_author' => true,
+			'layout' => array (
+				'main_content_container' => true,
+				'article_class' => 'col-12',
+				'article_class_excerpt' => 'col-12 col-md-6',
+			  ),
+			'posts' => array (
+				'show_post_date' => true,
+				'show_post_author' => true,
+			  ),
+			'excerpts' => array (
+				'show_post_date' => true,
+				'show_post_author' => true,
+			  ),
+			'carousel' => array (
+				'transition' => 'slide',
+				'speed' => '3000',
+			  ),
+			'navbar' => array(
+				'brand_type' => 'image',
+				'container' => true,
+				'expand' => 'md',
+				'bg_color' => 'light',
+				'navbar_color' => 'light',
+			),
+		);
+
+		
+		
+		
+		//get the theme mods
+		$user_settings = get_theme_mod( 'bric' );
+		
+		$theme_settings = wp_parse_args( $user_settings, $defaults );
+		
+		//Parse the args 2 levels deep
+		foreach ( $defaults as $k => $default ) {
+			
+			if ( is_array( $default ) ) {
+				
+				$theme_settings[$k] = wp_parse_args( $user_settings[$k], $default );
+				
+			}
+			
+		}
+		
+		
+		
+		//var_dump( $theme_settings );
+		//exit();
+		
+		$this->options->posts->show_post_date = $theme_settings['posts']['show_post_date'];
+		$this->options->posts->show_post_author = $theme_settings['posts']['show_post_author'];
+		
+		$this->options->excerpts->show_post_date = $theme_settings['excerpts']['show_post_date'];
+		$this->options->excerpts->show_post_author = $theme_settings['excerpts']['show_post_author'];
+		
+		
+		$this->options->main_content->container = $theme_settings['layout']['main_content_container'];
+		$this->options->article_class = $theme_settings['layout']['article_class'];
+		$this->options->article_class_excerpt = $theme_settings['layout']['article_class_excerpt'];
+		
+		
+		$this->breadcrumbs = array(
+			'enable' => false,
+			'action' => 'bric_after_header',
+			'priority' => '10',
+			'hide_on_home' => true,
+			'classes' => array(
+				'container',
+			),
+		);
+		
+				
+		
+		$this->carousel = array(
+			'enable' => $theme_settings['homepage_slider']['enable'],
+			'edge_to_edge' => $theme_settings['homepage_slider']['edge_to_edge'],  //force out of container for edge to edge
+			'show_caption' => $theme_settings['homepage_slider']['caption'],
+			'transition' => $theme_settings['carousel']['transition'],
+			'speed' => $theme_settings['carousel']['speed'],
+		);
+		
+		
+		
+		//Navbar Options
+		
+		$this->navbar->brand_type = $theme_settings['navbar']['brand_type'];
+		$this->navbar->container = $theme_settings['navbar']['container'];
+		$this->navbar->expand = $theme_settings['navbar']['expand'];
+		$this->navbar->bg_color = $theme_settings['navbar']['bg_color'];
+		$this->navbar->navbar_color = $theme_settings['navbar']['navbar_color'];
+		
+		
+		
+		/*
+		echo '<pre>';
+		var_dump( $options );
+		var_dump( $this->defaults );
+		var_dump( $this->options );
+		echo '</pre>';
+		*/
 		
 	}
+	
+	
+	/**
+	 *		Add SiteInfo Options to Customizer
+	 *
+	 *		@date 3/9/19
+	 *
+	 *
+	 */
+	
+	
+	public function add_options_to_customizer( $wp_customize ) {
+		
+		
+		
+		
+		/**
+		 *		Add Global Settings to customizer
+		 *
+		 *		@edit 3/9/19
+		 *
+		 *
+		 */
+		
+		//Add Section for Global Options
+		$wp_customize->add_section( 'bric_options', [
+			'priority' => 90,
+			'title' => __('Theme Options'),
+			'description' => __('Edit these options to control how your website looks.')
+		] );
+		
+		
+		
+		//Loop through defaults, [registering panels,] settings/controls
+		foreach ( $this->defaults['options'] as $option ) {
+		
+			
+			foreach ( $option['items'] as $item ) {
+				
+				$wp_customize->add_setting( 'bric['.$option['section'].']['.$item['name'].']', array(
+					'type' => 'theme_mod',
+					'capability' => 'edit_theme_options',
+					'theme_supports' => '',
+					'default' => $item['value'],
+					'transport' => 'refresh',
+					'sanitize_callback' => '',
+					'sanitize_js_callback' => '',
+				));
+
+
+				$wp_customize->add_control( 'bric['.$option['section'].']['.$item['name'].']', [
+					'type' => $item['type'],
+					'setting' => $item['value'],
+					'priority' => 10,
+					'section' => 'bric_options',
+					'label' => __($item['label']),
+					'description' => $option['label'],
+					'input_attrs' => [
+						'class' => sanitize_title($item['name'])
+					],
+					'active_callback' => '',
+				]);
+
+				
+			}
+			
+			
+			
+		}
+		
+		
+		/**
+		 *		Carousel Settings
+		 *
+		 *
+		 */
+		
+		//Controls
+		
+		
+		
+		
+		//Transition
+		$wp_customize->add_setting( 'bric[carousel][transition]', array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'theme_supports' => '',
+			'default' => '',
+			'transport' => 'postMessage',
+			'sanitize_callback' => ['BricCustomizer','carousel_transition_cb'],
+			'sanitize_js_callback' => '',
+		));
+
+
+		$wp_customize->add_control( 'bric[carousel][transition]', [
+			'type' => 'select',
+			'setting' => 'slide',
+			'priority' => 10,
+			'section' => 'static_front_page',
+			'label' => __('Select Transition'),
+			'description' => '',
+			'choices' => [
+				'slide' => __('Slide'),
+				'fade' => __('Fade'),
+			],
+			'active_callback' => '',
+		]);
+		
+		
+		//Speed
+		$wp_customize->add_setting( 'bric[carousel][speed]', array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'theme_supports' => '',
+			'default' => '3000',
+			'transport' => 'refresh',
+			'sanitize_callback' => [ 'BricCustomizer', 'carousel_speed_cb' ],
+			'sanitize_js_callback' => '',
+		));
+
+
+		$wp_customize->add_control( 'bric[carousel][speed]', [
+			'type' => 'text',
+			'setting' => '3000',
+			'priority' => 10,
+			'section' => 'static_front_page',
+			'label' => __('Transition Speed'),
+			'description' => '',
+			'attr' => [
+				'placeholder' => __('Transition speed in milliseconds'),
+				
+			],
+			'active_callback' => '',
+		]);
+		
+		
+
+
+
+		
+		
+		//
+		//		NAVBAR
+		//
+		
+		//Brand type
+		$wp_customize->add_setting( 'bric[navbar][brand_type]', array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'theme_supports' => '',
+			'default' => 'image',
+			'transport' => 'refresh',
+			'sanitize_callback' => ['BricCustomizer','navbar_brand_type_cb'],
+			'sanitize_js_callback' => '',
+		));
+
+
+		$wp_customize->add_control( 'bric[navbar][brand_type]', [
+			'type' => 'select',
+			'setting' => 'image',
+			'priority' => 10,
+			'section' => 'title_tagline',
+			'label' => __('Select how to display your brand'),
+			'description' => '',
+			'choices' => [
+				'image' => __('Image'),
+				'text' => __('Text'),
+				'textimage' => __('Image & Text'),
+			],
+			'active_callback' => '',
+		]);
+		
+
+		
+		
+		
+		//Navbar Container
+		$wp_customize->add_setting( 'bric[navbar][container]', array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'theme_supports' => '',
+			'default' => false,
+			'transport' => 'refresh',
+			'sanitize_callback' => [ 'BricCustomizer', 'checkbox_cb' ],
+			'sanitize_js_callback' => '',
+		));
+
+
+		$wp_customize->add_control( 'bric[navbar][container]', [
+			'type' => 'checkbox',
+			'setting' => false,
+			'priority' => 10,
+			'section' => 'bric_options',
+			'label' => __('Put Navbar in a container'),
+			'description' => '',
+			'active_callback' => '',
+		]);
+		
+
+		//Navbar bg color
+		$wp_customize->add_setting( 'bric[navbar][bg_color]', array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'theme_supports' => '',
+			'default' => 'light',
+			'transport' => 'refresh',
+			'sanitize_callback' => '', //['BricCustomizer','navbar_brand_type_cb'],
+			'sanitize_js_callback' => '',
+		));
+
+
+		$wp_customize->add_control( 'bric[navbar][bg_color]', [
+			'type' => 'select',
+			'setting' => 'light',
+			'priority' => 10,
+			'section' => 'title_tagline',
+			'label' => __('Navbar Background Color'),
+			'description' => '',
+			'choices' => [
+				'light' => __('Light Gray'),
+				'dark' => __('Dark Gray'),
+				'white' => __('White'),
+			],
+			'active_callback' => '',
+		]);
+		
+		
+		
+		
+		/*
+		//Post Options
+		foreach ( $this->options->posts as $k => $option ) {
+			
+			$wp_customize->add_setting( 'bric['.$k.']', array(
+				'type' => 'theme_mod',
+				'capability' => 'edit_theme_options',
+				'theme_supports' => '',
+				'default' => $option,
+				'transport' => 'refresh',
+				'sanitize_callback' => '',
+				'sanitize_js_callback' => '',
+			));
+			
+			
+			$wp_customize->add_control( 'bric['.$k.']', [
+				'type' => 'checkbox',
+				'priority' => 10,
+				'section' => 'bric_options',
+				'label' => __($k),
+				'description' => '',
+				'input_attrs' => [
+					'class' => 'checkbox'
+				],
+				'active_callback' => '',
+			]);
+			
+		}
+		
+		*/
+		
+	}
+	
+	
+	
+	
+	/**
+	 * 		Customizer JS 
+	 *
+	 *
+	 *
+	 */
+	 
+	
+	public function customizer_preview_scripts() {
+		
+		wp_enqueue_script( 'customizer-bric-carousel', get_template_directory_uri().'/assets/src/js/customizer-carousel.js', array('customize-preview', 'jquery'), null, true);
+
+	}
+	 
+	
+	
+	
+	
+	
 	
 	
 	
@@ -721,3 +1189,93 @@ $SiteInfo = new SiteInfo();
 
 
 
+
+
+
+
+
+
+
+
+class BricCustomizer {
+	
+	
+	
+	static function carousel_transition_cb( $value ) {
+		
+		if ( $value == 'fade' ) {
+			
+			return 'carousel-fade';
+		}
+		elseif ( $value == 'slide' ) {
+			
+			return 'slide';
+		}
+		
+	}
+	
+	
+	
+	static function carousel_speed_cb( $value ) {
+		
+		if ( is_numeric( $value ) ) {
+			
+			return $value;
+			
+		}
+		else {
+			
+			return null;
+			
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	static function navbar_brand_type_cb( $value ) {
+		
+		$value = sanitize_title( $value );
+		
+		if ( in_array( $value, [ 'text', 'image', 'textimage' ] ) ) {
+			
+			return $value;
+			
+		}
+		
+		else {
+			
+			return null;
+		}
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	static function checkbox_cb( $value ) {
+		
+		if ( $value === true ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
+	
+	
+	
+}

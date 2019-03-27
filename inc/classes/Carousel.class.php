@@ -14,7 +14,7 @@ class Carousel {
 	public $includeCaption = false;
 	public $includeIndicators = '';
 	public $includeControls = false;
-	public $wrapperClass = '';
+	public $wrapperClass = [];
 	public $id = 'generic-carousel-1';
 	public $autoPlay = true;
 	public $linkCaption = false;
@@ -281,10 +281,15 @@ class Carousel {
 	function wrapCarousel() {
 		
 		
+		$this->wrapperClass[] = 'col-12';
+		$this->wrapperClass[] = 'carousel';
+		$this->wrapperClass[] = 'slide';
+		
+		
 		
 		$this->carousel = sprintf( '<div id="%s" class="%s" %s %s data-interval="%s">%s</div>',
 								 	$this->id,
-								  	( $this->bsCarousel ? 'carousel slide ' : '').$this->wrapperClass,
+								  	( $this->bsCarousel ? implode( ' ', $this->wrapperClass ) : ''),
 								  	( $this->autoPlay ? 'data-ride="carousel"' : '' ),
 								    ( $this->pauseOnHover  ? 'data-pause="hover"' : 'data-pause="null"'),
 								    $this->slideSpeed,

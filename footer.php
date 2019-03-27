@@ -4,9 +4,15 @@
  *
  *
  */
+
+global $SiteInfo;
+
+$container_class = ( $SiteInfo->navbar->container ) ? 'container' : 'container-fluid';
+//itemscope itemtype="http://schema.org/WPFooter"
+
 ?>
 
-<footer class="site-footer container-fluid pl-0 pr-0" itemscope itemtype="http://schema.org/WPFooter">
+<footer class="site-footer <?php echo $container_class; ?>" >
 		<?php 
 		
 			/**

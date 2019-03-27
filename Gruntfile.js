@@ -1,19 +1,27 @@
 //GRUNTFILE for BRIC
 
-
 module.exports = function (grunt) {
 
+	const sass = require( 'sass' );
+
+	//require( 'load-grunt-tasks' )(grunt);
+
+	//console.log( sass.info );
+	
+	
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
 		sass: {
 			// this is the "dev" Sass config used with "grunt watch" command
-			dev: {
+			dist: {
 				options: {
+					implementation: sass,
+					sourceMap: true,
 					style: 'compressed',
 					// tell Sass to look in the Bootstrap stylesheets directory when compiling
-					loadPath: ['node_modules/bootstrap/scss/', 'assets/src/css/bric/']
+					includePaths: ['node_modules/bootstrap/scss/', 'assets/src/css/bric/']
 				},
 				files: {
 					// the first path is the output and the second is the input
@@ -21,7 +29,7 @@ module.exports = function (grunt) {
 				}
 			},
 			// this is the "production" Sass config used with the "grunt buildcss" command
-			dist: {
+			dev: {
 				options: {
 					style: 'compressed',
 					loadPath: 'node_modules/bootstrap/scss/'
@@ -114,6 +122,13 @@ module.exports = function (grunt) {
 						dest: 'assets/css/photoswipe/default-skin/',
 						filter: 'isFile',
 						flatten: true,
+					},{
+						expand:true,
+						cwd: 'node_modules/waypoints/lib/',
+						src: ['jquery.waypoints.min.js', 'shortcuts/inview.min.js'],
+						dest: 'assets/js/',
+						filter: 'isFile',
+						flatten: true,
 					}
 				]
 			}
@@ -135,11 +150,12 @@ module.exports = function (grunt) {
 	});
 
 	// Load the plugin that provides the "watch" task.
-	grunt.loadNpmTasks('grunt-contrib-watch');
+	//grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Load the plugin that provides the "sass" task.
-	grunt.loadNpmTasks('grunt-contrib-sass');
-
+	grunt.loadNpmTasks('grunt-sass');
+	
+	
 	grunt.loadNpmTasks('grunt-postcss');
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -149,6 +165,6 @@ module.exports = function (grunt) {
 	
 	
 	// Default task(s).
-	grunt.registerTask('default', ['copy', 'sass:dev', 'postcss', 'uglify']);
+	grunt.registerTask('default', ['copy', 'sass:dist', 'postcss', 'uglify'] );
 
 };

@@ -2,7 +2,8 @@
 /**
  *		CUSTOMIZER SETTINGS for BRIC
  *
- *
+ *		@edits 3/9/19
+ *		-Remove SCSSS from customizer
  *
  */
 
@@ -30,11 +31,11 @@ class BricOptions {
 		//add_filter( 'wp_get_custom_css', array( $this, 'override_wp_custom_css') );
 		
 		
-		add_action( 'customize_preview_init', array( $this, 'css_preview_js' ) );
+		//add_action( 'customize_preview_init', array( $this, 'css_preview_js' ) );
 		
-		add_action( 'customize_controls_enqueue_scripts', array( $this, 'customizer_code_formatter' ) );
+		//add_action( 'customize_controls_enqueue_scripts', array( $this, 'customizer_code_formatter' ) );
 	
-		add_action( 'customize_controls_print_footer_scripts', array( $this, 'behave_init'), 50);
+		//add_action( 'customize_controls_print_footer_scripts', array( $this, 'behave_init'), 50);
 		
 		
 
@@ -45,17 +46,19 @@ class BricOptions {
 	
 	function create_customizations( WP_Customize_Manager $wp_customize ) {
 		
+		$wp_customize->remove_section( 'custom_css' );
+
 		
+		/*
 		$wp_customize->add_section( 'bric_css', array(
 			'priority' => 160,
 			'title' => 'Bric CSS',
 			'description' => 'Description coming soon...',
 		
 		));
-		
-		$wp_customize->remove_section( 'custom_css' );
+		*/
 
-		
+		/*
 		$wp_customize->add_setting( 'custom_scss', array(
 				'type' => 'theme_mod',
 				'capability' => 'edit_theme_options',
@@ -104,12 +107,13 @@ class BricOptions {
 			'active_callback' => '', //when to show the control
 		));
 		
-		
+		*/
+		/*
 		$wp_customize->selective_refresh->add_partial( 'custom_scss', array(
 			'settings' => array( 'custom_scss', 'custom_scss_styles' ),
 			'selector' => '#bric-customizer-css',
 			'container_inclusive' => true,
-			/*'render_callback' => function() {
+			'render_callback' => function() {
 							
 				BricOptions::save_css_files();
 				$grunt_task = BricOptions::run_grunt_task('dev');
@@ -128,10 +132,10 @@ class BricOptions {
 				
 				
 			
-			},*/
+			},
 			'fallback_refresh' => false,
 		));
-		
+		*/
 		
 		//$wp_customize->remove_control( 'custom_css' );
 				
@@ -161,7 +165,55 @@ class BricOptions {
 		*/
 		
 		
-		$this->maybe_compile_css();
+		
+		
+		
+		//$this->maybe_compile_css();
+		
+		
+		
+		
+		
+		
+		
+		/**
+		 *		Add Homepage Setting
+		 *		-Enable homepage slider
+		 *
+		 *
+		 *//*
+		
+		$wp_customize->add_setting( 'bric[homepage_slider]', array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'theme_supports' => '',
+			'default' => false,
+			'transport' => 'refresh',
+			'sanitize_callback' => '',
+			'sanitize_js_callback' => '',
+		));
+		
+		
+		$wp_customize->add_control( 'bric[homepage_slider]', array(
+			'type' => 'checkbox',
+			'priority' => 10,
+			'section' => 'static_front_page',
+			'label' => __('Homepage Slider'),
+			'description' => __('Enable homepage slide show'),
+			'input_attrs' => [
+				'class' => 'checkbox'
+				
+			],
+			'active_callback' => 'is_front_page',
+		));
+		
+		*/
+		
+		
+		
+		
+		
+		
 		
 	}
 	

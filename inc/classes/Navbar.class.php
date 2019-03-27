@@ -21,6 +21,7 @@ class Navbar {
 	function __construct() {
 		
 		add_action( 'wp', array( $this, 'gather_assets' ) );		
+		add_action( 'customize_preview_init', array( $this, 'gather_assets' ) );		
 		
 
 		
@@ -70,7 +71,7 @@ class Navbar {
 	
 	public function get_main_nav_menu() {
 		
-		if ( !empty( $this->wp_menus['primary'] ) ) {
+		if ( !empty( $this->wp_menus ) ) {
 		
 				
 			$this->main_nav_menu = wp_nav_menu( array(
@@ -99,11 +100,16 @@ class Navbar {
 	
 	public function get_navbar() {
 		
+		global $SiteInfo;
+		
+		
+		
+		
 		$this->navbar_options = array(
-			'container' => false,
+			'container' => $SiteInfo->navbar->container,
 			'expand' => 'md',
-			'bg_color' => 'light',
-			'navbar_color' => 'light',
+			'bg_color' => $SiteInfo->navbar->bg_color,
+			'navbar_color' => $SiteInfo->navbar->navbar_color,
 			'content_before' => array(
 				//'html' => '',
 				//'above_navbar' => false,
@@ -124,6 +130,8 @@ class Navbar {
 		 *
 		 *
 		 */	
+		
+		
 		
 		$this->navbar_options = apply_filters( 'bric_navbar_options', $this->navbar_options );
 		
@@ -200,6 +208,14 @@ class Navbar {
 	
 	public function get_navbar_brand() {
 		
+		global $SiteInfo;
+		
+			
+		// Get the option for brand type
+		$navbar_brand_type = $SiteInfo->navbar->brand_type;
+		
+		
+		
 		/**
 		 *		Apply filter: bric_navbar_brand_type
 		 *
@@ -208,7 +224,8 @@ class Navbar {
 		 */
 		
 		
-		$navbar_brand_type = apply_filters( 'bric_navbar_brand_type', 'textimage', 10 );
+		$navbar_brand_type = apply_filters( 'bric_navbar_brand_type', $navbar_brand_type, 10 );
+		
 		
 		switch ( $navbar_brand_type ) {
 				

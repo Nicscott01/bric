@@ -419,14 +419,15 @@ class BricLoop {
 	/**
 	 *		Home carousel
 	 *
-	 *
+	 *		@edit 3/9/19 - check for theme_mod option for enabling carousel
 	 */
 	
 	public function home_carousel() {
 		
-		
-		
-		if ( is_front_page() ) {
+		//Get theme mod
+		global $SiteInfo;
+				
+		if ( is_front_page() && $SiteInfo->carousel['enable'] ) {
 			
 			if ( have_rows('carousel') ) {
 				
@@ -456,11 +457,10 @@ class BricLoop {
 		
 		$Carousel = new Carousel( $gallery );
 		
-		$Carousel = apply_filters( 'bric_header_carousel', $Carousel );
 		
 		
 		if ( $this->SiteInfo->carousel['edge_to_edge'] ) {
-			$Carousel->wrapperClass = 'edge-to-edge';
+			$Carousel->wrapperClass[] = 'edge-to-edge';
 			$Carousel->mainSize = 'full';
 			
 		}
@@ -469,6 +469,26 @@ class BricLoop {
 		if ( $this->SiteInfo->carousel['show_caption'] ) {
 			$Carousel->includeCaption = true;
 		}
+		
+		
+		if ( isset( $this->SiteInfo->carousel['transition'] ) ) {
+			$Carousel->wrapperClass[] = $this->SiteInfo->carousel['transition'];
+		}
+		
+		if ( isset( $this->SiteInfo->carousel['speed'] ) ) {
+			$Carousel->slideSpeed = strval( $this->SiteInfo->carousel['speed']);
+		}
+		
+		
+		
+		/**
+		 *		Filters: bric_header_carousel
+		 *
+		 *
+		 */
+		
+		$Carousel = apply_filters( 'bric_header_carousel', $Carousel );
+		
 		
 		
 		
