@@ -29,6 +29,47 @@ class Navbar {
 	
 	
 	
+	public function logo_is_svg() {
+		
+		if ( empty( $this->logo_id ) ) {
+			return false;
+		}
+		
+		$mime = get_post_mime_type( $this->logo_id );
+		
+		if ( $mime == 'image/svg+xml' ) {
+			
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+		
+	}
+	
+	
+	
+	public static function get_svg_source( $id ) {
+		
+		if ( empty( $id )) {
+			return $id;
+		}
+		
+		ob_start();
+		
+		include( get_attached_file( $id ) );
+		
+		return ob_get_clean();
+		
+		
+		
+	}
+	
+	
+	
+	
+	
 	public function gather_assets() {
 		
 		//Get the site logo
@@ -38,7 +79,18 @@ class Navbar {
 			
 			$this->logo_id = get_theme_mod( 'custom_logo' );
 			//$this->logo = get_custom_logo( );
-			$this->logo = wp_get_attachment_image( $this->logo_id, 'medium' );
+			
+			if ( $this->logo_is_svg() ) {
+				
+				$this->logo = self::get_svg_source( $this->logo_id );
+				
+			}
+			else {
+			
+				$this->logo = wp_get_attachment_image( $this->logo_id, 'medium' );
+				
+			}
+			
 			
 		}
 		

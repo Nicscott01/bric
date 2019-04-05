@@ -47,12 +47,47 @@ class Bric {
 		
 		add_filter( 'wpseo_metabox_prio', array( $this, 'yoast_meta_box' ));
 		
+		//Add redirect for sitemap.xml if yoast is active and we have nginx
+		//	add_action( 'init', [$this, 'sitemap_xml'] );
+		
 	}
 	
 	
 	
+	/**
+	 *		TODO: If need be, add a rewrite rule so that sitemap.xml goes to sitemap_index.xml if yoast is being used
+	 *
+	 *
+	 */
 	
 	
+	function sitemap_xml() {
+		
+		//see if nginx is being used
+		if ( strpos( $_SERVER['SERVER_SOFTWARE'], 'ginx') ) {
+			
+			//check if yoast is here
+			if ( function_exists( 'yoast_breadcrumb' ) && WPSEO_Options::get( 'enable_xml_sitemap' ) ) {
+				
+				
+				//Add rewrite
+				//add_rewrite_rule();
+				
+				
+				if( $_SERVER['REQUEST_URI'] == '/sitemap.xml' ) {
+					
+					
+					
+				}
+				
+				
+			}
+			
+			
+		}
+		
+		
+	}
 	
 	
 	
@@ -155,6 +190,10 @@ class Bric {
 	}
 	
 	 
+	
+	
+	
+	
 	
 	/** 
 	 *		Enqueue Theme Styles

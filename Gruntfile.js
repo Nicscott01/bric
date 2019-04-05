@@ -22,6 +22,7 @@ module.exports = function (grunt) {
 					style: 'compressed',
 					// tell Sass to look in the Bootstrap stylesheets directory when compiling
 					includePaths: ['node_modules/bootstrap/scss/', 'assets/src/css/bric/']
+					//loadPath: ['node_modules/bootstrap/scss/', 'assets/src/css/bric/']
 				},
 				files: {
 					// the first path is the output and the second is the input
@@ -129,6 +130,13 @@ module.exports = function (grunt) {
 						dest: 'assets/js/',
 						filter: 'isFile',
 						flatten: true,
+					},{
+						expand:true,
+						cwd: 'node_modules/stickyfilljs/dist/',
+						src: ['stickyfill.min.js'],
+						dest: 'assets/js/',
+						filter: 'isFile',
+						flatten: true,
 					}
 				]
 			}
@@ -154,6 +162,7 @@ module.exports = function (grunt) {
 
 	// Load the plugin that provides the "sass" task.
 	grunt.loadNpmTasks('grunt-sass');
+	//grunt.loadNpmTasks('grunt-contrib-sass');
 	
 	
 	grunt.loadNpmTasks('grunt-postcss');
