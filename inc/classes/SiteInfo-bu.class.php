@@ -230,15 +230,6 @@ class SiteInfo {
 				'bg_color' => 'light',
 				'navbar_color' => 'light',
 			),
-			'breadcrumbs' => array(
-				'enable' => WPSEO_Options::get( 'breadcrumbs-enable' ),
-				'action' => 'bric_after_header',
-				'priority' => '10',
-				'hide_on_home' => true,
-				'classes' => array(
-					'container',
-				),
-			)
 		);
 
 		
@@ -254,12 +245,7 @@ class SiteInfo {
 			
 			if ( is_array( $default ) ) {
 				
-				if ( isset( $user_settings[$k] ) ) {
-
-					$theme_settings[$k] = wp_parse_args( $user_settings[$k], $default );				
-				}
-				
-
+				$theme_settings[$k] = wp_parse_args( $user_settings[$k], $default );
 				
 			}
 			
@@ -267,8 +253,6 @@ class SiteInfo {
 		
 		
 		
-		
-		//var_dump( $user_settings );
 		//var_dump( $theme_settings );
 		//exit();
 		
@@ -284,7 +268,15 @@ class SiteInfo {
 		$this->options->article_class_excerpt = $theme_settings['layout']['article_class_excerpt'];
 		
 		
-		$this->breadcrumbs = $theme_settings['breadcrumbs'];
+		$this->breadcrumbs = array(
+			'enable' => false,
+			'action' => 'bric_after_header',
+			'priority' => '10',
+			'hide_on_home' => true,
+			'classes' => array(
+				'container',
+			),
+		);
 		
 				
 		
@@ -546,16 +538,6 @@ class SiteInfo {
 		
 		
 		
-		
-		
-		
-		//Breadcrumbs
-		//$wp_customize->add_setting( 'bric[breadcrumbs][action]');
-		//$wp_customize->add_setting( 'bric[breadcrumbs]');
-		
-		
-		
-		
 		/*
 		//Post Options
 		foreach ( $this->options->posts as $k => $option ) {
@@ -725,7 +707,7 @@ class SiteInfo {
 	<?php echo $this->format_phone(); ?><br>
 	<?php echo $this->format_email(); ?><br>
 </div>
-		<?php
+		<?
 		
 		
 	}

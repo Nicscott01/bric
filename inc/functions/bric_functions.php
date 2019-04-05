@@ -11,12 +11,15 @@ include get_template_directory().'/inc/classes/OptionsPages.class.php';
 //ACF Fields
 include get_template_directory().'/inc/acf-fields/site_info.php';
 
-$opts = get_theme_mod( 'bric' ); 
-if ( $opts['homepage_slider'] )
-include get_template_directory().'/inc/acf-fields/homepage_slider.php';
 
 
 include get_template_directory().'/inc/classes/SiteInfo.class.php';
+$opts = get_theme_mod( 'bric' ); 
+if ( isset( $opts['homepage_slider'] ) && $opts['homepage_slider'] )
+include get_template_directory().'/inc/acf-fields/homepage_slider.php';
+
+
+
 include get_template_directory().'/inc/classes/LoginLogo.class.php';
 
 include get_template_directory().'/inc/classes/BricChild.class.php';
@@ -32,7 +35,8 @@ include get_template_directory().'/inc/classes/Shortcakes.class.php';
 include get_template_directory().'/inc/classes/GoogleMaps.class.php';
 include get_template_directory().'/inc/classes/Restaurant.class.php';
 
-
+//Integrations 
+include get_template_directory().'/inc/classes/Integrations.class.php';
 
 
 

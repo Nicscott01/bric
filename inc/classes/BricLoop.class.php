@@ -46,7 +46,7 @@ class BricLoop {
 		}
 		
 		
-		elseif ( is_search() || is_archive() || is_home() ) {
+		if ( is_search() || is_archive() || is_home() ) {
 			
 			$this->contentTemplate = 'excerpt';
 		}

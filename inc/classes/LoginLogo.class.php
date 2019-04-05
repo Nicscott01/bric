@@ -27,15 +27,18 @@ class LoginLogo {
 		
 		$logo = wp_get_attachment_image_url( $SiteInfo->logo, 'medium' );
 		
+		
 		$logo_meta =  wp_get_attachment_metadata( $SiteInfo->logo );
 		
 		$logo_data = pathinfo( $logo );
 				
 		$bg_size = 'contain';
 		
-		if ( isset( $logo_data['extension'] ) && ( $logo_data['extension'] == 'svg' ) ) {
+		//if ( isset( $logo_data['extension'] ) && ( $logo_data['extension'] == 'svg' ) ) {
+		if ( 'image/svg+xml' == get_post_mime_type( $SiteInfo->logo ) ) {
 			
 			$bg_size = sprintf( '%spx %spx', (string) $logo_meta['width'], (string) $logo_meta['height'] );
+		
 		}
 		
 		wp_enqueue_style( 'bric', get_stylesheet_directory_uri().'/assets/css/bric-style.css' );
