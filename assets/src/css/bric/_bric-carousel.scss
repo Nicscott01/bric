@@ -16,8 +16,8 @@ body.has-header-carousel {
 
 
 .carousel.edge-to-edge {
-	width: 100vw;
-	left:calc( 50% - 50vw );
+	width: 100%;
+	//left:calc( 50% - 50vw );
 	margin-bottom: 3em;
 	display:flex;
 	justify-content: center;
@@ -25,7 +25,7 @@ body.has-header-carousel {
 	align-items: center;
 	
 	.carousel-inner {
-		flex: 1 0 auto;
+		flex: 0 0 auto;
 			
 	}
 	
@@ -43,6 +43,18 @@ body.has-header-carousel {
 }
 
 
+
+//Make Carousel Flex
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+
+/*
 .carousel-fade {
    
 	.carousel-inner {
@@ -82,7 +94,7 @@ body.has-header-carousel {
 	
 }
 
-
+*/
 
 
 .carousel-caption {
@@ -102,10 +114,50 @@ body.has-header-carousel {
 }
 
 
-.carousel-item {
+.carousel {
+	
+	.img-wrapper {
+		position: relative;		
+		overflow: hidden;
+		position: relative;
+		background-color: $gray-100;
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+		align-items: center;
+		justify-content: center;	
+		flex: 1 0 auto;
+		//padding-top: 40%;
+		//min-height: 600px;
+		
+		
+		&.has-copy {
+			
+			img {
+				position: absolute;
+				z-index: 0;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			
+			.copy {
+				position: relative;
+				top:0;
+				bottom: 0;
+				z-index: 1;
+			}
+		}
+	}
+	
+	.copy {
+		padding: 6rem 1rem;
+	}
+	
 	
 	img {
 		width: 100%;
 		height: auto;
 	}
+	
+	
 }

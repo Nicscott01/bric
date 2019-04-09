@@ -54,10 +54,9 @@ module.exports = function (grunt) {
 				stripBanners: true,
 				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 			},
-
-			dist: {
-				src: ['js/*.js'],
-				dest: 'js/main.min.js'
+			js: {
+				src: ['assets/src/js/bric/*.js'],
+				dest: 'assets/src/js/bric.js'
 			}
 		},
 
@@ -73,7 +72,8 @@ module.exports = function (grunt) {
 				},
 				files: {
 					'assets/js/photoswipe-thumbnail-opener.min.js': ['assets/src/js/photoswipe-thumbnail-opener.js'],
-					'assets/js/google-maps-render.min.js': ['assets/src/js/google-maps-render.js']
+					'assets/js/google-maps-render.min.js': ['assets/src/js/google-maps-render.js'],
+					'assets/js/bric.min.js': ['assets/src/js/bric.js']
 				}
 			}
 			/*bootstrap_js: {
@@ -171,9 +171,12 @@ module.exports = function (grunt) {
 	
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	
+	
 	
 	
 	// Default task(s).
-	grunt.registerTask('default', ['copy', 'sass:dist', 'postcss', 'uglify'] );
+	grunt.registerTask('default', ['copy', 'sass:dist', 'postcss', 'concat', 'uglify'] );
 
 };

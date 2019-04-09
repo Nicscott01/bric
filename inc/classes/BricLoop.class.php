@@ -46,7 +46,7 @@ class BricLoop {
 		}
 		
 		
-		if ( is_search() || is_archive() || is_home() ) {
+		elseif ( is_search() || is_archive() || is_home() ) {
 			
 			$this->contentTemplate = 'excerpt';
 		}
@@ -373,8 +373,12 @@ class BricLoop {
 	
 	public function get_developer_credits() {
 		
+		if ( !empty( DEVELOPER_NAME ) && !empty( DEVELOPER_URL ) ) {
+			
+			return sprintf( '<div class="developer-credits"><a href="%s" target="_blank">Website by %s</a></div>', DEVELOPER_URL, DEVELOPER_NAME );
+			
+		}
 		
-		return sprintf( '<div class="developer-credits"><a href="%s" target="_blank">Website by %s</a></div>', DEVELOPER_URL, DEVELOPER_NAME );
 		
 		
 	}
@@ -419,17 +423,16 @@ class BricLoop {
 	/**
 	 *		Home carousel
 	 *
-	 *		@edit 3/9/19 - check for theme_mod option for enabling carousel
+	 *
 	 */
 	
 	public function home_carousel() {
 		
-		//Get theme mod
-		global $SiteInfo;
-				
-		if ( is_front_page() && $SiteInfo->carousel['enable'] ) {
+		
+		
+		if ( is_front_page() ) {
 			
-			if ( have_rows('carousel') ) {
+			if ( have_rows('slides') ) {
 				
 				//set the body class to "has-header=carousel'
 				//global $SiteInfo;
@@ -452,15 +455,16 @@ class BricLoop {
 	function header_carousel() {
 
 		
-		$gallery = get_field('carousel');
+		$gallery = get_field('slides');
 
 		
-		$Carousel = new Carousel( $gallery );
+		
+		$Carousel = new \Bric\Carousel( $gallery );
 		
 		
 		
 		if ( $this->SiteInfo->carousel['edge_to_edge'] ) {
-			$Carousel->wrapperClass[] = 'edge-to-edge';
+			$Carousel->wrapperClass = 'edge-to-edge';
 			$Carousel->mainSize = 'full';
 			
 		}
@@ -470,27 +474,7 @@ class BricLoop {
 			$Carousel->includeCaption = true;
 		}
 		
-		
-		if ( isset( $this->SiteInfo->carousel['transition'] ) ) {
-			$Carousel->wrapperClass[] = $this->SiteInfo->carousel['transition'];
-		}
-		
-		if ( isset( $this->SiteInfo->carousel['speed'] ) ) {
-			$Carousel->slideSpeed = strval( $this->SiteInfo->carousel['speed']);
-		}
-		
-		
-		
-		/**
-		 *		Filters: bric_header_carousel
-		 *
-		 *
-		 */
-		
 		$Carousel = apply_filters( 'bric_header_carousel', $Carousel );
-		
-		
-		
 		
 		echo $Carousel->buildGallery();
 		
