@@ -1,10 +1,11 @@
 <?php
-
-
 //
 //		Image Slider Class
 //
 //
+
+namespace Bric;
+
 
 
 class Carousel {
@@ -13,8 +14,9 @@ class Carousel {
 	public $mainSize = 'large';
 	public $includeCaption = false;
 	public $includeIndicators = '';
+	public $indicatorItems = '';
 	public $includeControls = false;
-	public $wrapperClass = array();
+	public $wrapperClass = '';
 	public $id = 'generic-carousel-1';
 	public $autoPlay = true;
 	public $linkCaption = false;
@@ -24,6 +26,7 @@ class Carousel {
 	public $wrapItemInner = false;
 	public $itemInnerClass = '';
 	public $slideSpeed = '3000';
+	public $isGallery = false;
 	
 	
 	
@@ -114,6 +117,8 @@ class Carousel {
 		$item = '';
 		$caption = '';
 		
+
+		/*
 		if ( $this->includeCaption ) {
 			
 			if ( $this->linkCaption ) {
@@ -130,10 +135,55 @@ class Carousel {
 			
 			
 		}
+		*/
 		
-		$img = wp_get_attachment_image( $this->currentItem['id'], $this->mainSize );
+		/**
+		 *		Prepare the Copy
+		 *
+		 */
 		
-		($this->wrapImage ) ? $img = '<div class="img-wrapper">'.$img.'</div>' : $img = $img;
+		$title = '';
+		$description = '';
+		$cta = '';
+		
+		if ( !empty( $this->currentItem['title']) )
+			
+			$title = sprintf( '<h1>%s</h1>', $this->currentItem['title'] );
+			
+		if ( !empty( $this->currentItem['description']) )
+			
+			$description = sprintf( '<div class="description">%s</div>', $this->currentItem['description'] );
+			
+		
+		if ( !empty( $this->currentItem['link'] ) ) 
+			
+			$cta = sprintf( '<a class="btn btn-cta" href="%s">%s</a>', $this->currentItem['link']['url'], $this->currentItem['link']['title'] );
+			
+		
+		
+		$img = wp_get_attachment_image( $this->currentItem['image']['id'], $this->mainSize );
+		
+		
+		if ( $this->wrapImage || $title || $description || $cta ) {
+			
+			if (  $title || $description || $cta ) {
+				
+				
+				$img = sprintf( '<div class="img-wrapper has-copy"><div class="copy">%s %s %s</div>%s</div>', $title, $description, $cta, $img );
+			
+				
+			}
+			else {
+				
+				$img = '<div class="img-wrapper">'.$img.'</div>';
+
+			}
+			
+		
+			
+			
+		}
+		
 		
 
 		$item = sprintf( '<div class="carousel-item %s">%s%s%s%s</div>',
@@ -280,16 +330,11 @@ class Carousel {
 	
 	function wrapCarousel() {
 		
-		$this->wrapperClass[] = 'col-12';
-		$this->wrapperClass[] = 'carousel';
-		$this->wrapperClass[] = 'slide';
-		
-		
 		
 		
 		$this->carousel = sprintf( '<div id="%s" class="%s" %s %s data-interval="%s">%s</div>',
 								 	$this->id,
-								  	( $this->bsCarousel ? implode( ' ', $this->wrapperClass ) : ''),
+								  	( $this->bsCarousel ? 'carousel slide ' : '').$this->wrapperClass,
 								  	( $this->autoPlay ? 'data-ride="carousel"' : '' ),
 								    ( $this->pauseOnHover  ? 'data-pause="hover"' : 'data-pause="null"'),
 								    $this->slideSpeed,
@@ -309,9 +354,10 @@ class Carousel {
 	
 	function printScripts() {
 		
-		add_action( 'wp_footer', array( $this, '_printScripts'), 20 ); 
-		
+		//add_action( 'wp_footer', array( $this, '_printScripts'), 20 ); 
 	}
+	
+	
 	
 	
 	function _printScripts() {

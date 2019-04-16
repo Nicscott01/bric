@@ -47,47 +47,12 @@ class Bric {
 		
 		add_filter( 'wpseo_metabox_prio', array( $this, 'yoast_meta_box' ));
 		
-		//Add redirect for sitemap.xml if yoast is active and we have nginx
-		//	add_action( 'init', [$this, 'sitemap_xml'] );
-		
 	}
 	
 	
 	
-	/**
-	 *		TODO: If need be, add a rewrite rule so that sitemap.xml goes to sitemap_index.xml if yoast is being used
-	 *
-	 *
-	 */
 	
 	
-	function sitemap_xml() {
-		
-		//see if nginx is being used
-		if ( strpos( $_SERVER['SERVER_SOFTWARE'], 'ginx') ) {
-			
-			//check if yoast is here
-			if ( function_exists( 'yoast_breadcrumb' ) && WPSEO_Options::get( 'enable_xml_sitemap' ) ) {
-				
-				
-				//Add rewrite
-				//add_rewrite_rule();
-				
-				
-				if( $_SERVER['REQUEST_URI'] == '/sitemap.xml' ) {
-					
-					
-					
-				}
-				
-				
-			}
-			
-			
-		}
-		
-		
-	}
 	
 	
 	
@@ -185,15 +150,13 @@ class Bric {
 		//wp_register_script( 'popper', get_template_directory_uri().'/assets/js/popper.min.js', array( 'jquery' ), '1.12.5', true );
 
 		wp_register_script( 'bootstrap', get_template_directory_uri().'/assets/js/bootstrap.bundle.min.js', array( 'jquery' ), null, true );
+	
+		wp_register_script( 'bric', get_template_directory_uri().'/assets/js/bric.min.js', array( 'bootstrap' ), null, true );
 		
 		
 	}
 	
 	 
-	
-	
-	
-	
 	
 	/** 
 	 *		Enqueue Theme Styles
@@ -206,6 +169,7 @@ class Bric {
 		
 		//wp_enqueue_script( 'popper' );
 		wp_enqueue_script( 'bootstrap' );
+		wp_enqueue_script( 'bric' );
 		
 
 	}	
