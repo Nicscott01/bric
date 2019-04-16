@@ -56,12 +56,9 @@ class Navbar {
 			return $id;
 		}
 		
-		ob_start();
+		$file = get_attached_file( $id );
 		
-		include( get_attached_file( $id ) );
-		
-		return ob_get_clean();
-		
+		return file_get_contents( $file );
 		
 		
 	}

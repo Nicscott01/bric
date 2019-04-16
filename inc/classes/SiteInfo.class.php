@@ -231,7 +231,7 @@ class SiteInfo {
 				'navbar_color' => 'light',
 			),
 			'breadcrumbs' => array(
-				'enable' => WPSEO_Options::get( 'breadcrumbs-enable' ),
+				'enable' => ( class_exists( 'WPSEO_Options') ) ? WPSEO_Options::get( 'breadcrumbs-enable' ) : false,
 				'action' => 'bric_after_header',
 				'priority' => '10',
 				'hide_on_home' => true,
