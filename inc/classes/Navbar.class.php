@@ -58,9 +58,37 @@ class Navbar {
 		
 		$file = get_attached_file( $id );
 		
-		return file_get_contents( $file );
+		$svg = file_get_contents( $file );
 		
 		
+		//Strip out the comment
+		//todo: can't get this to work
+		/*
+		$comment = '/(?=<!--)([\s\S]*?)-->/m';
+		
+		$svg = preg_replace( $comment, '', $svg );
+	
+		//Strip out the comment
+		$comment = '/(?=<?)([\s\S]*?)-->/m';
+		
+		$svg = preg_replace( $comment, '', $svg );
+*/
+		
+		$re = '/viewBox=["\']?((?:.(?!["\']?\s+(?:\S+)=|[>"\']))+.)["\']?/m';
+		preg_match( $re, $svg, $viewBox );
+		
+		$dimensions = explode( ' ', $viewBox[1] );
+
+		$width = $dimensions[2] - $dimensions[0];
+		$height = $dimensions[3] - $dimensions[1];
+		
+		$dimension_css = sprintf( '<svg style="width:%spx; height:%spx"', $width, $height );
+		
+		
+		
+		$svg = str_replace( '<svg', $dimension_css, $svg );
+		
+		return $svg;
 	}
 	
 	
