@@ -158,6 +158,11 @@ class SiteInfo {
 							'label' => 'Excerpt Article Class',
 							'value' => 'col-12 col-md-6',
 							'type' => 'text',
+						],	
+					  	[	'name' => 'entry_content_class',
+							'label' => 'Entry Content Class',
+							'value' => '',
+							'type' => 'text',
 						],						
 					],
 				],
@@ -210,6 +215,7 @@ class SiteInfo {
 				'main_content_container' => true,
 				'article_class' => 'col-12',
 				'article_class_excerpt' => 'col-12 col-md-6',
+				'entry_content_class' => ''
 			  ),
 			'posts' => array (
 				'show_post_date' => true,
@@ -229,6 +235,7 @@ class SiteInfo {
 				'expand' => 'md',
 				'bg_color' => 'light',
 				'navbar_color' => 'light',
+				'width' => '260',
 			),
 			'breadcrumbs' => array(
 				'enable' => ( class_exists( 'WPSEO_Options') ) ? WPSEO_Options::get( 'breadcrumbs-enable' ) : false,
@@ -282,6 +289,7 @@ class SiteInfo {
 		$this->options->main_content->container = $theme_settings['layout']['main_content_container'];
 		$this->options->article_class = $theme_settings['layout']['article_class'];
 		$this->options->article_class_excerpt = $theme_settings['layout']['article_class_excerpt'];
+		$this->options->entry_content_class = $theme_settings['layout']['entry_content_class'];
 		
 		
 		$this->breadcrumbs = $theme_settings['breadcrumbs'];
@@ -305,6 +313,7 @@ class SiteInfo {
 		$this->navbar->expand = $theme_settings['navbar']['expand'];
 		$this->navbar->bg_color = $theme_settings['navbar']['bg_color'];
 		$this->navbar->navbar_color = $theme_settings['navbar']['navbar_color'];
+		$this->navbar->width = $theme_settings['navbar']['width'];
 		
 		
 		
@@ -490,6 +499,59 @@ class SiteInfo {
 		]);
 		
 
+		//Width
+		$wp_customize->add_setting( 'bric[navbar][width]', array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'theme_supports' => '',
+			'default' => 260,
+			'transport' => 'refresh',
+			'sanitize_callback' => '',
+			'sanitize_js_callback' => '',
+		));
+
+
+		$wp_customize->add_control( 'bric[navbar][width]', [
+			'type' => 'number',
+			'setting' => 260,
+			'priority' => 10,
+			'section' => 'title_tagline',
+			'label' => __('Logo max width'),
+			'description' => '',
+			'active_callback' => '',
+		]);
+		
+
+		
+		
+		//Expand
+		$wp_customize->add_setting( 'bric[navbar][expand]', array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'theme_supports' => '',
+			'default' => 'md',
+			'transport' => 'refresh',
+			'sanitize_callback' => '',//['BricCustomizer','navbar_brand_type_cb'],
+			'sanitize_js_callback' => '',
+		));
+
+
+		$wp_customize->add_control( 'bric[navbar][expand]', [
+			'type' => 'select',
+			'setting' => 'md',
+			'priority' => 10,
+			'section' => 'title_tagline',
+			'label' => __('Breakpoint for non-collapsed navigation'),
+			'description' => '',
+			'choices' => [
+				'sm' => __('Small'),
+				'md' => __('Medium'),
+				'lg' => __('Large'),
+			],
+			'active_callback' => '',
+		]);
+		
+
 		
 		
 		
@@ -516,6 +578,8 @@ class SiteInfo {
 		]);
 		
 
+		
+		
 		//Navbar bg color
 		$wp_customize->add_setting( 'bric[navbar][bg_color]', array(
 			'type' => 'theme_mod',
@@ -602,7 +666,7 @@ class SiteInfo {
 	
 	public function customizer_preview_scripts() {
 		
-		wp_enqueue_script( 'customizer-bric-carousel', get_template_directory_uri().'/assets/src/js/customizer-carousel.js', array('customize-preview', 'jquery'), null, true);
+		wp_enqueue_script( 'customizer-bric-carousel', get_template_directory_uri().'/assets/js/customizer-carousel.min.js', array('customize-preview', 'jquery'), null, true);
 
 	}
 	 

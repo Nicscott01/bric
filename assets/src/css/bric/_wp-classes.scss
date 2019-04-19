@@ -18,13 +18,23 @@ figure:not(.woocommerce-product-gallery__wrapper) {
 
 .alignright {
 	float: right;
-	padding-left: 1em;
 }
 
 .alignleft {
 	float: left;
-	padding-right: 1em;
 }
+
+@include media-breakpoint-up( sm ) {
+	.alignright {
+		padding-left: 1em;
+	}
+
+	.alignleft {
+		padding-right: 1em;
+	}
+
+}
+
 
 .aligncenter {
 	display: block;

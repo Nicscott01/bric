@@ -12,7 +12,7 @@ $container_class = ( $SiteInfo->navbar->container ) ? 'container' : 'container-f
 
 ?>
 
-<footer class="site-footer <?php echo $container_class; ?>" >
+<footer class="site-footer <?php echo $container_class; ?>" role="contentinfo">
 		<?php 
 		
 			/**

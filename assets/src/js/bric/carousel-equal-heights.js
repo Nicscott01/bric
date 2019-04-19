@@ -1,34 +1,32 @@
 //Normalize Heights on Carousel
-var carousel;
-
 
 ( function($) {
 	
 	$(document).ready( function() {
-		carousel = $('.carousel-item');
+		Bric.carousel = $('.carousel-item');
 		normalizeHeights();
 	});
 	
 	
 	function normalizeHeights() {
 		
-		carousel.minHeight = 0;
+		Bric.carousel.minHeight = 0;
 		
-		if ( carousel.length ) {
+		if ( Bric.carousel.length ) {
 			
 			
-			$(carousel).each( function() {
+			$(Bric.carousel).each( function() {
 								
-				if ( $(this).height() > carousel.minHeight ) {
-					carousel.minHeight = $(this).height();
+				if ( $(this).height() > Bric.carousel.minHeight ) {
+					Bric.carousel.minHeight = $(this).height();
 				}
 			});
 			
 			//Set max height of carousel
-			$('.carousel-item').css( 'min-height',  carousel.minHeight );
+			$('.carousel-item').css( 'min-height',  Bric.carousel.minHeight );
 			
 			//reset the variables
-			carousel.minHeight = 0;
+			Bric.carousel.minHeight = 0;
 		}
 
 		
@@ -36,7 +34,7 @@ var carousel;
 	
 	$(window).on( 'resize orientationchange', function(){
 		
-		$('.carousel-item').css( 'min-height',  carousel.minHeight );
+		$('.carousel-item').css( 'min-height',  Bric.carousel.minHeight );
 		normalizeHeights();
 		
 	});
@@ -47,7 +45,7 @@ var carousel;
 
 ( function($) {
 	if ( ( 'objectFit' in document.documentElement.style ) === false ) {
-		$(carousel).each( function(i) {
+		$(Bric.carousel).each( function(i) {
 
 			var img = $(this).find('img').attr('src');
 

@@ -16,7 +16,7 @@ class Carousel {
 	public $includeIndicators = '';
 	public $indicatorItems = '';
 	public $includeControls = false;
-	public $wrapperClass = '';
+	public $wrapperClass = [];
 	public $id = 'generic-carousel-1';
 	public $autoPlay = true;
 	public $linkCaption = false;
@@ -186,7 +186,7 @@ class Carousel {
 		
 		
 
-		$item = sprintf( '<div class="carousel-item %s">%s%s%s%s</div>',
+		$item = sprintf( '<div class="carousel-item %s" role="listitem">%s%s%s%s</div>',
 							( $this->counter == 0 ? 'active' : '' ),
 							( $this->wrapItemInner ) ? '<div class="carousel-item-inner '.$this->itemInnerClass.'">' : '',
 							$img,
@@ -212,7 +212,7 @@ class Carousel {
 			
 			
 		
-		$this->carouselInner = '<div class="'.$class.'" role="listbox">'.$this->imageItems.'</div>';
+		$this->carouselInner = '<div class="'.$class.'" role="list">'.$this->imageItems.'</div>';
 		
 		return $this->carouselInner;		
 		
@@ -330,11 +330,12 @@ class Carousel {
 	
 	function wrapCarousel() {
 		
-		
+		$class = join( ' ', $this->wrapperClass );
+				
 		
 		$this->carousel = sprintf( '<div id="%s" class="%s" %s %s data-interval="%s">%s</div>',
 								 	$this->id,
-								  	( $this->bsCarousel ? 'carousel slide ' : '').$this->wrapperClass,
+								  	( $this->bsCarousel ? 'carousel slide ' : '').$class,
 								  	( $this->autoPlay ? 'data-ride="carousel"' : '' ),
 								    ( $this->pauseOnHover  ? 'data-pause="hover"' : 'data-pause="null"'),
 								    $this->slideSpeed,

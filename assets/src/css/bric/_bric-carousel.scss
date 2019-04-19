@@ -16,7 +16,8 @@ body.has-header-carousel {
 
 
 .carousel.edge-to-edge {
-	width: 100%;
+	@include make-col(12);
+	//width: 100%;
 	//left:calc( 50% - 50vw );
 	margin-bottom: 3em;
 	display:flex;
