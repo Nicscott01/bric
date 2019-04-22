@@ -7,17 +7,12 @@
 
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		
 	<?php 
 	
 	do_action( 'bric_before_page_header');
-
 	
-	if ( has_post_thumbnail() ) {
-		get_template_part( 'template-parts/heading', 'header-image' );
-	}
-	else {
-		get_template_part( 'template-parts/heading', 'basic' );
-	}
+	get_template_part( 'template-parts/heading' );
 	
 	do_action( 'bric_after_page_header');
 	?>

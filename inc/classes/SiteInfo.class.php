@@ -25,7 +25,7 @@ class SiteInfo {
 	public $email = '';
 	public $social ='';
 	public $options = '';
-	public $breadcrumbs = '';
+	var $breadcrumbs = [];
 	public $body_classes = array();
 	public $carousel = array();
 	public $operating_hours = array();
@@ -45,6 +45,7 @@ class SiteInfo {
 		$this->options->posts = new stdClass();
 		$this->options->excerpts = new stdClass();
 		$this->options->main_content = new stdClass();
+		$this->options->breadcrumbs = new stdClass();
 		$this->navbar = new stdClass();
 		
 		$this->address = new stdClass();
@@ -235,8 +236,9 @@ class SiteInfo {
 				'action' => 'bric_after_header',
 				'priority' => '10',
 				'hide_on_home' => true,
+				'in_container' => false,
 				'classes' => array(
-					'container',
+					'container-fluid',
 				),
 			)
 		);
@@ -286,6 +288,16 @@ class SiteInfo {
 		
 		$this->breadcrumbs = $theme_settings['breadcrumbs'];
 		
+		/**
+		 *		Set the wrapper class based on customizer selection
+		 *
+		 */
+		if ( $theme_settings['breadcrumbs']['in_container'] ) {
+			$this->breadcrumbs['classes'] = ['container'];
+		}
+		else {
+			$this->breadcrumbs['classes'] = ['container-fluid'];
+		}
 				
 		
 		$this->carousel = array(
@@ -550,7 +562,26 @@ class SiteInfo {
 		
 		
 		//Breadcrumbs
-		//$wp_customize->add_setting( 'bric[breadcrumbs][action]');
+		$wp_customize->add_setting( 'bric[breadcrumbs][in_container]', [
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'theme_supports' => '',
+			'default' => false,
+			'transport' => 'refresh',
+			'sanitize_callback' => ['BricCustomizer','checkbox_cb'],
+			'sanitize_js_callback' => '',
+		]);
+		
+		$wp_customize->add_control( 'bric[breadcrumbs][in_container]', [
+			'type' => 'checkbox',
+			'setting' => false,
+			'priority' => 10,
+			'section' => 'wpseo_breadcrumbs_customizer_section',
+			'label' => __('Put Breadcrumbs in a container'),
+			'description' => '',
+			'active_callback' => '',
+		]);
+		
 		//$wp_customize->add_setting( 'bric[breadcrumbs]');
 		
 		
@@ -1283,6 +1314,22 @@ class BricCustomizer {
 		
 	}
 	
+	
+	
+	static function breadcrumb_classes_cb( $value ) {
+		
+		
+		if ( $value === true ) {
+			
+			return [ 'container' ];
+			
+		}
+		else {
+			return [ 'container-fluid' ];
+		}
+		
+		
+	}
 	
 	
 	

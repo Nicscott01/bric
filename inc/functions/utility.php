@@ -101,3 +101,93 @@ function xcopy($source, $dest, $permissions = 0755)
     $dir->close();
     return true;
 }
+
+
+
+
+
+/**
+ *		Has Landing Page
+ *		checks for page w/ slug
+ *		same as the current archive slug
+ *
+ */
+
+function has_landing_page() {
+	
+	if ( is_archive() ) {
+
+		$page = get_landing_page();
+
+		if ( $page ) {		
+			return true;
+		}
+	}
+	
+	
+	return false;
+	
+}
+
+
+
+/**
+ *		Returns a page with the same slug as 
+ *		the wp query object's rewrite slug
+ *
+ */
+
+
+function get_landing_page() {
+
+	$page = false;
+	
+	if ( is_home() ) {
+		
+		$page_id = get_option( 'page_for_posts' );
+		
+		$page = get_page( $page_id );
+		
+	}
+	elseif ( is_tax() ) {
+		
+		global $wp_taxonomies;
+		$query = get_queried_object();
+		
+		$tax = $wp_taxonomies[$query->taxonomy];
+		
+		if ( $tax ) {
+			
+			$post_type = $tax->object_type[0];
+			
+			$pt_obj = get_post_type_object( $post_type );
+			
+			if ( $pt_obj->rewrite ) {
+				
+				$page = get_page_by_path( $pt_obj->rewrite['slug'] );
+			}
+			
+		}
+		
+	}
+	elseif ( is_archive() ) {
+	
+		//global $wp_query;
+		//See if we have a page with a slug that's an archive
+		
+		$query = get_queried_object();
+		
+		//queried object rewrite slug
+	//	if ( $wp_query->queried_object->rewrite ) {
+		if ( $query->rewrite ) {
+
+			$slug = $query->rewrite['slug'];
+
+			$page = get_page_by_path( $slug );
+		}
+		
+	}
+
+	return $page;
+	
+}

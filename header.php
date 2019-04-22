@@ -6,7 +6,7 @@
    	<?php wp_head(); ?>
   </head>
   <body <?php body_class(); ?>>
-	<header class="site-header">
+	<div class="site-header">
 		<?php 
 		
 			/**
@@ -18,7 +18,7 @@
 			do_action( 'bric_header' );
 		
 		?>
-	</header>
+	</div>
 <?php 
 
 	/**

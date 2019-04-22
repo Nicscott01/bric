@@ -34,6 +34,7 @@ include get_template_directory().'/inc/classes/BricShortcodes.class.php';
 include get_template_directory().'/inc/classes/Shortcakes.class.php';
 include get_template_directory().'/inc/classes/GoogleMaps.class.php';
 include get_template_directory().'/inc/classes/Restaurant.class.php';
+include get_template_directory().'/inc/classes/Admin.class.php';
 
 //Integrations 
 include get_template_directory().'/inc/classes/Integrations.class.php';

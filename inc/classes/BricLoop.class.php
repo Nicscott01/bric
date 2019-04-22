@@ -80,6 +80,8 @@ class BricLoop {
 			//$this->get_pusher();
 			//echo '<div class="container"><div class="row"><div class="archive-posts-wrapper recent-posts col">';
 			echo '<div class="archive-posts-wrapper recent-posts '.$this->get_content_class( 'main' ).'"><div class="row">';
+			
+			
 			add_action( 'bric_after_loop', array( $this, 'close_div'), 10 );	//call early so we can slide in the sidebar
 			add_action( 'bric_after_loop', array( $this, 'close_div'), 15 );	
 			//add_action( 'bric_after_loop_posts', array( $this, 'close_div'), 50 );	
@@ -89,6 +91,52 @@ class BricLoop {
 		
 		
 	}
+	
+	
+	
+	/**
+	 *		Retrieve the archive header if an archive page
+	 *
+	 *		@since v1.1
+	 */
+	
+	public function get_archive_header() {
+		
+		global $post;
+
+		if ( has_landing_page() || is_home() ) {
+			
+			$page = get_landing_page();
+
+			$post = $page;	
+			
+		}
+		
+		
+		if ( is_archive () ) {
+			
+			//v_dump( $post );
+			setup_postdata( $post );
+
+			get_template_part( 'template-parts/archive', 'heading' );
+
+			wp_reset_postdata();
+		
+			
+		}
+
+
+
+
+
+		
+		
+		
+	}
+	
+	
+	
+	
 	
 	
 	
@@ -461,10 +509,10 @@ class BricLoop {
 		
 		$Carousel = new \Bric\Carousel( $gallery );
 		
-		
+		$Carousel->wrapperClass = 'container';
 		
 		if ( $this->SiteInfo->carousel['edge_to_edge'] ) {
-			$Carousel->wrapperClass = 'edge-to-edge';
+			$Carousel->wrapperClass = 'edge-to-edge container-fluid';
 			$Carousel->mainSize = 'full';
 			
 		}
