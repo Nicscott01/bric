@@ -119,37 +119,35 @@ class PhotoGallery {
 				
 				$output .= "\t<figure class='image-item".$item_class."' itemprop='associatedMedia' itemscope itemtype='http://schema.org/ImageObject'>\n";
 
+				
+				$aria_text = sprintf( "Click to enlarge thumbnail of %s", 
+									 ( $image['alt'] ) ? $image['alt'] : $image['title'] );
 
-				$img = wp_get_attachment_image( $image['id'], $image_large, false, array('itemprop' => 'thumbnail') );
+				$img = wp_get_attachment_image( $image['id'], $image_large, false, array(
+					'itemprop' => 'thumbnail',
+				));
 
 
-				$output .= sprintf( "\t\t<a href='%s' itemprop='contentUrl' data-size='%s'>%s</a>\n",
+				$output .= sprintf( "\t\t<a href='%s' itemprop='contentUrl' data-size='%s' aria-label='%s'>%s</a>\n",
 								apply_filters( 'bric_photo_gallery_full_size', $image['url'], $image ),
 								$image['width'].'x'.$image['height'],
+								$aria_text,
 								$img );
 
 
 				//Check for caption text, if not, check for alt text, if not, then no caption.
-				if ( $image['caption'] !== '' ) {
+				if ( !empty ( $image['caption'] ) ) {
 
 					$img_cap = '<span class="image-caption">'.$image['caption'].'</span>';
 
+					$output .= sprintf("\t\t<figcaption itemprop='caption description'>%s</figcaption>\n",
+									$img_cap
+								);
+
+					
 				}
-
-				else {
-
-					$img_cap = '';
-
-				}
-
-
-
-				$output .= sprintf("\t\t<figcaption itemprop='caption description'>%s</figcaption>\n",
-								$img_cap
-							);
 
 				$output .= "\t</figure>\n";
-
 
 					
 			$c++;
@@ -207,9 +205,9 @@ class PhotoGallery {
 			
 			wp_enqueue_script('photoswipe', get_template_directory_uri().'/assets/js/photoswipe.min.js', '', '4.1', true );
 
-			wp_enqueue_script('photoswipe-ui', get_template_directory_uri().'/assets/js/photoswipe-ui-default.min.js', 'photoswipe', '4.1', true);
+			wp_enqueue_script('photoswipe-ui', get_template_directory_uri().'/assets/js/photoswipe-ui-default.min.js', ['photoswipe'], '4.1', true);
 
-			wp_enqueue_script('photoswipe-thumbnail-opener', get_template_directory_uri().'/assets/js/photoswipe-thumbnail-opener.min.js', 'photoswipe-ui', '', true);
+			wp_enqueue_script('photoswipe-thumbnail-opener', get_template_directory_uri().'/assets/js/photoswipe-thumbnail-opener.min.js', array( 'photoswipe', 'photoswipe-ui'), '', true);
 
 			
 			
@@ -278,13 +276,13 @@ class PhotoGallery {
 
                 <div class="pswp__counter"></div>
 
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)" aria-label="Close"></button>
 
-                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--share" title="Share" aria-label="Share"></button>
 
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen" aria-label="Toggle fullscreen"></button>
 
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out" aria-label="Zoom in/out"></button>
 
                 <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
                 <!-- element will get class pswp__preloader--active when preloader is running -->
@@ -301,10 +299,10 @@ class PhotoGallery {
                 <div class="pswp__share-tooltip"></div> 
             </div>
 
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)" aria-label="Previous image">
             </button>
 
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)" aria-label="Next image">
             </button>
 
             <div class="pswp__caption">

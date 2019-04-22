@@ -48,3 +48,73 @@ include get_template_directory().'/inc/functions/utility.php';
 //Register Actions
 include get_template_directory().'/inc/actions.php';
 include get_template_directory().'/inc/filters.php';
+
+
+
+
+
+
+/**
+ *		Bric Main Content Class
+ *
+ *		@since v1.1
+ *
+ *		Output proper class for main content div based on 
+ *		Customizer settings.
+ */
+
+
+function bric_main_content_class( $classes = [] ) {
+	
+	$extra_classes = $classes;
+	
+	global $SiteInfo;
+	
+	
+	
+	
+}
+
+
+/**
+ *		Bric Entry Content Class
+ *
+ *		@since v1.1
+ *
+ *		Output proper class for entry-content div based on 
+ *		Customizer settings.
+ */
+
+
+function entry_content_class( $classes = [] ) {
+	
+	global $SiteInfo;
+	
+	//Get the page option
+	
+	
+	
+	$classes[] = 'entry-content';
+	$classes[] = $SiteInfo->options->entry_content_class;
+	
+	$classes = array_map( 'trim', $classes );
+	
+	echo join( ' ', $classes );
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

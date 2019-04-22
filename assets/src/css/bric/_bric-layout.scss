@@ -2,13 +2,13 @@
 //		PAGE LAYOUT FOR BRIC
 //
 
-
+/*
 .main-content-container {
 	.main-content {
 		@extend .container;
 	}
 }
-
+*/
 
 .main-content {	
 	margin-top: 1.5em;
@@ -251,6 +251,13 @@ blockquote {
 	@extend .row;
 }
 
+//Whenever the article has a class with col in it, we'll make sure to pull the page header left/right
+[class*="col"] > .page-header {
+    margin-left: $grid-gutter-width/-2;
+    margin-right: $grid-gutter-width/-2;
+}
+
+
 .page-header {
 	position: relative;
 	display: flex;
@@ -277,6 +284,10 @@ blockquote {
 	
 	.header-image {
 		width: 100%;
+		flex: 1 1 auto;
+		position: relative;
+		width: 100%;
+		padding-top: 40%;
 		overflow: hidden;
 		
 		img {

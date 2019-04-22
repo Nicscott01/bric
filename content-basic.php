@@ -17,7 +17,7 @@
 	do_action( 'bric_after_page_header');
 	?>
 	
-	<div class="entry-content">
+	<div class="<?php entry_content_class(); ?>">
 		<?php the_content(); ?>
 	</div>
 <?php 

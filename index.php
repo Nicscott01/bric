@@ -3,7 +3,7 @@
 get_header();
 
 ?>
-<div class="main-content">
+<main class="main-content container-fluid<?php //bric_main_content_class(); ?>" role="main">
 	<div class="row">
 <?php
 
@@ -32,7 +32,7 @@ do_action( 'bric_after_loop');
 		
 	?>
 	</div>
-</div>
+</main>
 <?php
 
 get_footer();

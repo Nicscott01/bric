@@ -56,14 +56,39 @@ class Navbar {
 			return $id;
 		}
 		
-		ob_start();
+		$file = get_attached_file( $id );
 		
-		include( get_attached_file( $id ) );
-		
-		return ob_get_clean();
+		$svg = file_get_contents( $file );
 		
 		
+		//Strip out the comment
+		//todo: can't get this to work
+		/*
+		$comment = '/(?=<!--)([\s\S]*?)-->/m';
 		
+		$svg = preg_replace( $comment, '', $svg );
+	
+		//Strip out the comment
+		$comment = '/(?=<?)([\s\S]*?)-->/m';
+		
+		$svg = preg_replace( $comment, '', $svg );
+*/
+		
+		$re = '/viewBox=["\']?((?:.(?!["\']?\s+(?:\S+)=|[>"\']))+.)["\']?/m';
+		preg_match( $re, $svg, $viewBox );
+		
+		$dimensions = explode( ' ', $viewBox[1] );
+
+		$width = $dimensions[2] - $dimensions[0];
+		$height = $dimensions[3] - $dimensions[1];
+		
+		$dimension_css = sprintf( '<svg style="width:%spx; height:%spx"', $width, $height );
+		
+		
+		
+		//$svg = str_replace( '<svg', $dimension_css, $svg );
+		
+		return $svg;
 	}
 	
 	
@@ -159,7 +184,7 @@ class Navbar {
 		
 		$this->navbar_options = array(
 			'container' => $SiteInfo->navbar->container,
-			'expand' => 'md',
+			'expand' => $SiteInfo->navbar->expand,
 			'bg_color' => $SiteInfo->navbar->bg_color,
 			'navbar_color' => $SiteInfo->navbar->navbar_color,
 			'content_before' => array(
@@ -167,7 +192,7 @@ class Navbar {
 				//'above_navbar' => false,
 			),
 			'navbar_expression' => '%9$s
-<nav class="navbar navbar-expand-%4$s navbar-%7$s bg-%8$s">%5$s
+<nav class="navbar navbar-expand-%4$s navbar-%7$s bg-%8$s" role="navigation">%5$s
 %1$s
 <div class="right-side">
 %10$s
@@ -276,28 +301,32 @@ class Navbar {
 		 */
 		
 		
-		$navbar_brand_type = apply_filters( 'bric_navbar_brand_type', $navbar_brand_type, 10 );
+		$navbar_brand_type = apply_filters( 'bric_navbar_brand_type', $navbar_brand_type );
 		
 		
+		$navbar_brand_width = apply_filters( 'bric_navbar_brand_width', $SiteInfo->navbar->width );
+		
+				
 		switch ( $navbar_brand_type ) {
 				
 			case 'text' :
 				
-				$this->navbar_brand = sprintf( '<a class="navbar-brand" href="%s">%s</a>', $this->url, $this->title );
+				$this->navbar_brand = sprintf( '<a class="navbar-brand" href="%s" style="width:%spx">%s</a>', $this->url, $navbar_brand_width, $this->title );
 			
 				break;
 				
 			case 'image' :
 				
-				$this->navbar_brand = sprintf( '<a class="navbar-brand" href="%s">%s</a>',$this->url, $this->logo );
+				$this->navbar_brand = sprintf( '<a class="navbar-brand" href="%s" style="width:%spx">%s</a>',$this->url, $navbar_brand_width, $this->logo );
 				break;
 				
 			case 'textimage' :
 				
-				$this->navbar_brand = sprintf( '<a class="navbar-brand" href="%s"><div class="tagline">%s</div> %s</a>', 
+				$this->navbar_brand = sprintf( '<a class="navbar-brand" href="%s" style="width:%spx"><div class="tagline">%s</div> %s</a>', 
 											  $this->url,
+											   $navbar_brand_width,
 											  '<span class="blogtitle">'.get_bloginfo('title').'</span>',
-											  wp_get_attachment_image( $this->logo_id, 'medium' ) );
+											  $this->logo );
 				break;
 		}
 			

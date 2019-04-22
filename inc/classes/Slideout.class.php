@@ -11,7 +11,9 @@ class Slideout {
 		
 		add_action( 'wp_enqueue_scripts', array ( $this, 'enqueue_scripts') );
 
-		add_action( 'wp_footer', array( $this, 'init_slideout'), 51 );
+		
+		//@since bric_v1.1 remove this inline script and bundle in bric.js
+		//add_action( 'wp_footer', array( $this, 'init_slideout'), 51 );
 
 	}
 	
@@ -96,35 +98,3 @@ class Slideout {
 }
 
 new Slideout();
-
-
-
-
-function tpc_dropdown() {
-	?>
-<script>
-	(function($){
-		$('.dropdown-toggle').on( 'click', function(e) {
-			if ( $(window).width() > 768 ) {
-				e.stopPropagation();
-			}
-		});	
-		/*
-		$('.dropdown-toggle').hover( function(e) {
-			$(this).parent().find('.dropdown-menu').addClass('show');			
-		},
-		function(e) {
-			$(this).parent().find('.dropdown-menu').removeClass('show');			
-		});*/
-		
-		$('.nav-item.dropdown').hover( function(e) {
-			$(this).find('.dropdown-menu').addClass('show');			
-		},
-		function(e) {
-			$(this).find('.dropdown-menu').removeClass('show');
-		});
-		
-	})(jQuery);
-</script>	
-	<?php
-}

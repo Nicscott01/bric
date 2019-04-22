@@ -1,13 +1,7 @@
 //GRUNTFILE for BRIC
+const sass = require( 'sass' );
 
 module.exports = function (grunt) {
-
-	const sass = require( 'sass' );
-
-	//require( 'load-grunt-tasks' )(grunt);
-
-	//console.log( sass.info );
-	
 	
 	// Project configuration.
 	grunt.initConfig({
@@ -52,7 +46,8 @@ module.exports = function (grunt) {
 			options: {
 				separator: ';',
 				stripBanners: true,
-				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+				sourceMap: true
 			},
 			js: {
 				src: ['assets/src/js/bric/*.js'],
@@ -73,7 +68,8 @@ module.exports = function (grunt) {
 				files: {
 					'assets/js/photoswipe-thumbnail-opener.min.js': ['assets/src/js/photoswipe-thumbnail-opener.js'],
 					'assets/js/google-maps-render.min.js': ['assets/src/js/google-maps-render.js'],
-					'assets/js/bric.min.js': ['assets/src/js/bric.js']
+					'assets/js/bric.min.js': ['assets/src/js/bric.js'],
+					'assets/js/customizer-carousel.min.js': ['assets/src/js/customizer-carousel.js']
 				}
 			}
 			/*bootstrap_js: {

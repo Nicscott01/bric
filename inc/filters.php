@@ -31,6 +31,12 @@ class BricFilters {
 		add_filter( 'gform_init_scripts_footer', '__return_true' );
 		add_filter( 'gform_cdata_open', array( $this, 'wrap_gform_cdata_open' ), 1 );
 		add_filter( 'gform_cdata_close', array( $this, 'wrap_gform_cdata_close' ), 100 );
+	
+	
+	
+		//Auto-populate ALT tags with title/caption text if not available
+		//apply_filters( 'wp_get_attachment_image_attributes', $attr, $attachment, $size );
+		add_filter( 'wp_get_attachment_image_attributes', [ $this, 'image_alt_tag'], 10, 3 );
 	}
 	
 	
@@ -174,6 +180,46 @@ class BricFilters {
 	}		
 	
 
+	
+	
+	
+	
+	
+	/**
+	 *		Filters the image attributes before outputing
+	 *		from wp_get_attachment_image
+	 *
+	 *		@since bric_v1.1
+	 *
+	 */
+	
+	function image_alt_tag( $attr, $attachment, $size ) {
+		
+		//Don't do anything if it's already populated
+		if ( !empty( $attr['alt']) ) {
+			return $attr;
+		}
+		
+		//var_dump( $attachment );
+		
+		//Check for other text. First will be caption
+		if ( !empty( $attachment->post_excerpt ) ) {
+			
+			$attr['alt'] = wp_trim_words( $attachment->post_excerpt );
+			
+		}
+		//Fall back on the title, which we probably have
+		else {
+			
+			$attr['alt'] = $attachment->post_title;
+			
+		}
+		
+		
+		return $attr;
+	}
+	
+	
  	
 }
 

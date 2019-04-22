@@ -92,8 +92,8 @@ class BricShortcodes {
 			$o = '';
 						
 			foreach ( $SiteInfo->social as $social ) {
-				
-				$o .= sprintf( '<li class="social-account list-inline-item"><a href="%s" target="_blank">%s</a></li>', $social['url'], $social['icon']->element );
+								
+				$o .= sprintf( '<li class="social-account list-inline-item"><a href="%s" target="_blank" aria-label="Follow us on %s">%s</a></li>', $social['url'], $social['platform'], $social['icon']->element );
 				
 				
 			}
