@@ -2,6 +2,7 @@
 This is the core theme for Creare Web Solutions websites. Creates a child theme when activated in the Wordpress dashboard.
 
 ### Changelog
+<<<<<<< HEAD
 #### v1.1
 Made numerous updates to Bric theme to incorporate more accessibility support including:
 
@@ -20,3 +21,5 @@ Other Bric theme updates:
 - Entry content class
 - Modify how the customizer renders carousel changes (still not perfect)
 
+=======
+>>>>>>> ac7d4a59cf929169f3607ab89919b2e53a545ac8
