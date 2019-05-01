@@ -18,7 +18,7 @@
 			do_action( 'bric_header' );
 		
 		?>
-	</div>
+	</header>
 <?php 
 
 	/**
