@@ -17,12 +17,27 @@
 	
 }
 
+.slideout-menu {
+	
+	.dropdown-menu .nav-link,
+	.dropdown-toggle {		
+		white-space: normal;
+		
+	}
+	
+	.nav-link {
+		text-align: left;
+	}
+	
+}
+
 
 
 
 
 .navbar-brand {
 	max-width: $custom-logo-max-width;
+	flex-shrink: 0;
 	
 	img {
 		@extend .img-fluid;		
@@ -91,6 +106,14 @@
 	
 
 }
+
+
+
+.navbar-nav {
+	margin-right: $navbar-padding-y * -1;
+}
+
+
 
 
 //

@@ -6,6 +6,15 @@
    	<?php wp_head(); ?>
   </head>
   <body <?php body_class(); ?>>
+	  <?php
+	  /**
+	   *	Bric Before Header
+	   *
+	   *
+	   */
+	  
+	  		do_action( 'bric_before_header' );
+	  ?>
 	<header class="site-header" role="banner">
 		<?php 
 		
@@ -18,7 +27,7 @@
 			do_action( 'bric_header' );
 		
 		?>
-	</div>
+	</header>
 <?php 
 
 	/**

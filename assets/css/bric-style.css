@@ -670,7 +670,7 @@ pre code {
   margin-left: auto;
 }
 
-.row, .column-group {
+.row, .column-group, .page .page-header {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
@@ -1947,11 +1947,6 @@ pre code {
 }
 .form-control::-webkit-input-placeholder, #loginform > p:not(.login-submit):not(.submit) > input::-webkit-input-placeholder,
 #lostpasswordform > p:not(.login-submit):not(.submit) > input::-webkit-input-placeholder, .comment-form > p[class*=comment-form] > :not(label)::-webkit-input-placeholder, .comment-form > p[class*=comment-form] textarea::-webkit-input-placeholder, .comment-form > p[class*=comment-form] input::-webkit-input-placeholder, .search-form .search-field::-webkit-input-placeholder, .gform_fields input[type=text]::-webkit-input-placeholder, .gform_fields input[type=tel]::-webkit-input-placeholder, .gform_fields input[type=email]::-webkit-input-placeholder, .gform_fields textarea::-webkit-input-placeholder, .gform_fields select::-webkit-input-placeholder, .gform_fields input[type=url]::-webkit-input-placeholder {
-  color: #868e96;
-  opacity: 1;
-}
-.form-control::-moz-placeholder, #loginform > p:not(.login-submit):not(.submit) > input::-moz-placeholder,
-#lostpasswordform > p:not(.login-submit):not(.submit) > input::-moz-placeholder, .comment-form > p[class*=comment-form] > :not(label)::-moz-placeholder, .comment-form > p[class*=comment-form] textarea::-moz-placeholder, .comment-form > p[class*=comment-form] input::-moz-placeholder, .search-form .search-field::-moz-placeholder, .gform_fields input[type=text]::-moz-placeholder, .gform_fields input[type=tel]::-moz-placeholder, .gform_fields input[type=email]::-moz-placeholder, .gform_fields textarea::-moz-placeholder, .gform_fields select::-moz-placeholder, .gform_fields input[type=url]::-moz-placeholder {
   color: #868e96;
   opacity: 1;
 }
@@ -4980,10 +4975,8 @@ input[type=button].btn-block {
 @media (min-width: 576px) {
   .card-columns {
     -webkit-column-count: 3;
-       -moz-column-count: 3;
             column-count: 3;
     -webkit-column-gap: 1.25rem;
-       -moz-column-gap: 1.25rem;
             column-gap: 1.25rem;
     orphans: 1;
     widows: 1;
@@ -10290,8 +10283,17 @@ a.text-dark:hover, a.text-dark:focus {
 .dropdown-menu {
   margin: 0 !important;
 }
+.slideout-menu .dropdown-menu .nav-link,
+.slideout-menu .dropdown-toggle {
+  white-space: normal;
+}
+.slideout-menu .nav-link {
+  text-align: left;
+}
+
 .navbar-brand {
   max-width: 250px;
+  flex-shrink: 0;
 }
 .navbar {
   flex-wrap: nowrap;
@@ -10413,7 +10415,14 @@ body {
 
 .gform_wrapper .gfield.hide-label .gfield_label,
 .gform_wrapper .gfield.hide-label .ginput_complex label {
-  display: none !important;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
 }
 
 .gf_name_has_2 {
@@ -10487,6 +10496,7 @@ body {
 .login-password-protected > .container,
 .login-password-protected > .container > .row,
 .login-password-protected > .container > .column-group,
+.page .login-password-protected > .container > .page-header,
 .login-password-protected .main-content {
   height: 100%;
 }
@@ -10678,8 +10688,24 @@ blockquote cite {
   display: flex;
   flex-direction: column-reverse;
   overflow: hidden;
+  z-index: 0;
+  padding: 0 1rem;
+}
+.page-header .entry-title {
+  z-index: 1;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  margin-bottom: 0;
+}
+.page-header .header-image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 .page-header .header-image {
+  width: 100%;
   flex: 1 1 auto;
   position: relative;
   width: 100%;
@@ -10687,13 +10713,9 @@ blockquote cite {
   overflow: hidden;
 }
 .page-header .header-image img {
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
-  width: 100%;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
   min-height: 100%;
   min-width: 100%;
   -o-object-fit: cover;
@@ -10725,7 +10747,7 @@ blockquote cite {
 body.has-header-carousel .main-content {
   margin-top: 0;
 }
-body.has-header-carousel .main-content > .row, body.has-header-carousel .main-content > .column-group {
+body.has-header-carousel .main-content > .row, body.has-header-carousel .main-content > .column-group, body.has-header-carousel .page .main-content > .page-header, .page body.has-header-carousel .main-content > .page-header {
   display: block;
 }
 
