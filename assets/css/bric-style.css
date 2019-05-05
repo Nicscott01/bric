@@ -1950,11 +1950,6 @@ pre code {
   color: #868e96;
   opacity: 1;
 }
-.form-control::-moz-placeholder, #loginform > p:not(.login-submit):not(.submit) > input::-moz-placeholder,
-#lostpasswordform > p:not(.login-submit):not(.submit) > input::-moz-placeholder, .comment-form > p[class*=comment-form] > :not(label)::-moz-placeholder, .comment-form > p[class*=comment-form] textarea::-moz-placeholder, .comment-form > p[class*=comment-form] input::-moz-placeholder, .search-form .search-field::-moz-placeholder, .gform_fields input[type=text]::-moz-placeholder, .gform_fields input[type=tel]::-moz-placeholder, .gform_fields input[type=email]::-moz-placeholder, .gform_fields textarea::-moz-placeholder, .gform_fields select::-moz-placeholder, .gform_fields input[type=url]::-moz-placeholder {
-  color: #868e96;
-  opacity: 1;
-}
 .form-control:-ms-input-placeholder, #loginform > p:not(.login-submit):not(.submit) > input:-ms-input-placeholder,
 #lostpasswordform > p:not(.login-submit):not(.submit) > input:-ms-input-placeholder, .comment-form > p[class*=comment-form] > :not(label):-ms-input-placeholder, .comment-form > p[class*=comment-form] textarea:-ms-input-placeholder, .comment-form > p[class*=comment-form] input:-ms-input-placeholder, .search-form .search-field:-ms-input-placeholder, .gform_fields input[type=text]:-ms-input-placeholder, .gform_fields input[type=tel]:-ms-input-placeholder, .gform_fields input[type=email]:-ms-input-placeholder, .gform_fields textarea:-ms-input-placeholder, .gform_fields select:-ms-input-placeholder, .gform_fields input[type=url]:-ms-input-placeholder {
   color: #868e96;
@@ -4980,10 +4975,8 @@ input[type=button].btn-block {
 @media (min-width: 576px) {
   .card-columns {
     -webkit-column-count: 3;
-       -moz-column-count: 3;
             column-count: 3;
     -webkit-column-gap: 1.25rem;
-       -moz-column-gap: 1.25rem;
             column-gap: 1.25rem;
     orphans: 1;
     widows: 1;
@@ -10290,8 +10283,17 @@ a.text-dark:hover, a.text-dark:focus {
 .dropdown-menu {
   margin: 0 !important;
 }
+.slideout-menu .dropdown-menu .nav-link,
+.slideout-menu .dropdown-toggle {
+  white-space: normal;
+}
+.slideout-menu .nav-link {
+  text-align: left;
+}
+
 .navbar-brand {
   max-width: 250px;
+  flex-shrink: 0;
 }
 .navbar {
   flex-wrap: nowrap;

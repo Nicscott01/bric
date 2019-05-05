@@ -13,7 +13,7 @@
 	do_action( 'bric_before_page_header');
 	
 	get_template_part( 'template-parts/heading' );
-	
+
 	do_action( 'bric_after_page_header');
 	?>
 	
