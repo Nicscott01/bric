@@ -17,6 +17,10 @@ class Admin {
 		
 		add_action( 'init', [ $this, 'init'] );
 		
+		//Doesn't work with gutenberg
+		//Featured image / Thumbnail extra fields
+	//	add_filter( 'admin_post_thumbnail_html', [ $this, 'add_featured_image_display_settings'], 10, 2 );
+
 	}
 	
 	
@@ -33,8 +37,35 @@ class Admin {
 		//Label the page set as this posts archives
 		add_filter( 'display_post_states', array( $this, 'archive_page_label'), 10, 2 );
 		
+
 	
 		
+	}
+	
+	
+	
+	/**
+	 *	This doesn't work with Gutenberg
+	 *
+	 *
+	 */
+	
+	
+	public function add_featured_image_display_settings( $content, $post_id ) {
+		
+		
+		$field_id    = 'show_featured_image';
+		$field_value = esc_attr( get_post_meta( $post_id, $field_id, true ) );
+		$field_text  = esc_html__( 'Show image.', 'generatewp' );
+		$field_state = checked( $field_value, 1, false);
+
+		$field_label = sprintf(
+			'<p><label for="%1$s"><input type="checkbox" name="%1$s" id="%1$s" value="%2$s" %3$s> %4$s</label></p>',
+			$field_id, $field_value, $field_state, $field_text
+		);
+
+		return $content .= $field_label;
+
 	}
 	
 	
@@ -70,7 +101,7 @@ class Admin {
 	
 	public function discover_archives() {
 		
-		
+		$pts = [];
 		
 		foreach ( $this->post_types as $pt ) {
 			

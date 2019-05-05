@@ -35,7 +35,9 @@ class Bric {
 		add_action( 'wp_footer', array( $this, 'enqueue_footer_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) ); // queue early because of jquery in footer
-				
+		//Dequeue scripts/styles (last call)
+		add_action( 'wp_print_styles', [ $this, 'deregister_styles'], 100 );
+		
 		add_action( 'widgets_init', array( $this, 'register_sidebars') );
 		
 		add_action( 'wp', array( $this, 'get_theme_globals' ));
@@ -118,6 +120,27 @@ class Bric {
 		}
 
 	}	
+	
+	
+	
+	/**
+	 *		Dequeue Styles
+	 *
+	 *
+	 */
+	 
+	
+	public function deregister_styles() {
+		
+		
+		wp_dequeue_style( 'wp-block-library' );
+		
+		
+	}
+	
+	
+	
+	
 
 	
 	/** 
@@ -217,6 +240,9 @@ class Bric {
 			'image', 
 			'video',
 		));
+		
+		//Gutenberg alignment option
+	  	add_theme_support( 'align-wide' );
 
 		
 		//Register Nav Menus

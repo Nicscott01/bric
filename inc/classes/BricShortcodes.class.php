@@ -98,7 +98,7 @@ class BricShortcodes {
 				
 			}
 			
-			return sprintf( '<ul class="list-unstyled list-inline">%s</ul>', $o );
+			return sprintf( '<ul class="list-unstyled list-inline social-media">%s</ul>', $o );
 			
 			
 		}

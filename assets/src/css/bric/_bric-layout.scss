@@ -12,6 +12,10 @@
 
 .main-content {	
 	margin-top: 1.5em;
+	
+	> .row {
+		flex-direction: column;
+	}
 }
 
 body {
@@ -47,6 +51,77 @@ body {
 		flex-shrink: 0;
 		flex-basis: auto;
 	}
+}
+
+
+
+//
+//		ENTRY CONTENT 
+//
+.container-text {
+	max-width: 100%;
+	width: 100%;
+	
+	.entry-content {
+		& > {
+			
+			p, h1, h2, h3, h4, h5, h6,
+			.h1, .h2, .h3, .h4, .h5, .h6, 
+			.wp-bootstrap-blocks-row {
+				@include make-container();
+				@include make-container-max-widths();
+			}
+
+		}
+		
+		
+		.alignwide {
+			@include make-container();
+			max-width: 100%;
+			
+			@include media-breakpoint-up(md) {
+				max-width: 90%;
+			}
+			
+			img {
+				width: 100%;
+			}
+			
+		}
+		
+		.alignfull {
+			width: 100%;
+			
+			img {
+				width: 100%;
+			}
+		}
+		
+		
+	}
+	
+	
+
+	
+	
+
+}
+
+
+
+
+
+
+//
+//		GUTENBERG STYLES
+//
+
+.wp-block-image {
+	margin-top: $spacer*3;
+	margin-bottom: $spacer*3;
+	text-align: center;
+	
+	
 }
 
 
@@ -247,15 +322,18 @@ blockquote {
 //		PAGE HEADER
 //
 
-.page .page-header {
-	@extend .row;
-}
 
 //Whenever the article has a class with col in it, we'll make sure to pull the page header left/right
 [class*="col"] > .page-header {
     margin-left: $grid-gutter-width/-2;
     margin-right: $grid-gutter-width/-2;
 }
+
+
+
+
+$space-above-h: $spacer*4;
+$space-below-h: $spacer*3;
 
 
 .page-header {
@@ -265,15 +343,23 @@ blockquote {
 	overflow: hidden;
 	z-index: 0;
 	padding: 0 $spacer;
+	margin-bottom: $space-above-h;
+	
+	
+	&.has-header-image {
+		padding-top: $spacer*4;
+		padding-bottom: $spacer*4;
+	}
 	
 	.entry-title {
 		z-index: 1;
 		padding-top: .75em;	
 		padding-bottom: .75em;
-		margin-bottom: 0;
+		margin: 0;
 	}
 	
 	.header-image-wrapper {
+		display: flex;
 		position: absolute;
 		top:0;
 		left:0;
@@ -282,27 +368,68 @@ blockquote {
 	}
 	
 	
+	&.conform-aspect-ratio {
+		padding: 0;
+		
+		.entry-title {
+			position: absolute;
+			top:0;
+			bottom:0;
+			z-index: 1;
+			left: 0;
+			right: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			align-content: center;
+				
+		}
+		
+		.header-image-wrapper {
+			position: relative;
+			padding: 0;
+		}
+	}
+	
+	
+	&.title-below-image {
+		margin-bottom: 0;
+		
+		.entry-title {
+			position: relative;
+		}
+	}
+	
+	
+	
 	.header-image {
+		display: flex;
 		width: 100%;
 		flex: 1 1 auto;
 		position: relative;
 		width: 100%;
-		padding-top: 40%;
 		overflow: hidden;
 		
 		img {
 			position: relative;
 			left:0;
 			right:0;
-			//width:100%;
-			//top: 50%;
-			//transform: translateY(-50%);
 			min-height: 100%;
 			min-width: 100%;
 			object-fit: cover;			
 		}
 			
 	}
+}
+
+
+
+
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
+	margin-bottom: $space-below-h;
+}
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
+	margin-top: $space-above-h;
 }
 
 
@@ -336,6 +463,10 @@ blockquote {
 //		SOCIAL ICONS
 //
 
+ul.social-media {
+	margin-bottom: 0;
+}
+
 .social-account {
 	font-size: 1.5rem;
 	
@@ -351,6 +482,8 @@ blockquote {
 //
 
 .site-footer {
+	margin-top: $space-above-h;
+	
 	
 	.footer-widgets {
 		
@@ -361,6 +494,27 @@ blockquote {
 		h5 {
 			font-size: 1rem;
 		}
+		
+		.widget {
+			margin-bottom: 0;
+		}
 	}
 	
+}
+
+
+
+
+
+.copyright-credits-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: $spacer 0;
+	
+	@include media-breakpoint-up( md ) {
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+	}
 }

@@ -109,12 +109,83 @@ function entry_content_class( $classes = [] ) {
 
 
 
+/**
+ *		Entry Title Class
+ *
+ *
+ */
+
+function entry_title_class( $classes = [] ) {
+	
+	global $SiteInfo;
+	
+
+	$defaults = explode( ' ', $SiteInfo->options->entry_title_alignment );
+		
+	
+	$classes = wp_parse_args( $classes, $defaults );
+	
+	return implode( ' ', $classes );
+	
+}
 
 
 
 
 
 
+/**
+ *		Article Header Class
+ *
+ *
+ */
 
 
+function article_header_class( $classes = [] ) {
 
+
+	$defaults = [];
+
+	$classes = wp_parse_args( $classes, $defaults );
+
+	
+	/**
+	 * Check for option to conform aspect ratio of image
+	 *
+	 */
+	
+	$featured_image_options = get_field( 'featured_image_options' );
+	
+	if ( !empty( $featured_image_options )) {
+		
+		foreach ( $featured_image_options as $option ) {
+			
+			switch( $option ) {
+					
+				case 'conform_aspect_ratio' :
+					
+					$classes[] = 'conform-aspect-ratio';
+					break;
+					
+				case 'fixed_background_image' :
+
+					$classes[] = 'has-parallax';
+					break;
+					
+				case 'page_title_below_image' :
+
+					$classes[] = 'title-below-image';
+					break;
+					
+		
+			}
+			
+		}
+	}
+	
+	
+	$classes = apply_filters( 'article_header_class', $classes );
+	
+	
+	echo sprintf( 'class="%s"', implode( ' ', $classes ) );
+}

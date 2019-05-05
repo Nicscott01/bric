@@ -165,6 +165,11 @@ class SiteInfo {
 							'value' => '',
 							'type' => 'text',
 						],						
+					  	[	'name' => 'entry_title_alignment',
+							'label' => 'Entry Title Alignment',
+							'value' => '',
+							'type' => 'text',
+						],						
 					],
 				],
 				[ 'section' => 'homepage_slider',
@@ -216,7 +221,8 @@ class SiteInfo {
 				'main_content_container' => true,
 				'article_class' => 'col-12',
 				'article_class_excerpt' => 'col-12 col-md-6',
-				'entry_content_class' => ''
+				'entry_content_class' => '',
+				'entry_title_alignment' => ''
 			  ),
 			'posts' => array (
 				'show_post_date' => true,
@@ -292,6 +298,7 @@ class SiteInfo {
 		$this->options->article_class = $theme_settings['layout']['article_class'];
 		$this->options->article_class_excerpt = $theme_settings['layout']['article_class_excerpt'];
 		$this->options->entry_content_class = $theme_settings['layout']['entry_content_class'];
+		$this->options->entry_title_alignment = $theme_settings['layout']['entry_title_alignment'];
 		
 		
 		$this->breadcrumbs = $theme_settings['breadcrumbs'];
