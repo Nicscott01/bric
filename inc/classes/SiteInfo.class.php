@@ -237,6 +237,11 @@ class SiteInfo {
 				'bg_color' => 'light',
 				'navbar_color' => 'light',
 				'width' => '260',
+				'slideout' => [
+					'side' => 'right',
+					'menu_location' => 'primary',
+					'close_button' => false,
+				],
 			),
 			'breadcrumbs' => array(
 				'enable' => ( class_exists( 'WPSEO_Options') ) ? WPSEO_Options::get( 'breadcrumbs-enable' ) : false,
@@ -326,7 +331,7 @@ class SiteInfo {
 		$this->navbar->bg_color = $theme_settings['navbar']['bg_color'];
 		$this->navbar->navbar_color = $theme_settings['navbar']['navbar_color'];
 		$this->navbar->width = $theme_settings['navbar']['width'];
-		
+		$this->navbar->slideout = $theme_settings['navbar']['slideout'];
 		
 		
 		/*
@@ -552,18 +557,73 @@ class SiteInfo {
 			'type' => 'select',
 			'setting' => 'md',
 			'priority' => 10,
-			'section' => 'title_tagline',
+			'section' => 'bric_options',
 			'label' => __('Breakpoint for non-collapsed navigation'),
 			'description' => '',
 			'choices' => [
 				'sm' => __('Small'),
 				'md' => __('Medium'),
 				'lg' => __('Large'),
+				'xl' => __('Xtra-Large'),
 			],
 			'active_callback' => '',
 		]);
 		
 
+		
+		//Slideout side
+		$wp_customize->add_setting( 'bric[navbar][slideout][side]', array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'theme_supports' => '',
+			'default' => 'right',
+			'transport' => 'refresh',
+			'sanitize_callback' => '',//['BricCustomizer','navbar_brand_type_cb'],
+			'sanitize_js_callback' => '',
+		));
+
+
+		$wp_customize->add_control( 'bric[navbar][slideout][side]', [
+			'type' => 'select',
+			'setting' => 'right',
+			'priority' => 10,
+			'section' => 'bric_options',
+			'label' => __('Side for slideout menu'),
+			'description' => '',
+			'choices' => [
+				'right' => __('Right'),
+				'left' => __('Left'),
+			],
+			'active_callback' => '',
+		]);
+		
+
+		
+		//Slideout close button
+		$wp_customize->add_setting( 'bric[navbar][slideout][close_button]', array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'theme_supports' => '',
+			'default' => false,
+			'transport' => 'refresh',
+			'sanitize_callback' => [ 'BricCustomizer', 'checkbox_cb' ],
+			'sanitize_js_callback' => '',
+		));
+
+
+		$wp_customize->add_control( 'bric[navbar][slideout][close_button]', [
+			'type' => 'checkbox',
+			'setting' => false,
+			'priority' => 10,
+			'section' => 'bric_options',
+			'label' => __('Show close button in slideout'),
+			'description' => '',
+			'active_callback' => '',
+		]);
+		
+
+		
+		
 		
 		
 		
@@ -608,7 +668,7 @@ class SiteInfo {
 			'type' => 'select',
 			'setting' => 'light',
 			'priority' => 10,
-			'section' => 'title_tagline',
+			'section' => 'bric_options',
 			'label' => __('Navbar Background Color'),
 			'description' => '',
 			'choices' => [

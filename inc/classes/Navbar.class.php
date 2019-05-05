@@ -23,6 +23,7 @@ class Navbar {
 		add_action( 'wp', array( $this, 'gather_assets' ) );		
 		add_action( 'customize_preview_init', array( $this, 'gather_assets' ) );		
 		
+		add_shortcode( 'navbar_toggler', [ $this, 'get_navbar_toggler'] );
 
 		
 	}
@@ -125,10 +126,17 @@ class Navbar {
 		$this->url = get_bloginfo( 'url' );
 		
 		
+		/**
+		 *		filter the navbar menu location
+		 *
+		 */
+		$menu = apply_filters( 'bric_navbar_menu_location', 'primary' );
+		
+		
 		//Get main menu
 		$this->wp_menus = get_nav_menu_locations();
 		
-		if ( !empty( $this->wp_menus['primary'] ) ) {
+		if ( !empty( $this->wp_menus[$menu] ) ) {
 		
 			$this->main_nav_menu_obj = wp_get_nav_menu_object( $this->wp_menus['primary'] );
 			$this->navbar_collapse_id = $this->main_nav_menu_obj->slug.'-'.$this->main_nav_menu_obj->term_id;
@@ -150,9 +158,16 @@ class Navbar {
 		
 		if ( !empty( $this->wp_menus ) ) {
 		
+			/**
+			 *		filter the navbar menu location
+			 *
+			 */
+			$location = apply_filters( 'bric_navbar_menu_location', 'primary' );
+
+
 				
 			$this->main_nav_menu = wp_nav_menu( array(
-				'theme_location' => 'primary',
+				'theme_location' => $location,
 				'echo' => 0,
 				'menu_class' => 'navbar-nav ml-auto',
 				'container' => 'div',
@@ -325,7 +340,7 @@ class Navbar {
 				$this->navbar_brand = sprintf( '<a class="navbar-brand" href="%s" style="width:%spx"><div class="tagline">%s</div> %s</a>', 
 											  $this->url,
 											   $navbar_brand_width,
-											  '<span class="blogtitle">'.get_bloginfo('title').'</span>',
+											  '<span class="blogtitle">'.get_bloginfo('blogname').'</span>',
 											  $this->logo );
 				break;
 		}
@@ -344,20 +359,46 @@ class Navbar {
 	
 	public function get_navbar_toggler() {
 		
-		if ( !empty( $this->main_nav_menu ) ) {
+		
+		//if ( !empty( $this->main_nav_menu ) )  {
+			
+			if ( !isset( $this->navbar_collapse_id ) ){
+				$this->gather_assets();
+			}
 			
 			$this->navbar_toggler = sprintf( '
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#%1$s-sidebar" aria-controls="%1$s" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	  </button>', $this->navbar_collapse_id );
 
-		}
+	//	}
 		
 		
 		return $this->navbar_toggler;		
 		
 		
 	}
+	
+	
+	
+	/**
+	 *		Get the menu object for Primary Menu
+	 *
+	 *
+	 */
+	
+	public static function get_primary_nav_menu_obj() {
+		
+		$nav_menu_locations = get_nav_menu_locations();
+			
+		$primary_nav = $nav_menu_locations['primary'];
+			
+		return wp_get_nav_menu_object( $primary_nav );
+
+	}
+	
+	
+	
 	
 	
 	
