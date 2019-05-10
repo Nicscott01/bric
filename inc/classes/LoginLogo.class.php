@@ -49,7 +49,7 @@ class LoginLogo {
 			#login h1 a, .login h1 a {
 			background-image: url(<?php echo $logo; ?>);
 			width:100%;
-			background-size: <?php echo $bg_size; ?>;
+			background-size: contain<?php //echo $bg_size; ?>;
 			background-repeat: no-repeat;
 			padding-bottom: 30px;
 			background-position: center center;
