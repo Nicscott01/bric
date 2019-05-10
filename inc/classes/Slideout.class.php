@@ -42,8 +42,7 @@ class Slideout {
 		global $SiteInfo;
 		
 		$main_menu = Navbar::get_primary_nav_menu_obj();
-		
-		
+			
 		
 		wp_enqueue_script( 'slideout', get_template_directory_uri().'/assets/js/slideout.min.js', array('jquery', 'bootstrap'), false, true );
 		

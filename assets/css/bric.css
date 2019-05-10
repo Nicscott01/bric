@@ -1960,6 +1960,11 @@ pre code {
   color: #868e96;
   opacity: 1;
 }
+.form-control::-moz-placeholder, #loginform > p:not(.login-submit):not(.submit) > input::-moz-placeholder,
+#lostpasswordform > p:not(.login-submit):not(.submit) > input::-moz-placeholder, .comment-form > p[class*=comment-form] > :not(label)::-moz-placeholder, .comment-form > p[class*=comment-form] textarea::-moz-placeholder, .comment-form > p[class*=comment-form] input::-moz-placeholder, .search-form .search-field::-moz-placeholder, .gform_fields input[type=text]::-moz-placeholder, .gform_fields input[type=tel]::-moz-placeholder, .gform_fields input[type=email]::-moz-placeholder, .gform_fields textarea::-moz-placeholder, .gform_fields select::-moz-placeholder, .gform_fields input[type=url]::-moz-placeholder {
+  color: #868e96;
+  opacity: 1;
+}
 .form-control::placeholder, #loginform > p:not(.login-submit):not(.submit) > input::placeholder,
 #lostpasswordform > p:not(.login-submit):not(.submit) > input::placeholder, .comment-form > p[class*=comment-form] > :not(label)::placeholder, .comment-form > p[class*=comment-form] textarea::placeholder, .comment-form > p[class*=comment-form] input::placeholder, .search-form .search-field::placeholder, .gform_fields input[type=text]::placeholder, .gform_fields input[type=tel]::placeholder, .gform_fields input[type=email]::placeholder, .gform_fields textarea::placeholder, .gform_fields select::placeholder, .gform_fields input[type=url]::placeholder {
   color: #868e96;
@@ -4975,8 +4980,10 @@ input[type=button].btn-block {
 @media (min-width: 576px) {
   .card-columns {
     -webkit-column-count: 3;
+         -moz-column-count: 3;
          column-count: 3;
     -webkit-column-gap: 1.25rem;
+         -moz-column-gap: 1.25rem;
          column-gap: 1.25rem;
     orphans: 1;
     widows: 1;

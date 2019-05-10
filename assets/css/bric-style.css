@@ -568,7 +568,8 @@ mark,
 
 .img-fluid, .navbar-brand img, img[class*=wp-image],
 img[class*=wp-post-image],
-figure:not(.woocommerce-product-gallery__wrapper) {
+figure:not(.woocommerce-product-gallery__wrapper),
+img[class*=attachment] {
   max-width: 100%;
   height: auto;
 }
@@ -670,7 +671,7 @@ pre code {
   margin-left: auto;
 }
 
-.row, .column-group, .page .page-header {
+.row, .column-group {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
@@ -1947,6 +1948,11 @@ pre code {
 }
 .form-control::-webkit-input-placeholder, #loginform > p:not(.login-submit):not(.submit) > input::-webkit-input-placeholder,
 #lostpasswordform > p:not(.login-submit):not(.submit) > input::-webkit-input-placeholder, .comment-form > p[class*=comment-form] > :not(label)::-webkit-input-placeholder, .comment-form > p[class*=comment-form] textarea::-webkit-input-placeholder, .comment-form > p[class*=comment-form] input::-webkit-input-placeholder, .search-form .search-field::-webkit-input-placeholder, .gform_fields input[type=text]::-webkit-input-placeholder, .gform_fields input[type=tel]::-webkit-input-placeholder, .gform_fields input[type=email]::-webkit-input-placeholder, .gform_fields textarea::-webkit-input-placeholder, .gform_fields select::-webkit-input-placeholder, .gform_fields input[type=url]::-webkit-input-placeholder {
+  color: #868e96;
+  opacity: 1;
+}
+.form-control::-moz-placeholder, #loginform > p:not(.login-submit):not(.submit) > input::-moz-placeholder,
+#lostpasswordform > p:not(.login-submit):not(.submit) > input::-moz-placeholder, .comment-form > p[class*=comment-form] > :not(label)::-moz-placeholder, .comment-form > p[class*=comment-form] textarea::-moz-placeholder, .comment-form > p[class*=comment-form] input::-moz-placeholder, .search-form .search-field::-moz-placeholder, .gform_fields input[type=text]::-moz-placeholder, .gform_fields input[type=tel]::-moz-placeholder, .gform_fields input[type=email]::-moz-placeholder, .gform_fields textarea::-moz-placeholder, .gform_fields select::-moz-placeholder, .gform_fields input[type=url]::-moz-placeholder {
   color: #868e96;
   opacity: 1;
 }
@@ -4975,8 +4981,10 @@ input[type=button].btn-block {
 @media (min-width: 576px) {
   .card-columns {
     -webkit-column-count: 3;
+       -moz-column-count: 3;
             column-count: 3;
     -webkit-column-gap: 1.25rem;
+       -moz-column-gap: 1.25rem;
             column-gap: 1.25rem;
     orphans: 1;
     widows: 1;
@@ -10226,21 +10234,14 @@ a.text-dark:hover, a.text-dark:focus {
 
 .alignright {
   float: right;
+  padding-left: 1em;
 }
 
 .alignleft {
   float: left;
+  padding-right: 1em;
 }
 
-@media (min-width: 576px) {
-  .alignright {
-    padding-left: 1em;
-  }
-
-  .alignleft {
-    padding-right: 1em;
-  }
-}
 .aligncenter {
   display: block;
   margin-left: auto;
@@ -10326,6 +10327,10 @@ a.text-dark:hover, a.text-dark:focus {
   .navbar .right-side {
     flex-basis: 100%;
   }
+}
+
+.navbar-nav {
+  margin-right: -0.5rem;
 }
 
 .nav-link:before {
@@ -10496,7 +10501,6 @@ body {
 .login-password-protected > .container,
 .login-password-protected > .container > .row,
 .login-password-protected > .container > .column-group,
-.page .login-password-protected > .container > .page-header,
 .login-password-protected .main-content {
   height: 100%;
 }
@@ -10525,6 +10529,9 @@ body {
 .main-content {
   margin-top: 1.5em;
 }
+.main-content > .row, .main-content > .column-group {
+  flex-direction: column;
+}
 
 body.has-header-image .main-content, body.has-header-carousel .main-content {
   margin-top: 0;
@@ -10544,6 +10551,95 @@ body.has-header-image .main-content, body.has-header-carousel .main-content {
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: auto;
+}
+
+.navbar-brand {
+  flex-shrink: 1;
+  flex-basis: 50%;
+}
+@media (min-width: 768px) {
+  .navbar-brand {
+    flex-basis: auto;
+    flex-shrink: 0;
+  }
+}
+
+.container-text {
+  max-width: 100%;
+  width: 100%;
+}
+.container-text .entry-content > p, .container-text .entry-content > h1, .container-text .entry-content > h2, .container-text .entry-content > h3, .container-text .entry-content > h4, .container-text .entry-content > h5, .container-text .entry-content > h6,
+.container-text .entry-content > .h1, .container-text .entry-content > .h2, .container-text .entry-content > .h3, .container-text .entry-content > .h4, .container-text .entry-content > .h5, .container-text .entry-content > .h6,
+.container-text .entry-content > .wp-bootstrap-blocks-row,
+.container-text .entry-content > blockquote {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 576px) {
+  .container-text .entry-content > p, .container-text .entry-content > h1, .container-text .entry-content > h2, .container-text .entry-content > h3, .container-text .entry-content > h4, .container-text .entry-content > h5, .container-text .entry-content > h6,
+.container-text .entry-content > .h1, .container-text .entry-content > .h2, .container-text .entry-content > .h3, .container-text .entry-content > .h4, .container-text .entry-content > .h5, .container-text .entry-content > .h6,
+.container-text .entry-content > .wp-bootstrap-blocks-row,
+.container-text .entry-content > blockquote {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .container-text .entry-content > p, .container-text .entry-content > h1, .container-text .entry-content > h2, .container-text .entry-content > h3, .container-text .entry-content > h4, .container-text .entry-content > h5, .container-text .entry-content > h6,
+.container-text .entry-content > .h1, .container-text .entry-content > .h2, .container-text .entry-content > .h3, .container-text .entry-content > .h4, .container-text .entry-content > .h5, .container-text .entry-content > .h6,
+.container-text .entry-content > .wp-bootstrap-blocks-row,
+.container-text .entry-content > blockquote {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container-text .entry-content > p, .container-text .entry-content > h1, .container-text .entry-content > h2, .container-text .entry-content > h3, .container-text .entry-content > h4, .container-text .entry-content > h5, .container-text .entry-content > h6,
+.container-text .entry-content > .h1, .container-text .entry-content > .h2, .container-text .entry-content > .h3, .container-text .entry-content > .h4, .container-text .entry-content > .h5, .container-text .entry-content > .h6,
+.container-text .entry-content > .wp-bootstrap-blocks-row,
+.container-text .entry-content > blockquote {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container-text .entry-content > p, .container-text .entry-content > h1, .container-text .entry-content > h2, .container-text .entry-content > h3, .container-text .entry-content > h4, .container-text .entry-content > h5, .container-text .entry-content > h6,
+.container-text .entry-content > .h1, .container-text .entry-content > .h2, .container-text .entry-content > .h3, .container-text .entry-content > .h4, .container-text .entry-content > .h5, .container-text .entry-content > .h6,
+.container-text .entry-content > .wp-bootstrap-blocks-row,
+.container-text .entry-content > blockquote {
+    max-width: 1140px;
+  }
+}
+.container-text .entry-content .alignwide {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 100%;
+}
+@media (min-width: 768px) {
+  .container-text .entry-content .alignwide {
+    max-width: 90%;
+  }
+}
+.container-text .entry-content .alignwide img {
+  width: 100%;
+}
+.container-text .entry-content .alignfull {
+  width: 100%;
+}
+.container-text .entry-content .alignfull img {
+  width: 100%;
+}
+
+.wp-block-image {
+  text-align: center;
+}
+
+.entry-content > .wp-block-image {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .excerpt {
@@ -10690,26 +10786,59 @@ blockquote cite {
   overflow: hidden;
   z-index: 0;
   padding: 0 1rem;
+  margin-bottom: 4rem;
+}
+.page-header.has-header-image {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 .page-header .entry-title {
   z-index: 1;
   padding-top: 0.75em;
   padding-bottom: 0.75em;
-  margin-bottom: 0;
+  margin: 0;
 }
 .page-header .header-image-wrapper {
+  display: flex;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+}
+.page-header.conform-aspect-ratio {
+  padding: 0;
+}
+.page-header.conform-aspect-ratio .entry-title {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+.page-header.conform-aspect-ratio .header-image-wrapper {
+  position: relative;
+  padding: 0;
+}
+.page-header.title-below-image {
+  margin-bottom: 0;
+}
+.page-header.title-below-image .entry-title {
+  position: relative;
 }
 .page-header .header-image {
+  display: flex;
   width: 100%;
   flex: 1 1 auto;
   position: relative;
   width: 100%;
-  padding-top: 40%;
   overflow: hidden;
 }
 .page-header .header-image img {
@@ -10722,12 +10851,24 @@ blockquote cite {
      object-fit: cover;
 }
 
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
+  margin-bottom: 3rem;
+}
+
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
+  margin-top: 4rem;
+}
+
 .acf-map {
   margin-bottom: 1em;
 }
 
 .operating-hours .day {
   font-weight: bold;
+}
+
+ul.social-media {
+  margin-bottom: 0;
 }
 
 .social-account {
@@ -10737,17 +10878,37 @@ blockquote cite {
   margin-right: 10px;
 }
 
+.site-footer {
+  margin-top: 4rem;
+}
 .site-footer .footer-widgets h4 {
   font-size: 1.25rem;
 }
 .site-footer .footer-widgets h5 {
   font-size: 1rem;
 }
+.site-footer .footer-widgets .widget {
+  margin-bottom: 0;
+}
+
+.copyright-credits-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+}
+@media (min-width: 768px) {
+  .copyright-credits-wrapper {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+}
 
 body.has-header-carousel .main-content {
   margin-top: 0;
 }
-body.has-header-carousel .main-content > .row, body.has-header-carousel .main-content > .column-group, body.has-header-carousel .page .main-content > .page-header, .page body.has-header-carousel .main-content > .page-header {
+body.has-header-carousel .main-content > .row, body.has-header-carousel .main-content > .column-group {
   display: block;
 }
 

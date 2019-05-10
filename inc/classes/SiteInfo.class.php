@@ -341,6 +341,8 @@ class SiteInfo {
 		$this->navbar->slideout = $theme_settings['navbar']['slideout'];
 		
 		
+//		var_dump( $this->navbar->slideout );
+		
 		/*
 		echo '<pre>';
 		var_dump( $options );

@@ -56,6 +56,25 @@ body {
 
 
 //
+//		NAVBAR
+//
+
+.navbar-brand {
+	flex-shrink: 1;
+	flex-basis: 50%;
+	
+	@include media-breakpoint-up( md ) {
+		flex-basis: auto;
+		flex-shrink: 0;
+	}
+	
+}
+
+
+
+
+
+//
 //		ENTRY CONTENT 
 //
 .container-text {
@@ -67,7 +86,10 @@ body {
 			
 			p, h1, h2, h3, h4, h5, h6,
 			.h1, .h2, .h3, .h4, .h5, .h6, 
-			.wp-bootstrap-blocks-row {
+			.wp-bootstrap-blocks-row,
+			blockquote,
+			.wp-block-image,
+			.gallery-wrapper {
 				@include make-container();
 				@include make-container-max-widths();
 			}
@@ -117,11 +139,12 @@ body {
 //
 
 .wp-block-image {
+	text-align: center;	
+}
+
+.entry-content > .wp-block-image {
 	margin-top: $spacer*3;
 	margin-bottom: $spacer*3;
-	text-align: center;
-	
-	
 }
 
 
