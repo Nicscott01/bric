@@ -1,4 +1,5 @@
 //GRUNTFILE for Bric Children
+const sass = require( 'sass' );
 
 module.exports = function (grunt) {
 
@@ -8,6 +9,7 @@ module.exports = function (grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		sass: {
 			options: {
+				implementation: sass,
 				sourceMap: true,
 				outputStyle: 'compressed',
 				includePaths: ['../bric/assets/src/css/bric/','node_modules/bootstrap/scss/']

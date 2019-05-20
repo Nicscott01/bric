@@ -10571,7 +10571,9 @@ body.has-header-image .main-content, body.has-header-carousel .main-content {
 .container-text .entry-content > p, .container-text .entry-content > h1, .container-text .entry-content > h2, .container-text .entry-content > h3, .container-text .entry-content > h4, .container-text .entry-content > h5, .container-text .entry-content > h6,
 .container-text .entry-content > .h1, .container-text .entry-content > .h2, .container-text .entry-content > .h3, .container-text .entry-content > .h4, .container-text .entry-content > .h5, .container-text .entry-content > .h6,
 .container-text .entry-content > .wp-bootstrap-blocks-row,
-.container-text .entry-content > blockquote {
+.container-text .entry-content > blockquote,
+.container-text .entry-content > .wp-block-image,
+.container-text .entry-content > .gallery-wrapper {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
@@ -10582,7 +10584,9 @@ body.has-header-image .main-content, body.has-header-carousel .main-content {
   .container-text .entry-content > p, .container-text .entry-content > h1, .container-text .entry-content > h2, .container-text .entry-content > h3, .container-text .entry-content > h4, .container-text .entry-content > h5, .container-text .entry-content > h6,
 .container-text .entry-content > .h1, .container-text .entry-content > .h2, .container-text .entry-content > .h3, .container-text .entry-content > .h4, .container-text .entry-content > .h5, .container-text .entry-content > .h6,
 .container-text .entry-content > .wp-bootstrap-blocks-row,
-.container-text .entry-content > blockquote {
+.container-text .entry-content > blockquote,
+.container-text .entry-content > .wp-block-image,
+.container-text .entry-content > .gallery-wrapper {
     max-width: 540px;
   }
 }
@@ -10590,7 +10594,9 @@ body.has-header-image .main-content, body.has-header-carousel .main-content {
   .container-text .entry-content > p, .container-text .entry-content > h1, .container-text .entry-content > h2, .container-text .entry-content > h3, .container-text .entry-content > h4, .container-text .entry-content > h5, .container-text .entry-content > h6,
 .container-text .entry-content > .h1, .container-text .entry-content > .h2, .container-text .entry-content > .h3, .container-text .entry-content > .h4, .container-text .entry-content > .h5, .container-text .entry-content > .h6,
 .container-text .entry-content > .wp-bootstrap-blocks-row,
-.container-text .entry-content > blockquote {
+.container-text .entry-content > blockquote,
+.container-text .entry-content > .wp-block-image,
+.container-text .entry-content > .gallery-wrapper {
     max-width: 720px;
   }
 }
@@ -10598,7 +10604,9 @@ body.has-header-image .main-content, body.has-header-carousel .main-content {
   .container-text .entry-content > p, .container-text .entry-content > h1, .container-text .entry-content > h2, .container-text .entry-content > h3, .container-text .entry-content > h4, .container-text .entry-content > h5, .container-text .entry-content > h6,
 .container-text .entry-content > .h1, .container-text .entry-content > .h2, .container-text .entry-content > .h3, .container-text .entry-content > .h4, .container-text .entry-content > .h5, .container-text .entry-content > .h6,
 .container-text .entry-content > .wp-bootstrap-blocks-row,
-.container-text .entry-content > blockquote {
+.container-text .entry-content > blockquote,
+.container-text .entry-content > .wp-block-image,
+.container-text .entry-content > .gallery-wrapper {
     max-width: 960px;
   }
 }
@@ -10606,7 +10614,9 @@ body.has-header-image .main-content, body.has-header-carousel .main-content {
   .container-text .entry-content > p, .container-text .entry-content > h1, .container-text .entry-content > h2, .container-text .entry-content > h3, .container-text .entry-content > h4, .container-text .entry-content > h5, .container-text .entry-content > h6,
 .container-text .entry-content > .h1, .container-text .entry-content > .h2, .container-text .entry-content > .h3, .container-text .entry-content > .h4, .container-text .entry-content > .h5, .container-text .entry-content > .h6,
 .container-text .entry-content > .wp-bootstrap-blocks-row,
-.container-text .entry-content > blockquote {
+.container-text .entry-content > blockquote,
+.container-text .entry-content > .wp-block-image,
+.container-text .entry-content > .gallery-wrapper {
     max-width: 1140px;
   }
 }
