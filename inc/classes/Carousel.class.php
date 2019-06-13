@@ -27,7 +27,12 @@ class Carousel {
 	public $itemInnerClass = '';
 	public $slideSpeed = '3000';
 	public $isGallery = false;
-	
+
+	/**
+	 *		Enable entire slide to be hyperlink
+	 */
+	public $link_entire_slide = false;
+
 	
 	
 	function __construct( $gallery ) {
@@ -155,7 +160,7 @@ class Carousel {
 			$description = sprintf( '<div class="description">%s</div>', $this->currentItem['description'] );
 			
 		
-		if ( !empty( $this->currentItem['link'] ) ) 
+		if ( !empty( $this->currentItem['link'] ) && !$this->link_entire_slide  ) 
 			
 			$cta = sprintf( '<a class="btn btn-cta" href="%s">%s</a>', $this->currentItem['link']['url'], $this->currentItem['link']['title'] );
 			
@@ -183,6 +188,15 @@ class Carousel {
 			
 			
 		}
+		
+		
+		if ( $this->link_entire_slide ){
+
+			$img = sprintf( '<a class="d-block" href="%s">%s</a>', $this->currentItem['link']['url'], $img );
+
+		}
+
+		
 		
 		
 

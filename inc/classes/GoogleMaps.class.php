@@ -15,6 +15,11 @@ class GoogleMaps {
 		//add_action( 'init', array( $this, 'add_shorcodes') );
 		add_shortcode( 'bric_google_map', array( $this, 'google_maps_sc' ) );
 		
+		
+		if ( !defined( 'BRIC_GOOGLE_MAPS_API_KEY') ) {
+			define( 'BRIC_GOOGLE_MAPS_API_KEY', 'AIzaSyDc778GGrKeGmDI5qIl1H-nFQUt4We6ZkA' );// //AIzaSyAHiR6Mb0pnjvQs0FoUn6gsk3_TZxRgkOU
+		}
+		
 	}
 	
 	
@@ -80,11 +85,11 @@ class GoogleMaps {
 		
 		wp_register_script( 'google-maps-api', 'https://maps.googleapis.com/maps/api/js?key='.BRIC_GOOGLE_MAPS_API_KEY, array('jquery'), null, true );
 		wp_enqueue_script( 'google-maps-api' );
+
 		
 		wp_register_script( 'google-maps-render', get_template_directory_uri().'/assets/js/google-maps-render.min.js', array('jquery', 'google-maps-api'), null, true );
 		wp_enqueue_script( 'google-maps-render' );
 				
-		
 		
 	}
 	

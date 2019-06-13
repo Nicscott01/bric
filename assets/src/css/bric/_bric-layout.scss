@@ -317,24 +317,15 @@ body {
 //
 
 blockquote {
-	background-color: $gray-100;
 	padding: 1em 2em;
-	margin-left: 3em;
-	margin-right: 3em;
 	
 	p {
-		font-style: italic;
-		font-size: $font-size-lg;
-		font-weight: lighter;
 		
 		&:last-child {
 			margin-bottom: 0;
 		}
 	}
 	
-	cite {
-		font-weight: bold;
-	}
 }
 
 
@@ -355,8 +346,8 @@ blockquote {
 
 
 
-$space-above-h: $spacer*4;
-$space-below-h: $spacer*3;
+$space-above-h: $spacer*1;
+$space-below-h: $spacer*1.25;
 
 
 .page-header {
@@ -455,6 +446,15 @@ h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
 }
 h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
 	margin-top: $space-above-h;
+}
+
+
+.page-title {
+	
+	&.page-title-sc {
+		margin-top:0;
+		margin-bottom: 1em;
+	}
 }
 
 

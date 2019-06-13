@@ -266,7 +266,7 @@ class Navbar {
 			   $this->get_main_nav_menu(),
 			   $this->get_navbar_toggler(),
 			   $this->navbar_options['expand'],
-			   ( $this->navbar_options['container'] ) ? '<div class="container">' : '',
+			   ( $this->navbar_options['container'] ) ? '<div class="container navbar-inner-wrapper">' : '',
 			   ( $this->navbar_options['container'] ) ? '</div>' : '',
 			   $this->navbar_options['navbar_color'],
 			   $this->navbar_options['bg_color'],

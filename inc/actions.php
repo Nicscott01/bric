@@ -9,7 +9,7 @@ add_action( 'bric_header', array( $Navbar, 'get_navbar' ), 10 );
 global $BricLoop;
 
 //Add in the archive header
-add_action( 'bric_after_header', array( $BricLoop, 'get_archive_header' ), 10 );
+add_action( 'bric_before_loop', array( $BricLoop, 'get_archive_header' ), 5 );
 
 
 add_action( 'bric_before_loop', array( $BricLoop, 'get_sidebar'), 5 );

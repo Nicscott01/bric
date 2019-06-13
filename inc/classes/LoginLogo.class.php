@@ -54,6 +54,10 @@ class LoginLogo {
 			padding-bottom: 30px;
 			background-position: center center;
 			}
+			.wp-core-ui .button-primary {
+				text-shadow: none !important;
+				box-shadow: none !important;
+			}
 		</style>
 	<?php }
 	

@@ -9,7 +9,9 @@
 
 class BricLoop {
 	
-	public $contentTemplate = '';
+	var $contentTemplate = 'basic';
+	
+	
 	
 	function __construct() {
 		
@@ -26,11 +28,7 @@ class BricLoop {
 	
 	public function setupContent() {
 		
-		if ( empty( $this->contentTemplate ) ) {
-			
-			$this->contentTemplate = 'basic';
-			
-		}
+		
 		
 		
 		
@@ -50,6 +48,18 @@ class BricLoop {
 			
 			$this->contentTemplate = 'excerpt';
 		}
+		
+		
+		
+		/**
+	 	 *		Filter: bric_content_template
+		 *
+		 *		@since 5/23/19
+		 *
+		 */
+		
+		$this->contentTemplate = apply_filters( 'bric_content_template', $this->contentTemplate, $this );
+		
 	
 		
 	}

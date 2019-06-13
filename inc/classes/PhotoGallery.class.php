@@ -102,20 +102,26 @@ class PhotoGallery {
 			$c = 1;				
 			foreach ( $gallery as $key => $image ) {
 
-				if ( $c == 1 ) {
-					$item_class = " grid-sizer";
-				}
+				if ( $this->args['gallery_display'] == 'masonry' ) {
+					
+					if ( $c == 1 ) {
+						$item_class = " grid-sizer";
+					}
 
-				elseif ( $c % 3 == 0) {
-					$item_class = " image-width-2 image-height-2";
-					$image_large = 'medium_large';
-				}
+					elseif ( $c % 3 == 0) {
+						$item_class = " image-width-2 image-height-2";
+						$image_large = 'medium_large';
+					}
 
+					else {
+						$item_class= ' ';
+						$image_large = 'medium';
+					}
+
+				}
 				else {
-					$item_class= ' ';
 					$image_large = 'medium';
 				}
-
 				
 				$output .= "\t<figure class='image-item".$item_class."' itemprop='associatedMedia' itemscope itemtype='http://schema.org/ImageObject'>\n";
 

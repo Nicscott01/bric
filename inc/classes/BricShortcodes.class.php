@@ -29,6 +29,13 @@ class BricShortcodes {
 		add_shortcode( 'login_form', array( $this, 'login_form_sc') );
 		add_filter( 'login_form_bottom', array( $this, 'login_form_bottom'), 10, 2 );
 		
+		
+		
+		
+		//Page title move around
+		add_shortcode( 'page_title', [ $this, 'page_title_sc' ], 10, 2 );
+		//add_action( 'wp', [ $this, 'evaluate_page_title_sc' ] );
+		
 	}
 	
 	
@@ -247,7 +254,52 @@ class BricShortcodes {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	/**
+	 *		Page Title
+	 *		-Use of shortcode will place the page title where it is!
+	 *
+	 *
+	 */
+	
+	public function page_title_sc( $content, $args ) {
+		
+		
+		return sprintf( '<h1 class="page-title page-title-sc">%s</h1>', get_the_title() );
+		
+		
+	}
 
+	
+	
+	/**
+	 *		Evaluate Page Title SC
+	 *		-see if the sc is in the post_content
+	 *		so we can remove the regular title early enough
+	 *
+	 */
+	
+	public function evaluate_page_title_sc() {
+		
+		global $post;
+		
+		if ( has_shortcode( $post->post_content, 'page_title' ) ) {
+		
+			
+			//Remove the title
+			
+		}
+		
+		
+		
+	}
+	
+	
 }
 
 
