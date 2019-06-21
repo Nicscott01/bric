@@ -14,7 +14,7 @@
 	margin-top: 1.5em;
 	
 	> .row {
-		flex-direction: column;
+		//flex-direction: column;
 	}
 }
 
@@ -356,7 +356,7 @@ $space-below-h: $spacer*1.25;
 	flex-direction: column-reverse;
 	overflow: hidden;
 	z-index: 0;
-	padding: 0 $spacer;
+	//padding: 0 $spacer;
 	margin-bottom: $space-above-h;
 	
 	
