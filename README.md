@@ -3,6 +3,10 @@ This is the core theme for Creare Web Solutions websites. Creates a child theme 
 
 ### Changelog
 <<<<<<< HEAD
+#### v1.2
+Broke out template parts a bit more for easier child theme flexibility.
+
+
 #### v1.1
 Made numerous updates to Bric theme to incorporate more accessibility support including:
 
