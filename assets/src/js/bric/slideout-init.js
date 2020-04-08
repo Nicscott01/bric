@@ -30,7 +30,7 @@
 		});
 
 		if( parseInt( slideout.close_button ) ) {
-			$slideout.prepend('<div class="close-button w-100 text-right"><button class="btn btn-primary" onclick="Bric.mainmenu.close();"><i class="far fa-times"></i></button></>')
+			$slideout.prepend('<div class="close-button w-100 text-right"><button class="btn btn-primary" onclick="Bric.mainmenu.close();"><i class="fas fa-times"></i></button></>')
 		}
 		
 		

@@ -1,4 +1,4 @@
-/*! bric 2019-05-20 */
+/*! bric 2020-03-31 */
 //Initialize the Bric JS object.
 var Bric = {};;//Normalize Heights on Carousel
 
@@ -104,7 +104,7 @@ var Bric = {};;//Normalize Heights on Carousel
 		});
 
 		if( parseInt( slideout.close_button ) ) {
-			$slideout.prepend('<div class="close-button w-100 text-right"><button class="btn btn-primary" onclick="Bric.mainmenu.close();"><i class="far fa-times"></i></button></>')
+			$slideout.prepend('<div class="close-button w-100 text-right"><button class="btn btn-primary" onclick="Bric.mainmenu.close();"><i class="fas fa-times"></i></button></>')
 		}
 		
 		

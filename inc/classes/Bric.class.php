@@ -85,7 +85,19 @@ class Bric {
 			wp_register_style( 'bric-child', get_stylesheet_directory_uri().'/assets/css/bric-style.css' );
 		} 
 		else {
-*/			wp_register_style( 'bric', get_stylesheet_directory_uri().'/assets/css/bric-style.css' );
+*/	
+		
+		if ( defined( 'THEME_ASSET_VER' ) ) {
+			
+			$ver = THEME_ASSET_VER;
+			
+		} else {
+			
+			$ver = null;
+		}
+		
+		
+		wp_register_style( 'bric', get_stylesheet_directory_uri().'/assets/css/bric-style.css', [], $ver );
 		//}
 		
 		

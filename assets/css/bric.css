@@ -1965,6 +1965,22 @@ pre code {
   color: #868e96;
   opacity: 1;
 }
+.form-control::-webkit-input-placeholder, #loginform > p:not(.login-submit):not(.submit) > input::-webkit-input-placeholder, #lostpasswordform > p:not(.login-submit):not(.submit) > input::-webkit-input-placeholder, .comment-form > p[class*=comment-form] > :not(label)::-webkit-input-placeholder, .comment-form > p[class*=comment-form] textarea::-webkit-input-placeholder, .comment-form > p[class*=comment-form] input::-webkit-input-placeholder, .search-form .search-field::-webkit-input-placeholder, .gform_fields input[type=text]::-webkit-input-placeholder, .gform_fields input[type=tel]::-webkit-input-placeholder, .gform_fields input[type=email]::-webkit-input-placeholder, .gform_fields textarea::-webkit-input-placeholder, .gform_fields select::-webkit-input-placeholder, .gform_fields input[type=url]::-webkit-input-placeholder {
+  color: #868e96;
+  opacity: 1;
+}
+.form-control::-moz-placeholder, #loginform > p:not(.login-submit):not(.submit) > input::-moz-placeholder, #lostpasswordform > p:not(.login-submit):not(.submit) > input::-moz-placeholder, .comment-form > p[class*=comment-form] > :not(label)::-moz-placeholder, .comment-form > p[class*=comment-form] textarea::-moz-placeholder, .comment-form > p[class*=comment-form] input::-moz-placeholder, .search-form .search-field::-moz-placeholder, .gform_fields input[type=text]::-moz-placeholder, .gform_fields input[type=tel]::-moz-placeholder, .gform_fields input[type=email]::-moz-placeholder, .gform_fields textarea::-moz-placeholder, .gform_fields select::-moz-placeholder, .gform_fields input[type=url]::-moz-placeholder {
+  color: #868e96;
+  opacity: 1;
+}
+.form-control:-ms-input-placeholder, #loginform > p:not(.login-submit):not(.submit) > input:-ms-input-placeholder, #lostpasswordform > p:not(.login-submit):not(.submit) > input:-ms-input-placeholder, .comment-form > p[class*=comment-form] > :not(label):-ms-input-placeholder, .comment-form > p[class*=comment-form] textarea:-ms-input-placeholder, .comment-form > p[class*=comment-form] input:-ms-input-placeholder, .search-form .search-field:-ms-input-placeholder, .gform_fields input[type=text]:-ms-input-placeholder, .gform_fields input[type=tel]:-ms-input-placeholder, .gform_fields input[type=email]:-ms-input-placeholder, .gform_fields textarea:-ms-input-placeholder, .gform_fields select:-ms-input-placeholder, .gform_fields input[type=url]:-ms-input-placeholder {
+  color: #868e96;
+  opacity: 1;
+}
+.form-control::-ms-input-placeholder, #loginform > p:not(.login-submit):not(.submit) > input::-ms-input-placeholder, #lostpasswordform > p:not(.login-submit):not(.submit) > input::-ms-input-placeholder, .comment-form > p[class*=comment-form] > :not(label)::-ms-input-placeholder, .comment-form > p[class*=comment-form] textarea::-ms-input-placeholder, .comment-form > p[class*=comment-form] input::-ms-input-placeholder, .search-form .search-field::-ms-input-placeholder, .gform_fields input[type=text]::-ms-input-placeholder, .gform_fields input[type=tel]::-ms-input-placeholder, .gform_fields input[type=email]::-ms-input-placeholder, .gform_fields textarea::-ms-input-placeholder, .gform_fields select::-ms-input-placeholder, .gform_fields input[type=url]::-ms-input-placeholder {
+  color: #868e96;
+  opacity: 1;
+}
 .form-control::placeholder, #loginform > p:not(.login-submit):not(.submit) > input::placeholder,
 #lostpasswordform > p:not(.login-submit):not(.submit) > input::placeholder, .comment-form > p[class*=comment-form] > :not(label)::placeholder, .comment-form > p[class*=comment-form] textarea::placeholder, .comment-form > p[class*=comment-form] input::placeholder, .search-form .search-field::placeholder, .gform_fields input[type=text]::placeholder, .gform_fields input[type=tel]::placeholder, .gform_fields input[type=email]::placeholder, .gform_fields textarea::placeholder, .gform_fields select::placeholder, .gform_fields input[type=url]::placeholder {
   color: #868e96;
@@ -4114,9 +4130,7 @@ input[type=button].btn-block {
   height: calc(1rem - 4px);
   background-color: #adb5bd;
   border-radius: 0.5rem;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
   transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .custom-switch .custom-control-label::after {
@@ -4125,8 +4139,7 @@ input[type=button].btn-block {
 }
 .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
   background-color: #fff;
-  -webkit-transform: translateX(0.75rem);
-          transform: translateX(0.75rem);
+  transform: translateX(0.75rem);
 }
 .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
   background-color: rgba(227, 123, 64, 0.5);
@@ -4281,12 +4294,14 @@ input[type=button].btn-block {
   background-color: #E37B40;
   border: 0;
   border-radius: 1rem;
+  -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   -webkit-appearance: none;
           appearance: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .custom-range::-webkit-slider-thumb {
+    -webkit-transition: none;
     transition: none;
   }
 }
@@ -4308,12 +4323,14 @@ input[type=button].btn-block {
   background-color: #E37B40;
   border: 0;
   border-radius: 1rem;
+  -moz-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   -moz-appearance: none;
        appearance: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .custom-range::-moz-range-thumb {
+    -moz-transition: none;
     transition: none;
   }
 }
@@ -4338,11 +4355,13 @@ input[type=button].btn-block {
   background-color: #E37B40;
   border: 0;
   border-radius: 1rem;
+  -ms-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   appearance: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .custom-range::-ms-thumb {
+    -ms-transition: none;
     transition: none;
   }
 }
@@ -4979,12 +4998,10 @@ input[type=button].btn-block {
 }
 @media (min-width: 576px) {
   .card-columns {
-    -webkit-column-count: 3;
-         -moz-column-count: 3;
-         column-count: 3;
-    -webkit-column-gap: 1.25rem;
-         -moz-column-gap: 1.25rem;
-         column-gap: 1.25rem;
+    -moz-column-count: 3;
+    column-count: 3;
+    -moz-column-gap: 1.25rem;
+    column-gap: 1.25rem;
     orphans: 1;
     widows: 1;
   }
@@ -5812,11 +5829,8 @@ a.close.disabled {
   pointer-events: none;
 }
 .modal.fade .modal-dialog {
-  transition: -webkit-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
-  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
-  -webkit-transform: translate(0, -50px);
-          transform: translate(0, -50px);
+  transform: translate(0, -50px);
 }
 @media (prefers-reduced-motion: reduce) {
   .modal.fade .modal-dialog {
@@ -5824,8 +5838,7 @@ a.close.disabled {
   }
 }
 .modal.show .modal-dialog {
-  -webkit-transform: none;
-          transform: none;
+  transform: none;
 }
 
 .modal-dialog-scrollable {
@@ -6252,9 +6265,7 @@ a.close.disabled {
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  transition: -webkit-transform 0.6s ease-in-out;
   transition: transform 0.6s ease-in-out;
-  transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .carousel-item {
@@ -6270,21 +6281,18 @@ a.close.disabled {
 
 .carousel-item-next:not(.carousel-item-left),
 .active.carousel-item-right {
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
+  transform: translateX(100%);
 }
 
 .carousel-item-prev:not(.carousel-item-right),
 .active.carousel-item-left {
-  -webkit-transform: translateX(-100%);
-          transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
 .carousel-fade .carousel-item {
   opacity: 0;
   transition-property: opacity;
-  -webkit-transform: none;
-          transform: none;
+  transform: none;
 }
 .carousel-fade .carousel-item.active,
 .carousel-fade .carousel-item-next.carousel-item-left,
@@ -10559,8 +10567,7 @@ body.has-header-image .main-content, body.has-header-carousel .main-content {
   position: absolute;
   top: 50%;
   left: 0;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   width: 100%;
 }
 .excerpt * {
@@ -10678,8 +10685,7 @@ blockquote cite {
   right: 0;
   width: 100%;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   min-height: 100%;
   min-width: 100%;
   -o-object-fit: cover;
@@ -10755,10 +10761,8 @@ body.has-header-carousel .main-content > .row, body.has-header-carousel .main-co
 .carousel-fade .carousel-inner .carousel-item.active,
 .carousel-fade .carousel-inner .active.carousel-item-left,
 .carousel-fade .carousel-inner .active.carousel-item-prev {
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0);
+  transform: translateX(0);
+  transform: translate3d(0, 0, 0);
 }
 .carousel-fade .carousel-control {
   z-index: 2;
@@ -10827,8 +10831,7 @@ body.has-header-carousel .main-content > .row, body.has-header-carousel .main-co
   font-size: 1.8em;
   color: #fff;
   text-align: center;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 .cta img {
   min-width: 100%;
@@ -10920,15 +10923,14 @@ body.has-header-carousel .main-content > .row, body.has-header-carousel .main-co
 
 @media (min-width: 768px) {
   /* parallax */
-  @supports ((-webkit-perspective: 1px) or (perspective: 1px)) and (not (-webkit-overflow-scrolling: touch)) {
+  @supports (perspective: 1px) and (not (-webkit-overflow-scrolling: touch)) {
     body.has-parallax {
       overflow: hidden;
       height: 100%;
     }
 
     body.has-parallax {
-      -webkit-transform: translateZ(0px);
-              transform: translateZ(0px);
+      transform: translateZ(0px);
       /* Fix paint issues in Edge && Safari H/W acceleration */
     }
 
@@ -10938,21 +10940,17 @@ body.has-header-carousel .main-content > .row, body.has-header-carousel .main-co
       height: 100%;
       overflow-x: hidden;
       overflow-y: auto;
-      -webkit-perspective: 300px;
-              perspective: 300px;
+      perspective: 300px;
       scroll-behavior: smooth;
     }
 
     .slide, .slide__content {
-      -webkit-transform-style: preserve-3d;
-              transform-style: preserve-3d;
+      transform-style: preserve-3d;
     }
 
     .slide__text {
-      -webkit-transform: translateZ(60px) scale(0.8);
-              transform: translateZ(60px) scale(0.8);
-      -webkit-transform-origin: 50% 50%;
-              transform-origin: 50% 50%;
+      transform: translateZ(60px) scale(0.8);
+      transform-origin: 50% 50%;
     }
 
     .slide .slide__content {
@@ -10967,18 +10965,14 @@ body.has-header-carousel .main-content > .row, body.has-header-carousel .main-co
       margin: 8em auto;
     }
     .slide:nth-child(2n) .slide__image {
-      -webkit-transform: translateZ(100px) scale(0.67);
-              transform: translateZ(100px) scale(0.67);
-      -webkit-transform-origin: center center;
-              transform-origin: center center;
+      transform: translateZ(100px) scale(0.67);
+      transform-origin: center center;
     }
     .slide:nth-child(2n) .slide__text {
-      -webkit-transform-origin: center center;
-              transform-origin: center center;
+      transform-origin: center center;
     }
     .slide:nth-child(2n) .slide__bg {
-      -webkit-transform: translateZ(35px) scale(0.8833333333);
-              transform: translateZ(35px) scale(0.8833333333);
+      transform: translateZ(35px) scale(0.8833333333);
     }
     .slide:nth-child(2n+1):not(:first-child) .slide__bg {
       top: -50%;
@@ -10989,10 +10983,9 @@ body.has-header-carousel .main-content > .row, body.has-header-carousel .main-co
   }
 }
 @media (min-width: 768px) {
-  @supports ((-webkit-perspective: 1px) or (perspective: 1px)) and (not (-webkit-overflow-scrolling: touch)) {
+  @supports (perspective: 1px) and (not (-webkit-overflow-scrolling: touch)) {
     .parallax {
-      -webkit-perspective: 300px;
-              perspective: 300px;
+      perspective: 300px;
       height: 100vh;
       overflow-x: hidden;
       overflow-y: auto;
@@ -11001,8 +10994,7 @@ body.has-header-carousel .main-content > .row, body.has-header-carousel .main-co
     .parallax__group {
       position: relative;
       height: 100vh;
-      -webkit-transform-style: preserve-3d;
-              transform-style: preserve-3d;
+      transform-style: preserve-3d;
       padding: 3em 0;
       z-index: 0;
     }
@@ -11018,30 +11010,25 @@ body.has-header-carousel .main-content > .row, body.has-header-carousel .main-co
       perspective-origin-x: 100%;
     }
     .parallax__layer--fore {
-      -webkit-transform: translateZ(90px) scale(0.7);
-              transform: translateZ(90px) scale(0.7);
+      transform: translateZ(90px) scale(0.7);
       z-index: 1;
     }
     .parallax__layer--base {
-      -webkit-transform: translateZ(0);
-              transform: translateZ(0);
+      transform: translateZ(0);
       z-index: 4;
     }
     .parallax__layer--back {
-      -webkit-transform: translateZ(-300px) scale(2);
-              transform: translateZ(-300px) scale(2);
+      transform: translateZ(-300px) scale(2);
       z-index: 3;
     }
     .parallax__layer--deep {
-      -webkit-transform: translateZ(-600px) scale(3);
-              transform: translateZ(-600px) scale(3);
+      transform: translateZ(-600px) scale(3);
       z-index: 2;
     }
   }
 }
 body.dp .parallax__group, body.dp .slide {
-  -webkit-transform: translate3d(700px, 0, -800px) rotateY(30deg);
-          transform: translate3d(700px, 0, -800px) rotateY(30deg);
+  transform: translate3d(700px, 0, -800px) rotateY(30deg);
 }
 
 .fixed-bg {
