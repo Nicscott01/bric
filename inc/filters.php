@@ -5,6 +5,10 @@
 class BricFilters {
 	
 	
+	public $wpseo_map_id = 0;
+	
+	
+	
 	function __construct() {
 		
 		$this->add_filters();
@@ -37,6 +41,19 @@ class BricFilters {
 		//Auto-populate ALT tags with title/caption text if not available
 		//apply_filters( 'wp_get_attachment_image_attributes', $attr, $attachment, $size );
 		add_filter( 'wp_get_attachment_image_attributes', [ $this, 'image_alt_tag'], 10, 3 );
+	
+	
+	
+		/**
+		 * Make the Yoast SEO Local Maps load lazy
+		 *
+		 *
+		 */
+		add_filter( 'wpseo_local_location_route_title_name', [ $this, 'wpseo_local_location_route_title_name' ] );
+
+		
+	
+	
 	}
 	
 	
@@ -219,6 +236,105 @@ class BricFilters {
 		return $attr;
 	}
 	
+	
+	
+	
+	/**
+	 * We use this filter to just trigger the 
+	 * access of a wp seo local global variable
+	 * 
+	 * always return what goes in
+	 */
+	
+	public function wpseo_local_location_route_title_name( $name ) {
+		
+
+		global $wpseo_map;
+
+		
+		// Comment out the JS directives
+
+		$s = [ 	
+				'if( window', 
+				'else if', 
+				'window.addEventListener(', 
+				'window.attachEvent(' 
+			 ];
+
+		$r = [ 
+				'//if( window', 
+				'//else if', 
+				'//window.addEventListener(', 
+				'//window.attachEvent('  
+		];
+
+
+		$wpseo_map = str_replace( $s, $r, $wpseo_map );
+
+		//Get the 
+		
+
+		$this->bric_render_wpseo_lazy_script();
+		//This is for when autoptimize is turned on
+		add_filter( 'autoptimize_filter_js_exclude', [ $this, 'wpseo_autoptimize' ], 10 );
+		wp_enqueue_script( 'in-view' );
+
+		
+		return $name;
+
+
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 *		Exclude In-View and WPSEO frontend scripts
+	 *
+	 *		wp-content/themes/bric/assets/js/in-view.min.js, 
+	 *		wp-content/plugins/wpseo-local/js/dist/wp-seo-local-frontend-1290.js
+	 */
+
+	function wpseo_autoptimize( $exclude_js ) {
+
+
+		$exclude_js .= ',wp-content/themes/bric/assets/js/in-view.min.js';
+		$exclude_js .= ',wp-content/plugins/wpseo-local/js/dist/wp-seo-local-frontend-1290.js';
+
+		return $exclude_js;
+
+	}
+
+
+	function bric_render_wpseo_lazy_script() {
+
+		if ( $this->wpseo_map_id ) {
+			$init_function = 'wpseo_map_init_' . $this->wpseo_map_id . '()';
+			$map_canvas = '#map_canvas_' . $this->wpseo_map_id;
+		}
+		else {
+			$init_function = 'wpseo_map_init()';
+			$map_canvas = '#map_canvas';
+		}
+		
+		
+		ob_start();
+		?>
+		inView('<?php echo $map_canvas; ?>', 1000 ).once( 'enter', function() {
+			<?php echo $init_function; ?>;
+		});
+		<?php
+		$this->wpseo_map_id++;
+		
+		$data = ob_get_clean();
+
+		wp_add_inline_script( 'in-view', $data, 'after' );
+
+	}
 	
  	
 }

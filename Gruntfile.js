@@ -133,6 +133,13 @@ module.exports = function (grunt) {
 						dest: 'assets/js/',
 						filter: 'isFile',
 						flatten: true,
+					},{
+						expand:true,
+						cwd: 'node_modules/in-view/dist/',
+						src: ['in-view.min.js'],
+						dest: 'assets/js/',
+						filter: 'isFile',
+						flatten: true,
 					}
 				]
 			}

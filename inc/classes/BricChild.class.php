@@ -7,7 +7,7 @@
  */
 
 
-class BricChild {
+class BricChildInit {
 	
 	
 	function __construct() {
@@ -200,6 +200,4 @@ $headings-color: $c2;
 }
 
 
-global $BricChild;
-
-new BricChild();
+new BricChildInit();

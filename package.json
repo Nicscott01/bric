@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "in-view": "^0.6.1",
     "slideout": "^1.0.1",
     "stickyfilljs": "^2.1.0",
     "waypoints": "^4.0.1"
