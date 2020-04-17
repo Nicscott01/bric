@@ -3,9 +3,9 @@ This is the core theme for Creare Web Solutions websites. Creates a child theme 
 
 ### Changelog
 #### v1.2.1
--Added support for "lazy loading" of Yoast SEO Local Google maps. This little nugget should be published as a gist and written about in a blog.
--Filter autoptimize plugin JS ignore files when doing a map.
--Added a simple way to add Google fonts to the child.
+- Added support for "lazy loading" of Yoast SEO Local Google maps. This little nugget should be published as a gist and written about in a blog.
+- Filter autoptimize plugin JS ignore files when doing a map.
+- Added a simple way to add Google fonts to the child.
 
 #### v1.2
 Broke out template parts a bit more for easier child theme flexibility.
