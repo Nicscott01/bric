@@ -7,14 +7,52 @@
  */
 
 
-class BricChildInit {
+class BricChild {
+	
+	/**
+	 *		Instance
+	 */
+	static public $instance;
+	
+	/**
+	 *		Get Instance
+	 */
+	public static function get_instance() {
+		
+		if ( self::$instance == null ) {
+			
+			self::$instance = new self;
+		}
+		
+		return self::$instance;
+	}
+	
+	
+	
+	/**
+	 *		Fonts
+	 *
+	 */
+	public $google_fonts = [];
+	public $google_font_url = '';
+	
+	
+
+	
+	
+	
+	
 	
 	
 	function __construct() {
 		
 		add_action( 'after_switch_theme', array( $this, 'setup_child') );
 		
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts_styles' ] );
+		
 	}
+	
+	
 	
 	
 	public function setup_child() {
@@ -47,7 +85,7 @@ class BricChildInit {
 		update_option( 'stylesheet', $this->folder_name );
 		
 						//set base variables in theme mod
-				$this->set_child_variables_defaults();
+				//$this->set_child_variables_defaults();
 		
 	}
 	
@@ -197,7 +235,75 @@ $headings-color: $c2;
 	}
 	
 	
+	
+	
+	
+	
+	
+	public function define_google_fonts( $fonts = [] ) {
+		
+		$this->google_fonts = $fonts;
+		
+		return $this;
+	}
+	
+	
+	
+	
+	public function enqueue_scripts_styles() {
+		
+		
+		
+		
+		if ( !empty( $this->google_fonts ) ) {
+			
+			$c = count( $this->google_fonts );
+			
+			foreach( $this->google_fonts as $font ) {
+				
+				$font_string = 'family=' . $font;
+				
+				if ( $c > 0 ) {
+					
+					$font_string .= "&";
+				
+				} else {
+				
+					$font_string .= 'display=swap';
+					
+				}
+				
+				$c--;
+			}
+			
+			
+			$this->google_font_url = urldecode( urlencode( 'https://fonts.googleapis.com/css2?' . $font_string ) );
+			
+		
+			
+			//var_dump( $this );
+		
+		}
+		
+		wp_enqueue_style( 'fonts', $this->google_font_url );
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 }
 
 
-new BricChildInit();
+
+function BricChild() {
+	
+	return BricChild::get_instance();
+	
+}
+
+
+BricChild();
