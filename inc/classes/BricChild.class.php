@@ -259,17 +259,19 @@ $headings-color: $c2;
 			
 			$c = count( $this->google_fonts );
 			
+			$font_string = [];
+			
 			foreach( $this->google_fonts as $font ) {
 				
-				$font_string = 'family=' . $font;
+				$font_string[] = http_build_query( ['family' => $font ] );
 				
-				if ( $c > 0 ) {
+				if ( $c > 1 ) {
 					
-					$font_string .= "&";
+					//$font_string .= "\&";
 				
 				} else {
 				
-					$font_string .= 'display=swap';
+					$font_string[] = http_build_query( ['display' => 'swap']);
 					
 				}
 				
@@ -277,18 +279,31 @@ $headings-color: $c2;
 			}
 			
 			
-			$this->google_font_url = urldecode( urlencode( 'https://fonts.googleapis.com/css2?' . $font_string ) );
 			
-		
+			//$this->google_font_url = urldecode( urlencode( 'https://fonts.googleapis.com/css2?' . $font_string ) );
+			$this->google_font_url =  'https://fonts.googleapis.com/css2?' . implode( '&', $font_string );
 			
-			//var_dump( $this );
+			//var_dump( http_build_query( [ 'test' => 'this', 'another' => 'thing' ]));
+			
+			//var_dump( $this->google_font_url );
 		
+			add_action( 'wp_head', [ $this, 'enqueue_google_fonts_v2' ], 11 );
+			
 		}
 		
-		wp_enqueue_style( 'fonts', $this->google_font_url );
+//		wp_enqueue_style( 'fonts', $this->google_font_url );
 		
 	}
 	
+	
+	
+	public function enqueue_google_fonts_v2() {
+		
+		printf( '<link href="%s" rel="stylesheet">', $this->google_font_url );
+		
+		
+		
+	}
 	
 	
 	

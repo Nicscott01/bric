@@ -7,7 +7,8 @@
 img[class*=wp-image], 
 img[class*=wp-post-image],
 figure:not(.woocommerce-product-gallery__wrapper),
-img[class*=attachment]{
+img[class*=attachment],
+.wp-block-image img {
 	@extend .img-fluid;
 }
 
@@ -105,4 +106,17 @@ img[class*=attachment]{
 .wp-block-file__button {
 	@extend .btn, .btn-primary;
 	margin-left: 1em;
+}
+
+
+
+.wp-block-table {
+	
+	&.aligncenter {
+		
+		> table {
+			margin-left: auto;
+			margin-right: auto;
+		}
+	} 
 }

@@ -1,14 +1,13 @@
 /*!
- * Bootstrap v4.0.0-beta (https://getbootstrap.com)
- * Copyright 2011-2017 The Bootstrap Authors
- * Copyright 2011-2017 Twitter, Inc.
+ * Bootstrap v4.4.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors
+ * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
 @import "functions";
 
-//@import "child-variables";
-@import "child-variables-customizer";
+@import "child-variables";
 //Need to dynamically create some variables
 @import "variables";
 
@@ -59,4 +58,4 @@
 @import "bric-layout";
 
 //Custom S/CSS from customizer
-@import "custom-css";
+@import "child-styles";

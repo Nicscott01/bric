@@ -36,6 +36,7 @@ include get_template_directory().'/inc/classes/GoogleMaps.class.php';
 include get_template_directory().'/inc/classes/Restaurant.class.php';
 include get_template_directory().'/inc/classes/Admin.class.php';
 include get_template_directory().'/inc/classes/ACFBlocks.class.php';
+include get_template_directory().'/inc/classes/ComingSoon.class.php';
 
 
 //Integrations 

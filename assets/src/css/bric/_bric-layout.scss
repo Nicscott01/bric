@@ -1,4 +1,4 @@
-//
+s//
 //		PAGE LAYOUT FOR BRIC
 //
 
@@ -171,7 +171,7 @@ body {
 		margin-bottom: .5em;
 		
 		.img-wrapper {
-			padding-top: 9/16 * 100%;
+			padding-top: $excerpt-image-ratio * 100%;
 			position: relative;
 			overflow: hidden;
 		}
@@ -500,7 +500,7 @@ ul.social-media {
 	font-size: 1.5rem;
 	
 	&.list-inline-item:not(:last-child) {
-		margin-right: 10px;
+		margin-right: $social-icon-spacing;
 	}
 }
 

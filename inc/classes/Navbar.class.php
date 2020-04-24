@@ -57,6 +57,13 @@ class Navbar {
 			return $id;
 		}
 		
+		//Filter to return something other than the SVG of the id
+		$file_override = apply_filters( 'bric_navbar_brand_svg_override', null, $id );
+		
+		if ( !empty( $file_override )) {
+			return $file_override;
+		}
+		
 		$file = get_attached_file( $id );
 		
 		$svg = file_get_contents( $file );
@@ -225,7 +232,7 @@ class Navbar {
 		
 		
 		
-		$this->navbar_options = apply_filters( 'bric_navbar_options', $this->navbar_options );
+		$this->navbar_options = apply_filters( 'bric_navbar_options', $this->navbar_options, $this );
 		
 		
 

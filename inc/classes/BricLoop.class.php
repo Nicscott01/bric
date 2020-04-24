@@ -11,6 +11,11 @@ class BricLoop {
 	
 	var $contentTemplate = 'basic';
 	
+	/**
+	 *	Instnace
+	 */
+	public static $instance = null;
+	
 	
 	
 	function __construct() {
@@ -86,21 +91,30 @@ class BricLoop {
 		
 		if ( is_archive() || is_home() || is_single() || is_search() || is_404() ) {
 			
-					
-			//$this->get_pusher();
-			//echo '<div class="container"><div class="row"><div class="archive-posts-wrapper recent-posts col">';
-			echo '<div class="archive-posts-wrapper recent-posts '.$this->get_content_class( 'main' ).'"><div class="row">';
+			get_template_part( 'template-parts/archive-start' );
+			
+			add_action( 'bric_after_loop', [$this, 'archive_end' ], 10 );
+			
+		//	echo '<div class="archive-posts-wrapper recent-posts '.$this->get_content_class( 'main' ).'"><div class="row">';
 			
 			
-			add_action( 'bric_after_loop', array( $this, 'close_div'), 10 );	//call early so we can slide in the sidebar
-			add_action( 'bric_after_loop', array( $this, 'close_div'), 15 );	
-			//add_action( 'bric_after_loop_posts', array( $this, 'close_div'), 50 );	
-		
+			//add_action( 'bric_after_loop', array( $this, 'close_div'), 10 );	//call early so we can slide in the sidebar
+			//add_action( 'bric_after_loop', array( $this, 'close_div'), 15 );	
+
+			
 		}
 		
 		
 		
 	}
+	
+	
+	public function archive_end() {
+		
+		get_template_part( 'template-parts/archive-end' );
+		
+	}
+	
 	
 	
 	
@@ -545,9 +559,30 @@ class BricLoop {
 	
 	
 	
+	
+	
+	public static function get_instance() {
+		
+		if ( self::$instance == null ) {
+			
+			self::$instance = new self;
+			
+		}
+		
+		return self::$instance;
+		
+	}
+	
+	
 }
 
 
 global $BricLoop;
 
-$BricLoop = new BricLoop();
+
+function BricLoop() {
+	
+	return BricLoop::get_instance();
+}
+
+$BricLoop = BricLoop();

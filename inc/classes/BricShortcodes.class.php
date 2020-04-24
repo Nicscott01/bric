@@ -99,13 +99,21 @@ class BricShortcodes {
 			$o = '';
 						
 			foreach ( $SiteInfo->social as $social ) {
-								
-				$o .= sprintf( '<li class="social-account list-inline-item"><a href="%s" target="_blank" aria-label="Follow us on %s">%s</a></li>', $social['url'], $social['platform'], $social['icon']->element );
+					
+				ob_start();
 				
+				include locate_template( 'template-parts/social-media-item.php' );
 				
+				$o .= ob_get_clean();
+							
 			}
 			
-			return sprintf( '<ul class="list-unstyled list-inline social-media">%s</ul>', $o );
+			ob_start();
+			
+			include locate_template( 'template-parts/social-media-wrapper.php' );
+			
+			return ob_get_clean();
+			
 			
 			
 		}
@@ -267,10 +275,22 @@ class BricShortcodes {
 	 *
 	 */
 	
-	public function page_title_sc( $content, $args ) {
+	public function page_title_sc( $args, $content ) {
+		
+		$args = shortcode_atts( [
+			'tag' => 'h1',
+			'class' => get_post_type() . '-title',
+		], $args );
 		
 		
-		return sprintf( '<h1 class="page-title page-title-sc">%s</h1>', get_the_title() );
+		ob_start();
+		
+		include locate_template( 'template-parts/post-title.php' );
+		
+		return ob_get_clean();
+		
+		
+		//return sprintf( '<h1 class="page-title page-title-sc">%s</h1>', get_the_title() );
 		
 		
 	}
