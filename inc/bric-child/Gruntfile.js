@@ -36,7 +36,18 @@ module.exports = function (grunt) {
 			dist: {
 				src: 'assets/css/*.css'
 			}
+		},
+		svgstore: {
+		  	options: {
+				prefix : '', // This will prefix each <g> ID
+		  	},
+		  	default: {
+			  	files: {
+				'assets/svgs/bric-child.svg': ['assets/src/svgs/*.svg', '../bric/assets/src/svgs/*.svg' ],
+				}
+			}
 		}
+		
 
 
 	});
@@ -44,7 +55,8 @@ module.exports = function (grunt) {
 	// Load the plugin that provides the "sass" task.
 	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-postcss');
-	
+	grunt.loadNpmTasks('grunt-svgstore');
+
 	
 	// Default task(s).
 	grunt.registerTask('default', ['sass:dist', 'postcss']);

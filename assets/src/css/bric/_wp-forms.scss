@@ -130,7 +130,7 @@
 #loginform,
 #lostpasswordform {
 	
-	> p:not(.login-submit ):not(.submit) {
+	> p:not(.login-submit ):not(.submit):not(.forgetmenot) {
 		@extend .form-group;
 		
 		> input {

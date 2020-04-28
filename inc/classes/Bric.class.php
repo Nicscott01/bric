@@ -52,6 +52,10 @@ class Bric {
 		
 		add_filter( 'wpseo_metabox_prio', array( $this, 'yoast_meta_box' ));
 		
+		
+		//WP Version Number
+		remove_action('wp_head', 'wp_generator');
+		
 	}
 	
 	
