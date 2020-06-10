@@ -258,7 +258,10 @@ class SiteInfo {
 				'classes' => array(
 					'container-fluid',
 				),
-			)
+			),
+            'bg_image' => [
+                'attachment_id' => ''
+            ]
 		);
 
 		
@@ -305,6 +308,7 @@ class SiteInfo {
 		$this->options->entry_content_class = $theme_settings['layout']['entry_content_class'];
 		$this->options->entry_title_alignment = $theme_settings['layout']['entry_title_alignment'];
 		
+        $this->options->bg_image = $theme_settings['bg_image']['attachment_id'];
 		
 		$this->breadcrumbs = $theme_settings['breadcrumbs'];
 		
@@ -661,6 +665,34 @@ class SiteInfo {
 
 		
 		
+		//Navbar  color
+		$wp_customize->add_setting( 'bric[navbar][navbar_color]', array(
+			'type' => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'theme_supports' => '',
+			'default' => 'light',
+			'transport' => 'refresh',
+			'sanitize_callback' => '', //['BricCustomizer','navbar_brand_type_cb'],
+			'sanitize_js_callback' => '',
+		));
+
+
+		$wp_customize->add_control( 'bric[navbar][navbar_color]', [
+			'type' => 'select',
+			'setting' => 'light',
+			'priority' => 10,
+			'section' => 'bric_options',
+			'label' => __('Navbar Color'),
+			'description' => '',
+			'choices' => [
+				'light' => __('Light'),
+				'dark' => __('Dark'),
+			],
+			'active_callback' => '',
+		]);
+		
+		
+		
 		//Navbar bg color
 		$wp_customize->add_setting( 'bric[navbar][bg_color]', array(
 			'type' => 'theme_mod',
@@ -684,6 +716,7 @@ class SiteInfo {
 				'light' => __('Light Gray'),
 				'dark' => __('Dark Gray'),
 				'white' => __('White'),
+				'transparent' => __('Transparent'),
 			],
 			'active_callback' => '',
 		]);
@@ -718,6 +751,40 @@ class SiteInfo {
 		//$wp_customize->add_setting( 'bric[breadcrumbs]');
 		
 		
+        
+        
+        
+        
+        //Background Image
+        $wp_customize->add_setting( 'bric[bg_image][attachment_id]', [
+            'type' => 'theme_mod',
+            'capability' => 'edit_theme_options',
+            'theme_supports' => '',
+			'default' => false,
+			'transport' => 'refresh',
+			'sanitize_callback' => 'absint',
+			'sanitize_js_callback' => '',
+        ]);
+        
+        $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'bric[bg_image][attachment_id]',
+           array(
+              'label' => __( 'Sitewide Background Image' ),
+              'description' => esc_html__( 'Choose a background image to use on every page of the site. You can override the image on any page.' ),
+              'section' => 'bric_options',
+              'mime_type' => 'image',  // Required. Can be image, audio, video, application, text
+              'button_labels' => array( // Optional
+                 'select' => __( 'Select Image' ),
+                 'change' => __( 'Change Image' ),
+                 'default' => __( 'Default' ),
+                 'remove' => __( 'Remove' ),
+                 'placeholder' => __( 'No image selected' ),
+                 'frame_title' => __( 'Select Image' ),
+                 'frame_button' => __( 'Choose Image' ),
+              )
+           )
+        ) );
+		
+        
 		
 		
 		/*

@@ -5,6 +5,7 @@
  *
  *
  */
+
 if ( has_shortcode( get_the_content(), 'page_title' ) ) {
 	//Don't get a template for heading.
 }

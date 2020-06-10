@@ -4,7 +4,7 @@
   "description": "Wordpress theme developed by BRianna and nIC Scott",
   "main": "index.js",
   "dependencies": {
-    "bootstrap": "^4.3.1",
+    "bootstrap": "^4.5.0",
     "in-view": "^0.6.1",
     "slideout": "^1.0.1",
     "stickyfilljs": "^2.1.0",
