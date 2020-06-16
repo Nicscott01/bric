@@ -98,10 +98,14 @@ class PhotoGallery {
 
 			$gallery = $this->gallery;
 			$image_large = 'medium';
-
-			$c = 1;				
+            $item_class = '';
+            
+            
+            $c = 1;				
 			foreach ( $gallery as $key => $image ) {
 
+
+                
 				if ( $this->args['gallery_display'] == 'masonry' ) {
 					
 					if ( $c == 1 ) {
@@ -349,14 +353,11 @@ class PhotoGallery {
 	( function($){
 
 		var $masonry = $('.gallery-masonry').masonry({
-			  // options...
 			  itemSelector: '.image-item',
 			  percentPosition: true,
 			  columnWidth: '.grid-sizer',
 			  gutter:0,
 			});
-			//Horizontal centering of large header img
-
 
 		$masonry.imagesLoaded().progress( function() {
 		  $masonry.masonry('layout');

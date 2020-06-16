@@ -393,6 +393,7 @@ class BricLoop {
 		
 		$pts = apply_filters( 'bric_sidebar_post_types', [ 'post', 'testimonials-widget' ] );
 		
+        
 		/*if ( (  ( get_post_type() == 'post' ) || ( get_post_type() == 'testimonials-widget' ) || is_home() && ( is_archive() || is_home() || is_single() ) ) || is_search() || is_404() ) {
 		*/	
 		if ( is_home() || is_singular( $pts ) || ( in_array( get_post_type(), $pts ) && is_archive() ) ) {

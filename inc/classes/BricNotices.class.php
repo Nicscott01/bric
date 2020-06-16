@@ -12,7 +12,7 @@ class BricNotices {
 	public function __construct() {
 		
 		//Start the session
-		add_action( 'admin_init', [ $this, 'start_session' ] );
+		//add_action( 'admin_init', [ $this, 'start_session' ] );
 		
 		add_action( 'admin_notices', [ $this, 'display_notices' ] );
 		

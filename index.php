@@ -19,7 +19,7 @@ if ( have_posts() ) :
 
 	endwhile;
 		
-		do_action( 'bric_after_loop_posts' );
+        do_action( 'bric_after_loop_posts' );
 
 else :
 		
