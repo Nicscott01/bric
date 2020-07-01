@@ -1122,15 +1122,48 @@ class SiteInfo {
 			'email_label' => '',
 			'fax_label' => '',
 			'address_label' => '',
+            'simple' => false,
 		), $attr );
 		
 		
 		$include = explode( ',', $attr['include'] );
-		
-		$o = '';
-		
+
+        $o = '';
 		$num_of_items = count( $include );
 		$c = 1;
+
+        
+        
+        
+        if ( $attr['simple'] ) {
+            
+            global $SiteInfo;
+            $simple_items = [];
+            
+            foreach ( $include as $k => $v ) {
+                
+                switch ( $v ) {
+                    
+                    case "phone" :
+                        
+                        $simple_items[] = $SiteInfo->phone->main;
+                        
+                    case "email" :
+                        
+                        $simple_items[] = $SiteInfo->email->main;
+                        
+                }
+                
+                
+            }
+            
+            return implode( ', ', $simple_items );
+            
+        }
+        
+        
+        
+
 		
 		if ( $num_of_items > 0 ) {
 			

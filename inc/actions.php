@@ -48,3 +48,20 @@ add_action( 'bric_after_loop_posts', array( $BricLoop, 'get_post_pagination') );
 
 		//Carousel for homepage
 add_action( 'wp', array( $BricLoop, 'home_carousel'), 10 );
+
+
+
+//SVGs
+add_action( 'wp_footer', function() {
+    
+    $child_svg = get_stylesheet_directory() . '/assets/svgs/bric-child.svg';
+    
+    if ( file_exists( $child_svg ) ) {
+        
+        echo '<div class="svg-wrapper d-none">';
+        include $child_svg;
+        echo '</div>';
+        
+    }
+    
+}, 100 );

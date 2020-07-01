@@ -67,6 +67,8 @@ class Navbar {
 		$file = get_attached_file( $id );
 		
 		$svg = file_get_contents( $file );
+        
+        $svg = preg_replace( '/^\<\?xml.+\?\>/m', '', $svg );
 		
 		
 		//Strip out the comment
