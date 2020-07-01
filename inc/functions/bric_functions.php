@@ -100,8 +100,11 @@ function entry_content_class( $classes = [] ) {
 	$classes[] = 'entry-content';
 	$classes[] = $SiteInfo->options->entry_content_class;
 	
+    //Filter
+    $classes = apply_filters( 'entry_content_class', $classes );
+    
 	$classes = array_map( 'trim', $classes );
-	
+    
 	echo join( ' ', $classes );
 	
 }

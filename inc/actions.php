@@ -48,3 +48,12 @@ add_action( 'bric_after_loop_posts', array( $BricLoop, 'get_post_pagination') );
 
 		//Carousel for homepage
 add_action( 'wp', array( $BricLoop, 'home_carousel'), 10 );
+
+
+
+//SVG output
+add_action( 'wp_footer', function() {
+   
+    get_template_part( 'template-parts/svg/sprite-sheet' );
+    
+}, 100 );
