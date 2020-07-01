@@ -1,5 +1,5 @@
 //GRUNTFILE for Bric Children
-const sass = require( 'sass' );
+const sass = require( 'node-sass' );
 
 module.exports = function (grunt) {
 

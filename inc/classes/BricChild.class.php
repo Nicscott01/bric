@@ -263,8 +263,12 @@ $headings-color: $c2;
 			
 			foreach( $this->google_fonts as $font ) {
 				
+                //var_dump( $font );
+                
 				$font_string[] = http_build_query( ['family' => $font ] );
 				
+                
+                
 				if ( $c > 1 ) {
 					
 					//$font_string .= "\&";
@@ -279,13 +283,9 @@ $headings-color: $c2;
 			}
 			
 			
-			
-			//$this->google_font_url = urldecode( urlencode( 'https://fonts.googleapis.com/css2?' . $font_string ) );
+
 			$this->google_font_url =  'https://fonts.googleapis.com/css2?' . implode( '&', $font_string );
 			
-			//var_dump( http_build_query( [ 'test' => 'this', 'another' => 'thing' ]));
-			
-			//var_dump( $this->google_font_url );
 		
 			add_action( 'wp_head', [ $this, 'enqueue_google_fonts_v2' ], 11 );
 			
