@@ -3,6 +3,12 @@ body {
   height: auto; //did this for sticky header
 }
 
+
+
+//
+//		SLIDEOUT PANEL
+//
+
 .slideout-menu {
   position: fixed;
   top: 0;
@@ -35,6 +41,10 @@ body {
 			}
 		}
 	}
+    
+    .navbar-nav {
+        padding-bottom: $spacer*2;
+    }
 }
 
 .slideout-menu-left {
@@ -46,11 +56,12 @@ body {
 }
 
 .slideout-panel {
-  position: relative;
-  z-index: 1;
- // will-change: transform;
-  background-color: transparent; /* A background-color is required */
-  min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    // will-change: transform;
+    background-color: transparent;
+    min-height: 100vh;
+    box-shadow: 1px -10px 10px 0px rgba($gray-600, .75);
 }
 
 .slideout-open,
