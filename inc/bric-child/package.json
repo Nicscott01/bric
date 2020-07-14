@@ -1,11 +1,22 @@
-{
+
   "name": "bric",
   "version": "0.0.2",
   "description": "Wordpress theme developed by BRianna and nIC Scott",
   "main": "index.js",
   "dependencies": {
+    "bootstrap": "^4.5.0",
+    "slideout": "^1.0.1"
   },
   "devDependencies": {
+    "autoprefixer": "^9.8.3",
+    "grunt": "^1.2.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^4.0.1",
+    "grunt-postcss": "^0.9.0",
+    "grunt-sass": "^3.1.0",
+    "grunt-svgstore": "^2.0.0",
+    "node-sass": "^4.14.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
