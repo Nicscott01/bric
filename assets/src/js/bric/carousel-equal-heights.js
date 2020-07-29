@@ -3,30 +3,37 @@
 ( function($) {
 	
 	$(document).ready( function() {
-		Bric.carousel = $('.carousel-item');
-		normalizeHeights();
+        
+        //Do this for multiple carousels on the page
+        Bric.carousels = $('.carousel');
+        Bric.carousels.each(function( index ){
+            normalizeHeights( $(this) );
+        });
+        
+        
 	});
 	
 	
-	function normalizeHeights() {
+	function normalizeHeights( $object ) {
+		        
+		$object.minHeight = 0;
 		
-		Bric.carousel.minHeight = 0;
-		
-		if ( Bric.carousel.length ) {
+		if ( $object.length ) {
 			
 			
-			$(Bric.carousel).each( function() {
-								
-				if ( $(this).height() > Bric.carousel.minHeight ) {
-					Bric.carousel.minHeight = $(this).height();
+            
+			$object.find('.carousel-item').each( function() {
+								                
+				if ( $(this).height() > $object.minHeight ) {
+					$object.minHeight = $(this).height();
 				}
 			});
 			
 			//Set max height of carousel
-			$('.carousel-item').css( 'min-height',  Bric.carousel.minHeight );
+			$object.find('.carousel-item').css( 'min-height',  $object.minHeight );
 			
 			//reset the variables
-			Bric.carousel.minHeight = 0;
+			$object.minHeight = 0;
 		}
 
 		
@@ -34,9 +41,10 @@
 	
 	$(window).on( 'resize orientationchange', function(){
 		
-		$('.carousel-item').css( 'min-height',  Bric.carousel.minHeight );
-		normalizeHeights();
-		
+        Bric.carousels.each(function( index ){
+            normalizeHeights( $(this) );
+        });
+        		
 	});
 	
 	
