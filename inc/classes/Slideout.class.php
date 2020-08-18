@@ -24,14 +24,17 @@ class Slideout {
 	
 	
 	public function open_page_wrap() {
-		
-		echo '<div id="total-page-wrapper">';
-		
+        
+        get_template_part( 'template-parts/slideout/open-page-wrap' );
+				
 	}
 	
+    
+    
 	public function close_page_wrap() {
-		
-		echo '</div><!--#total-page-wrapper-->';
+	
+        get_template_part( 'template-parts/slideout/close-page-wrap' );
+        
 		
 	}
 	
