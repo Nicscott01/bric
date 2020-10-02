@@ -38,9 +38,12 @@ include get_template_directory().'/inc/classes/Admin.class.php';
 include get_template_directory().'/inc/classes/ACFBlocks.class.php';
 include get_template_directory().'/inc/classes/ComingSoon.class.php';
 include get_template_directory().'/inc/classes/SortByTaxTerm.class.php';
+include get_template_directory().'/inc/classes/Staff.class.php';
+include get_template_directory().'/inc/classes/JobListings.class.php';
 
 //Integrations 
 include get_template_directory().'/inc/classes/Integrations.class.php';
+
 
 
 

@@ -200,8 +200,9 @@ class Carousel {
 		
 		
 
-		$item = sprintf( '<div class="carousel-item %s" role="listitem">%s%s%s%s</div>',
+		$item = sprintf( '<div class="carousel-item %s" role="listitem" style="background-image:url(%s)">%s%s%s%s</div>',
 							( $this->counter == 0 ? 'active' : '' ),
+                            ( $this->currentItem['image']['sizes']['large'] ),
 							( $this->wrapItemInner ) ? '<div class="carousel-item-inner '.$this->itemInnerClass.'">' : '',
 							$img,
 							$caption,

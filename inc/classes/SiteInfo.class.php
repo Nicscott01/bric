@@ -978,12 +978,20 @@ class SiteInfo {
 	 *
 	 */
 	
-	public function format_email( $label = '' ) {
+	public function format_email( $label = '', $attr = [] ) {
 		
 		if ( !empty( $this->email->main )) {
 			
-			return $this->get_href( $this->email->main, $label );		
+            ob_start();
+            
+            $item = $this->email->main;
+            
+            include locate_template( 'template-parts/shortcodes/site-info/format-email.php' );
+            
+			//return $this->get_href( $this->email->main, $label );		
 			
+            return ob_get_clean();
+            
 		}
 		
 		return '';
@@ -997,14 +1005,17 @@ class SiteInfo {
 	 *
 	 */
 	
-	public function format_phone( $label = '' ) {
+	public function format_phone( $label = '', $attr = [] ) {
 		
 		
 		if ( !empty( $this->phone->main ) ) {
+            
+            
+            ob_start();
+            
+            include locate_template( 'template-parts/shortcodes/site-info/format-phone.php' );
 		
-		return sprintf( '<span class="tel-wrapper">%2$s<a href="tel:%1$s">%1$s</a></span>', $this->phone->main, 
-					   ( !empty( $label) ? $label.'&nbsp;' : '' )
-					  );	
+			return ob_get_clean();
 			
 		}
 		
@@ -1019,14 +1030,17 @@ class SiteInfo {
 	 *
 	 */
 	
-	public function format_fax( $label = '' ) {
+	public function format_fax( $label = '', $attr = [] ) {
 		
 		
 		if ( !empty( $this->phone->fax ) ) {
 		
-		return sprintf( '<span class="fax-wrapper">%2$s<a href="fax:%1$s">%1$s</a></span>', $this->phone->fax, 
-					   ( !empty( $label) ? $label.'&nbsp;' : '' )
-					  );	
+            ob_start();
+
+            include locate_template( 'template-parts/shortcodes/site-info/format-fax.php' );
+		
+			return ob_get_clean();
+
 			
 		}
 		
@@ -1047,6 +1061,9 @@ class SiteInfo {
 	
 	public function get_href( $item, $label ) {
 		
+        
+        
+        
 		if ( $this->is_email( $item ) ) {
 			
 			$class = 'email';
@@ -1123,6 +1140,8 @@ class SiteInfo {
 			'fax_label' => '',
 			'address_label' => '',
             'simple' => false,
+            'inner_class' => '',
+            'outer_class' => '',
 		), $attr );
 		
 		
@@ -1157,7 +1176,12 @@ class SiteInfo {
                 
             }
             
-            return implode( ', ', $simple_items );
+            ob_start();
+            
+            include locate_template( 'template-parts/shortcodes/site-info/simple.php' );
+            
+            return ob_get_clean();
+            
             
         }
         
@@ -1182,14 +1206,19 @@ class SiteInfo {
 				//global $SiteInfo;
 				
 				
-				$o .= call_user_func( 'SiteInfo::format_'.$v, $label ).$br;
+				$o .= call_user_func( 'SiteInfo::format_'.$v, $label, $attr ).$br;
 			
 				
 				$c++;
 			}
 			
-			
-			$o = sprintf( '<div name="%s" class="biz-info mb-3">%s</div>', $this->name, $o );
+			ob_start(); 
+            
+            include locate_template( 'template-parts/shortcodes/site-info/wrapper.php' );
+            
+            $o = ob_get_clean();
+            
+
 			
 		}
 		
@@ -1209,43 +1238,8 @@ class SiteInfo {
 	public function format_address() {
 		
 		ob_start();
-		?>
-<div class="address">
-	
-	
-	
-	<?php 
-		if ( !empty ( $this->address->line_1 ) ) : ?>
-	
-	<span><?php echo $this->address->line_1; 
-		if ( !empty( $this->address->line_2 ) ) {
-			echo '<br>'.$this->address->line_2.'<br>';
-		}
-		else {
-			echo '<br>';
-		}
-		?></span>
 		
-	<?php endif; 
-	
-	if ( !empty( $this->address->city ) ) :
-	?>	
-	<span><?php echo $this->address->city; ?></span>,
-	<?php endif; 
-		
-	if ( !empty( $this->address->state ) ) : 
-	?>
-	<span><?php echo $this->address->state; ?></span>
-	<?php endif;
-	
-	if ( !empty( $this->address->zip ) ) : 
-	?>
-	<span><?php echo $this->address->zip; ?></span>
-	<?php endif; ?>
-	
-</div>		
-		
-		<?php
+        include locate_template( 'template-parts/shortcodes/site-info/format-address.php' );
 		
 		return ob_get_clean();
 		
