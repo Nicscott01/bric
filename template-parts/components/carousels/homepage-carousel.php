@@ -6,28 +6,32 @@
  */
 
 
-$Carousel = new \Bric\Carousel( $gallery );
-
-
-//The transition value returns the class
-$Carousel->wrapperClass[] = $this->SiteInfo->carousel['transition'];
-
-if ( $this->SiteInfo->carousel['edge_to_edge'] ) {
-    $Carousel->wrapperClass[] = 'edge-to-edge';
-    $Carousel->mainSize = 'full';
-
+if( empty( $gallery ) ) {
+    return;
 }
+?>
+<div id="homepage-carousel" class="carousel slide col-12 px-0" data-ride="carousel">
+    <?php
+    
+    /**
+     *      Indicators
+     */
+    
+    include locate_template( 'template-parts/components/carousels/indicators.php' );
+    
+    
+    /**
+     *      Inner
+     *
+     */
+    
+    include locate_template( 'template-parts/components/carousels/inner.php' );
 
-if ( $this->SiteInfo->carousel['show_caption'] ) {
-    $Carousel->includeCaption = true;
-}
-
-
-if ( $this->SiteInfo->carousel['speed'] ) {
-    $Carousel->slideSpeed = $this->SiteInfo->carousel['speed'];
-}
-
-
-$Carousel = apply_filters( 'bric_header_carousel', $Carousel );
-
-echo $Carousel->buildGallery();
+    
+    
+    /**
+     *      Controls
+     */
+    include locate_template( 'template-parts/components/carousels/controls.php' );
+    ?>
+</div>
