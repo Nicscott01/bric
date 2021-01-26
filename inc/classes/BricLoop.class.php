@@ -38,21 +38,16 @@ class BricLoop {
 		
 		
 		//Check for woocommerce 
-		if ( function_exists('is_product') ) {
+		if ( function_exists('is_product') && is_product() ) {
+
+             		$this->contentTemplate = 'bricproduct';
 			
-			if ( is_product() ) {
-				
-				$this->contentTemplate = 'bricproduct';
-				
-			}
-			
-		}
-		
-		
-		elseif ( is_search() || is_archive() || is_home() ) {
+		} elseif ( is_search() || is_archive() || is_home() ) {
 			
 			$this->contentTemplate = 'excerpt';
 		}
+		
+		
 		
 		
 		
