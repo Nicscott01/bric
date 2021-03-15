@@ -1,0 +1,17 @@
+{
+    "name": "nicscott01/bric",
+    "description": "Wordpress parent theme",
+    "keywords": [
+        "wordpress",
+        "theme"
+    ],
+    "homepage": "https://github.com/Nicscott01/bric",
+    "type": "wordpress-theme",
+    "require": {
+        "php": "^7.3",
+    },
+    "authors": [{
+        "name": "Nic Scott",
+        "email": "nicolas.r.scott@gmail.com"
+    }]
+}
