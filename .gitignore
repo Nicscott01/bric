@@ -14,3 +14,4 @@ assets/js/
 #ignore DWSYNC
 _notes/dwsync.xml
 _notes/*
+/vendor/
