@@ -24,7 +24,7 @@ global $BricLoop;
 add_action( 'bric_before_loop', array( $BricLoop, 'get_archive_header' ), 5 );
 
 
-add_action( 'bric_before_loop', array( $BricLoop, 'get_sidebar'), 5 );
+//add_action( 'bric_before_loop', array( $BricLoop, 'get_sidebar'), 5 );
 add_action( 'bric_before_loop', array( $BricLoop, 'get_before_loop_posts'), 10 );
 add_action( 'bric_before_loop', array( $BricLoop, 'get_before_loop'), 10 ); 
 

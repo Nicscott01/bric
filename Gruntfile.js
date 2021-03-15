@@ -180,6 +180,6 @@ module.exports = function (grunt) {
 	
 	
 	// Default task(s).
-	grunt.registerTask('default', ['copy', 'sass:dist', 'postcss', 'concat', 'uglify'] );
+	grunt.registerTask('default', ['copy', 'concat', 'uglify', 'sass:dist', 'postcss'] );
 
 };

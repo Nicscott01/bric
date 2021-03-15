@@ -49,6 +49,7 @@ class BricChild {
 		add_action( 'after_switch_theme', array( $this, 'setup_child') );
 		
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts_styles' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts_styles' ] );
 		
 	}
 	
@@ -289,11 +290,19 @@ $headings-color: $c2;
 			$this->google_font_url = urldecode( 'https://fonts.googleapis.com/css2?' . implode( '&', $font_string ) );
 			
 		
-			add_action( 'wp_head', [ $this, 'enqueue_google_fonts_v2' ], 11 );
+            if ( !is_admin() ) {
+                add_action( 'wp_head', [ $this, 'enqueue_google_fonts_v2' ], 11 );
+    			//add_action( 'wp_enqueue_style', [ $this, 'enqueue_google_fonts_v2' ], 11 );
+            } else {
+                
+                wp_enqueue_style( 'bric-fonts', $this->google_font_url );
+
+            }
 			
+            
 		}
 		
-//		wp_enqueue_style( 'fonts', $this->google_font_url );
+
 		
 	}
 	

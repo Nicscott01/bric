@@ -38,16 +38,21 @@ class BricLoop {
 		
 		
 		//Check for woocommerce 
-		if ( function_exists('is_product') && is_product() ) {
-
-             		$this->contentTemplate = 'bricproduct';
+		if ( function_exists('is_product') ) {
 			
-		} elseif ( is_search() || is_archive() || is_home() ) {
+			if ( is_product() ) {
+				
+				$this->contentTemplate = 'bricproduct';
+				
+			}
 			
-			$this->contentTemplate = 'excerpt';
 		}
 		
 		
+		elseif ( is_search() || is_archive() || is_home() ) {
+			
+			$this->contentTemplate = 'excerpt';
+		}
 		
 		
 		
@@ -83,9 +88,9 @@ class BricLoop {
 		}
 
 		
-		
 		if ( is_archive() || is_home() || is_single() || is_search() || is_404() ) {
 			
+            
 			get_template_part( 'template-parts/archive-start' );
 			
 			add_action( 'bric_after_loop', [$this, 'archive_end' ], 10 );
@@ -131,12 +136,14 @@ class BricLoop {
 			
 		}
 		
+    
+        
 		
-		if ( is_archive () ) {
+		if ( is_archive() || is_home() ) {
 			
 			//v_dump( $post );
 			setup_postdata( $post );
-
+            
 			get_template_part( 'template-parts/archive', 'heading' );
 
 			wp_reset_postdata();

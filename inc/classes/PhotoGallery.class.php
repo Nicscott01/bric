@@ -146,7 +146,7 @@ class PhotoGallery {
 
 
 				//Check for caption text, if not, check for alt text, if not, then no caption.
-				if ( !empty ( $image['caption'] ) && $this->args['display_captions'] ) {
+				if ( !empty ( $image['caption'] ) ) {
 
 					$img_cap = '<span class="image-caption">'.$image['caption'].'</span>';
 
@@ -385,7 +385,6 @@ class PhotoGallery {
 		$def = array(
 			'gallery_display' => 'masonry',
 			'lightbox' => 'photoswipe',
-            'display_captions' => false,
 		);
 		
 		$this->args = wp_parse_args( $this->args, $def );
