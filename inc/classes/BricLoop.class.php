@@ -35,25 +35,31 @@ class BricLoop {
 		
 		
 		
-		
-		
-		//Check for woocommerce 
-		if ( function_exists('is_product') ) {
-			
-			if ( is_product() ) {
-				
-				$this->contentTemplate = 'bricproduct';
-				
-			}
-			
-		}
-		
-		
-		elseif ( is_search() || is_archive() || is_home() ) {
-			
+		$pt = get_post_type();
+       	 	$template_string_archive = 'content-excerpt-' . $pt . '.php';
+        	$template_string = 'content-' . $pt . '.php';
+        
+        	$template_file_archive = locate_template( $template_string_archive ); 
+        	$template_file = locate_template( $template_string ); 
+            
+          
+		if ( is_search() || is_archive() || is_home() ) {
+
+		    if ( !empty( $template_file_archive ) ) {
+
+			$this->contentTemplate = 'excerpt-' . $pt;
+
+		    } else {
+
 			$this->contentTemplate = 'excerpt';
-		}
-		
+
+		    }
+
+			} elseif ( !empty( $template_file ) ) {
+
+		    $this->contentTemplate =  $pt;
+
+		} 
 		
 		
 		/**
