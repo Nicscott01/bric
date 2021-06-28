@@ -46,7 +46,12 @@ class Slideout {
 		
 		$main_menu = Navbar::get_primary_nav_menu_obj();
 			
-		
+        //bail if no menu items
+        if ( $main_menu->count == 0 ) {
+            
+           return;
+        }
+
 		wp_enqueue_script( 'slideout', get_template_directory_uri().'/assets/js/slideout.min.js', array('jquery', 'bootstrap'), false, true );
 		
 		wp_localize_script( 'slideout', 'slideout', [
@@ -60,7 +65,7 @@ class Slideout {
 	}
 	
 	
-	public function init_slideout() {
+	public function init_slideout_d() {
 		
 		?>
 <script>
