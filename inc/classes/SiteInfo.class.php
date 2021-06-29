@@ -909,21 +909,27 @@ class SiteInfo {
 		$address = get_field( 'address', 'options' );
 		$city_state = get_field( 'city_state', 'options' );
 		
-		$this->address->line_1 = $address['address_1'];
-		$this->address->line_2 = $address['address_2'];
-		$this->address->city = $city_state['city'];
-		$this->address->state = $city_state['state'];
-		$this->address->zip = $city_state['zip'];
-		
+        
+        if( !empty( $address) ) {
+            $this->address->line_1 = $address['address_1'];
+            $this->address->line_2 = $address['address_2'];
+            $this->address->city = $city_state['city'];
+            $this->address->state = $city_state['state'];
+            $this->address->zip = $city_state['zip'];
+        }
 				
 		
 		
 		//Contact
 		$contact = get_field( 'contact', 'options');
 		
-		$this->phone->main = $contact['phone'];
-		$this->phone->fax = $contact['fax'];
-		$this->email->main = $contact['email'];
+        if ( !empty( $contact ) ) {
+            
+            $this->phone->main = $contact['phone'];
+            $this->phone->fax = $contact['fax'];
+            $this->email->main = $contact['email'];
+
+        }
 		
 		
 		
