@@ -309,6 +309,9 @@ $headings-color: $c2;
 	
 	
 	public function enqueue_google_fonts_v2() {
+        
+        echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
+        echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
 		
 		printf( '<link href="%s" rel="stylesheet">', $this->google_font_url );
 		
