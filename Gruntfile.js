@@ -69,7 +69,8 @@ module.exports = function (grunt) {
 					'assets/js/photoswipe-thumbnail-opener.min.js': ['assets/src/js/photoswipe-thumbnail-opener.js'],
 					'assets/js/google-maps-render.min.js': ['assets/src/js/google-maps-render.js'],
 					'assets/js/bric.min.js': ['assets/src/js/bric.js'],
-					'assets/js/customizer-carousel.min.js': ['assets/src/js/customizer-carousel.js']
+					'assets/js/customizer-carousel.min.js': ['assets/src/js/customizer-carousel.js'],
+					'assets/js/jQuery-inView.min.js': ['assets/src/js/jQuery-inView.js']
 				}
 			}
 			/*bootstrap_js: {
@@ -92,6 +93,13 @@ module.exports = function (grunt) {
 			main: {
 				files: [
 					{
+						expand:true,
+						cwd: 'node_modules/jquery/dist',
+						src: ['jquery.min.js', 'jquery.min.map'],
+						dest: 'assets/js/',
+						filter: 'isFile',
+						flatten: true,
+					},{
 						expand:true,
 						cwd: 'node_modules/bootstrap/dist/js/',
 						src: ['bootstrap.bundle.min.js', 'bootstrap.bundle.min.js.map'],

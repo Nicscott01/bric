@@ -268,8 +268,9 @@ class BricStaff {
         $staff_members = $this->add_custom_fields_to_obj( $staff_members );
         
         
-        ob_start();
         
+        ob_start();
+                
         include locate_template( 'template-parts/components/staff/' . $atts['template'] . '.php' );
         
         return ob_get_clean();
@@ -302,9 +303,16 @@ class BricStaff {
             
             $fields = get_fields( $obj->ID );
 
+            
+            
             if ( !empty( $fields ) ) {
+                
+                foreach( $fields as $name => $value ) {
+                
+                    $posts[$key]->$name = $value;
+                    
+                }
 
-                $posts[$key]->$fields['name'] = $fields['value'];
             }
 
 
@@ -312,7 +320,7 @@ class BricStaff {
             
         }
         
-        
+                
         return $posts;
         
         

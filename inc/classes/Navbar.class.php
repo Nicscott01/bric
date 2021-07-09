@@ -368,20 +368,19 @@ class Navbar {
 	
 	public function get_navbar_toggler() {
 		
-		
-		//if ( !empty( $this->main_nav_menu ) )  {
-			
-			if ( !isset( $this->navbar_collapse_id ) ){
-				$this->gather_assets();
-			}
-			
-			$this->navbar_toggler = sprintf( '
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#%1$s-sidebar" aria-controls="%1$s" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	  </button>', $this->navbar_collapse_id );
 
-	//	}
-		
+
+        if ( !isset( $this->navbar_collapse_id ) ){
+            $this->gather_assets();
+        }
+			
+
+        ob_start();
+        
+        include( locate_template( 'template-parts/components/navbar/navbar-toggler.php' ) );        
+        
+		$this->navbar_toggler = ob_get_clean();
+
 		
 		return $this->navbar_toggler;		
 		

@@ -235,8 +235,9 @@ class Bric {
 		
 		wp_deregister_script( 'jquery' );
 		
+		wp_register_script( 'jquery', get_template_directory_uri(). '/assets/js/jquery.min.js', array(), null, true );
 		//wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js', array(), null, true );
-		wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js', array(), null, true );
+		//wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js', array(), null, true );
 		
 		//wp_register_script( 'popper', get_template_directory_uri().'/assets/js/popper.min.js', array( 'jquery' ), '1.12.5', true );
 
@@ -245,7 +246,9 @@ class Bric {
 		wp_register_script( 'bric', get_template_directory_uri().'/assets/js/bric.min.js', array( 'bootstrap' ), null, true );
 		
 		
-		wp_register_script( 'in-view', get_template_directory_uri() . '/assets/js/in-view.min.js', [ 'jquery', 'wp-seo-local-frontend' ], null, true );
+		wp_register_script( 'in-view', get_template_directory_uri() . '/assets/js/in-view.min.js', [ 'jquery' ], null, true );
+		
+        wp_register_script( 'jQuery-inView', get_template_directory_uri() . '/assets/js/jQuery-inView.min.js', [ 'jquery' ], null, true );
 		
 	}
 	
@@ -260,6 +263,8 @@ class Bric {
 
 	function enqueue_scripts() {
 		
+       // wp_scripts()->add_data( 'jquery', 'group', 1 );
+        
 		//wp_enqueue_script( 'popper' );
 		wp_enqueue_script( 'bootstrap' );
 		wp_enqueue_script( 'bric' );

@@ -310,10 +310,21 @@ $headings-color: $c2;
 	
 	public function enqueue_google_fonts_v2() {
         
-        echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
-        echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-		
-		printf( '<link href="%s" rel="stylesheet">', $this->google_font_url );
+        ?>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href="<?php echo $this->google_font_url; ?>" />
+<link rel="stylesheet" href="<?php echo $this->google_font_url; ?>" media="print" onload="this.media='all'" />
+<noscript>
+    <link rel="stylesheet" href="<?php echo $this->google_font_url; ?>">
+</noscript>
+        <?php
+
+        
+        add_action( 'wp_footer_d', function() {
+            
+            printf( '<link href="%s" rel="stylesheet" media="print" onload="this.media=\'all\'">', $this->google_font_url );
+            
+        }, 1 );
 		
 		
 		
