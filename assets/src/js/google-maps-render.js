@@ -161,12 +161,14 @@ var map = null;
 $(document).ready( function() {
     
     function maybeRenderMap() {
-        if( $('.acf-map').inView('topOnly') ) {
+        
+        if ( typeof( google ) == 'object' && $('.acf-map').inView('topOnly') )  {
               if ( map == null ) {
                   map = new_map( $('.acf-map') );        
               }
           }    
     }
+    
     
     maybeRenderMap();
 

@@ -103,7 +103,7 @@ class GoogleMaps {
         
         if ( $handle == 'google-maps-api' ) {
             
-            $tag = str_replace( '><', ' async defer><', $tag );
+            $tag = str_replace( '><', ' async><', $tag );
             
         }
         
