@@ -62,7 +62,7 @@ class BricChild {
 		$this->get_child_folder();
 		
 		
-		if ( ! file_exists( $this->folder_name ) ) {
+		if ( ! file_exists(  get_theme_root() . '/' . $this->folder_name ) ) {
 
 			//copy child model folder
 			$this->copy_child_model();
