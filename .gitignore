@@ -7,9 +7,6 @@
 #ignore node_modules
 node_modules/
 
-#ignore compiled css/js
-assets/css/
-assets/js/
 
 #ignore DWSYNC
 _notes/dwsync.xml
