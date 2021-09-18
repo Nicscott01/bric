@@ -104,61 +104,7 @@ class PhotoGallery {
             $c = 1;				
 			foreach ( $gallery as $key => $image ) {
 
-
-                
-				if ( $this->args['gallery_display'] == 'masonry' ) {
-					
-					if ( $c == 1 ) {
-						$item_class = " grid-sizer";
-					}
-
-					elseif ( $c % 3 == 0) {
-						$item_class = " image-width-2 image-height-2";
-						$image_large = 'medium_large';
-					}
-
-					else {
-						$item_class= ' ';
-						$image_large = 'medium';
-					}
-
-				}
-				else {
-					$image_large = 'medium';
-				}
-				
-				$output .= "\t<figure class='image-item".$item_class."' itemprop='associatedMedia' itemscope itemtype='http://schema.org/ImageObject'>\n";
-
-				
-				$aria_text = sprintf( "Click to enlarge thumbnail of %s", 
-									 ( $image['alt'] ) ? $image['alt'] : $image['title'] );
-
-				$img = wp_get_attachment_image( $image['id'], $image_large, false, array(
-					'itemprop' => 'thumbnail',
-				));
-
-
-				$output .= sprintf( "\t\t<a href='%s' itemprop='contentUrl' data-size='%s' aria-label='%s'>%s</a>\n",
-								apply_filters( 'bric_photo_gallery_full_size', $image['url'], $image ),
-								$image['width'].'x'.$image['height'],
-								$aria_text,
-								$img );
-
-
-				//Check for caption text, if not, check for alt text, if not, then no caption.
-				if ( !empty ( $image['caption'] ) ) {
-
-					$img_cap = '<span class="image-caption">'.$image['caption'].'</span>';
-
-					$output .= sprintf("\t\t<figcaption itemprop='caption description'>%s</figcaption>\n",
-									$img_cap
-								);
-
-					
-				}
-
-				$output .= "\t</figure>\n";
-
+				include locate_template( 'template-parts/components/photo-gallery/image.php' );
 					
 			$c++;
 				
@@ -316,7 +262,7 @@ class PhotoGallery {
             </button>
 
             <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
+                <div class="pswp__caption__center text-center"></div>
             </div>
 
         </div>
@@ -419,7 +365,7 @@ function cc_photogallery_scripts() {
 
 add_filter( 'post_gallery', 'bric_post_gallery', 10, 3 );
 
-function bric_post_gallery( $output, $atts, $instance ) {
+function bric_post_gallery( $output = '', $atts, $instance ) {
 		
 	$images = explode( ',', $atts['ids'] );
 	

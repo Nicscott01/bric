@@ -189,5 +189,5 @@ module.exports = function (grunt) {
 	
 	// Default task(s).
 	grunt.registerTask('default', ['copy', 'concat', 'uglify', 'sass:dist', 'postcss'] );
-
+        grunt.registerTask( 'js', ['copy', 'concat', 'uglify'] );
 };
