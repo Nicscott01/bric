@@ -171,7 +171,7 @@ class PhotoGallery {
 
 			
 				
-			$output = sprintf( "<div class='gallery-wrapper'><div class='gallery %s %s' itemscope itemtype='http://schema.org/ImageGallery'>\n%s</div></div><div id='after-gallery' style='height:10px;'></div>", 
+			$output = sprintf( "<div class='gallery-wrapper'><div class='gallery %s %s' itemscope itemtype='http://schema.org/ImageGallery'>\n%s</div></div>", 
 							  'gallery-'.$this->args['gallery_display'],
 							  'gallery-'.$this->args['lightbox'],
 							  $output 
