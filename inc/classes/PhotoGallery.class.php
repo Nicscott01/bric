@@ -28,6 +28,8 @@ class PhotoGallery {
 			
 		}
 		
+		$this->raw_gallery = $gallery;
+		
 		//Parse arguments w/ defaults
 		$this->parseArgs();
 		
@@ -79,11 +81,60 @@ class PhotoGallery {
 			
 		}
 		
-		$this->compileGallery();	
+		$ajax = isset( $this->args['ajax_load'] ) ? $this->args['ajax_load'] : false;
+		
+		if ( $ajax ) {
+		
+			$this->prepareAjax();	
+			
+		} else {
+			
+			$this->compileGallery();	
+			$this->prepareAjax();	
+		}
 		
 		return $this->htmlGallery;
 		
 	}
+	
+	
+	
+	
+	
+	public function prepareAjax() {
+		
+		//We need to output the files that are a part of this gallery, 
+		//along with the template for rendering on the page
+		
+		$ajax_data = [];
+		$ajax_data['rest_url'] = get_rest_url() . 'bric/v1/photogallery/get-images/';
+		$ajax_data['photos_per_load'] = $this->args['photos_per_load'];
+		
+		if ( is_array( $this->gallery ) ) {
+			
+			$ajax_data['gallery'] = $this->raw_gallery;
+			//$ajax_data['template'] = include locate_template( 'template-parts/components/photo-gallery/image.php' );
+			
+			
+		}
+		
+		
+		ob_start();
+		?>
+		$BricPhotoGallery.ajax = <?php echo json_encode( $ajax_data ); ?>
+		<?php
+		
+		$script = ob_get_clean();
+		
+		wp_add_inline_script( 'bric', $script );
+		
+		
+		
+		
+	}
+	
+	
+	
 	
 	
 	
@@ -100,19 +151,27 @@ class PhotoGallery {
 			$image_large = 'medium';
             $item_class = '';
             
-            
+			
+		//	$render_limit = isset( $this->args['render_limit'] ) && is_int( $this->args['render_limit'] ) ? $this->args['render_limit'] : 10; 
+			$render_limit = $this->args['photos_per_load'];
+			
+			
             $c = 1;				
 			foreach ( $gallery as $key => $image ) {
 
+				if ( $c > $render_limit ) {
+					break;
+				}
+				
 				include locate_template( 'template-parts/components/photo-gallery/image.php' );
 					
-			$c++;
+				$c++;
 				
 			}
 
 			
 				
-			$output = sprintf( "<div class='gallery-wrapper'><div class='gallery %s %s' itemscope itemtype='http://schema.org/ImageGallery'>\n%s</div></div>", 
+			$output = sprintf( "<div class='gallery-wrapper'><div class='gallery %s %s' itemscope itemtype='http://schema.org/ImageGallery'>\n%s</div></div><div id='after-gallery' style='height:10px;'></div>", 
 							  'gallery-'.$this->args['gallery_display'],
 							  'gallery-'.$this->args['lightbox'],
 							  $output 
@@ -183,6 +242,11 @@ class PhotoGallery {
 		}
 		
 
+		
+		//Queue up Waypoints for infinite loading
+		wp_enqueue_script( 'waypoints', get_template_directory_uri(). '/assets/js/jquery.waypoints.min.js', ['jquery'], '4.0.1', true );
+		
+		
 		
 		
 	}
@@ -292,23 +356,43 @@ class PhotoGallery {
 	
 	
 	
-	function masonry_queue() {
+	public function masonry_queue() {
 	?>
-	<script>	
-
+	<script>			
 	( function($){
 
-		var $masonry = $('.gallery-masonry').masonry({
-			  itemSelector: '.image-item',
-			  percentPosition: true,
-			  columnWidth: '.grid-sizer',
-			  gutter:0,
-			});
+		$(document).ready( function() {
+			
+			/*
+			$BricPhotoGallery.photos = $('.gallery-masonry').masonry({
+				  itemSelector: '.image-item',
+				  percentPosition: true,
+				  columnWidth: '.grid-sizer',
+				  gutter:0,
+				});
 
-		$masonry.imagesLoaded().progress( function() {
-		  $masonry.masonry('layout');
+
+			$BricPhotoGallery.photos.imagesLoaded().progress( function() {
+					$BricPhotoGallery.photos.masonry('layout');
+					console.log( 'imagesLoaded ran' );
+				});
+			
+			
+			$BricPhotoGallery.bottomOfGallery = $BricPhotoGallery.photos.waypoint( {
+				handler: function() { 
+					$BricPhotoGallery.loadMore() 
+					this.destroy();
+				},
+				offset: 'bottom-in-view'
+			});
+	*/
+			
+			
+			
+			
+			
+
 		});
-		
 
 	})(jQuery);
 
@@ -331,6 +415,7 @@ class PhotoGallery {
 		$def = array(
 			'gallery_display' => 'masonry',
 			'lightbox' => 'photoswipe',
+			'photos_per_load' => 10,
 		);
 		
 		$this->args = wp_parse_args( $this->args, $def );
@@ -374,3 +459,125 @@ function bric_post_gallery( $output = '', $atts, $instance ) {
 	return $Gallery->buildGallery();
 	
 }
+
+
+
+
+
+class PhotoGalleryRest {
+	
+	public $args;
+	
+	public function __construct() {
+		
+		//Register our rest route
+		add_action( 'rest_api_init', [ $this, 'register_rest_route' ] );
+		
+		$this->args = [];
+		$this->args['gallery_display'] = 'masonry';
+		
+		
+	}
+	
+	
+	public function register_rest_route() {
+
+        register_rest_route( 'bric/v1', '/photogallery/image/(?P<id>\d+)', array(
+            'methods'  => 'GET',
+            'callback' => [ $this, 'get_image_markup' ],
+       ) );
+		
+        register_rest_route( 'bric/v1', '/photogallery/get-images', array(
+            'methods'  => 'GET',
+            'callback' => [ $this, 'get_images_markup' ],
+       ) );
+		
+	
+
+    } 
+	
+	
+	public function get_images_markup( $data ) {
+		
+		if ( isset( $data['imgs'] ) ) {
+			
+			$images = explode( ',', $data['imgs' ] );
+			
+		}
+		
+		//$html = [];
+		
+		$output = '';
+
+		$c = 1;
+		
+		foreach( $images as $img ) {
+			
+
+			if ( function_exists( 'acf_get_attachment' ) ) {
+
+				$image = acf_get_attachment( $img );
+
+			}
+
+			include locate_template( 'template-parts/components/photo-gallery/image.php' );
+			
+			//$html[] = $output;
+			
+			$c++;
+					
+		}
+				
+		
+		return array( 'html' => $output );
+			
+
+		
+	}
+	
+	
+	public function get_image_markup( $data ) {
+		
+		
+		
+		if ( function_exists( 'acf_get_attachment' ) ) {
+			
+			$image = acf_get_attachment( $data['id'] );
+			
+		}
+		
+		/*ob_start();
+		
+	 	var_dump( $data['id'] );
+		
+		$log = ob_get_clean();
+		
+		error_log( $log );
+		*/
+		$output = '';
+		
+		//ob_start();
+		
+		//Get the markup
+		include locate_template( 'template-parts/components/photo-gallery/image.php' );
+		
+		
+		//$markup = ob_get_clean();
+		
+		
+
+		
+		return $output; //$data['id'];
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+}
+
+new PhotoGalleryRest();
+
