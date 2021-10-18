@@ -329,6 +329,9 @@ class BricOptions {
 	
 	public function run_grunt_task( $commit = '' ) {
 
+		if ( !function_exists( 'exec' ) ) {
+			return;
+		}
 
 		$env = array(
 			array( 'PATH', PATH_NODE ),
