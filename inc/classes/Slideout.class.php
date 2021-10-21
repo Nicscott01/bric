@@ -43,20 +43,31 @@ class Slideout {
 	public function enqueue_scripts() {
 		
 		global $SiteInfo;
-		
+		global $Navbar;
+
+
 		$main_menu = Navbar::get_primary_nav_menu_obj();
 			
+
+
         //bail if no menu items
         if ( $main_menu->count == 0 ) {
             
            return;
         }
 
+
+		if ( isset( $Navbar->main_nav_menu_obj_left ) ) {
+
+		}
+
+
 		wp_enqueue_script( 'slideout', get_template_directory_uri().'/assets/js/slideout.min.js', array('jquery', 'bootstrap'), false, true );
 		
 		wp_localize_script( 'slideout', 'slideout', [
 			'side' => $SiteInfo->navbar->slideout['side'],
 			'target_id' => 'menu-'. $main_menu->slug,
+			'target_id_left' => ( isset( $Navbar->main_nav_menu_obj_left ) ) ? 'menu-' . $Navbar->main_nav_menu_obj_left->slug : '',
 			'close_button' => $SiteInfo->navbar->slideout['close_button'],
 			'id' => 'slideout-primary-menu'
 		] );

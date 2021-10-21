@@ -5,15 +5,9 @@
 //		@developer Nic Scott
 //
 //
-
-
-
 @mixin reset-ul() {
-	@extend .list-unstyled;
+    @extend .list-unstyled;
 }
-
-
-
 
 // Common form controls
 //
@@ -36,125 +30,90 @@
 // input[type="search"]
 // input[type="tel"]
 // input[type="color"]
-
 @mixin form-control() {
-  display: block;
-  width: 100%;
-  height: $input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
-  padding: $padding-base-vertical $padding-base-horizontal;
-  font-size: $font-size-base;
-  line-height: $line-height-base;
-  color: $input-color;
-  background-color: $input-bg;
-  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-  border: 1px solid $input-border;
-  border-radius: $input-border-radius; // Note: This has no effect on <select>s in some browsers, due to the limited stylability of <select>s in CSS.
-  @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
-  @include transition(border-color ease-in-out .15s, box-shadow ease-in-out .15s);
-
-  // Customize the `:focus` state to imitate native WebKit styles.
-  @include form-control-focus;
-
-  // Placeholder
-  @include placeholder;
-
-  // Unstyle the caret on `<select>`s in IE10+.
-  &::-ms-expand {
-    border: 0;
-    background-color: transparent;
-  }
-
-  // Disabled and read-only inputs
-  //
-  // HTML5 says that controls under a fieldset > legend:first-child won't be
-  // disabled if the fieldset is disabled. Due to implementation difficulty, we
-  // don't honor that edge case; we style them as disabled anyway.
-  &[disabled],
-  &[readonly],
-  fieldset[disabled] & {
-    background-color: $input-bg-disabled;
-    opacity: 1; // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655
-  }
-
-  &[disabled],
-  fieldset[disabled] & {
-    cursor: $cursor-disabled;
-  }
-
-  // [converter] extracted textarea& to textarea.form-control
+    display: block;
+    width: 100%;
+    height: $input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+    padding: $padding-base-vertical $padding-base-horizontal;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: $input-color;
+    background-color: $input-bg;
+    background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+    border: 1px solid $input-border;
+    border-radius: $input-border-radius; // Note: This has no effect on <select>s in some browsers, due to the limited stylability of <select>s in CSS.
+    @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, .075));
+    @include transition(border-color ease-in-out .15s, box-shadow ease-in-out .15s);
+    // Customize the `:focus` state to imitate native WebKit styles.
+    @include form-control-focus;
+    // Placeholder
+    @include placeholder;
+    // Unstyle the caret on `<select>`s in IE10+.
+    &::-ms-expand {
+        border: 0;
+        background-color: transparent;
+    }
+    // Disabled and read-only inputs
+    //
+    // HTML5 says that controls under a fieldset > legend:first-child won't be
+    // disabled if the fieldset is disabled. Due to implementation difficulty, we
+    // don't honor that edge case; we style them as disabled anyway.
+    &[disabled],
+    &[readonly],
+    fieldset[disabled] & {
+        background-color: $input-bg-disabled;
+        opacity: 1; // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655
+    }
+    &[disabled],
+    fieldset[disabled] & {
+        cursor: $cursor-disabled;
+    }
+    // [converter] extracted textarea& to textarea.form-control
 }
-
-
-
-
-
-
-
-
-
-
-
 
 @mixin radio-checkbox-inputs() {
-
-	input[type="radio"],
-	input[type="radio"],
-	input[type="checkbox"],
-	input[type="checkbox"] {
-	  position: absolute;
-	  margin-left: -20px;
-	  margin-top: 4px \9;
-	
-	}
+    input[type="radio"],
+    input[type="radio"],
+    input[type="checkbox"],
+    input[type="checkbox"] {
+        position: absolute;
+        margin-left: -20px;
+        margin-top: 4px \9;
+    }
 }
-
 
 @mixin radio-checkbox-inline() {
-  position: relative;
-  display: inline-block;
-  padding-left: 20px;
-  margin-bottom: 0;
-  vertical-align: middle;
-  font-weight: normal;
-  cursor: pointer;
+    position: relative;
+    display: inline-block;
+    padding-left: 20px;
+    margin-bottom: 0;
+    vertical-align: middle;
+    font-weight: normal;
+    cursor: pointer;
 }
-
-
 
 @mixin radio-checkbox() {
-  position: relative;
-  display: block;
-  margin-top: 10px;
-  margin-bottom: 10px;
-
-  label {
-    //min-height: $line-height-computed; // Ensure the input doesn't jump when there is no text
-    //padding-left: $font-size-base/2;
-    margin-bottom: 0;
-    font-weight: inherit;
-    cursor: pointer;
-  }
-	
+    position: relative;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    label {
+        //min-height: $line-height-computed; // Ensure the input doesn't jump when there is no text
+        //padding-left: $font-size-base/2;
+        margin-bottom: 0;
+        font-weight: inherit;
+        cursor: pointer;
+    }
 }
-
 
 @mixin gravity-radio-checkbox-inline() {
-	
-	.gfield_radio, .gfield_checkbox {
-			
-		> li {
-			@include radio-checkbox-inline();
-		}
-		
-	}
-	
+    .gfield_radio,
+    .gfield_checkbox {
+        >li {
+            @include radio-checkbox-inline();
+        }
+    }
 }
-
-
-
-
-
-
 
 //
 //		SCSS BOOTSTRAP ADDON STYLES 
@@ -165,80 +124,74 @@
 //		@developer Nic Scott
 //
 //
-
-
-
-
-
-
 .gform_fields {
-	@include reset-ul();
-
-	> li,
-	li.field_sublabel_below {
-		@extend .form-group;
-	}
-
-	ul {
-		@include reset-ul();
-	}
-
-	input[type="text"], input[type="tel"], input[type="email"], textarea, select, input[type="url"]  {
-		//@include form-control();
-		@extend .form-control;
-	}
-
-	textarea {
-		height:auto;
-	}
-
-	.gfield_radio, .gfield_checkbox {
-		@include reset-ul();
-		@include radio-checkbox();
-
-	}
-
+    @include reset-ul();
+    >li,
+    li.field_sublabel_below {
+        @extend .form-group;
+    }
+    ul {
+        @include reset-ul();
+    }
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea,
+    select,
+    input[type="url"] {
+        //@include form-control();
+        @extend .form-control;
+    }
+    textarea {
+        height: auto;
+    }
+    .gfield_radio,
+    .gfield_checkbox {
+        @include reset-ul();
+        @include radio-checkbox();
+    }
 }
 
 .gform_button {
-	@extend .btn, .btn-primary;
+    @extend .btn,
+    .btn-primary;
+}
+
+.gform_wrapper {
+    .gfield {
+        &.hide-label {
+            .gfield_label,
+            .ginput_complex label {
+                position: absolute;
+                overflow: hidden;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                width: 1px;
+                margin: -1px;
+                padding: 0;
+                border: 0;
+            }
+        }
+    }
 }
 
 
-
-.gform_wrapper {	
-	
-	.gfield {
-		&.hide-label {
-			
-			.gfield_label,
-			.ginput_complex label {
-				 position: absolute; 
-				  overflow: hidden; 
-				  clip: rect(0 0 0 0); 
-				  height: 1px; width: 1px; 
-				  margin: -1px; padding: 0; border: 0;
-			}
-			
-			
-		}
-	}
-	
-}
-
+/*
 .gf_name_has_2 {
-	display:flex;
-	width:100%;
-	
-	> * {
-		flex: 1 1 auto;
-	}
+    display: flex;
+    width: 100%;
+    >* {
+        flex: 1 1 auto;
+    }
 }
+*/
 
+
+/*
 .ginput_complex {
-	//margin-left: -.25em;
-	//margin-right: -.25em;
-	
+    //margin-left: -.25em;
+    //margin-right: -.25em;
+    /*
 	> * {
 		padding-right: .25em;
 		padding-left: .25em;
@@ -252,12 +205,85 @@
 		}
 		
 	}
+	
+}
+*/
+
+//Try to put the form in the BS grid
+.gform_fields,
+.ginput_complex {
+    @include make-row();
 }
 
+.gfield {
+    //@include make-col(12);
+    @extend .col-12;
+    //padding: 0 $grid-gutter-width/2;
+    margin-bottom: $margin-below-field;
+}
+
+//Layout for address
+.ginput_container_address {
+    margin-bottom: $grid-gutter-width/-2; //because all the fields within have margin bottom to space them out
+    .ginput_full,
+    .address_city {
+        //@include make-col(12);
+        @extend .col-12;
+        //padding: 0 $grid-gutter-width/2;
+    }
+    .ginput_left,
+    .ginput_right {
+        //@include make-col(6);
+        @extend .col-6;
+        //padding: 0 $grid-gutter-width/2;
+    }
+    .ginput_full,
+    .ginput_left,
+    .ginput_right {
+        margin-bottom: $margin-below-field;
+    }
+    .address_city {
+        // @include make-col(12);
+        @include media-breakpoint-up( md) {
+            @include make-col(6);
+            padding-right: $grid-gutter-width/4;
+        }
+    }
+    .address_state,
+    .address_zip {
+        @include media-breakpoint-up( md) {
+            @include make-col(3);
+        }
+    }
+    .address_state {
+        padding-right: $grid-gutter-width/4;
+        @include media-breakpoint-up( md) {
+            padding-left: $grid-gutter-width/4;
+        }
+    }
+    .address_zip {
+        padding-left: $grid-gutter-width/4;
+    }
+}
+
+//Layout for name
+.ginput_container_name {
+    .name_first,
+    .name_last {
+        //@include make-col(6);
+        //padding: 0 $grid-gutter-width/2;
+        @extend .col-6;
+    }
+    .name_first {
+        padding-right: $grid-gutter-width/4;
+    }
+    .name_last {
+        padding-left: $grid-gutter-width/4;
+    }
+}
 
 .gfield_error {
-	
-	.ginput_container {
-		border: 2px solid $yellow;
-	}
+    .ginput_container {
+        border: 2px solid $yellow;
+    }
 }

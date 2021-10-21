@@ -110,10 +110,11 @@ class PhotoGallery {
 				
 			}
 
-			
+			$gallery_wrapper_class = apply_filters( 'photogallery_wrapper_class', 'gallery-wrapper' );			
 				
-			$output = sprintf( "<div class='gallery-wrapper'><div class='gallery %s %s' itemscope itemtype='http://schema.org/ImageGallery'>\n%s</div></div>", 
-							  'gallery-'.$this->args['gallery_display'],
+			$output = sprintf( "<div class='%s'><div class='gallery %s %s' itemscope itemtype='http://schema.org/ImageGallery'>\n%s</div></div>", 
+							  	$gallery_wrapper_class,
+								'gallery-'.$this->args['gallery_display'],
 							  'gallery-'.$this->args['lightbox'],
 							  $output 
 							 );
