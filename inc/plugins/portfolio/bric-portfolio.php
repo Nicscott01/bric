@@ -576,7 +576,8 @@ class BricPortfolio {
 			
 			remove_action( 'bric_before_loop', array( $BricLoop, 'get_before_loop_posts'), 10 );
 			
-			remove_action( 'bric_after_loop_posts', array( $BricLoop, 'get_post_pagination') ); 
+			//Not sure why this was added to remove post archive pagination. I took this line out on 10/27 but will leave the comment for now.
+			//remove_action( 'bric_after_loop_posts', array( $BricLoop, 'get_post_pagination') ); 
 		}
 		
 		
