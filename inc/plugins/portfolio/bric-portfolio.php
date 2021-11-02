@@ -82,6 +82,10 @@ class BricPortfolio {
 		add_action( 'init', [ $this, 'options_page' ] );
 		
 		
+
+		add_filter( 'acf/load_field/key=field_6180277f17025', [ $this, 'load_registered_taxonomies'] );
+
+
 	}
 				   
 	
@@ -410,6 +414,7 @@ class BricPortfolio {
 		$label = ( empty( $label ) ) ? 'Portfolio' : $label;
 		$slug = ( empty( $slug )) ? $this->slug : $slug;
 		
+		$taxonomies = get_field( 'portfolio_include_taxonomies', 'option' );
 		
 		
 
@@ -453,7 +458,7 @@ class BricPortfolio {
 			'description'           => __( $label . ' area', 'text_domain' ),
 			'labels'                => $labels,
 			'supports'              => array( 'title', 'editor', 'thumbnail', 'revisions','page-attributes' ),
-			'taxonomies'            => array( 'category', 'post_tag' ),
+			'taxonomies'            => $taxonomies,
 			'hierarchical'          => false,
 			'public'                => true,
 			'show_ui'               => true,
@@ -529,6 +534,37 @@ class BricPortfolio {
 	
 	
 
+
+	/**
+	 * 
+	 * 		Load the already registerd taxonomies 
+	 * 		to use with this portfolio plugin
+	 * 
+	 * 
+	 * 
+	 */
+
+	public function load_registered_taxonomies( $field ) {
+	
+		$taxes = get_taxonomies( [
+			'public' => true,
+			'publicly_queryable' => true,
+			'show_ui' => true,
+		], 'object' );
+
+		
+
+		$field['choices'] = [];
+
+		foreach ( $taxes as $tax ) {
+
+			$field['choices'][$tax->name] = $tax->label;
+
+		}
+
+
+		return $field;
+	}
 	
 	
 	
