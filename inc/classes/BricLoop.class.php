@@ -149,7 +149,7 @@ class BricLoop {
 			
 			//v_dump( $post );
 			setup_postdata( $post );
-            
+
 			get_template_part( 'template-parts/archive', 'heading' );
 
 			wp_reset_postdata();
