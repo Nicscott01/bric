@@ -905,9 +905,19 @@ class SiteInfo {
 		$this->copyright_owner = $copy_holder;
 		
 		
-		//Address
-		$address = get_field( 'address', 'options' );
-		$city_state = get_field( 'city_state', 'options' );
+		if ( defined( 'ICL_LANGUAGE_CODE') ) {
+
+			$address = $this->get_global_option( 'address' );
+			$city_state = $this->get_global_option( 'city_state', 'options' );
+		
+		} else {
+
+			//Address
+			$address = get_field( 'address', 'options' );
+			$city_state = get_field( 'city_state', 'options' );
+		
+		}
+
 		
         
         if( !empty( $address) ) {
@@ -951,8 +961,20 @@ class SiteInfo {
 	}
 	
 	
-	
-	
+	public function cl_acf_set_language() {
+		return acf_get_setting('default_language');
+	  }
+	   
+	public function get_global_option($name) {
+		  add_filter('acf/settings/current_language', [ $this, 'cl_acf_set_language' ], 100);
+		  $option = get_field($name, 'option');
+		  remove_filter('acf/settings/current_language', [ $this, 'cl_acf_set_language' ], 100);
+		  return $option;
+	}	
+
+
+
+
 	function print_all_business_info() {
 
 		ob_start();

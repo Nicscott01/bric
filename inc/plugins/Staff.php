@@ -292,7 +292,7 @@ class BricStaff {
     public function add_custom_fields_to_obj( $posts ) {
         
         
-        if( empty( $posts ) || !function_exists( 'get_field' )  ) {
+        if( empty( $posts )  ) {
             
             return $posts;
         
@@ -301,22 +301,25 @@ class BricStaff {
         
         foreach( $posts as $key => $obj ) {
             
-            $fields = get_fields( $obj->ID );
+            if( function_exists( 'get_field' ) ) {
 
-            
-            
-            if ( !empty( $fields ) ) {
+                $fields = get_fields( $obj->ID );
                 
-                foreach( $fields as $name => $value ) {
                 
-                    $posts[$key]->$name = $value;
+                if ( !empty( $fields ) ) {
                     
-                }
+                    foreach( $fields as $name => $value ) {
+                    
+                        $posts[$key]->$name = $value;
+                        
+                    }
 
+                }
             }
 
-
             
+            //Maybe get the featured image
+            $posts[$key]->featured_image = get_post_thumbnail_id( $obj );
             
         }
         
