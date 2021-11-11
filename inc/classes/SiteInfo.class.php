@@ -920,7 +920,7 @@ class SiteInfo {
 
 		
         
-        if( !empty( $address) ) {
+        if( !empty( $address ) && is_array( $address ) ) {
             $this->address->line_1 = $address['address_1'];
             $this->address->line_2 = $address['address_2'];
             $this->address->city = $city_state['city'];

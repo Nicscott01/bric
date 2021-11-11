@@ -2,6 +2,8 @@
 This is the core theme for Creare Web Solutions websites. Creates a child theme when activated in the Wordpress dashboard.
 
 ### Changelog
+#### v2.1.4
+- Updates to portfolio plugin. More options to include taxonomies and adjust number of posts per page on archive.
 #### v2.0.1
 - Try to get my shit together and tag versions; 
 - This was the copy of the theme from the Zenas build; it got mashed together with the Bedrock git repo; this is supposed to pull it back out and make it on track again

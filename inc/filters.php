@@ -54,8 +54,10 @@ class BricFilters {
 		 */
 		add_filter( 'wpseo_local_location_route_title_name', [ $this, 'wpseo_local_location_route_title_name' ] );
 
-		
-	
+		/**
+		 * 	Make Gform Submit a button so we can add btn classes
+		 */
+		add_filter( 'gform_submit_button', [ $this, 'gform_submit_button'], 10, 2 );
 	
 	}
 	
@@ -339,6 +341,14 @@ class BricFilters {
 
 	}
 	
+
+
+
+	public function gform_submit_button( $button, $form ) {
+
+		return "<button class='btn btn-primary' id='gform_submit_button_{$form['id']}'>Submit</button>";
+	}
+
  	
 }
 

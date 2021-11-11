@@ -149,7 +149,7 @@ class BricLoop {
 			
 			//v_dump( $post );
 			setup_postdata( $post );
-            
+
 			get_template_part( 'template-parts/archive', 'heading' );
 
 			wp_reset_postdata();
@@ -354,8 +354,9 @@ class BricLoop {
 			}
 			
 		}
+
 		
-		if ( is_archive() || is_home() ) {
+		if ( is_archive() || is_home() || is_post_type_archive() ) {
 			
 			the_posts_pagination( array( 'mid_size' => 1, 'type' => 'list' ) );
 

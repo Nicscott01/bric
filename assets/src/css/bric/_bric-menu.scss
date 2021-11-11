@@ -1,145 +1,106 @@
 //
 //		NAvbar/Menu Fixes
 //
-
-
-
 .dropdown-menu {
-	margin: 0 !important; //fix for hover 
-
-	.menu-item {
-		
-		a {
-			@extend .dropdown-item;
-		}
-		
-	}
-	
+    margin: 0 !important; //fix for hover 
+    .menu-item {
+        a {
+            @extend .dropdown-item;
+        }
+    }
 }
 
 .slideout-menu {
-	
-	.dropdown-menu .nav-link,
-	.dropdown-toggle {		
-		white-space: normal;
-		
-	}
-	
-	.nav-link {
-		text-align: left;
-	}
-	
+    .dropdown-menu .nav-link,
+    .dropdown-toggle {
+        white-space: normal;
+    }
+    .nav-link {
+        text-align: left;
+    }
 }
-
-
-
-
 
 .navbar-brand {
-	max-width: $custom-logo-max-width;
-	flex-shrink: 0;
-	
-	img {
-		@extend .img-fluid;		
-	}
+    max-width: $custom-logo-max-width;
+    flex-shrink: 0;
+    img {
+        @extend .img-fluid;
+    }
 }
-
-
 
 .navbar {
-	flex-wrap: nowrap;
-	
-	.right-side {
-		display:flex;
-		flex-direction: column;
-		flex-basis: auto;
-		
-		.navbar-collapse {
-			flex-basis: auto;
-		}
-		
-		.navbar-toggler {
-			max-width: 58px;
-			align-self: flex-end;
-		}
-	}
-	
-	
-	.widget {
-		
-		ul {
-			margin-bottom: 0;
-		}
-		
-		.d-inline-flex {
-			
-			> * {
-				padding: 0 .5em;
-			}
-		}
-		
-		.biz-info {
-			margin-bottom: 0 !important;
-		}
-	}
-	
-	
-	&.navbar-expand-md,
-	&.navbar-expand-lg {
-		justify-content: space-between;
-	}
-	
-	
-	& {
-
-		.right-side {
-			@include media-breakpoint-up( 'md' ) {
-				flex-basis: 100%;
-			}
-
-		}
-	
-	}
-	
-	
-	
-	
-
+    flex-wrap: nowrap;
+    .right-side {
+        display: flex;
+        flex-direction: column;
+        flex-basis: auto;
+        .navbar-collapse {
+            flex-basis: auto;
+        }
+        .navbar-toggler {
+            max-width: 58px;
+            align-self: flex-end;
+        }
+    }
+    .widget {
+        ul {
+            margin-bottom: 0;
+        }
+        .d-inline-flex {
+            >* {
+                padding: 0 .5em;
+            }
+        }
+        .biz-info {
+            margin-bottom: 0 !important;
+        }
+    }
+    &.navbar-expand-md,
+    &.navbar-expand-lg {
+        justify-content: space-between;
+    }
+    & {
+        .right-side {
+            @include media-breakpoint-up( 'md') {
+                flex-basis: 100%;
+            }
+        }
+    }
+    &.has-left-side {
+        .right-side {
+            @include media-breakpoint-up( 'md') {
+                flex-basis: auto;
+                margin-left: auto;
+            }
+        }
+        .left-side {
+            flex-basis: auto;
+            margin-right: auto;
+        }
+    }
 }
-
-
 
 .navbar-nav {
-	margin-right: $navbar-padding-y * -1;
+    margin-right: $navbar-padding-y * -1;
 }
-
-
-
 
 //
 //		Handle width when bold on hover
 //
-
 .nav-link {
-	
-	&:before {
-		display: block;
-		content: attr(data-text-content);
-		font-weight: bolder;
-		height: 0;
-		overflow: hidden;
-		visibility: hidden;		
-	}
+    &:before {
+        display: block;
+        content: attr(data-text-content);
+        font-weight: bolder;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+    }
 }
-
-
-
-
 
 //
 //		Don't let phone numbers break
 //
-
 a[href^="tel:"] {
-	word-break: keep-all;
+    word-break: keep-all;
 }

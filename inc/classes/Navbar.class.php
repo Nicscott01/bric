@@ -144,50 +144,98 @@ class Navbar {
 		
 		//Get main menu
 		$this->wp_menus = get_nav_menu_locations();
+
 		
 		if ( !empty( $this->wp_menus[$menu] ) ) {
 		
-			$this->main_nav_menu_obj = wp_get_nav_menu_object( $this->wp_menus['primary'] );
+			$this->main_nav_menu_obj = wp_get_nav_menu_object( $this->wp_menus[$menu] );
 			$this->navbar_collapse_id = $this->main_nav_menu_obj->slug.'-'.$this->main_nav_menu_obj->term_id;
 
 		}
-		
-		
+			
 		
 		$this->main_nav_menu_items_wrap = '<ul id="%1$s" class="%2$s">%3$s</ul>';
 		$this->main_nav_menu_container_class = 'collapse navbar-collapse';
 		
+
+		//Check for a "right side" menu
+		$menu_left = apply_filters( 'bric_navbar_menu_location_left', 'primary_l' );
+			
+		
+		if ( !empty( $this->wp_menus[$menu_left] ) ) {
+		
+			$this->main_nav_menu_obj_left = wp_get_nav_menu_object( $this->wp_menus[$menu_left] );
+			$this->navbar_collapse_id_left= $this->main_nav_menu_obj_left->slug.'-'.$this->main_nav_menu_obj_left->term_id;
+
+		}
+			
+		
+		$this->main_nav_menu_items_wrap = '<ul id="%1$s" class="%2$s">%3$s</ul>';
+		$this->main_nav_menu_container_class = 'collapse navbar-collapse';
+
+
+
+
 	}
 	
 	
 	
 	
 	
-	public function get_main_nav_menu() {
+	public function get_main_nav_menu( $side = 'right') {
 		
-		if ( !empty( $this->wp_menus ) ) {
+
+		if ( !empty( $this->wp_menus )  ) {
 		
-			/**
-			 *		filter the navbar menu location
-			 *
-			 */
-			$location = apply_filters( 'bric_navbar_menu_location', 'primary' );
+
+			if ( $side == 'right' ) {
+
+				/**
+				 *		filter the navbar menu location
+				*
+				*/
+				$location = apply_filters( 'bric_navbar_menu_location', 'primary' );
 
 
+					
+				$this->main_nav_menu = wp_nav_menu( array(
+					'theme_location' => $location,
+					'echo' => 0,
+					'menu_class' => 'navbar-nav ml-auto',
+					'container' => 'div',
+					'container_class' => $this->main_nav_menu_container_class,
+					'container_id' => $this->navbar_collapse_id,
+					'walker' => new BootstrapNavwalker(),
+					'items_wrap' => $this->main_nav_menu_items_wrap, //<ul id="%1$s" class="%2$s">%3$s</ul>
+
+				));	
 				
-			$this->main_nav_menu = wp_nav_menu( array(
-				'theme_location' => $location,
-				'echo' => 0,
-				'menu_class' => 'navbar-nav ml-auto',
-				'container' => 'div',
-				'container_class' => $this->main_nav_menu_container_class,
-				'container_id' => $this->navbar_collapse_id,
-				'walker' => new BootstrapNavwalker(),
-				'items_wrap' => $this->main_nav_menu_items_wrap, //<ul id="%1$s" class="%2$s">%3$s</ul>
-
-			));		
+				$nav_menu = $this->main_nav_menu;
 			
-			return $this->main_nav_menu;
+			} elseif ( $side == 'left' ) {
+
+				if ( isset( $this->main_nav_menu_obj_left ) ) {
+
+					$this->main_nav_menu_left = wp_nav_menu([
+						'menu' => $this->main_nav_menu_obj_left,
+						'echo' => 0,
+						'menu_class' => 'navbar-nav ml-auto',
+						'container' => 'div',
+						'container_class' => $this->main_nav_menu_container_class,
+						'container_id' => $this->navbar_collapse_id_left,
+						'walker' => new BootstrapNavwalker(),
+						'items_wrap' => $this->main_nav_menu_items_wrap, //<ul id="%1$s" class="%2$s">%3$s</ul>
+						]);
+
+					$nav_menu = $this->main_nav_menu_left;
+
+				}
+			}
+
+
+
+
+			return $nav_menu;
 
 		}
 		
@@ -205,7 +253,8 @@ class Navbar {
 		
 		
 		
-		
+		$navbar_expression = include locate_template( 'template-parts/components/navbar/navbar-expression.php' );
+
 		$this->navbar_options = array(
 			'container' => $SiteInfo->navbar->container,
 			'expand' => $SiteInfo->navbar->expand,
@@ -215,15 +264,7 @@ class Navbar {
 				//'html' => '',
 				//'above_navbar' => false,
 			),
-			'navbar_expression' => '%9$s
-<nav class="navbar navbar-expand-%4$s navbar-%7$s bg-%8$s" role="navigation">%5$s
-%1$s
-<div class="right-side">
-%10$s
-%3$s
-%2$s
-</div>
-%6$s</nav>',
+			'navbar_expression' => $navbar_expression,
 		);
 		
 		/**
@@ -271,16 +312,17 @@ class Navbar {
 		
 		
 		printf( $this->navbar_options['navbar_expression'], 
-			   $this->get_navbar_brand(),
-			   $this->get_main_nav_menu(),
-			   $this->get_navbar_toggler(),
-			   $this->navbar_options['expand'],
-			   ( $this->navbar_options['container'] ) ? '<div class="container navbar-inner-wrapper">' : '',
-			   ( $this->navbar_options['container'] ) ? '</div>' : '',
-			   $this->navbar_options['navbar_color'],
-			   $this->navbar_options['bg_color'],
-			   $this->content_above_nav,
-			   $this->get_header_cta()
+			   $this->get_navbar_brand(), //1
+			   $this->get_main_nav_menu(), //2
+			   $this->get_navbar_toggler(), //3 
+			   $this->navbar_options['expand'], //4
+			   ( $this->navbar_options['container'] ) ? '<div class="container navbar-inner-wrapper">' : '', //5
+			   ( $this->navbar_options['container'] ) ? '</div>' : '', //6
+			   $this->navbar_options['navbar_color'], //7
+			   $this->navbar_options['bg_color'], //8
+			   $this->content_above_nav, //9
+			   $this->get_header_cta(), //10
+			   $this->get_main_nav_menu( 'left' ) //11
 			  );
 		
 		
