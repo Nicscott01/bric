@@ -68,8 +68,8 @@ class JobListings {
 
         
 		
-		//Sort by menu_order
-		add_action( 'pre_get_posts', array( $this, 'query_options' ) );
+		//Sort by menu_order ** REMOVED 7/6/21 -- not sure this is good or really needed.
+		//add_action( 'pre_get_posts', array( $this, 'query_options' ) );
 		//Put sticky up front
 		add_filter( 'the_posts', array( $this, 'sticky_goes_first' ) );
 		
@@ -147,7 +147,7 @@ class JobListings {
 		
 		
 		//var_dump( $this->options );
-		if ( $query->is_main_query() && !empty( $this->options['query_options'] ) && is_array( $this->options['query_options'] ) ) {
+		if ( $query->is_main_query() && !empty( $this->options['query_options'] ) && is_array( $this->options['query_options'] ) && !is_admin() ) {
 
 				foreach ( $this->options['query_options'] as $k => $option ) {
 
