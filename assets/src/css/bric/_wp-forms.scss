@@ -1,156 +1,121 @@
 //
 //		Search form Styling
 //
-
-
 .search-form {
-	@extend .form-inline;
-	justify-content: flex-start;
-
-	
-	.search-field {
-		@extend .form-control;
-		margin-right: .25em;
-		width: 100%;
-	}
-	
-	label {
-		flex-basis: 0;
-		flex-grow: 1;
-		max-width: 100%;
-		margin-bottom: 0;
-		margin-right: .5em;
-	}
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    .search-field {
+        @extend .form-control;
+        margin-right: .25em;
+        width: 100%;
+    }
+    label {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+        margin-bottom: 0;
+        margin-right: .5em;
+    }
 }
-
-
-
 
 .comment-form {
-	
-	> p[class*=comment-form] {
-		@extend .form-group;
-		
-		textarea, input {
-			@extend .form-control;
-		}
-		
-		> *:not(label) {
-			@extend .form-control;
-		}
-	}
+    >p[class*=comment-form] {
+        //@extend .form-group;
+        display: flex;
+        textarea,
+        input {
+            @extend .form-control;
+        }
+        >*:not(label) {
+            @extend .form-control;
+        }
+    }
 }
 
-
-.search-submit, .submit {
-	@extend .btn, .btn-primary;
+.search-submit,
+.submit {
+    @extend .btn,
+    .btn-primary;
 }
-
-
-
 
 //
 //		POST PAGINATION
 //
-
 .has-btn-primary {
-	
-	a {
-		@extend .btn, .btn-primary;
-	}
-	
+    a {
+        @extend .btn,
+        .btn-primary;
+    }
 }
 
 .has-raquo {
-	
-	a {
-		&:after {
-			content: "\00BB";
-			margin-left: .25em;
-		}
-	}
+    a {
+        &:after {
+            content: "\00BB";
+            margin-left: .25em;
+        }
+    }
 }
-
 
 .has-laquo {
-	
-	a {
-		&:before {
-			content: "\00AB";
-			margin-right: .25em;
-		}
-	}
+    a {
+        &:before {
+            content: "\00AB";
+            margin-right: .25em;
+        }
+    }
 }
-
-
-
-
 
 //
 //		PASSWORD PROTECTED FRONT END STYLES
 //
-
 .login-password-protected {
-	
-	&, 
-	> .container, 
-	> .container > .row,
-	.main-content {
-		height:100%;
-	}
-	
-	
+    &,
+    >.container,
+    >.container>.row,
+    .main-content {
+        height: 100%;
+    }
 }
-
-
-
 
 //
 //		Login Form
 //
-
 .login-form-wrapper {
-	max-width: 400px;
-	margin: 0 auto;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .login {
-	
-	.message {
-		@extend .alert, .alert-primary;
-	}
-	
-	#login_error {
-		@extend .alert, .alert-danger;
-	}
-	
+    .message {
+        @extend .alert,
+        .alert-primary;
+    }
+    #login_error {
+        @extend .alert,
+        .alert-danger;
+    }
 }
-
 
 #loginform,
 #lostpasswordform {
-	
-	> p:not(.login-submit ):not(.submit):not(.forgetmenot) {
-		@extend .form-group;
-		
-		> input {
-			@extend .form-control;
-		}
-	}
-	
-	.button {
-		@extend .btn, .btn-primary;
-	}
-	
-	> p {
-		
-		&:last-child {
-			margin-bottom: 0 !important;
-		}
-	}
-	
-	.forgetmenot {
-		float:none;
-	}
-	
+    >p:not(.login-submit):not(.submit):not(.forgetmenot) {
+        //@extend .form-group;
+        >input {
+            @extend .form-control;
+        }
+    }
+    .button {
+        @extend .btn,
+        .btn-primary;
+    }
+    >p {
+        &:last-child {
+            margin-bottom: 0 !important;
+        }
+    }
+    .forgetmenot {
+        float: none;
+    }
 }

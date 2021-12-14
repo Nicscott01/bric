@@ -358,45 +358,8 @@ class Navbar {
 		$navbar_brand_type = $SiteInfo->navbar->brand_type;
 		
 		
-		
-		/**
-		 *		Apply filter: bric_navbar_brand_type
-		 *
-		 *		choices: text, image, textimage
-		 *
-		 */
-		
-		
-		$navbar_brand_type = apply_filters( 'bric_navbar_brand_type', $navbar_brand_type );
-		
-		
-		$navbar_brand_width = apply_filters( 'bric_navbar_brand_width', $SiteInfo->navbar->width );
-		
-				
-		switch ( $navbar_brand_type ) {
-				
-			case 'text' :
-				
-				$this->navbar_brand = sprintf( '<a class="navbar-brand" href="%s" style="width:%spx">%s</a>', $this->url, $navbar_brand_width, $this->title );
-			
-				break;
-				
-			case 'image' :
-				
-				$this->navbar_brand = sprintf( '<a class="navbar-brand" href="%s" style="width:%spx">%s</a>',$this->url, $navbar_brand_width, $this->logo );
-				break;
-				
-			case 'textimage' :
-				
-				$this->navbar_brand = sprintf( '<a class="navbar-brand" href="%s" style="width:%spx"><div class="tagline">%s</div> %s</a>', 
-											  $this->url,
-											   $navbar_brand_width,
-											  '<span class="blogtitle">'.get_bloginfo('blogname').'</span>',
-											  $this->logo );
-				break;
-		}
-			
-		
+		include locate_template( 'template-parts/components/navbar/navbar-brand.php' );
+
 		return $this->navbar_brand;
 				
 		
@@ -448,6 +411,15 @@ class Navbar {
 	}
 	
 	
+
+
+
+	public function get_upper_header() {
+		//Outout top navbar
+		
+		include locate_template( 'template-parts/components/navbar/upper-header.php' );
+				
+	}
 	
 	
 	

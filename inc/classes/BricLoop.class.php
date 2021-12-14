@@ -42,8 +42,22 @@ class BricLoop {
         	$template_file_archive = locate_template( $template_string_archive ); 
         	$template_file = locate_template( $template_string ); 
             
-          
-		if ( is_search() || is_archive() || is_home() ) {
+
+		$look_for_another = false;
+
+
+		if ( is_search() ) {
+
+			$search_template = locate_template( 'content-search-result.php' );
+
+			if ( !empty( $search_template ) ) {
+				$this->contentTemplate = 'search-result';
+			} else {
+				$look_for_another = true;
+			}
+
+
+		} elseif ( is_archive() || is_home() || $look_for_another ) {
 
 		    if ( !empty( $template_file_archive ) ) {
 
@@ -139,13 +153,14 @@ class BricLoop {
 			$page = get_landing_page();
 
 			$post = $page;	
-			
+				
+
 		}
 		
-    
+  
         
 		
-		if ( is_archive() || is_home() ) {
+		if ( is_archive() || is_home() || is_tax() ) {
 			
 			//v_dump( $post );
 			setup_postdata( $post );

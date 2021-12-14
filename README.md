@@ -2,6 +2,10 @@
 This is the core theme for Creare Web Solutions websites. Creates a child theme when activated in the Wordpress dashboard.
 
 ### Changelog
+#### v2.1.5
+- Updates for Bootstrap 5
+- Tweaks made during the YB Fire buildout 
+- More template parts for various components
 #### v2.1.4
 - Updates to portfolio plugin. More options to include taxonomies and adjust number of posts per page on archive.
 #### v2.0.1

@@ -128,7 +128,8 @@
     @include reset-ul();
     >li,
     li.field_sublabel_below {
-        @extend .form-group;
+        //@extend .form-group;
+        //may have to rework this all since Bootstrap 5 and Gravity Forms 2.5
     }
     ul {
         @include reset-ul();
@@ -268,6 +269,9 @@
 
 //Layout for name
 .ginput_container_name {
+    padding-left: $grid-gutter-width/2;
+    padding-right: $grid-gutter-width/2;
+
     .name_first,
     .name_last {
         //@include make-col(6);
@@ -275,10 +279,10 @@
         @extend .col-6;
     }
     .name_first {
-        padding-right: $grid-gutter-width/4;
+        padding-right: $spacer/2;
     }
     .name_last {
-        padding-left: $grid-gutter-width/4;
+        padding-left: $spacer/2;
     }
 }
 
@@ -286,4 +290,11 @@
     .ginput_container {
         border: 2px solid $yellow;
     }
+}
+
+
+.gfield_label {
+    font-size: $font-size-base;
+    margin-bottom: $spacer/2;
+    font-weight: $font-weight-bold;
 }

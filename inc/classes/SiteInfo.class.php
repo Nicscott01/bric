@@ -1194,10 +1194,12 @@ class SiteInfo {
                     case "phone" :
                         
                         $simple_items[] = $SiteInfo->phone->main;
-                        
+                        break;
+
                     case "email" :
                         
                         $simple_items[] = $SiteInfo->email->main;
+						break;
                         
                 }
                 

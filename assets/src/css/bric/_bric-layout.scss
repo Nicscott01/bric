@@ -81,7 +81,7 @@ body {
             .wp-block-image,
             .gallery-wrapper {
                 @include make-container();
-                @include make-container-max-widths();
+                //@include make-container-max-widths();
             }
         }
         .alignwide {
@@ -181,7 +181,7 @@ body {
 //		SCREEN READERS
 //
 .screen-reader-text {
-    @include sr-only;
+    @include visually-hidden();
 }
 
 //
@@ -357,15 +357,6 @@ h4,
         margin-top: 0;
         margin-bottom: 1em;
     }
-}
-
-//
-//		GOOGLE MAPS
-//
-.acf-map {
-    @extend .embed-responsive,
-    .embed-responsive-16by9;
-    margin-bottom: 1em;
 }
 
 //

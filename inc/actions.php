@@ -2,17 +2,7 @@
 
 global $Navbar;
 
-add_action( 'bric_header', function() {
-    //Outout top navbar
-    
-    if ( is_active_sidebar('upper-header') ) { ?>
-    <div class="upper-header">
-        <?php dynamic_sidebar( 'upper-header' ); ?>
-    </div>
-    <?php
-     }
-    
-}, 10 );
+add_action( 'bric_header', [$Navbar, 'get_upper_header'], 10 ); 
     
 add_action( 'bric_header', array( $Navbar, 'get_navbar' ), 10 );
 

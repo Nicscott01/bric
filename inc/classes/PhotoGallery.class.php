@@ -366,7 +366,7 @@ function cc_photogallery_scripts() {
 
 add_filter( 'post_gallery', 'bric_post_gallery', 10, 3 );
 
-function bric_post_gallery( $output = '', $atts, $instance ) {
+function bric_post_gallery( $output = '', $atts = [], $instance = null ) {
 		
 	$images = explode( ',', $atts['ids'] );
 	
