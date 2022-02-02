@@ -102,8 +102,12 @@ class BootstrapNavwalker extends Walker_Nav_Menu {
 			
 			//Editted for BS4 Beta 1 -- class .nav-link
 			//Editted for BS5 - adding .active to the .nav-link
-			if( $item->current ) {
+			if( $item->current && $depth > 0 ) {
+				$anchor_classes = 'dropdown-item active';
+			} elseif( $item->current ) {
 				$anchor_classes = 'nav-link active';
+			} elseif ( $depth > 0 ){
+				$anchor_classes = 'dropdown-item';
 			} else {
 				$anchor_classes = 'nav-link';
 			}
