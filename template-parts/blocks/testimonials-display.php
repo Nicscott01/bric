@@ -19,6 +19,9 @@ if ( empty( $testimonials ) ) {
 
 }
 
+
+
+
 $bg_colors = [
     'primary',
     'secondary',
@@ -30,7 +33,7 @@ $c = 0;
 
 ?>
 <div class="block testimonials-display-block full-width">
-    <div class="row m-0 p-2">
+    <div class="row m-0 testimonials">
 <?php
 foreach( $testimonials as $testimonial ) {
 
@@ -62,3 +65,28 @@ foreach( $testimonials as $testimonial ) {
 ?>
     </div>
 </div>
+<?php
+
+//Enqueue Masonry
+wp_enqueue_script( 'masonry' );
+
+
+//Init the masonry
+ob_start();
+?>
+( function($) {
+
+    $('.testimonials').masonry({
+        itemSelector: '.testimonial',
+        columnWidth: '.testimonial',
+        percentPosition: true,
+        gutter:0,
+        horizontalOrder: true,
+    });
+
+})(jQuery);
+
+<?php
+$script = ob_get_clean();
+
+wp_add_inline_script( 'masonry', $script, 'after' );
