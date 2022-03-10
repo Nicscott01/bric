@@ -112,7 +112,7 @@ class BricInit {
 		
 		if ( $this->check_dependencies()->startuptheme ) {
 			
-			include 'functions/bric_functions.php';
+			include_once( __DIR__ . '/functions/bric_functions.php' );
 		
 		}
 		

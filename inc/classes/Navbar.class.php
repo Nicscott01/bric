@@ -187,6 +187,7 @@ class Navbar {
 
 		if ( !empty( $this->wp_menus )  ) {
 		
+			$nav_menu = '';
 
 			if ( $side == 'right' ) {
 
@@ -232,9 +233,7 @@ class Navbar {
 				}
 			}
 
-
-
-
+			
 			return $nav_menu;
 
 		}

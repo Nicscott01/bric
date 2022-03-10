@@ -1,24 +1,30 @@
 /*!
- * Bootstrap v4.4.1 (https://getbootstrap.com/)
- * Copyright 2011-2019 The Bootstrap Authors
- * Copyright 2011-2019 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * Bootstrap v5.1.3 (https://getbootstrap.com/)
+ * Copyright 2011-2021 The Bootstrap Authors
+ * Copyright 2011-2021 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
+// scss-docs-start import-stack
+// Configuration
 @import "functions";
 
+@import "child-colors";
 @import "child-variables";
-//Need to dynamically create some variables
 @import "variables";
 @import "bric-variables";
 
+
 @import "mixins";
 @import "bric-mixins";
-@import "print";
+@import "utilities";
+
+// Layout & components
+@import "root";
 @import "reboot";
 @import "type";
 @import "images";
-@import "code";
+@import "containers";
 @import "grid";
 @import "tables";
 @import "forms";
@@ -26,25 +32,32 @@
 @import "transitions";
 @import "dropdown";
 @import "button-group";
-@import "input-group";
-@import "custom-forms";
 @import "nav";
 @import "navbar";
 @import "card";
+@import "accordion";
 @import "breadcrumb";
 @import "pagination";
 @import "badge";
-@import "jumbotron";
 @import "alert";
 @import "progress";
-@import "media";
 @import "list-group";
 @import "close";
+@import "toasts";
 @import "modal";
 @import "tooltip";
 @import "popover";
 @import "carousel";
-@import "utilities";
+@import "spinners";
+@import "offcanvas";
+@import "placeholders";
+
+// Helpers
+@import "helpers";
+
+// Utilities
+@import "utilities/api";
+// scss-docs-end import-stack
 
 //WP Styles
 @import "wp-classes";
