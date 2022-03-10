@@ -70,7 +70,8 @@ module.exports = function (grunt) {
 					'assets/js/google-maps-render.min.js': ['assets/src/js/google-maps-render.js'],
 					'assets/js/bric.min.js': ['assets/src/js/bric.js'],
 					'assets/js/customizer-carousel.min.js': ['assets/src/js/customizer-carousel.js'],
-					'assets/js/jQuery-inView.min.js': ['assets/src/js/jQuery-inView.js']
+					'assets/js/jQuery-inView.min.js': ['assets/src/js/jQuery-inView.js'],
+					'assets/js/cookie-banner.min.js': ['assets/src/js/cookie-banner.js']
 				}
 			}
 			/*bootstrap_js: {
@@ -146,6 +147,13 @@ module.exports = function (grunt) {
 						cwd: 'node_modules/in-view/dist/',
 						src: ['in-view.min.js'],
 						dest: 'assets/js/',
+						filter: 'isFile',
+						flatten: true,
+					},{
+						expand:true,
+						cwd: 'vendor/bootstrap-cookie-banner/src',
+						src: ['cookie-banner.js'],
+						dest: 'assets/src/js/',
 						filter: 'isFile',
 						flatten: true,
 					}

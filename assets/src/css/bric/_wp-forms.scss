@@ -100,16 +100,56 @@
 
 #loginform,
 #lostpasswordform {
+
     >p:not(.login-submit):not(.submit):not(.forgetmenot) {
         //@extend .form-group;
         >input {
             @extend .form-control;
         }
     }
-    .button {
-        @extend .btn,
-        .btn-primary;
+
+
+    .wp-pwd {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
     }
+
+    .button {
+        @extend .btn, .btn-primary;
+        
+        &:before, &:after {
+            display: none !important;
+            content: unset !important;
+            mask-image: none !important;
+        }
+
+        &.wp-hide-pw {
+            position: relative;
+            width: auto;
+            max-width: 75px;
+            padding: 0 1rem;
+            margin: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+
+    #user_pass {
+        width: auto;
+        max-width: 100%;
+        position: relative;
+        margin-right: 0;
+        flex: 1 1 auto;
+        padding-right: 0;
+        min-width: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+
     >p {
         &:last-child {
             margin-bottom: 0 !important;
@@ -118,4 +158,9 @@
     .forgetmenot {
         float: none;
     }
+
+
+
+
 }
+

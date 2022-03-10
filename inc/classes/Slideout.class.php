@@ -42,6 +42,11 @@ class Slideout {
 	
 	public function enqueue_scripts() {
 		
+		if ( is_admin() ) {
+			return;
+		}
+
+
 		global $SiteInfo;
 		global $Navbar;
 

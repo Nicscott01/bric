@@ -30,7 +30,8 @@
     "sass": "^1.17.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install_cookie_banner" :  "git clone https://github.com/kolappannathan/bootstrap-cookie-banner.git vendor/bootstrap-cookie-banner"
   },
   "author": "BRianna and nIC Scott",
   "license": "ISC"
