@@ -1229,14 +1229,14 @@ class SiteInfo {
 					$br = '';
 				}
 							
-				$label = $attr[trim($v).'_label'];
+				$label = $attr[$v.'_label'];
 				
 				//var_dump( $v.'_label' );
 				//var_dump( $this->format_phone( $label ) );
 				//global $SiteInfo;
 				
 				
-				$o .= call_user_func( 'SiteInfo::format_'.trim($v), $label, $attr ).$br;
+				$o .= call_user_func( 'SiteInfo::format_'.$v, $label, $attr ).$br;
 			
 				
 				$c++;
