@@ -64,7 +64,7 @@ class SiteInfo {
 		$this->social = array();
 		
 		//Now really get the business info from the DB
-		$this->get_business_info();
+		add_action( 'acf/init', [ $this, 'get_business_info' ] );
 		
 		//init the options for the site
 		add_action( 'init', [ $this, 'get_site_options' ] );
@@ -1229,14 +1229,14 @@ class SiteInfo {
 					$br = '';
 				}
 							
-				$label = $attr[trim($v).'_label'];
+				$label = $attr[$v.'_label'];
 				
 				//var_dump( $v.'_label' );
 				//var_dump( $this->format_phone( $label ) );
 				//global $SiteInfo;
 				
 				
-				$o .= call_user_func( 'SiteInfo::format_'.trim($v), $label, $attr ).$br;
+				$o .= call_user_func( 'SiteInfo::format_'.$v, $label, $attr ).$br;
 			
 				
 				$c++;
@@ -1284,6 +1284,21 @@ class SiteInfo {
 		
 		//$sdata = new stdClass();
 		
+		$address_street = '';
+
+		if ( isset( $this->address->line_1 ) ) {
+
+			$address_street .= $this->address->line_1;
+		}
+
+		if ( isset( $this->address->line_2 ) ) {
+
+			$address_street .= $this->address->line_2;
+		
+		}
+
+		
+
 		$sdata = array(
 			'@context' => 'http://schema.org',
 			'@type' => $this->type,
@@ -1294,15 +1309,15 @@ class SiteInfo {
 			'url' => $this->url,
 			'address' => array(
 				'@type' => 'PostalAddress',
-				'addressLocality' => $this->address->city,
-				'addressRegion' => $this->address->state,
-				'postalCode' => $this->address->zip,
-				'streetAddress' => $this->address->line_1.$this->address->line_2
+				'addressLocality' => isset( $this->address->city ) ? $this->address->city : '',
+				'addressRegion' => isset( $this->address->state) ? $this->address->state : '',
+				'postalCode' => isset( $this->address->zip ) ? $this->address->zip : '',
+				'streetAddress' => $address_street
 			),
 			'geo' => array(
 				'@type' => 'GeoCoordinates',
-				'latitude' => $this->location['lat'],
-				'longitude' => $this->location['lng'],
+				'latitude' => !empty( $this->location['lat'] ) ? $this->location['lat']  : '',
+				'longitude' => !empty( $this->location['lng'] ) ? $this->location['lng']  : '',
 			),
 			'logo' => $this->get_logo_data()->url,
 			'image' => $this->get_logo_data()->url,

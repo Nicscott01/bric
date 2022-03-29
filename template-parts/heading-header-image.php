@@ -9,9 +9,6 @@
 ?>
 <header <?php article_header_class(['page-header', 'row' ]); ?>>
 	<h1 class="entry-title <?php echo entry_title_class(); ?> text-center text-primary text-uppercase"><?php the_title(); ?></h1>
-	<?php
-	do_action( 'ybf_breadcrumbs' );
-	?>
 	<div class="header-image-wrapper p-0">		
 		<div class="header-image ratio ratio-9x2">
 			<?php the_post_thumbnail( 'full' ); ?>
