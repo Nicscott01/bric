@@ -216,10 +216,11 @@
     @include make-row();
 }
 
-.gfield:not(.gform_hidden) {
-    //@include make-col(12);
+.gfield {
     @extend .col-12;
-    //padding: 0 $grid-gutter-width/2;
+}
+
+.gfield:not(.gform_hidden) {
     margin-bottom: $margin-below-field;
 }
 
@@ -303,7 +304,8 @@
 /**
  *  Added for version 5 of BS support
  */
-.ginput_container_consent {
+.ginput_container_consent,
+.gchoice {
     @extend .form-check;
 
     input {
