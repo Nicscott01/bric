@@ -225,13 +225,13 @@ class JobListings {
 
 		$this->options = apply_filters( $this->name.'_options', $options );
 		
+		//var_dump( $this->name.'_options' );
 		
 		
 		
 		
 		
-		
-		if ( $options['archive_page'] === false ) {
+		if ( $this->options['archive_page'] === false ) {
 			//change rewrite for archive base
 			add_filter('rewrite_rules_array', array( $this, 'rewrites') );
 		
@@ -243,7 +243,7 @@ class JobListings {
 
 		
 		
-		if ( $options['landing_page_content'] == true ) {
+		if ( $this->options['landing_page_content'] == true ) {
 			
 			//Output the landing page content above the archive page
 			//add_action( 'bric_before_loop', array( $this, 'output_landing_page_content' ), 5 );
@@ -345,6 +345,8 @@ class JobListings {
 	function rewrite_apply_page( $rules ) {
 		
 		$my_rule = [];
+
+		//var_dump( $this->slug );
 			
 		$my_rule[$this->slug.'/apply/?$'] = 'index.php?pagename='.$this->slug.'/apply'; 	
 		

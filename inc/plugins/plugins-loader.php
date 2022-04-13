@@ -19,6 +19,8 @@ if ( !empty( $include_plugins ) ) {
 
             include_once( $file );
 
+            do_action( 'bric_plugin_init_' . $plugin );
+
         }
 
     }
