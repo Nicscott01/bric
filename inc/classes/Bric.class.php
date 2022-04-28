@@ -1,7 +1,10 @@
 <?php
 
+if ( !defined( 'BRIC_GOOGLE_MAPS_API_KEY' ) ) {
+	
+	define( 'BRIC_GOOGLE_MAPS_API_KEY', 'AIzaSyDUy-vuqQLK4APwNGoJ2MWDn04nTMzeZJ8' );
 
-define( 'BRIC_GOOGLE_MAPS_API_KEY', 'AIzaSyDUy-vuqQLK4APwNGoJ2MWDn04nTMzeZJ8' );
+}
 
 
 class Bric {
