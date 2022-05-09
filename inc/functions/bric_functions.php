@@ -39,6 +39,7 @@ include get_template_directory().'/inc/classes/ACFBlocks.class.php';
 include get_template_directory().'/inc/classes/ComingSoon.class.php';
 include get_template_directory().'/inc/classes/SortByTaxTerm.class.php';
 include get_template_directory().'/inc/classes/BricSitemapImages.class.php';
+include get_template_directory().'/inc/classes/DLMModals.class.php';
 
 include get_template_directory().'/inc/plugins/plugins-loader.php';
 
