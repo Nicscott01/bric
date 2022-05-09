@@ -3,11 +3,6 @@
 //
 .dropdown-menu {
     margin: 0 !important; //fix for hover 
-    .menu-item {
-        a {
-            @extend .dropdown-item;
-        }
-    }
 }
 
 .slideout-menu {
