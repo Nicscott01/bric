@@ -27,7 +27,7 @@ include get_template_directory().'/inc/classes/Navbar.class.php';
 include get_template_directory().'/inc/classes/BricLoop.class.php';
 include get_template_directory().'/inc/classes/BricWidgets.class.php';
 include get_template_directory().'/inc/classes/Carousel.class.php';
-include get_template_directory().'/inc/classes/PhotoGallery.class.php';
+//include get_template_directory().'/inc/classes/PhotoGallery.class.php';
 include get_template_directory().'/inc/classes/Slideout.class.php';
 //include get_template_directory().'/inc/classes/Columns.class.php'; //-- Disabled because of conflict with shortcode filter in Gutenberg
 include get_template_directory().'/inc/classes/BricShortcodes.class.php';
