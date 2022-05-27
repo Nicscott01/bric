@@ -35,25 +35,45 @@ class BricLoop {
 		
 		
 		
-		
-		
-		//Check for woocommerce 
-		if ( function_exists('is_product') ) {
-			
-			if ( is_product() ) {
-				
-				$this->contentTemplate = 'bricproduct';
-				
+		$pt = get_post_type();
+       	 	$template_string_archive = 'content-excerpt-' . $pt . '.php';
+        	$template_string = 'content-' . $pt . '.php';
+        
+        	$template_file_archive = locate_template( $template_string_archive ); 
+        	$template_file = locate_template( $template_string ); 
+            
+
+		$look_for_another = false;
+
+
+		if ( is_search() ) {
+
+			$search_template = locate_template( 'content-search-result.php' );
+
+			if ( !empty( $search_template ) ) {
+				$this->contentTemplate = 'search-result';
+			} else {
+				$look_for_another = true;
 			}
-			
-		}
-		
-		
-		elseif ( is_search() || is_archive() || is_home() ) {
-			
+
+
+		} elseif ( is_archive() || is_home() || $look_for_another ) {
+
+		    if ( !empty( $template_file_archive ) ) {
+
+			$this->contentTemplate = 'excerpt-' . $pt;
+
+		    } else {
+
 			$this->contentTemplate = 'excerpt';
-		}
-		
+
+		    }
+
+			} elseif ( !empty( $template_file ) ) {
+
+		    $this->contentTemplate =  $pt;
+
+		} 
 		
 		
 		/**
@@ -88,9 +108,9 @@ class BricLoop {
 		}
 
 		
-		
 		if ( is_archive() || is_home() || is_single() || is_search() || is_404() ) {
 			
+            
 			get_template_part( 'template-parts/archive-start' );
 			
 			add_action( 'bric_after_loop', [$this, 'archive_end' ], 10 );
@@ -133,11 +153,14 @@ class BricLoop {
 			$page = get_landing_page();
 
 			$post = $page;	
-			
+				
+
 		}
 		
+  
+        
 		
-		if ( is_archive () ) {
+		if ( is_archive() || is_home() || is_tax() ) {
 			
 			//v_dump( $post );
 			setup_postdata( $post );
@@ -346,8 +369,9 @@ class BricLoop {
 			}
 			
 		}
+
 		
-		if ( is_archive() || is_home() ) {
+		if ( is_archive() || is_home() || is_post_type_archive() ) {
 			
 			the_posts_pagination( array( 'mid_size' => 1, 'type' => 'list' ) );
 

@@ -2,17 +2,7 @@
 
 global $Navbar;
 
-add_action( 'bric_header', function() {
-    //Outout top navbar
-    
-    if ( is_active_sidebar('upper-header') ) { ?>
-    <div class="upper-header">
-        <?php dynamic_sidebar( 'upper-header' ); ?>
-    </div>
-    <?php
-     }
-    
-}, 10 );
+add_action( 'bric_header', [$Navbar, 'get_upper_header'], 10 ); 
     
 add_action( 'bric_header', array( $Navbar, 'get_navbar' ), 10 );
 
@@ -24,7 +14,7 @@ global $BricLoop;
 add_action( 'bric_before_loop', array( $BricLoop, 'get_archive_header' ), 5 );
 
 
-add_action( 'bric_before_loop', array( $BricLoop, 'get_sidebar'), 5 );
+//add_action( 'bric_before_loop', array( $BricLoop, 'get_sidebar'), 5 );
 add_action( 'bric_before_loop', array( $BricLoop, 'get_before_loop_posts'), 10 );
 add_action( 'bric_before_loop', array( $BricLoop, 'get_before_loop'), 10 ); 
 

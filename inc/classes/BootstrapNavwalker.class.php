@@ -101,7 +101,14 @@ class BootstrapNavwalker extends Walker_Nav_Menu {
 			$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
 			
 			//Editted for BS4 Beta 1 -- class .nav-link
-			$attributes .= ($args->has_children) 	    ? ' data-toggle="dropdown-none" data-target="#" class="nav-link dropdown-toggle"' : ' class="nav-link"';
+			//Editted for BS5 - adding .active to the .nav-link
+			if( $item->current ) {
+				$anchor_classes = 'nav-link active';
+			} else {
+				$anchor_classes = 'nav-link';
+			}
+
+			$attributes .= ($args->has_children) ? ' data-toggle="dropdown-none" data-target="#" class="' . $anchor_classes .' dropdown-toggle"' : ' class="' . $anchor_classes .'"';
 			
 			//Add the title as an attribute for active bold styling (prevents moving)
 			$attributes .= ' data-text-content="'.$item->title.'"';

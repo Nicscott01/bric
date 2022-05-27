@@ -155,15 +155,32 @@ function center_map( map ) {
 // global var
 var map = null;
 
-$(document).ready(function(){
 
-	$('.acf-map').each(function(){
+    
+    
+$(document).ready( function() {
+    
+    function maybeRenderMap() {
+        
+        if ( typeof( google ) == 'object' && $('.acf-map').inView('topOnly') )  {
+              if ( map == null ) {
+                  map = new_map( $('.acf-map') );        
+              }
+          }    
+    }
+    
+    
+    maybeRenderMap();
 
-		// create map
-		map = new_map( $(this) );
 
-	});
+    $(window).scroll( function() {
+        maybeRenderMap();
+    });
+        
+    
+    
 
 });
+
 
 })(jQuery);

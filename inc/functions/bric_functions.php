@@ -37,6 +37,9 @@ include get_template_directory().'/inc/classes/Restaurant.class.php';
 include get_template_directory().'/inc/classes/Admin.class.php';
 include get_template_directory().'/inc/classes/ACFBlocks.class.php';
 include get_template_directory().'/inc/classes/ComingSoon.class.php';
+include get_template_directory().'/inc/classes/SortByTaxTerm.class.php';
+
+include get_template_directory().'/inc/plugins/plugins-loader.php';
 
 
 if ( !class_exists( 'SortByTaxTerm' ) && ! file_exists( get_stylesheet_directory() . '/inc/classes/SortByTaxTerm.class.php' ) ) {

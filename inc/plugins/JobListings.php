@@ -46,7 +46,8 @@ class JobListings {
 		add_action( 'init', array( $this, 'register_post_type'), 0 );
 		
 		//Set page layout
-		add_action( 'wp', array( $this, 'set_page_layout'), 10 );
+        //commented out because i think we want to keep the archive posts wrapper
+	//	add_action( 'wp', array( $this, 'set_page_layout'), 10 );
 
 
 		
@@ -55,8 +56,6 @@ class JobListings {
 		
 	
 		
-		//Label the page set as this post type's archive
-		add_filter( 'display_post_states', array( $this, 'archive_page_label'), 10, 2 );
 				
 		
 		//Set landing page
@@ -247,7 +246,7 @@ class JobListings {
 		if ( $options['landing_page_content'] == true ) {
 			
 			//Output the landing page content above the archive page
-			add_action( 'bric_before_loop', array( $this, 'output_landing_page_content' ), 5 );
+			//add_action( 'bric_before_loop', array( $this, 'output_landing_page_content' ), 5 );
 			
 		}
 		
@@ -358,21 +357,6 @@ class JobListings {
 	
 	
 	
-	
-	function archive_page_label( $post_states, $post ) {
-		
-		
-		if ( $post->post_name == $this->slug ) {
-			
-			$this->get_post_type_object();
-			
-			$post_states[] = $this->post_type_object->label.' Landing Page';
-			
-		}
-		
-		return $post_states;
-		
-	}
 	
 	
 	
@@ -591,6 +575,7 @@ class JobListings {
 		register_taxonomy( 'type', array( $this->post_type ), $args );
 
 		
+        do_action( 'after_bric_job_listings_register_taxonomies' );
 
 		
 	}

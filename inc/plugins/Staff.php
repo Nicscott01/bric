@@ -143,11 +143,12 @@ class BricStaff {
             'items_list_navigation' => __( 'Items list navigation', 'text_domain' ),
             'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
         );
+        
         $args = array(
             'label'                 => __( $this->post_type_name, 'text_domain' ),
             'description'           => __( 'Listing of staff members', 'text_domain' ),
             'labels'                => $labels,
-            'supports'              => array( 'title', 'editor', 'thumbnail', 'revisions' ),
+            'supports'              => array( 'title', 'editor', 'thumbnail', 'revisions', 'page-attributes' ),
             'hierarchical'          => false,
             'public'                => $this->public,
             'show_ui'               => true,
@@ -170,7 +171,7 @@ class BricStaff {
             
         );
         
-        register_post_type( $this->post_type, $args );
+        register_post_type( $this->post_type, apply_filters( 'bric_staff_pt_args', $args ) );
 
     }
 
@@ -231,7 +232,26 @@ class BricStaff {
             'posts_per_page' => -1,
             'orderby'   => 'menu_order',
             'order' => 'ASC',
+            'tax_query' => false,
+            'taxonomy' => null,
+            'term' => null
         ], $atts );
+        
+        
+        $tax_query = null;
+        
+        if ( $atts['tax_query'] ) {
+            
+            $tax_query = [
+                [
+                    'taxonomy' => $atts['taxonomy'],
+                    'terms' => $atts['term'],
+                    'field' => 'slug'
+                ]
+            ];
+            
+        }
+        
         
         
         
@@ -241,11 +261,16 @@ class BricStaff {
             'posts_per_page' => $atts['posts_per_page'],
             'orderby'   => $atts['orderby'],
             'order' => $atts['order'],
+            'tax_query' => $tax_query
         ]);
         
         
-        ob_start();
+        $staff_members = $this->add_custom_fields_to_obj( $staff_members );
         
+        
+        
+        ob_start();
+                
         include locate_template( 'template-parts/components/staff/' . $atts['template'] . '.php' );
         
         return ob_get_clean();
@@ -258,8 +283,54 @@ class BricStaff {
     
     
     
+    /**
+     *  Add custom fields as pieces to the Staff object
+     *
+     *
+     */
     
-    
+    public function add_custom_fields_to_obj( $posts ) {
+        
+        
+        if( empty( $posts )  ) {
+            
+            return $posts;
+        
+        }
+       
+        
+        foreach( $posts as $key => $obj ) {
+            
+            if( function_exists( 'get_field' ) ) {
+
+                $fields = get_fields( $obj->ID );
+                
+                
+                if ( !empty( $fields ) ) {
+                    
+                    foreach( $fields as $name => $value ) {
+                    
+                        $posts[$key]->$name = $value;
+                        
+                    }
+
+                }
+            }
+
+            
+            //Maybe get the featured image
+            $posts[$key]->featured_image = get_post_thumbnail_id( $obj );
+            
+        }
+        
+                
+        return $posts;
+        
+        
+        
+        
+        
+    }
     
     
     

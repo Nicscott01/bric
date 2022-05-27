@@ -10,7 +10,6 @@
  
  */
 
-
 if ( has_landing_page() || is_home() ) {
 	
 	$page = get_landing_page();

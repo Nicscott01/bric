@@ -905,25 +905,41 @@ class SiteInfo {
 		$this->copyright_owner = $copy_holder;
 		
 		
-		//Address
-		$address = get_field( 'address', 'options' );
-		$city_state = get_field( 'city_state', 'options' );
+		if ( defined( 'ICL_LANGUAGE_CODE') ) {
+
+			$address = $this->get_global_option( 'address' );
+			$city_state = $this->get_global_option( 'city_state', 'options' );
 		
-		$this->address->line_1 = $address['address_1'];
-		$this->address->line_2 = $address['address_2'];
-		$this->address->city = $city_state['city'];
-		$this->address->state = $city_state['state'];
-		$this->address->zip = $city_state['zip'];
+		} else {
+
+			//Address
+			$address = get_field( 'address', 'options' );
+			$city_state = get_field( 'city_state', 'options' );
 		
+		}
+
+		
+        
+        if( !empty( $address ) && is_array( $address ) ) {
+            $this->address->line_1 = $address['address_1'];
+            $this->address->line_2 = $address['address_2'];
+            $this->address->city = $city_state['city'];
+            $this->address->state = $city_state['state'];
+            $this->address->zip = $city_state['zip'];
+        }
 				
 		
 		
 		//Contact
 		$contact = get_field( 'contact', 'options');
 		
-		$this->phone->main = $contact['phone'];
-		$this->phone->fax = $contact['fax'];
-		$this->email->main = $contact['email'];
+        if ( !empty( $contact ) ) {
+            
+            $this->phone->main = $contact['phone'];
+            $this->phone->fax = $contact['fax'];
+            $this->email->main = $contact['email'];
+
+        }
 		
 		
 		
@@ -945,8 +961,20 @@ class SiteInfo {
 	}
 	
 	
-	
-	
+	public function cl_acf_set_language() {
+		return acf_get_setting('default_language');
+	  }
+	   
+	public function get_global_option($name) {
+		  add_filter('acf/settings/current_language', [ $this, 'cl_acf_set_language' ], 100);
+		  $option = get_field($name, 'option');
+		  remove_filter('acf/settings/current_language', [ $this, 'cl_acf_set_language' ], 100);
+		  return $option;
+	}	
+
+
+
+
 	function print_all_business_info() {
 
 		ob_start();
@@ -1166,10 +1194,12 @@ class SiteInfo {
                     case "phone" :
                         
                         $simple_items[] = $SiteInfo->phone->main;
-                        
+                        break;
+
                     case "email" :
                         
                         $simple_items[] = $SiteInfo->email->main;
+						break;
                         
                 }
                 

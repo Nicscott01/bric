@@ -2,6 +2,15 @@
 This is the core theme for Creare Web Solutions websites. Creates a child theme when activated in the Wordpress dashboard.
 
 ### Changelog
+#### v2.1.5
+- Updates for Bootstrap 5
+- Tweaks made during the YB Fire buildout 
+- More template parts for various components
+#### v2.1.4
+- Updates to portfolio plugin. More options to include taxonomies and adjust number of posts per page on archive.
+#### v2.0.1
+- Try to get my shit together and tag versions; 
+- This was the copy of the theme from the Zenas build; it got mashed together with the Bedrock git repo; this is supposed to pull it back out and make it on track again
 #### v1.2.1
 - Added support for "lazy loading" of Yoast SEO Local Google maps. This little nugget should be published as a gist and written about in a blog.
 - Filter autoptimize plugin JS ignore files when doing a map.

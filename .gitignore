@@ -6,7 +6,8 @@
 
 #ignore node_modules
 node_modules/
+package-lock.json
 
-#ignore compiled css/js
-assets/css/
-assets/js/
+#ignore DWSYNC
+_notes/dwsync.xml
+_notes/*

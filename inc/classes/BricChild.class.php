@@ -49,6 +49,7 @@ class BricChild {
 		add_action( 'after_switch_theme', array( $this, 'setup_child') );
 		
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts_styles' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts_styles' ] );
 		
 	}
 	
@@ -61,7 +62,7 @@ class BricChild {
 		$this->get_child_folder();
 		
 		
-		if ( ! file_exists( $this->folder_name ) ) {
+		if ( ! file_exists(  get_theme_root() . '/' . $this->folder_name ) ) {
 
 			//copy child model folder
 			$this->copy_child_model();
@@ -289,19 +290,41 @@ $headings-color: $c2;
 			$this->google_font_url = urldecode( 'https://fonts.googleapis.com/css2?' . implode( '&', $font_string ) );
 			
 		
-			add_action( 'wp_head', [ $this, 'enqueue_google_fonts_v2' ], 11 );
+            if ( !is_admin() ) {
+                add_action( 'wp_head', [ $this, 'enqueue_google_fonts_v2' ], 11 );
+    			//add_action( 'wp_enqueue_style', [ $this, 'enqueue_google_fonts_v2' ], 11 );
+            } else {
+                
+                wp_enqueue_style( 'bric-fonts', $this->google_font_url );
+
+            }
 			
+            
 		}
 		
-//		wp_enqueue_style( 'fonts', $this->google_font_url );
+
 		
 	}
 	
 	
 	
 	public function enqueue_google_fonts_v2() {
-		
-		printf( '<link href="%s" rel="stylesheet">', $this->google_font_url );
+        
+        ?>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href="<?php echo $this->google_font_url; ?>" />
+<link rel="stylesheet" href="<?php echo $this->google_font_url; ?>" media="print" onload="this.media='all'" />
+<noscript>
+    <link rel="stylesheet" href="<?php echo $this->google_font_url; ?>">
+</noscript>
+        <?php
+
+        
+        add_action( 'wp_footer_d', function() {
+            
+            printf( '<link href="%s" rel="stylesheet" media="print" onload="this.media=\'all\'">', $this->google_font_url );
+            
+        }, 1 );
 		
 		
 		
