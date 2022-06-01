@@ -6,6 +6,11 @@
 ( function($){
 	$(document).ready( function(e) { 
 
+
+		if ( typeof( slideout ) == 'undefined' ) {
+			return;
+		}
+		
 		//$('body > *:not(script):not(link)').wrapAll( '<div id="total-page-wrapper" />' );
 		
 		//$('.navbar-collapse').clone().appendTo('body').attr('id', 'slideout').removeClass('navbar-collapse collapse').find('ul').attr('id','');

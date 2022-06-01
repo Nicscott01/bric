@@ -146,16 +146,21 @@ class JobListings {
 	
 	public function query_options( $query ) {
 		
+			
 		
-		//var_dump( $this->options );
-		if ( $query->is_main_query() && !empty( $this->options['query_options'] ) && is_array( $this->options['query_options'] ) ) {
+		if ( $query->is_main_query() && 
+		!empty( $this->options['query_options'] ) && 
+		is_array( $this->options['query_options'] ) &&
+		is_archive() && 
+		( $query->query_vars['post_type'] == $this->post_type )
+		) {
 
-				foreach ( $this->options['query_options'] as $k => $option ) {
 
-					$query->set( $k, $option );
+			foreach ( $this->options['query_options'] as $k => $option ) {
 
-				}
+				$query->set( $k, $option );
 
+			}
 
 
 		}

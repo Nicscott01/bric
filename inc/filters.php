@@ -32,9 +32,9 @@ class BricFilters {
 
 		
 		// Force Gravity Forms to init scripts in the footer and ensure that the DOM is loaded before scripts are executed
-		add_filter( 'gform_init_scripts_footer', '__return_true' );
-		add_filter( 'gform_cdata_open', array( $this, 'wrap_gform_cdata_open' ), 1 );
-		add_filter( 'gform_cdata_close', array( $this, 'wrap_gform_cdata_close' ), 100 );
+		//add_filter( 'gform_init_scripts_footer', '__return_true' );
+		//add_filter( 'gform_cdata_open', array( $this, 'wrap_gform_cdata_open' ), 1 );
+		//add_filter( 'gform_cdata_close', array( $this, 'wrap_gform_cdata_close' ), 100 );
 	
 	
 	
