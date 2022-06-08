@@ -156,9 +156,8 @@ class Bric {
 		
 		
 		wp_dequeue_style( 'wp-block-library' );
-		wp_dequeue_style( 'wp-block-library' );
-		
-		
+		wp_dequeue_style( 'global-styles' );
+			
 	}
 	
 	
