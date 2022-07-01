@@ -231,7 +231,6 @@ if (class_exists('WP_Customize_Control')) {
         public function skyrocket_getGoogleFonts($count = 30)
         {
             // Google Fonts json generated from https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&key=YOUR-API-KEY
-            //https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&key=AIzaSyDYeu1Cqsr10ozndeHumW6MAbiBntX_4do
             
             
             $fontFile = get_template_directory_uri() . '/inc/google-fonts-alpha.json';
