@@ -1,0 +1,36 @@
+@import "functions";
+
+@import "variables";
+@import "bric-variables";
+
+
+
+@import "mixins";
+@import "bric-mixins";
+@import "utilities";
+
+
+
+.wp-block-button {
+
+    &.is-style-outline {
+    
+        > a {
+           border-color: var( --#{$variable-prefix}primary );
+        }
+    }
+    
+}
+    
+
+
+a {
+    color: var( --#{$variable-prefix}link-color );
+    text-decoration: var( --#{$variable-prefix}link-decoration );
+
+    &:hover {
+        color: var( --#{$variable-prefix}link-hover-color );
+        text-decoration: var( --#{$variable-prefix}link-hover-decoration );
+    }
+
+}

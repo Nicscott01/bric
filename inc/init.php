@@ -1,5 +1,8 @@
 <?php
 
+namespace Bric;
+
+
 /**
  *		Initialize the BRIC Theme
  *
@@ -11,14 +14,14 @@ class BricInit {
 	public $startuptheme = null;
 	
 	
-	function __construct() {
+	public function __construct() {
 		
 		$this->init();
 		
 	}
 	
 	
-	function init() {
+	public function init() {
 		
 		add_action( 'after_switch_theme', array( $this, 'theme_dependencies'), 5, 2 );		
 		add_action( 'after_setup_theme', array ($this, 'startup_theme') );
@@ -32,7 +35,7 @@ class BricInit {
 	 *
 	 */
 	
-	function check_dependencies() {
+	public function check_dependencies() {
 		
 		$this->startuptheme = true;
 
@@ -48,7 +51,7 @@ class BricInit {
 			
 		}
 		
-		
+		/*
 		if ( ! class_exists( 'acf_plugin_font_awesome' ) ) {
 			
 			$this->errors[] = sprintf( 'ACF Font Awesome required for social icons. <a href="%s">Click here to get it</a>', admin_url( 'plugin-install.php?s=Advanced+Custom+Fields+Font+Awesome') );
@@ -56,7 +59,7 @@ class BricInit {
 			
 		}
 		
-		
+		*/
 		
 		
 		
@@ -70,7 +73,7 @@ class BricInit {
 	
 	
 		
-	function theme_dependencies( $oldthemename, $oldtheme ) {
+	public function theme_dependencies( $oldthemename, $oldtheme ) {
 		
 		$this->check_dependencies();
 		
@@ -90,7 +93,7 @@ class BricInit {
 	
 	
 	
-	function admin_notices() {
+	public function admin_notices() {
 		
 		if ( !empty( $this->errors ) ) {
 			
@@ -108,7 +111,7 @@ class BricInit {
 	
 	
 	
-	function startup_theme() {
+	public function startup_theme() {
 		
 		if ( $this->check_dependencies()->startuptheme ) {
 			
@@ -129,3 +132,6 @@ class BricInit {
 }
 
 new BricInit();
+
+
+

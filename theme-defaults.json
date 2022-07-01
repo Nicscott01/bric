@@ -1,0 +1,647 @@
+{
+    "scss": {
+        "prefix": "bric-"
+    },
+    "sections": [
+        {
+            "id": "theme_colors",
+            "label": "Theme Colors",
+            "scss": "passthrough",
+            "transport": "postMessage",
+            "partial": true,
+            "selector": "bric-css-vars",
+            "callback": "write_css_vars",
+            "container_inclusive": true
+        },
+        {
+            "id": "fonts",
+            "label": "Fonts",
+            "scss": "passthrough",
+            "transport": "refresh"
+        },
+        {
+            "id": "navbar",
+            "label": "Navbar",
+            "scss": "html"
+        },
+        {
+            "id": "body",
+            "label": "Body",
+            "scss": "passthrough"
+        },
+        {
+            "id": "borders",
+            "label": "Borders",
+            "scss": "passthrough"
+        },
+        {
+            "id": "footer",
+            "label": "Footer",
+            "scss": "html",
+            "transport": "postMessage",
+            "partial": true,
+            "selector": ".footer-inner",
+            "callback": "get_template_part_footer_inner",
+            "container_inclusive": true
+        },
+        {
+            "id": "lower_footer",
+            "label": "Lower Footer",
+            "scss": "html",
+            "transport": "postMessage",
+            "partial": true,
+            "selector": ".footer-lower",
+            "callback": "get_template_part_footer_lower",
+            "container_inclusive": true
+        }
+    ],
+    "theme_colors": [
+        {
+            "prop": "primary",
+            "label": "Primary",
+            "val": "#0d6efd",
+            "description": "Primary theme color",
+            "type": "color",
+            "sanitize_callback": "sanitize_hex_color"
+        },
+        {
+            "prop": "secondary",
+            "label": "Secondary",
+            "val": "#6c757d",
+            "description": "Secondary theme color",
+            "type": "color",
+            "sanitize_callback": "sanitize_hex_color"
+        },
+        {
+            "prop": "light",
+            "label": "Light",
+            "val": "#f8f9fa",
+            "description": "Light theme color",
+            "type": "color",
+            "sanitize_callback": "sanitize_hex_color"
+        },
+        {
+            "prop": "dark",
+            "label": "Dark",
+            "val": "#212529",
+            "description": "Dark theme color",
+            "type": "color",
+            "sanitize_callback": "sanitize_hex_color"
+        },
+        {
+            "prop": "white",
+            "label": "White",
+            "val": "#ffffff",
+            "description": "White theme color",
+            "type": "color",
+            "sanitize_callback": "sanitize_hex_color"
+        },
+        {
+            "prop": "black",
+            "label": "Black",
+            "val": "#000000",
+            "description": "Black theme color",
+            "type": "color",
+            "sanitize_callback": "sanitize_hex_color"
+        }
+    ],
+    "fonts": [
+        {
+            "prop": "font_family_base",
+            "label": "Base Font Family",
+            "description": "This is the main font.",
+            "val": {"font":"Montserrat","regularweight":"regular","italicweight":"italic","boldweight":"700","category":"sans-serif"},
+            "type": "google_font",
+            "sanitize_callback": "skyrocket_google_font_sanitization",
+            "css_var": "font-sans-serif"
+        },
+        {
+            "prop": "font_family_alt",
+            "label": "Headings Font Family",
+            "description": "If this is left blank, headings will inherit the base font.",
+            "val": null,
+            "type": "google_font",
+            "sanitize_callback": "skyrocket_google_font_sanitization",
+            "css_var": "font-sans-serif-alt"
+        },
+        {
+            "prop": "font_size_base",
+            "label": "Base Font Size",
+            "description": "Size in px",
+            "val": "16",
+            "type": "number",
+            "units": "px",
+            "sanitize_callback": "absint",
+            "css_var": "body-font-size"
+        },
+        {
+            "prop": "line_height_base",
+            "label": "Base Line Height",
+            "val": "1.5",
+            "type": "number",
+            "sanitize_callback": "bric_floatval",
+            "css_var": "body-line-height"
+        },
+        {
+            "prop": "h1_font_size",
+            "label": "H1 Font Size",
+            "description": "Size in px",
+            "val": "46",
+            "type": "number",
+            "units": "px",
+            "sanitize_callback": "absint"
+        },
+        {
+            "prop": "h2_font_size",
+            "label": "H2 Font Size",
+            "description": "Size in px",
+            "val": "26",
+            "type": "number",
+            "units": "px",
+            "sanitize_callback": "absint"
+        },
+        {
+            "prop": "h3_font_size",
+            "label": "H3 Font Size",
+            "description": "Size in px",
+            "val": "21",
+            "type": "number",
+            "units": "px",
+            "sanitize_callback": "absint"
+        },
+        {
+            "prop": "headings_font_family",
+            "label": "Headings Font Family",
+            "val": "null",
+            "type": "choice",
+            "choices": [
+                {
+                    "prop": "font_family_base",
+                    "val": "Base font family"
+                },
+                {
+                    "prop": "font_family_alt",
+                    "val": "Alternate font family"
+                }
+            ]
+           
+        },
+        {
+            "prop": "headings_font_weight",
+            "label": "Headings Font Weight",
+            "description": "Use a number from the font weights selected above.",
+            "val": "500",
+            "type": "text",
+            "sanitize_callback": "wp_filter_nohtml_kses"
+        }
+    ],
+    "navbar": [
+        {
+            "prop": "theme",
+            "val": "light",
+            "label": "Theme",
+            "description": "Navbar theme color",
+            "type": "select",
+            "css_var":false,
+            "choices": [
+                {
+                    "prop": "light",
+                    "val": "Light"
+                },
+                {
+                    "prop": "dark",
+                    "val": "Dark"
+                }
+            ]
+        },
+        {
+            "prop": "bg_color",
+            "val": "light",
+            "label": "Background Color",
+            "description": "Navbar Background Color",
+            "type": "select",
+            "css_var": false,
+            "choices": [
+                {
+                    "prop": "light",
+                    "val": "Light"
+                },
+                {
+                    "prop": "dark",
+                    "val": "Dark"
+                },
+                {
+                    "prop": "white",
+                    "val": "White"
+                },
+                {
+                    "prop": "transparent",
+                    "val": "Transparent"
+                }
+            ]
+        },
+        {
+            "prop": "text_transform",
+            "val": "none",
+            "label": "Text Transform",
+            "description": "Transform text style",
+            "type": "select",
+            "css_var": false,
+            "choices": [
+                {
+                    "prop": "none",
+                    "val": "None"
+                },
+                {
+                    "prop": "uppercase",
+                    "val": "Uppercase"
+                },
+                {
+                    "prop": "lowercase",
+                    "val": "Lowercase"
+                }
+            ]
+        },
+        {
+            "prop": "active_style",
+            "val": "underline",
+            "label": "Active Style",
+            "description": "Style of active (current) page title",
+            "type": "select",
+            "css_var":false,
+            "choices": [
+                {
+                    "prop": "underline",
+                    "val": "Underline"
+                },
+                {
+                    "prop": "bold",
+                    "val": "Bold"
+                }
+            ]
+        },
+        {
+            "prop": "active_color",
+            "val": "default",
+            "label": "Active Color",
+            "description": "Color of active (current) page title",
+            "type": "select",
+            "css_var":false,
+            "choices": [
+                {
+                    "prop": "default",
+                    "val": "Default"
+                },
+                {
+                    "prop": "primary",
+                    "val": "Primary"
+                },
+                {
+                    "prop": "secondary",
+                    "val": "Secondary"
+                },
+                {
+                    "prop": "light",
+                    "val": "Light"
+                },
+                {
+                    "prop": "dark",
+                    "val": "Dark"
+                }
+            ]
+        }
+    ],
+    "borders": [
+        {
+            "prop": "border_width",
+            "val": "3",
+            "label": "Border Width",
+            "description": "Width of borders around buttons, rules, separators, etc.",
+            "type": "number",
+            "units": "px",
+            "sanitize_callback": "absint"           
+        }
+    ],
+    "body": [
+        {
+            "prop": "body_bg",
+            "val": "white",
+            "label": "Body Background",
+            "description": "Body background color",
+            "type": "select",
+            "css_var": "body-bg",
+            "choices": [
+                {
+                    "prop": "white",
+                    "val": "White"
+                },
+                {
+                    "prop": "light",
+                    "val": "Light"
+                },
+                {
+                    "prop": "dark",
+                    "val": "Dark"
+                }
+            ]
+        },
+        {
+            "prop": "body_color",
+            "val": "dark",
+            "label": "Body Color",
+            "description": "Color of the text in the body",
+            "type": "select",
+            "css_var": "body-color",
+            "choices": [
+                {
+                    "prop": "dark",
+                    "val": "Dark"
+                },
+                {
+                    "prop": "black",
+                    "val": "Black"
+                },
+                {
+                    "prop": "light",
+                    "val": "Light"
+                }
+            ]
+        },
+        {
+            "prop": "link_color",
+            "val": "primary",
+            "label": "Link Color",
+            "description": "Color of hyperlinks in body",
+            "type": "select",
+            "choices": [
+                {
+                    "prop": "primary",
+                    "val": "Primary"
+                },
+                {
+                    "prop": "secondary",
+                    "val": "Secondary"
+                },
+                {
+                    "prop": "dark",
+                    "val": "Dark"
+                },
+                {
+                    "prop": "black",
+                    "val": "Black"
+                },
+                {
+                    "prop": "light",
+                    "val": "Light"
+                }
+            ]
+        },
+        {
+            "prop": "link_decoration",
+            "val": "underline",
+            "label": "Link Decoration",
+            "description": "Style of hyperlinks",
+            "type": "select",
+            "facevalue": true,
+            "choices": [
+                {
+                    "prop": "underline",
+                    "val": "Underline"
+                },
+                {
+                    "prop": "null",
+                    "val": "None"
+                }
+            ]
+        },
+        {
+            "prop": "link_hover_color",
+            "val": "null",
+            "label": "Link Hover Color",
+            "description": "Color of hyperlink on hover",
+            "type": "select",
+            "choices": [
+                {
+                    "prop": "primary",
+                    "val": "Primary"
+                },
+                {
+                    "prop": "secondary",
+                    "val": "Secondary"
+                },
+                {
+                    "prop": "dark",
+                    "val": "Dark"
+                },
+                {
+                    "prop": "black",
+                    "val": "Black"
+                },
+                {
+                    "prop": "light",
+                    "val": "Light"
+                }
+            ]
+        },
+        {
+            "prop": "link_hover_decoration",
+            "val": "null",
+            "label": "Link Hover Decoration",
+            "description": "Style of hyperlinks on hover",
+            "type": "select",
+            "choices": [
+                {
+                    "prop": "null",
+                    "val": "None"
+                },
+                {
+                    "prop": "underline",
+                    "val": "Underline"
+                }
+            ]
+
+        },
+        {
+            "prop": "paragraph_margin_bottom",
+            "val": "16",
+            "label": "Paragraph Margin Bottom",
+            "description":"Amount of margin in rems",
+            "type": "number",
+            "units": "px",
+            "sanitize_callback": "bric_floatval"
+        },
+        {
+            "prop": "lead_font_size",
+            "val": "21",
+            "label": "Lead/Feature Copy Font Size",
+            "description":"in px",
+            "type": "number",
+            "units": "px",
+            "sanitize_callback": "bric_floatval"
+        }
+    ],
+    "footer": [
+        {
+            "prop": "background_color",
+            "val": "light",
+            "label": "Background Color",
+            "description": "",
+            "type": "select",
+            "choices": [
+                {
+                    "prop": "dark",
+                    "val": "Dark"
+                },
+                {
+                    "prop": "light",
+                    "val": "Light"
+                },
+                {
+                    "prop": "black",
+                    "val": "Black"
+                },
+                {
+                    "prop": "white",
+                    "val": "White"
+                },
+                {
+                    "prop": "primary",
+                    "val": "Primary"
+                },
+                {
+                    "prop": "secondary",
+                    "val": "Secondary"
+                }
+            ]
+        }, 
+        {
+            "prop": "text_color",
+            "val": "dark",
+            "label": "Text Color",
+            "description": "Color of text",
+            "type": "select",
+            "choices": [
+                {
+                    "prop": "dark",
+                    "val": "Dark"
+                },
+                {
+                    "prop": "light",
+                    "val": "Light"
+                },
+                {
+                    "prop": "black",
+                    "val": "Black"
+                },
+                {
+                    "prop": "white",
+                    "val": "White"
+                },
+                {
+                    "prop": "primary",
+                    "val": "Primary"
+                },
+                {
+                    "prop": "secondary",
+                    "val": "Secondary"
+                }
+            ]
+        } 
+    ],
+    "lower_footer": [
+        {
+            "prop": "background_color",
+            "val": "dark",
+            "label": "Background Color",
+            "description": "Color of background",
+            "type": "select",
+            "choices": [
+                {
+                    "prop": "dark",
+                    "val": "Dark"
+                },
+                {
+                    "prop": "light",
+                    "val": "Light"
+                },
+                {
+                    "prop": "black",
+                    "val": "Black"
+                },
+                {
+                    "prop": "white",
+                    "val": "White"
+                },
+                {
+                    "prop": "primary",
+                    "val": "Primary"
+                },
+                {
+                    "prop": "secondary",
+                    "val": "Secondary"
+                }
+            ]
+        }, 
+        {
+            "prop": "text_color",
+            "val": "light",
+            "label": "Text Color",
+            "description": "Color of text",
+            "type": "select",
+            "choices": [
+                {
+                    "prop": "dark",
+                    "val": "Dark"
+                },
+                {
+                    "prop": "light",
+                    "val": "Light"
+                },
+                {
+                    "prop": "black",
+                    "val": "Black"
+                },
+                {
+                    "prop": "white",
+                    "val": "White"
+                },
+                {
+                    "prop": "primary",
+                    "val": "Primary"
+                },
+                {
+                    "prop": "secondary",
+                    "val": "Secondary"
+                }
+            ]
+        }, 
+        {
+            "prop": "copyright_year",
+            "val": null,
+            "label": "Copyright Year",
+            "description": "First year of copyright (leave blank to always display current year)",
+            "type": "number",
+            "css_var": false,
+            "sanitize_callback": "intval"
+        },
+        {
+            "prop": "copyright_holder",
+            "val": null,
+            "label": "Copyright Holder",
+            "description": "Text that appears after the copyright year. Defaults to site title.",
+            "type": "text",
+            "css_var": false,
+            "sanitize_callback": "wp_filter_nohtml_kses"
+        },
+        {
+            "prop": "menu",
+            "val": null,
+            "label" : "Menu",
+            "description": "Menu to display next to copyright (for privacy policy, terms, etc.)",
+            "type": "select",
+            "choices": "wp_get_nav_menus",
+            "css_var": false,
+            "sanitize_callback": "intval"
+        }
+    ]
+}

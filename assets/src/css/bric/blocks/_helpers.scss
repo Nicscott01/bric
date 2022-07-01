@@ -1,0 +1,52 @@
+//Helper classes that WP uses in blocks
+
+.has {
+
+
+    &-text-align-center {
+        @extend .text-center;
+    }
+    &-text-align-right {
+        @extend .text-end;
+    }
+    &-text-align-left {
+        @extend .text-start;
+    }
+
+    &-primary-color {
+        @extend .text-primary;
+    }
+
+    &-secondary-color {
+        @extend .text-secondary;
+    }
+
+
+}
+
+
+
+
+//Menus that have a text class
+
+
+
+@each $slug, $color in $utilities-text-colors {
+
+    .menu.text-#{$slug} {
+
+        ul, a {
+            color: var( --#{$variable-prefix}#{$slug} );
+        }
+    }
+
+} 
+
+
+
+
+//Flex Classes
+
+.are-vertically-aligned-top {
+    @extend .align-items-start;
+}

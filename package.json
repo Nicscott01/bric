@@ -1,6 +1,6 @@
 {
   "name": "bric",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "Wordpress theme developed by BRianna and nIC Scott",
   "main": "index.js",
   "dependencies": {

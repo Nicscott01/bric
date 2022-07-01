@@ -1,5 +1,5 @@
 //GRUNTFILE for BRIC
-const sass = require( 'sass' );
+const sass = require( 'node-sass' );
 
 module.exports = function (grunt) {
 	
@@ -26,11 +26,13 @@ module.exports = function (grunt) {
 			// this is the "production" Sass config used with the "grunt buildcss" command
 			dev: {
 				options: {
+					implementation: sass,
 					style: 'compressed',
-					loadPath: 'node_modules/bootstrap/scss/'
+					includePaths: ['assets/src/css/bric/', 'assets/src/css/photoswipe/', 'node_modules/bootstrap/scss/' ]
+
 				},
 				files: {
-					'static/css/mystyle.css': 'sass/mystyle.scss'
+					'assets/css/bric-customizer.css': 'assets/src/css/bric/customizer/customizer-fakes.scss',
 				}
 			}
 		},

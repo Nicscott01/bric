@@ -71,7 +71,7 @@ class SiteInfo {
 		//make sure we init the options for customizer
 		add_action( 'customize_preview_init', [ $this, 'get_site_options' ] );
 		
-		add_action( 'customize_register', [ $this, 'add_options_to_customizer'] );
+//		add_action( 'customize_register', [ $this, 'add_options_to_customizer'] );
 		
 		add_action( 'customize_preview_init', [ $this, 'customizer_preview_scripts' ] );
 

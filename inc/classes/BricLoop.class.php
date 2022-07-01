@@ -447,7 +447,7 @@ class BricLoop {
 	
 	public function get_copyright() {
 		
-		$copyright_text = get_copyright_text( $this->SiteInfo->copyright_start );
+		$copyright_text = get_copyright_text( bric_get_theme_mod( 'lower_footer', 'copyright_year' ) );
 
 		include( locate_template( 'template-parts/copyright.php' ) ); 
 		

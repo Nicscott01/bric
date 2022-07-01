@@ -208,3 +208,40 @@ function get_landing_page()
 
 	return $page;
 }
+
+
+
+
+
+
+if ( !function_exists( 'maybe_json_decode' ) ) {
+
+	function maybe_json_decode( $thing ) {
+
+		//var_dump( strpos( $thing, '{' ) );
+		//var_dump( strpos( $thing, '{' ) === 0  );
+
+		if ( strpos( $thing, '{' ) === 0 ) {
+
+			$new_thing = json_decode( $thing );
+
+		} else {
+
+			return $thing;
+		}
+
+
+
+		if ( is_object( $new_thing ) ) {
+			
+			return $new_thing;
+		
+		} else {
+
+			return $thing;
+		}
+
+	}
+
+}
+

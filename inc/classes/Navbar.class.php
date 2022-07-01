@@ -196,6 +196,8 @@ class Navbar {
 		
 			$nav_menu = '';
 
+			$menu_class = 'navbar-nav ml-auto text-' . bric_get_theme_mod( 'navbar', 'text_transform' );
+
 			if ( $side == 'right' ) {
 
 				/**
@@ -209,7 +211,7 @@ class Navbar {
 				$this->main_nav_menu = wp_nav_menu( array(
 					'theme_location' => $location,
 					'echo' => 0,
-					'menu_class' => 'navbar-nav ml-auto',
+					'menu_class' => $menu_class,
 					'container' => 'div',
 					'container_class' => $this->main_nav_menu_container_class,
 					'container_id' => $this->navbar_collapse_id,
@@ -227,7 +229,7 @@ class Navbar {
 					$this->main_nav_menu_left = wp_nav_menu([
 						'menu' => $this->main_nav_menu_obj_left,
 						'echo' => 0,
-						'menu_class' => 'navbar-nav ml-auto',
+						'menu_class' => $menu_class,
 						'container' => 'div',
 						'container_class' => $this->main_nav_menu_container_class,
 						'container_id' => $this->navbar_collapse_id_left,
@@ -335,9 +337,18 @@ class Navbar {
 		
 		$nav_menu_locations = get_nav_menu_locations();
 			
-		$primary_nav = $nav_menu_locations['primary'];
+		if ( isset( $nav_menu_locations['primary'] ) ) {
 			
-		return wp_get_nav_menu_object( $primary_nav );
+			$primary_nav = $nav_menu_locations['primary'];
+
+			return wp_get_nav_menu_object( $primary_nav );
+
+		} else {
+
+			return false;
+		}
+			
+	
 
 	}
 	

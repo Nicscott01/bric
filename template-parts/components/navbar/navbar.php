@@ -13,8 +13,8 @@
 		$this->navbar_options = array(
 			'container' => $SiteInfo->navbar->container,
 			'expand' => $SiteInfo->navbar->expand,
-			'bg_color' => $SiteInfo->navbar->bg_color,
-			'navbar_color' => $SiteInfo->navbar->navbar_color,
+			'bg_color' => bric_get_theme_mod( 'navbar', 'bg_color'),
+			'navbar_color' => bric_get_theme_mod('navbar', 'theme' ),
 			'content_before' => array(
 				//'html' => '',
 				//'above_navbar' => false,
@@ -71,8 +71,8 @@
 			   $this->get_main_nav_menu(), //2
 			   $this->get_navbar_toggler(), //3 
 			   $this->navbar_options['expand'], //4
-			   ( $this->navbar_options['container'] ) ? '<div class="container navbar-inner-wrapper">' : '', //5
-			   ( $this->navbar_options['container'] ) ? '</div>' : '', //6
+			   '<div class="container-xxl navbar-inner-wrapper">', //5
+			   '</div>', //6
 			   $this->navbar_options['navbar_color'], //7
 			   $this->navbar_options['bg_color'], //8
 			   $this->content_above_nav, //9
