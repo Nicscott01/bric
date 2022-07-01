@@ -117,8 +117,7 @@
         },
         {
             "prop": "font_family_alt",
-            "label": "Headings Font Family",
-            "description": "If this is left blank, headings will inherit the base font.",
+            "label": "Alternate Font Family",
             "val": null,
             "type": "google_font",
             "sanitize_callback": "skyrocket_google_font_sanitization",
@@ -172,7 +171,7 @@
         {
             "prop": "headings_font_family",
             "label": "Headings Font Family",
-            "val": "null",
+            "val": "font_family_base",
             "type": "choice",
             "choices": [
                 {
