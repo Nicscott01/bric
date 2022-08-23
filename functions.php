@@ -9,10 +9,14 @@
  *
  *
  */
-define( 'PATH_NODE', '/home/creare2/webapps/node/bin' );
-define( 'PATH_SASS', '/home/creare2/webapps/sass/bin' );
-define( 'GEM_HOME', '/home/creare2/webapps/sass/gems' );
-define( 'RUBYLIB', '/home/creare2/webapps/sass/lib' );	
+
+if ( !defined( 'BRIC_GOOGLE_MAPS_API_KEY' ) ) {
+	
+	define( 'BRIC_GOOGLE_MAPS_API_KEY', 'AIzaSyDUy-vuqQLK4APwNGoJ2MWDn04nTMzeZJ8' );
+
+}
+
 
 include get_template_directory().'/inc/init.php';
+
 

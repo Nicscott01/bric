@@ -1,5 +1,6 @@
 <?php
 
+
 include get_template_directory().'/inc/classes/BootstrapNavwalker.class.php';
 
 
@@ -7,6 +8,10 @@ include get_template_directory().'/inc/classes/BricNotices.class.php';
 include get_template_directory().'/inc/classes/Bric.class.php';
 include get_template_directory().'/inc/classes/BricOptions.class.php';
 include get_template_directory().'/inc/classes/OptionsPages.class.php';
+include get_template_directory().'/inc/classes/Customizer.class.php';
+include get_template_directory().'/inc/classes/CustomizerCustomControls.class.php';
+//Vendor (phpscss)
+include get_template_directory().'/vendor/autoload.php';
 
 //ACF Fields
 include get_template_directory().'/inc/acf-fields/site_info.php';
@@ -33,11 +38,14 @@ include get_template_directory().'/inc/classes/Slideout.class.php';
 include get_template_directory().'/inc/classes/BricShortcodes.class.php';
 include get_template_directory().'/inc/classes/Shortcakes.class.php';
 include get_template_directory().'/inc/classes/GoogleMaps.class.php';
+include get_template_directory().'/inc/classes/GoogleFontLoader.class.php';
 include get_template_directory().'/inc/classes/Restaurant.class.php';
 include get_template_directory().'/inc/classes/Admin.class.php';
 include get_template_directory().'/inc/classes/ACFBlocks.class.php';
 include get_template_directory().'/inc/classes/ComingSoon.class.php';
 include get_template_directory().'/inc/classes/SortByTaxTerm.class.php';
+include get_template_directory().'/inc/classes/BricSitemapImages.class.php';
+include get_template_directory().'/inc/classes/DLMModals.class.php';
 
 include get_template_directory().'/inc/plugins/plugins-loader.php';
 
@@ -60,6 +68,8 @@ include get_template_directory().'/inc/classes/Integrations.class.php';
 
 //Functions
 include get_template_directory().'/inc/functions/utility.php';
+include get_template_directory().'/inc/functions/sanitization-functions.php';
+include get_template_directory().'/inc/functions/callback-functions.php';
 
 
 //Register Actions
@@ -218,6 +228,24 @@ function article_header_class( $classes = [] ) {
  
 function hex2rgba($color, $opacity = false) {
  
+
+
+	//Check if opacity is set(rgba or rgb)
+	if($opacity){
+		if(abs($opacity) > 1)
+			$opacity = 1.0;
+		$output = 'rgba('. hex2rgb( $color ) . ','.$opacity.')';
+	} else {
+		$output = 'rgb('. hex2rgb( $color ) .')';
+	}
+
+
+	return $output;
+
+
+
+	/// OLD ///
+
 	$default = 'rgb(0,0,0)';
  
 	//Return default if no color provided
@@ -252,4 +280,56 @@ function hex2rgba($color, $opacity = false) {
  
         //Return rgb(a) color string
         return $output;
+}
+
+
+
+function hex2rgb( $color ) {
+
+	$default = '0,0,0';
+ 
+	//Return default if no color provided
+	if(empty($color))
+          return $default; 
+ 
+	//Sanitize $color if "#" is provided 
+        if ($color[0] == '#' ) {
+        	$color = substr( $color, 1 );
+        }
+ 
+        //Check if color has 6 or 3 characters and get values
+        if (strlen($color) == 6) {
+                $hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
+        } elseif ( strlen( $color ) == 3 ) {
+                $hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
+        } else {
+                return $default;
+        }
+ 
+        //Convert hexadec to rgb
+        $rgb =  array_map('hexdec', $hex);
+ 
+		$output = implode(",",$rgb);
+
+ 
+        //Return rgb(a) color string
+        return $output;
+
+
+}
+
+
+
+
+
+/**
+ * 	Wrapper function for get_theme_mod
+ * 
+ * 
+ */
+
+function bric_get_theme_mod( $section, $setting ) {
+
+	return \Bric\Customizer()->get_theme_mod( $section, $setting );
+
 }

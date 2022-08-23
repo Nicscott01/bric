@@ -12,3 +12,22 @@ $margin-below-field: $spacer !default;
 //
 $social-icon-height: $font-size-lg !default;
 $social-icon-width: $font-size-lg !default;
+
+//
+// BS Defaults Overrides
+//
+$variable-prefix: bric-; 
+$btn-border-width: 3px;
+
+
+
+//
+//  NEW THEME CUSTOMIZER
+//
+$blocks-margin-bottom: 3.75rem;
+
+$headings-margin-bottom: $blocks-margin-bottom;
+$headings-margin-top: 6rem;
+
+$columns-margin-bottom: $blocks-margin-bottom;
+

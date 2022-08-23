@@ -1,46 +1,75 @@
 <?php
 
-
-define( 'BRIC_GOOGLE_MAPS_API_KEY', 'AIzaSyDUy-vuqQLK4APwNGoJ2MWDn04nTMzeZJ8' );
+namespace Bric;
 
 
 class Bric {
+
+	public static $instance = null;
 	
 	public $SiteInfo;
 	public $errors = array();
 	
 	
-	function __construct() {
+	public function __construct() {
 		
 		
 		$this->setup_theme();
 		
 		add_action( 'wp_enqueue_scripts', array( $this, 'easy_google_fonts_edits'), 999 );
 		
+
+		/**
+		 * Remove some crap in the WP head
+		 * 
+		 */
+		remove_action( 'wp_head', 'rest_output_link_wp_head' );
+		remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+		remove_action( 'wp_head', 'rsd_link');
+		remove_action( 'wp_head', 'wlwmanifest_link');
+		remove_action( 'wp_head', 'wp_shortlink_wp_head');
+
+		remove_action( 'template_redirect', 'rest_output_link_header', 11, 0 );
+	   
+		add_filter( 'xmlrpc_enabled', '__return_false' );
+
+
+
 	}
 	
 	
 		
 	
 	
-	function setup_theme() {
+	public function setup_theme() {
 				
-		add_action( 'after_setup_theme', array( $this, 'theme_support') );
-		add_action( 'after_setup_theme', array( $this, 'nav_menus') );
-
+		//add_action( 'after_setup_theme', array( $this, 'theme_support') );
+		//add_action( 'after_setup_theme', array( $this, 'nav_menus') );
+		//add_action( 'after_setup_theme', [ $this, 'block_theme_setup' ] );
 		
+		$this->theme_support();
+		$this->nav_menus();
+		$this->block_theme_setup();
+
 		
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_footer', array( $this, 'enqueue_footer_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) ); // queue early because of jquery in footer
+		
+		
 		//Dequeue scripts/styles (last call)
 		add_action( 'wp_print_styles', [ $this, 'deregister_styles'], 100 );
-		
+		//add_action( 'wp_enqueue_scripts', [ $this, 'deregister_styles'], 100 );
+		//add_action( 'init', [ $this, 'deregister_styles'], 100 );
+
+
 		//Disable emojies
 		add_action( 'init', [ $this, 'disable_emojis'] );
-		
+		add_filter( 'emoji_svg_url', '__return_false' );		
+
+
 		add_action( 'widgets_init', array( $this, 'register_sidebars') );
 		
 		add_action( 'wp', array( $this, 'get_theme_globals' ));
@@ -68,7 +97,7 @@ class Bric {
 	
 	
 	
-	function easy_google_fonts_edits() {
+	public function easy_google_fonts_edits() {
 		
 		//remove_action( 'wp_enqueue_scripts', array( 'EGF_Frontend', 'enqueue_stylesheets' ) );
 		wp_dequeue_style( 'tt-easy-google-fonts' );
@@ -84,7 +113,7 @@ class Bric {
 	 *
 	 */
 	
-	function register_styles() {
+	public function register_styles() {
 		
 		//var_dump(get_stylesheet_directory_uri().'/assets/css/bric-style.css' );
 		/*
@@ -108,7 +137,7 @@ class Bric {
 		//}
 		
 		
-		wp_register_style( 'bric-customizer', get_stylesheet_directory_uri().'/assets/css/bric-style-customizer.css' );
+		//wp_register_style( 'bric-customizer', get_template_directory_uri().'/assets/css/bric-customizer.css' );
 		
 		
 		
@@ -124,11 +153,12 @@ class Bric {
 	 */
 	
 
-	function enqueue_styles() {
+	public function enqueue_styles() {
 
 		if ( is_customize_preview() ) {
 		
-			wp_enqueue_style( 'bric-customizer' );
+			//wp_enqueue_style( 'bric-customizer' );
+			wp_enqueue_style( 'bric' );
 			
 			
 		}
@@ -152,10 +182,15 @@ class Bric {
 	public function deregister_styles() {
 		
 		
+		wp_deregister_style( 'wp-block-library' );
+
 		wp_dequeue_style( 'wp-block-library' );
-		wp_dequeue_style( 'wp-block-library' );
-		
-		
+		wp_dequeue_style( 'wp-block-library-theme' );
+		//wp_dequeue_style( 'wp-block-post-title' );
+		//wp_dequeue_style( 'wp-block-template-part' );
+		wp_dequeue_style( 'wc-blocks-style' ); //woocommerce 
+		wp_dequeue_style( 'global-styles' );
+			
 	}
 	
 	
@@ -182,7 +217,7 @@ class Bric {
 	 * @param array $plugins 
 	 * @return array Difference betwen the two arrays
 	 */
-	function disable_emojis_tinymce( $plugins ) {
+	public function disable_emojis_tinymce( $plugins ) {
 	 if ( is_array( $plugins ) ) {
 	 return array_diff( $plugins, array( 'wpemoji' ) );
 	 } else {
@@ -197,7 +232,7 @@ class Bric {
 	 * @param string $relation_type The relation type the URLs are printed for.
 	 * @return array Difference betwen the two arrays.
 	 */
-	function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
+	public function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
 	 if ( 'dns-prefetch' == $relation_type ) {
 	 /** This filter is documented in wp-includes/formatting.php */
 	 $emoji_svg_url = apply_filters( 'emoji_svg_url', 'https://s.w.org/images/core/emoji/2/svg/' );
@@ -218,7 +253,7 @@ class Bric {
 	 */
 	
 
-	function enqueue_footer_styles() {
+	public function enqueue_footer_styles() {
 
 			wp_enqueue_style( 'tt-easy-google-fonts' );
 					
@@ -230,7 +265,7 @@ class Bric {
 	 *
 	 */
 	
-	function register_scripts() {
+	public function register_scripts() {
 		
 		
 		wp_deregister_script( 'jquery' );
@@ -261,7 +296,7 @@ class Bric {
 	 */
 	
 
-	function enqueue_scripts() {
+	public function enqueue_scripts() {
 		
        // wp_scripts()->add_data( 'jquery', 'group', 1 );
         
@@ -283,7 +318,22 @@ class Bric {
 	 *
 	 */
 	
-	function theme_support() {
+	public function block_theme_setup() {
+
+
+		//add_theme_support( 'block-templates' );
+
+		// Add support for block styles.
+		//add_theme_support( 'wp-block-styles' );
+
+		// Enqueue editor styles.
+		//add_editor_style( 'editor-style.css' );
+
+	}
+
+
+
+	public function theme_support() {
 		
 		
 		add_theme_support( 'post-thumbnails' );
@@ -303,7 +353,9 @@ class Bric {
 			'comment-form', 
 			'search-form', 
 			'gallery', 
-			'caption' 
+			'caption',
+			'style',
+			'script' 
 		));
 		
 		add_theme_support( 'title-tag' );
@@ -318,8 +370,13 @@ class Bric {
 		
 		//Gutenberg alignment option
 	  	add_theme_support( 'align-wide' );
+	  	
+		
+		add_theme_support( 'disable-custom-colors' );
 
 		
+
+
 		//Register Nav Menus
 		$this->nav_menus();
 		
@@ -335,7 +392,7 @@ class Bric {
 	 *
 	 */
 	
-	function nav_menus() {
+	public function nav_menus() {
 
 		register_nav_menus( array(
 			'primary'   => 'Main Site Menu',
@@ -353,7 +410,7 @@ class Bric {
 	 *
 	 */
 	
-	function get_theme_globals() {
+	public function get_theme_globals() {
 		
 		global $SiteInfo;
 		$this->SiteInfo = $SiteInfo;
@@ -463,13 +520,33 @@ class Bric {
 		
 	}
 
+
+
+
+
+	public static function get_instance() {
+
+
+		if ( self::$instance == null ) {
+
+			self::$instance = new self;
+
+		}
+
+		return self::$instance;
+
+	}
+
 	
 	
 }
 
 
-global $Bric;
+function Bric() {
 
-$Bric = new Bric();
-$Bric->theme_support();
+	return Bric::get_instance();
 
+}
+
+
+Bric();

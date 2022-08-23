@@ -1,6 +1,15 @@
 <?php
-do_action( 'ybf_breadcrumbs' );
+/**
+ * 	Template for Basic Heading (no image)
+ * 
+ * 
+ * 
+ */
+
+
 ?>
-<h1 class="<?php echo entry_title_class( ['page-header', 'entry-title', 'text-center text-primary text-uppercase d-flex flex-column' ]); ?>">
-	<?php the_title(); ?>
-</h1>
+<div class="container-xxl">
+	<h1 class="<?php echo entry_title_class( ['page-header', 'entry-title', 'text-primary d-flex flex-column py-4' ]); ?>">
+		<?php the_title(); ?>
+	</h1>
+</div>

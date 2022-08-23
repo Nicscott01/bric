@@ -7,48 +7,58 @@ class ACFBlocks {
 	
 	public function __construct() {
 		
+		add_action( 'acf/init', [ $this, 'load_parent_blocks' ] );
+		add_action( 'acf/init', [ $this, 'load_child_blocks' ] );
+
+	}
+
+	public function load_parent_blocks() {
+
+		$this->load_blocks(  get_template_directory() . '/inc/acf-blocks' );
+		
+	}
+
+	public function load_child_blocks() {
+
+		$this->load_blocks(  get_stylesheet_directory() . '/inc/acf-blocks' );
+		
+	}
+
+
+
+	public function load_blocks( $folder ) {
+
+		if (  !file_exists( $folder ) ) {
+			return false;
+		}
 
 		//add_action( 'init', [ $this, 'init'] );
-		add_action( 'init', [ $this, 'register_acf_block_types' ] );
-	
-	}
-	
-	
-	
-	
-	public function init() {
+		$files = scandir( $folder );
 		
-		// Check if function exists and hook into setup.
-		if( function_exists('acf_register_block_type') ) {
-				
-			add_action('acf/init', [ $this, 'register_acf_block_types' ] );
-			
+		if ( !empty( $files ) && is_array( $files ) ) {
+
+			foreach( $files as $file ) {
+
+				if ( strpos( $file, '.' ) > 3 ) {
+
+					$path = $folder . '/' . $file;
+
+					if ( file_exists( $path ) ) {
+
+						include_once( $path );
+					
+					}
+
+				}
+
+			}
 		}
-		
-		
+
+
 	}
 	
 	
 	
-	
-	public function register_acf_block_types() {
-
-		
-		// register a testimonial block.
-		acf_register_block_type( array(
-			'name'              => 'google-map',
-			'title'             => __('Google Map'),
-			'description'       => __('Display custom Google map.'),
-			'render_template'   => 'template-parts/blocks/google-map.php',
-			'category'          => 'embed',
-			'icon'              => 'dashicons-location-alt',
-			'keywords'          => array( 'map', 'google' ),
-			'mode'				=> 'preview',
-			''
-		));
-		
-	}
-
 	
 	
 	

@@ -25,7 +25,7 @@ class BricOptions {
 		
 		
 		//add_action( 'customize_save_after', array( $this, 'write_custom_css') );
-		add_action( 'customize_save_after', array( $this, 'run_grunt_task') );
+//		add_action( 'customize_save_after', array( $this, 'run_grunt_task') );
 	
 		
 		//add_filter( 'wp_get_custom_css', array( $this, 'override_wp_custom_css') );
@@ -44,7 +44,7 @@ class BricOptions {
 	
 	
 	
-	function create_customizations( WP_Customize_Manager $wp_customize ) {
+	public function create_customizations( $wp_customize ) {
 		
 		$wp_customize->remove_section( 'custom_css' );
 
@@ -384,6 +384,8 @@ class BricOptions {
 		wp_enqueue_script( 'behave', get_template_directory_uri().'/assets/js/behave.js', array('jquery'), null, true);
 		
 	}
+	
+
 	
 	
 	public function behave_init() {

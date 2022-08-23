@@ -1,0 +1,29 @@
+{
+    "theme_colors" : [
+        {
+            "slug" : "primary",
+            "name" : "Primary",
+            "hex" : "#0d6efd"
+        },{
+            "slug" : "secondary",
+            "name" : "Secondary",
+            "hex" : "#6c757d"
+        },{
+            "slug" : "light",
+            "name" : "Light",
+            "hex" : "#f8f9fa"
+        },{
+            "slug" : "dark",
+            "name" : "Dark",
+            "hex" : "#212529"
+        },{
+            "slug" : "white",
+            "name" : "White",
+            "hex" : "#ffffff"
+        },{
+            "slug" : "black",
+            "name" : "Black",
+            "hex" : "#000000"
+        }
+    ]
+}

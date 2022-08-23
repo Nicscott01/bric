@@ -11,3 +11,6 @@ package-lock.json
 #ignore DWSYNC
 _notes/dwsync.xml
 _notes/*
+
+#ignore Vendor
+vendor/

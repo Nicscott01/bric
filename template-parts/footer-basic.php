@@ -9,7 +9,7 @@ global $BricLoop;
 
 ?>
 
-<div class="footer-inner">
+<div class="footer-inner bg-<?php echo bric_get_theme_mod( 'footer', 'background_color' ); ?> text-<?php  echo bric_get_theme_mod( 'footer', 'text_color' ); ?>">
 	<?php 
 
 	ob_start();
@@ -23,9 +23,7 @@ global $BricLoop;
 
 	}
 
-	?>
-	<div class="copyright-credits-wrapper">
-	<?php echo $BricLoop->get_copyright(); ?>
-	<?php echo $BricLoop->get_developer_credits(); ?>
-	</div>
+	get_template_part( 'template-parts/footer-lower' );
+
+	?>	
 </div>

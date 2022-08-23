@@ -1,0 +1,29 @@
+@import "functions";
+
+@import "theme-colors-auto";
+@import "child-colors";
+@import "bric-bs-variables";
+@import "theme-variables-auto";
+@import "child-variables";
+@import "variables";
+@import "bric-variables";
+
+
+
+@import "mixins";
+@import "bric-mixins";
+@import "utilities";
+
+
+
+.wp-block-button {
+
+    &.is-style-outline {
+    
+        > a {
+           border-color: var( --#{$variable-prefix}btn-border-width );
+        }
+    }
+    
+}
+    

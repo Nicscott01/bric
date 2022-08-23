@@ -36,6 +36,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    overflow-x: hidden;
     .main-content {
         flex-grow: 1;
         flex-shrink: 0;
@@ -58,6 +59,8 @@ body {
 //
 //		ENTRY CONTENT 
 //
+
+/*
 .container-text {
     max-width: 100%;
     width: 100%;
@@ -102,6 +105,9 @@ body {
         }
     }
 }
+
+
+*/
 
 //
 //		GUTENBERG STYLES
@@ -271,7 +277,7 @@ $space-below-h: $spacer*1.25;
         z-index: 1;
         padding-top: .75em;
         padding-bottom: .75em;
-        margin: 0;
+        position: relative;
     }
     .header-image-wrapper {
         display: flex;
@@ -386,7 +392,7 @@ ul.social-media {
 //		SITE FOOTER
 //
 .site-footer {
-    margin-top: $space-above-h;
+
     .footer-widgets {
         h4 {
             font-size: 1.25rem;
@@ -400,6 +406,7 @@ ul.social-media {
     }
 }
 
+/*
 .copyright-credits-wrapper {
     display: flex;
     flex-direction: column;
@@ -411,6 +418,7 @@ ul.social-media {
         justify-content: space-between;
     }
 }
+*/
 
 //
 //	Prevent post nav from having padding left

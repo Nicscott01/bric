@@ -191,17 +191,9 @@ class BricLoop {
 		
 		if ( is_search() ) {
 			
-					
-			//$this->get_pusher();
-			printf( '
-					<div class="col-12 mb-2">
-						<h1>Search Results for: %s</h1>
-						%s
-					</div>
-				', get_search_query(), get_search_form(0) );
-			//add_action( 'bric_after_loop', array( $this, 'close_div'), 20 );	//call early so we can slide in the sidebar
-			//add_action( 'bric_after_loop', array( $this, 'close_div'), 50 );	
-			//add_action( 'bric_after_loop', array( $this, 'close_div'), 50 );	
+
+			get_template_part( 'template-parts/search-header' );
+				
 		
 		}
 		elseif ( is_404() ) {
@@ -455,7 +447,7 @@ class BricLoop {
 	
 	public function get_copyright() {
 		
-		$copyright_text = get_copyright_text( $this->SiteInfo->copyright_start );
+		$copyright_text = get_copyright_text( bric_get_theme_mod( 'lower_footer', 'copyright_year' ) );
 
 		include( locate_template( 'template-parts/copyright.php' ) ); 
 		

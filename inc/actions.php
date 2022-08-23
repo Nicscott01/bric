@@ -60,3 +60,37 @@ add_action( 'wp_footer', function() {
     get_template_part( 'template-parts/svg/sprite-sheet' );
     
 }, 100 );
+
+
+
+
+
+/**
+ *  Cookie Consent
+ * 
+ * 
+ */
+
+
+add_action( 'init', function() {
+
+    $output_cookie_consent = apply_filters( 'bric_enable_cookie_consent', true );
+
+
+    if ( $output_cookie_consent ) {
+
+        //Load the template before the script. It matters.
+        add_action( 'wp_footer', function() {
+
+            get_template_part( 'template-parts/cookie-consent' );
+
+        }, 10 );
+
+
+
+        wp_enqueue_script( 'cookie-consent', get_template_directory_uri() . '/assets/js/cookie-banner.min.js', null, null, true );
+
+
+    }
+
+});

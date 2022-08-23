@@ -7,12 +7,8 @@
 
 global $SiteInfo;
 
-$container_class = ( $SiteInfo->navbar->container ) ? 'container' : 'container-fluid';
-//itemscope itemtype="http://schema.org/WPFooter"
-
 ?>
-
-<footer class="site-footer <?php echo $container_class; ?>" role="contentinfo">
+<footer class="site-footer" role="contentinfo">
 		<?php 
 		
 			/**

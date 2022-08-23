@@ -59,6 +59,14 @@ class BricFilters {
 		 */
 		add_filter( 'gform_submit_button', [ $this, 'gform_submit_button'], 10, 2 );
 	
+
+
+
+
+	
+
+
+
 	}
 	
 	

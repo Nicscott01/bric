@@ -1,0 +1,29 @@
+//WP Block Columns
+
+.wp-block-columns {
+    @extend .container-xxl;
+    margin-bottom: 3.75rem;
+
+
+    @include media-breakpoint-down( md ) {
+        flex-wrap: wrap !important;
+
+        .wp-block-column {
+            flex-basis: auto !important;
+        }
+    }
+
+
+
+}
+
+
+.site-footer {
+
+    .wp-block-columns {
+        margin-bottom: 0;
+        padding-top: $spacer * 4;
+        padding-bottom: $spacer * 4;
+    }
+}
+

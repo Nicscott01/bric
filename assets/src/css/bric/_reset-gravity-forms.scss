@@ -217,9 +217,10 @@
 }
 
 .gfield {
-    //@include make-col(12);
     @extend .col-12;
-    //padding: 0 $grid-gutter-width/2;
+}
+
+.gfield:not(.gform_hidden) {
     margin-bottom: $margin-below-field;
 }
 
@@ -292,9 +293,53 @@
     }
 }
 
-
+/*
 .gfield_label {
     font-size: $font-size-base;
     margin-bottom: $spacer/2;
     font-weight: $font-weight-bold;
+}*/
+
+
+/**
+ *  Added for version 5 of BS support
+ */
+.ginput_container_consent,
+.gchoice {
+    @extend .form-check;
+
+    input {
+        @extend .form-check-input;
+    }
+
+    label {
+        @extend .form-check-label;
+    }
+}
+
+
+//Validation
+.gform_submission_error {
+    @extend .h6;
+}
+
+.gform_validation_error {
+
+    .gfield_error {
+
+        input {
+            @extend .is-invalid;
+        }
+
+        .validation_message {
+            @extend .invalid-feedback;
+        }
+    }
+
+
+    .gfield:not( .gfield_error ) {
+        input {
+            @extend .is-valid;
+        }
+    }
 }

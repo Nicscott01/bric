@@ -1,0 +1,27 @@
+
+//Button container
+.wp-block-buttons {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
+
+.wp-block-button {
+
+    > a {
+        //@extend .btn;
+        text-transform: uppercase;
+        color: var( --#{$variable-prefix}dark ) !important;
+
+    }
+
+    &.is-style-outline {
+
+        > a {
+            //@extend .btn-outline-primary;
+            @include button-outline-variant($primary);
+            border-width: var( --#{$variable-prefix}btn-border-width );
+        }
+    }
+
+}

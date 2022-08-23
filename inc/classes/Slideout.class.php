@@ -42,6 +42,11 @@ class Slideout {
 	
 	public function enqueue_scripts() {
 		
+		if ( is_admin() ) {
+			return;
+		}
+
+
 		global $SiteInfo;
 		global $Navbar;
 
@@ -50,8 +55,9 @@ class Slideout {
 			
 
 
+		//var_dump( $main_menu );
         //bail if no menu items
-        if ( $main_menu->count == 0 ) {
+        if ( empty( $main_menu) || $main_menu->count == 0  ) {
             
            return;
         }
