@@ -9,10 +9,14 @@
 // Configuration
 @import "functions";
 
+@import "theme-colors-auto";
 @import "child-colors";
+@import "bric-bs-variables";
+@import "theme-variables-auto";
 @import "child-variables";
 @import "variables";
 @import "bric-variables";
+
 
 
 @import "mixins";
@@ -21,6 +25,8 @@
 
 // Layout & components
 @import "root";
+@import "bric-root";
+
 @import "reboot";
 @import "type";
 @import "images";
@@ -62,6 +68,8 @@
 //WP Styles
 @import "wp-classes";
 
+
+
 //BRIC Styles
 @import "bric-menu";
 @import "slideout";
@@ -71,6 +79,16 @@
 @import "bric-instagram";
 @import "bric-layout";
 @import "bric-social-icons";
+@import "cookie-consent";
+
+//Bric Blocks
+@import "blocks/heading";
+@import "blocks/buttons";
+@import "blocks/columns";
+@import "blocks/helpers";
+
+//Bric ACF Blocks
+@import "acf-blocks/company-info";
 
 //Custom S/CSS from customizer
 @import "child-styles";
