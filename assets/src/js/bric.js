@@ -1,4 +1,4 @@
-/*! bric 2021-10-18 */
+/*! bric 2022-07-05 */
 //Initialize the Bric JS object.
 var Bric = {};;//Normalize Heights on Carousel
 

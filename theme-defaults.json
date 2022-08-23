@@ -172,7 +172,7 @@
             "prop": "headings_font_family",
             "label": "Headings Font Family",
             "val": "font_family_base",
-            "type": "choice",
+            "type": "select",
             "choices": [
                 {
                     "prop": "font_family_base",
@@ -189,12 +189,22 @@
             "prop": "headings_font_weight",
             "label": "Headings Font Weight",
             "description": "Use a number from the font weights selected above.",
-            "val": "500",
-            "type": "text",
-            "sanitize_callback": "wp_filter_nohtml_kses"
+            "val": null,
+            "type": "number",
+            "sanitize_callback": "absint"
         }
     ],
     "navbar": [
+        {
+            "prop": "brand_width",
+            "val": 400,
+            "label": "Navbar Brand Width",
+            "description": "Max width of logo",
+            "type":"number",
+            "css_var": false,
+            "units":"px",
+            "sanitize_callback": "absint"
+        },
         {
             "prop": "theme",
             "val": "light",
@@ -240,6 +250,26 @@
             ]
         },
         {
+            "prop": "font_weight",
+            "val": "null",
+            "label": "Font Weight",
+            "description": "Enter weight number (must be loaded)",
+            "type": "number",
+            "scss_var": "nav-link-font-weight",
+            "sanitize_callback":"absint"
+        },
+        {
+            "prop": "nav_link_padding_x",
+            "val": ".5",
+            "label": "Nav Link Padding X",
+            "description": "Padding between nav items (units: rem)",
+            "type": "number",
+            "units": "rem",
+            "css_var": "navbar-nav-link-padding-x",
+            "scss_var": "navbar-nav-link-padding-x",
+            "sanitize_callback":"bric_floatval"
+        },
+        {
             "prop": "text_transform",
             "val": "none",
             "label": "Text Transform",
@@ -270,6 +300,10 @@
             "css_var":false,
             "choices": [
                 {
+                    "prop": "none",
+                    "val": "None"
+                },
+                {
                     "prop": "underline",
                     "val": "Underline"
                 },
@@ -281,14 +315,15 @@
         },
         {
             "prop": "active_color",
-            "val": "default",
+            "val": "null",
             "label": "Active Color",
             "description": "Color of active (current) page title",
             "type": "select",
-            "css_var":false,
+            "css_var":"navbar-active-color",
+            "scss_var": "navbar-active-color",
             "choices": [
                 {
-                    "prop": "default",
+                    "prop": "null",
                     "val": "Default"
                 },
                 {
@@ -329,6 +364,7 @@
             "description": "Body background color",
             "type": "select",
             "css_var": "body-bg",
+            "find_val": true,
             "choices": [
                 {
                     "prop": "white",
@@ -351,6 +387,7 @@
             "description": "Color of the text in the body",
             "type": "select",
             "css_var": "body-color",
+            "find_val": true,
             "choices": [
                 {
                     "prop": "dark",
@@ -486,6 +523,7 @@
             "label": "Background Color",
             "description": "",
             "type": "select",
+            "css_var": false,
             "choices": [
                 {
                     "prop": "dark",
@@ -519,6 +557,7 @@
             "label": "Text Color",
             "description": "Color of text",
             "type": "select",
+            "css_var":false,
             "choices": [
                 {
                     "prop": "dark",
@@ -554,6 +593,7 @@
             "label": "Background Color",
             "description": "Color of background",
             "type": "select",
+            "css_var": false,
             "choices": [
                 {
                     "prop": "dark",
@@ -587,6 +627,7 @@
             "label": "Text Color",
             "description": "Color of text",
             "type": "select",
+            "css_var": false,
             "choices": [
                 {
                     "prop": "dark",

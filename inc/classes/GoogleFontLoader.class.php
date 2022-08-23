@@ -67,6 +67,48 @@ class GoogleFontLoader {
 
 
 
+
+
+    public function map_fonts_for_url_encoding( $font ) {
+
+        $new_font = [];
+
+        foreach( $font as $key => $value ) {
+            
+    
+            if ( strpos( $key, 'weight' ) > 0 ) {
+
+                if ( $value == 'regular' ) {
+
+                    $new_value = 400;
+                
+                } else {
+
+                    $new_value = $value;
+                }
+
+
+
+
+                if ( !empty( $new_value ) ) {
+
+                    $new_font[$key] = $new_value;
+
+                }
+               
+
+            } 
+
+        }
+
+
+        return $new_font;
+        
+    }
+
+
+
+
     /**
      * Enqueue Stylesheets
      */
@@ -79,23 +121,17 @@ class GoogleFontLoader {
       
        
 
-
-        foreach( $fonts as $font ) {
+        foreach( $fonts as $key => $font ) {
 
             if ( empty( $font ) ) {
                 continue;
             }
 
-            $font_families[ $font->font ] = [
-                $font->regularweight === 'regular' ? 400 : $font->regularweight,
-                $font->italicweight === 'regular' ? 400 : $font->italicweight,
-                $font->boldweight === 'regular' ? 400 : $font->boldweight
-            ];
-
+      
+            $font_families[ $font->font ] = $this->map_fonts_for_url_encoding( $font );
 
         }
 
-     
 
 
 
@@ -136,7 +172,10 @@ class GoogleFontLoader {
             $has_italic               = false;
             $load_additional_variants = false;
 
+
             foreach ( $variants as $variant ) {
+
+
                 if ( 400 !== $variant && 'regular' !== $variant ) {
                     $load_additional_variants = true;
                 }

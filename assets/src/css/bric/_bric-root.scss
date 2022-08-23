@@ -1,3 +1,4 @@
 :root {
-    --#{$variable-prefix}btn-border-width: #{$btn-border-width};
+    --#{$variable-prefix}border-width: #{$border-width};
+    --#{$variable-prefix}btn-border-width: var( --#{$variable-prefix}border-width );
 }

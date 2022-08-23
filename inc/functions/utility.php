@@ -151,7 +151,7 @@ function get_landing_page()
 
 
 
-	if (is_home()) {
+	if ( is_home() ) {
 
 		$page_id = get_option('page_for_posts');
 
@@ -245,3 +245,81 @@ if ( !function_exists( 'maybe_json_decode' ) ) {
 
 }
 
+
+
+
+
+if ( !function_exists( 'is_svg' ) ) {
+
+	function is_svg( $file = null ) {
+			
+		if ( empty( $file ) ) {
+			return false;
+		}
+		
+		$mime = get_post_mime_type( $file );
+		
+		if ( $mime == 'image/svg+xml' ) {
+			
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+		
+	}
+
+}
+
+
+
+
+
+if ( ! function_exists( 'get_svg_source' ) ) {
+
+
+	function get_svg_source( $id = null ) {
+		
+		if ( empty( $id )) {
+			return false;
+		}
+		
+		//Filter to return something other than the SVG of the id
+		$file_override = apply_filters( 'bric_navbar_brand_svg_override', null, $id );
+		
+		if ( !empty( $file_override )) {
+			return $file_override;
+		}
+		
+		$file = get_attached_file( $id );
+		
+		if ( empty( $file ) ) {
+			
+			return false;
+
+		}
+
+
+		$svg = file_get_contents( $file );
+        
+        $svg = preg_replace( '/^\<\?xml.+\?\>/m', '', $svg );
+		
+		$re = '/viewBox=["\']?((?:.(?!["\']?\s+(?:\S+)=|[>"\']))+.)["\']?/m';
+		preg_match( $re, $svg, $viewBox );
+		/*
+		$dimensions = explode( ' ', $viewBox[1] );
+
+		$width = $dimensions[2] - $dimensions[0];
+		$height = $dimensions[3] - $dimensions[1];
+		
+		$dimension_css = sprintf( '<svg style="width:%spx; height:%spx"', $width, $height );
+		*/
+		
+		
+		//$svg = str_replace( '<svg', $dimension_css, $svg );
+		
+		return $svg;
+	}
+	
+}

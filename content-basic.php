@@ -4,9 +4,13 @@
  *
  *
  */
+ 
+ $extra_classes = [];
+
+ $extra_classes[] = get_post_type() == 'post' ? 'pe-5' : ''; 
 
 ?>
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( $extra_classes ); ?>>
 		
 	<?php 
 	
@@ -15,9 +19,12 @@
 	get_template_part( 'template-parts/heading' );
 
 	do_action( 'bric_after_page_header');
-	?>
 	
-	<div class="<?php entry_content_class(); ?>">
+	
+	$extra_entry_content_classes[] = get_post_type() == 'post' ? 'pt-3' : '';
+
+ 	?>
+	<div class="<?php entry_content_class( $extra_entry_content_classes ); ?>">
 		<?php the_content(); ?>
 	</div>
 <?php 

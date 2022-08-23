@@ -336,6 +336,23 @@ $space-below-h: $spacer*1.25;
     }
 }
 
+
+
+.post .page-header {
+    overflow: visible;
+
+    .header-image-wrapper {
+        right:0;
+        left:auto;
+        overflow: hidden;
+        width: 100vw;
+    }
+}
+
+
+
+
+
 h1,
 h2,
 h3,

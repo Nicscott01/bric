@@ -4,7 +4,8 @@
 
 class BricFilters {
 	
-	
+	public static $instance;
+
 	public $wpseo_map_id = 0;
 	
 	
@@ -61,15 +62,47 @@ class BricFilters {
 	
 
 
-
-
+		/**
+		 * 	Filter the Archive Page Title
+		 */
+		add_filter( 'get_the_archive_title', [ $this, 'get_the_archive_title'], 10, 3 );
 	
-
+		/**
+		 * 
+		 * 	Filters the Archive Page Image
+		 */
+		//add_filter( 'post_thumbnail_id', [ $this, 'post_thumbnail_id' ], 10, 3 );
 
 
 	}
+
+
+
+
+	/**
+	 * 	Filter the archive title
+	 * 
+	 * 
+	 */
 	
-	
+	public function get_the_archive_title( $title, $original_title, $prefix ) {
+
+		if ( has_landing_page() || is_home() ) {
+
+			$page = get_landing_page();
+			
+			$title = $page->post_title;
+			
+		}
+
+		return $title;
+
+	}
+
+
+
+
+
 	/**
 	 *		Filter body classes for site sizes
 	 *		and use CSS to control
@@ -358,7 +391,30 @@ class BricFilters {
 	}
 
  	
+
+
+	/**
+	 * 	Singleton
+	 * 
+	 */
+	public static function get_instance() {
+
+		if ( self::$instance == null ) {
+			
+			self::$instance = new self;
+		}
+
+		return self::$instance;
+
+	}
+
 }
 
 
-new BricFilters();
+function BricFilters() {
+
+	return BricFilters::get_instance();
+
+}
+
+BricFilters();

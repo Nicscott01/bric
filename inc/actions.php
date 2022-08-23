@@ -34,8 +34,8 @@ add_action( 'bric_footer', array( $BricLoop, 'get_footer'), 10 );
  *		Comments
  *
  */
-
-add_action( 'bric_after_loop_posts', array( $BricLoop, 'get_post_comments') ); 
+// REMOVE COMMENT FORM
+//add_action( 'bric_after_loop_posts', array( $BricLoop, 'get_post_comments') ); 
 
 
 /**

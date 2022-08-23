@@ -1,5 +1,4 @@
 <?php
-
 /**
  *      Template for Navbar Brand 
  * 
@@ -11,41 +10,43 @@
  */
 
 
-/**
- *		Apply filter: bric_navbar_brand_type
- *
- *		choices: text, image, textimage
- *
- */
 
 
-$navbar_brand_type = apply_filters('bric_navbar_brand_type', $navbar_brand_type);
+$navbar_brand_width = bric_get_theme_mod( 'navbar', 'brand_width' );
+$site_logo = get_theme_mod( 'custom_logo' );
+
+//Get site info
+$title = get_bloginfo( 'name' );
+//$tagline = get_bloginfo( 'description' );
 
 
-$navbar_brand_width = apply_filters('bric_navbar_brand_width', $SiteInfo->navbar->width . 'px');
 
 
-switch ($navbar_brand_type) {
 
-    case 'text':
+?>
+  <a class="navbar-brand" href="<?php echo get_home_url( ); ?>" style="max-width:<?php echo $navbar_brand_width; ?>px";>
+		<?php
 
-        $this->navbar_brand = sprintf('<a class="navbar-brand" href="%s" style="width:%s">%s</a>', $this->url, $navbar_brand_width, $this->title);
+		if ( !empty( $site_logo ) ) {
+			
+			if ( is_svg( $site_logo ) ) {
+				
+				$logo = get_svg_source( $site_logo );
+				
+			} else {
+			
+				$logo = wp_get_attachment_image( $site_logo, 'medium' );
+				
+			}
+           
+            //Print the logo
+            echo $logo;
+			
+		} else {
 
-        break;
+            //There's no logo, so we'll use the site title and tag
+            echo $title;
 
-    case 'image':
-
-        $this->navbar_brand = sprintf('<a class="navbar-brand" href="%s" style="width:%s">%s</a>', $this->url, $navbar_brand_width, $this->logo);
-        break;
-
-    case 'textimage':
-
-        $this->navbar_brand = sprintf(
-            '<a class="navbar-brand" href="%s" style="width:%s"><div class="tagline">%s</div> %s</a>',
-            $this->url,
-            $navbar_brand_width,
-            '<span class="blogtitle">' . get_bloginfo('blogname') . '</span>',
-            $this->logo
-        );
-        break;
-}
+        }
+		?>
+  </a>
