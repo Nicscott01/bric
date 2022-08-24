@@ -65,6 +65,7 @@ include get_template_directory().'/inc/functions/callback-functions.php';
 //Register Actions
 include get_template_directory().'/inc/actions.php';
 include get_template_directory().'/inc/filters.php';
+include get_template_directory().'/inc/functions/wp-block-filters.php';
 
 
 
