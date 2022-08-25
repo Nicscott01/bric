@@ -55,12 +55,7 @@ if ( !class_exists( 'SortByTaxTerm' ) && ! file_exists( get_stylesheet_directory
     include get_template_directory().'/inc/classes/SortByTaxTerm.class.php';
 }
 
-if ( !class_exists( 'Staff' ) && ! file_exists( get_stylesheet_directory() . '/inc/classes/Staff.class.php' ) ) {
-    include get_template_directory().'/inc/classes/Staff.class.php';
-}
-if ( !class_exists( 'JobListings' ) ) {
-    include get_template_directory().'/inc/classes/JobListings.class.php';
-}
+
 //Integrations 
 include get_template_directory().'/inc/classes/Integrations.class.php';
 
