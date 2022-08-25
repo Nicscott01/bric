@@ -11,7 +11,7 @@
     > a {
         //@extend .btn;
         text-transform: uppercase;
-        color: var( --#{$variable-prefix}dark ) !important;
+        //color: var( --#{$variable-prefix}dark ) !important;
 
     }
 
@@ -21,6 +21,14 @@
             //@extend .btn-outline-primary;
             @include button-outline-variant($primary);
             border-width: var( --#{$variable-prefix}btn-border-width );
+        }
+    }
+
+
+    &.is-style-fill {
+
+        > {
+            @extend .btn-primary;
         }
     }
 

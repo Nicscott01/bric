@@ -435,21 +435,21 @@ class Bric {
 	public function site_breadcrumbs() {
 		
 		//add_action( 'bric_after_header', array( $this, 'print_breadcrumbs'));
-		if ( $this->SiteInfo->breadcrumbs['enable'] ) {
+		//if ( $this->SiteInfo->breadcrumbs['enable'] ) {
 			
-			if( $this->SiteInfo->breadcrumbs['hide_on_home'] ) {
+		//	if( $this->SiteInfo->breadcrumbs['hide_on_home'] ) {
 				
-				if ( !is_front_page() ) {
+				if ( !is_front_page() && function_exists( 'yoast_breadcrumb' ) ) {
 					
 					add_action( $this->SiteInfo->breadcrumbs['action'], array( $this, 'print_breadcrumbs') );
 					//var_dump($this->SiteInfo->breadcrumbs['action']);
 				}
 				
-			}
+			//}
 			
 			
 			
-		}
+		//}
 	}
 	
 	
@@ -458,23 +458,8 @@ class Bric {
 	public function print_breadcrumbs() {
 		
 		
-		if ( function_exists('yoast_breadcrumb') ) {
+		get_template_part( 'template-parts/components/breadcrumbs/breadcrumbs' );
 						
-			
-			$classes = implode( ' ', $this->SiteInfo->breadcrumbs['classes'] );
-		
-			$open_tag = sprintf( '<p id="breadcrumbs" class="%s">', $classes );
-			$close_tag = "</p>";
-			
-			
-			yoast_breadcrumb( $open_tag, $close_tag, true );
-		}
-		else {
-			
-			echo '<p>Yoast Breadcrumbs not enabled.</p>';
-			
-		}
-		
 		
 	}
 	

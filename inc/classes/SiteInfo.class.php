@@ -1319,11 +1319,21 @@ class SiteInfo {
 				'latitude' => !empty( $this->location['lat'] ) ? $this->location['lat']  : '',
 				'longitude' => !empty( $this->location['lng'] ) ? $this->location['lng']  : '',
 			),
-			'logo' => $this->get_logo_data()->url,
-			'image' => $this->get_logo_data()->url,
 			 
 		);
-		
+
+		/**
+		 * 			'logo' => $this->get_logo_data()->url,
+		 *			'image' => $this->get_logo_data()->url,
+		 */
+		if ( !empty( $this->get_logo_data() ) ) {
+
+			$sdata['logo'] = $this->get_logo_data()->url;
+			$sdata['image'] = $this->get_logo_data()->url;
+	
+		}
+
+
 		
 		$sdata = apply_filters( 'bric_structured_data', $sdata, $this );		
 		
@@ -1489,6 +1499,10 @@ class SiteInfo {
 				
 		$img = wp_get_attachment_image_src( $this->logo, $size );
 		
+		if ( empty( $img ) ) {
+			return null;
+		}
+
 		$obj = new StdClass();
 		
 		$obj->type = '@ImageObject';

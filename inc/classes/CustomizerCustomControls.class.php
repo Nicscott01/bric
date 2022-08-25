@@ -669,6 +669,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			$this->fontList = $this->skyrocket_getGoogleFonts( 'all' );
 
+
 			// Decode the default json font value
 			$this->fontValues = json_decode( $this->value() );
 
@@ -715,6 +716,11 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 							<?php
 								foreach( $this->fontList as $key => $value ) {
 									$fontCounter++;
+
+									if ( empty( $this->fontValues ) ) {
+										break;
+									}
+
 									$fontListStr .= '<option value="' . $value->family . '" ' . selected( $this->fontValues->font, $value->family, false ) . '>' . $value->family . '</option>';
 									if ( $this->fontValues->font === $value->family ) {
 										$isFontInList = true;
@@ -840,6 +846,14 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			}
 		}
 	}
+
+
+
+
+
+
+
+
 
 	/**
 	 * Font Awesome Select Custom Control

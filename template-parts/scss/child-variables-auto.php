@@ -39,7 +39,14 @@
     $theme_mods = $this->get_merged_theme_mods( $theme_mods );
  
 } 
-    
+/*    
+ob_start();
+
+var_dump( $theme_mods );
+
+$log = ob_get_clean();
+ error_log( $log );
+*/
  $theme_defaults = $this->get_theme_defaults();
 
  $scss_prefix = $theme_defaults->scss->prefix;
@@ -68,6 +75,7 @@ foreach( $theme_defaults->sections as $theme_default_section ) {
 
 
 
+
     //Skip stuff
     $skip = [
         'theme_colors'
@@ -89,6 +97,16 @@ foreach( $theme_defaults->sections as $theme_default_section ) {
         //$settings = $theme_mods[ $section->id ];
 
         foreach ( $theme_defaults->$section_id as $setting ) {
+
+/*
+            ob_start();
+
+            var_dump($theme_mods[$section_id][$setting->prop]);
+
+            $log = ob_get_clean();
+            error_log($log);
+        
+*/
 
             if ( $write_inline && isset( $setting->css_var ) && !empty( $setting->css_var ) ) {
 

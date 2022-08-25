@@ -21,6 +21,7 @@ class Customizer {
         add_action( 'customize_register', [ $this, 'add_theme_defaults_to_customizer'] );
 
         add_action( 'customize_register', [ $this, 'add_site_info_to_customizer'] );
+        add_action( 'customize_register', [ $this, 'add_breadcrumb_options_to_customizer'] );
         
       //  add_action( 'customize_register', [ $this, 'register_social_media_customizer'] );
 
@@ -44,7 +45,7 @@ class Customizer {
 
         if ( is_customize_preview() ) {
 
-            wp_enqueue_style( 'bric-customizer2',  get_template_directory_uri() . '/assets/css/bric-customizer.css', ['bric'], THEME_ASSET_VER );
+            wp_enqueue_style( 'bric-customizer2',  get_template_directory_uri() . '/assets/css/bric-customizer.css', ['bric'], time() );
 
         }
     }
@@ -548,6 +549,49 @@ class Customizer {
 
 
 
+    /**
+     *  Breadcrumb Options in the Customizer
+     * 
+     *  This will only load if Yoast SEO is active.
+     * 
+     * 
+     */
+
+
+    public function add_breadcrumb_options_to_customizer( $wp_customize ) {
+
+ 
+        $wp_customize->add_setting( 'bric_bc_container', [
+            'default' => 'container-xxl',
+            'transport' => 'refresh',
+            'type' => 'theme_mod',
+            'capability' => 'edit_theme_options',
+            'sanitize_callback' => 'wp_filter_nohtml_kses'
+       ]);           
+
+
+        $wp_customize->add_control( 'bric_bc_container', [
+            'label' => __( 'Breadcrumb Container Class' ),
+            'description' => __( '' ),
+            'section' => 'wpseo_breadcrumbs_customizer_section',
+            'priority' => 100,
+            'type' => 'select',
+            'capability' => 'edit_theme_options',
+            'choices' => [ 
+                'container-xxl' => __( 'Container XXL'),
+                'container-xl'  => __( 'Container XL'),
+                'container-lg'  => __( 'Container LG'),
+                'container-md' =>  __( 'Container MD'),
+                'container'     => __( 'Container'),
+                'container-fluid' => __( 'Container Fluid'),
+            ]
+        ]);
+
+            
+          
+     }
+
+
 
 
 
@@ -833,7 +877,7 @@ class Customizer {
  
         } catch ( \Exception $e ) {
 
-            error_log( 'SCSS Compiler Error:' . $e->getMessage() );
+            error_log( 'SCSS Compiler Error: ' . $e->getMessage() );
 
         }
 
