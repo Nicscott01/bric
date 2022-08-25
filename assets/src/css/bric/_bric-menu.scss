@@ -16,7 +16,6 @@
 }
 
 .navbar-brand {
-    max-width: $custom-logo-max-width;
     flex-shrink: 0;
     img {
         @extend .img-fluid;
@@ -25,6 +24,7 @@
 
 .navbar {
     flex-wrap: nowrap;
+  
     .right-side {
         display: flex;
         flex-direction: column;
@@ -37,30 +37,8 @@
             align-self: flex-end;
         }
     }
-    .widget {
-        ul {
-            margin-bottom: 0;
-        }
-        .d-inline-flex {
-            >* {
-                padding: 0 .5em;
-            }
-        }
-        .biz-info {
-            margin-bottom: 0 !important;
-        }
-    }
-    &.navbar-expand-md,
-    &.navbar-expand-lg {
-        justify-content: space-between;
-    }
-    & {
-        .right-side {
-            @include media-breakpoint-up( 'md') {
-                flex-basis: 100%;
-            }
-        }
-    }
+
+   
     &.has-left-side {
         .right-side {
             @include media-breakpoint-up( 'md') {
@@ -79,6 +57,44 @@
     margin-right: $navbar-padding-y * -1;
 }
 
+
+.nav-link.active {
+    position: relative;
+}
+
+.active-style-underline {
+
+    .nav-link.active {
+        
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            width: $nav-link-active-underline-width;
+            height: $border-width;
+            background-color: var( --#{$variable-prefix}primary );
+        }
+    }
+}
+
+
+
+.active-style-bold {
+
+    .nav-link.active {
+        font-weight: bold;
+    }
+}
+
+
+
+
+
+
 //
 //		Handle width when bold on hover
 //
@@ -92,6 +108,11 @@
         visibility: hidden;
     }
 }
+
+
+
+
+
 
 //
 //		Don't let phone numbers break

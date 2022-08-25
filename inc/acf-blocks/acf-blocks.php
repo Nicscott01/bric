@@ -30,3 +30,16 @@
     ]);
 
 
+
+    acf_register_block_type( [
+        'name'              => 'social-accounts',
+        'title'             => __( 'Social Media Accounts' ),
+        'description'       => __( 'Display social media accounts.'),
+        'render_template'   => locate_template( 'template-parts/blocks/social-media-accounts.php' ),
+        'category'          => 'layout',
+        'icon'              => 'dashicons-share',
+        'keywords'          => [ 'social', 'media' ],
+        'mode'              => 'preview'
+    ]);
+
+

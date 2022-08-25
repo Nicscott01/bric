@@ -3,7 +3,7 @@
 get_header();
 
 ?>
-<main class="main-content container-fluid<?php //bric_main_content_class(); ?>" role="main">
+<main class="main-content container<?php echo get_post_type() == 'page' ? '-fluid' : ''; ?>" role="main">
 	<div class="row">
 <?php
 

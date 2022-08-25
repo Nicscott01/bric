@@ -1,28 +1,31 @@
+.heading-wrapper {
 
-h2, .h2 {
-    text-transform: uppercase;
-    margin-top: $headings-margin-top;
-    margin-bottom: $headings-margin-bottom;
-    position: relative;
-    
-    
-    &:after {
-        content:"";
-        position: absolute;
-        right: 0;
-        bottom:-1rem;
-        width: 100vw;
-        border-bottom: map-get( $border-widths, 3 ) solid var( --#{$variable-prefix}primary ); //write in border thickness
-    }
-
-
-    &.right-side {
-        text-align: right;
-
+    h2, .h2 {
+        text-transform: uppercase;
+        margin-top: $headings-margin-top;
+        margin-bottom: $headings-margin-bottom;
+        position: relative;
+        
+        
         &:after {
-            right:auto;
-            left:0;
+            content:"";
+            position: absolute;
+            right: 0;
+            bottom:-1rem;
+            width: 100vw;
+            border-bottom: var( --#{$variable-prefix}border-width ) solid var( --#{$variable-prefix}primary ); //write in border thickness
         }
+
+
+        &.right-side {
+            text-align: right;
+
+            &:after {
+                right:auto;
+                left:0;
+            }
+        }
+
     }
 
 }

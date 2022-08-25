@@ -42,6 +42,7 @@ include get_template_directory().'/inc/classes/GoogleFontLoader.class.php';
 include get_template_directory().'/inc/classes/Restaurant.class.php';
 include get_template_directory().'/inc/classes/Admin.class.php';
 include get_template_directory().'/inc/classes/ACFBlocks.class.php';
+include get_template_directory().'/inc/classes/ACFOptions.class.php';
 include get_template_directory().'/inc/classes/ComingSoon.class.php';
 include get_template_directory().'/inc/classes/SortByTaxTerm.class.php';
 include get_template_directory().'/inc/classes/BricSitemapImages.class.php';
@@ -75,6 +76,7 @@ include get_template_directory().'/inc/functions/callback-functions.php';
 //Register Actions
 include get_template_directory().'/inc/actions.php';
 include get_template_directory().'/inc/filters.php';
+include get_template_directory().'/inc/functions/wp-block-filters.php';
 
 
 

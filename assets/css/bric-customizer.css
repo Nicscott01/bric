@@ -1,2 +1,46 @@
 .wp-block-button.is-style-outline > a {
   border-color: var(--bric-primary); }
+
+a {
+  color: var(--bric-link-color);
+  text-decoration: var(--bric-link-decoration); }
+  a:hover {
+    color: var(--bric-link-hover-color);
+    text-decoration: var(--bric-link-hover-decoration); }
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  font-family: var(--bric-headings-font-family);
+  font-weight: var(--bric-headings-font-weight); }
+
+.active-color-primary a.active {
+  color: var(--bric-primary) !important; }
+
+.active-color-secondary a.active {
+  color: var(--bric-secondary) !important; }
+
+.active-color-success a.active {
+  color: var(--bric-success) !important; }
+
+.active-color-info a.active {
+  color: var(--bric-info) !important; }
+
+.active-color-warning a.active {
+  color: var(--bric-warning) !important; }
+
+.active-color-danger a.active {
+  color: var(--bric-danger) !important; }
+
+.active-color-light a.active {
+  color: var(--bric-light) !important; }
+
+.active-color-dark a.active {
+  color: var(--bric-dark) !important; }
+
+.navbar .navbar-nav .nav-link {
+  padding-left: var(--bric-navbar-nav-link-padding-x);
+  padding-right: var(--bric-navbar-nav-link-padding-x); }

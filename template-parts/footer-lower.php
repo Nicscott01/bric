@@ -5,7 +5,7 @@ global $BricLoop;
 
 
 ?>
-<div class="footer-lower d-flex justify-content-center align-items-center p-2 small copyright-credits-wrapper text-<?php echo bric_get_theme_mod( 'lower_footer', 'text_color' ); ?> bg-<?php echo get_theme_mod( 'lower_footer__background_color' ); ?>">
+<div class="footer-lower d-flex flex-wrap justify-content-center align-items-center p-2 small copyright-credits-wrapper text-<?php echo bric_get_theme_mod( 'lower_footer', 'text_color' ); ?> bg-<?php echo get_theme_mod( 'lower_footer__background_color' ); ?>">
 	<?php echo $BricLoop->get_copyright(); ?><span class="px-2">|</span>
     <?php 
     //Get the lower nav menu

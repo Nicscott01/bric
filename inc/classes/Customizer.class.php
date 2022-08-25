@@ -19,8 +19,11 @@ class Customizer {
         self::$defaults_file =  \get_template_directory() . '/theme-defaults.json';
 
         add_action( 'customize_register', [ $this, 'add_theme_defaults_to_customizer'] );
-        //add_action( 'customize_register', [ $this, 'add_google_fonts_to_customizer'] );
+
         add_action( 'customize_register', [ $this, 'add_site_info_to_customizer'] );
+        add_action( 'customize_register', [ $this, 'add_breadcrumb_options_to_customizer'] );
+        
+      //  add_action( 'customize_register', [ $this, 'register_social_media_customizer'] );
 
         add_action( 'update_option_theme_mods_' . get_stylesheet(), [ $this, 'after_theme_mod_update' ], 10, 3 );
      
@@ -34,11 +37,15 @@ class Customizer {
     }
 
 
+
+
+
+
     public function enqueue_customizer_preview_styles() {
 
         if ( is_customize_preview() ) {
 
-            wp_enqueue_style( 'bric-customizer2',  get_template_directory_uri() . '/assets/css/bric-customizer.css' );
+            wp_enqueue_style( 'bric-customizer2',  get_template_directory_uri() . '/assets/css/bric-customizer.css', ['bric'], time() );
 
         }
     }
@@ -46,7 +53,20 @@ class Customizer {
 
 
 
-    public function add_theme_defaults_to_customizer( $wp_customize ) {
+
+
+
+
+
+    /**
+     *  Register our theme-defaults.json
+     *  in the customizer
+     * 
+     * 
+     * 
+     */
+
+     public function add_theme_defaults_to_customizer( $wp_customize ) {
     
     
         $wp_customize->add_panel( 'theme_options', [
@@ -161,6 +181,8 @@ class Customizer {
                                         
                                 break;
 
+                           
+
                             default :
 
                                 $wp_customize->add_control( sprintf( "%s__%s", $section_id, $default_prop ), [
@@ -231,9 +253,357 @@ class Customizer {
 
 
 
+    /**
+     *      Add the Site Info fields
+     *      to customizer
+     *      Opted to manually code into theme without json file
+     * 
+     * 
+     */
+
+    public function add_site_info_to_customizer( $wp_customize ) {
+
+        /*
+                $wp_customize->add_panel( 'bric_si', [
+                    'title' => __( 'Site Info' ),
+                    'description' => __( 'Define business info.' ),
+                    'priority' => 160,
+                    'capability' => 'edit_theme_options',
+                ]);
+        */
+        
+        /*
+                $wp_customize->add_section( 'bric_si', [
+                    'title' => __( 'Site Info'),
+                    'panel' => 'bric_si'
+                ]);
+        */
+        
+        
+                $wp_customize->add_setting( 'bric_si_name', [
+                    'default' => get_bloginfo( 'title' ),
+                    'transport' => 'refresh',
+                    'type' => 'option',
+                    'capability' => 'edit_theme_options',
+                    'sanitize_callback' => 'wp_filter_nohtml_kses'
+               ]);           
+        
+        
+                $wp_customize->add_control( 'bric_si_name', [
+                    'label' => __( 'Company Name' ),
+                    'description' => __( 'Company name, or whatever the main entity is on the website.' ),
+                    'section' => 'title_tagline',
+                    'priority' => 100,
+                    'type' => 'text',
+                    'capability' => 'edit_theme_options'
+                ]);
+        
+        
+                
+        
+                $wp_customize->add_setting( 'bric_si_address_1', [
+                    'default' => '',
+                    'transport' => 'refresh',
+                    'type' => 'option',
+                    'capability' => 'edit_theme_options',
+                    'sanitize_callback' => 'wp_filter_nohtml_kses'
+               ]);           
+        
+        
+                $wp_customize->add_control( 'bric_si_address_1', [
+                    'label' => __( 'Address' ),
+                    'description' => null,
+                    'section' => 'title_tagline',
+                    'priority' => 100,
+                    'type' => 'text',
+                    'capability' => 'edit_theme_options'
+                ]);
+        
+        
+        
+                $wp_customize->add_setting( 'bric_si_address_2', [
+                    'default' => '',
+                    'transport' => 'refresh',
+                    'type' => 'option',
+                    'capability' => 'edit_theme_options',
+                    'sanitize_callback' => 'wp_filter_nohtml_kses'
+               ]);           
+        
+        
+                $wp_customize->add_control( 'bric_si_address_2', [
+                    'label' => __( 'Address Line 2' ),
+                    'description' => null,
+                    'section' => 'title_tagline',
+                    'priority' => 100,
+                    'type' => 'text',
+                    'capability' => 'edit_theme_options'
+                ]);
+        
+        
+                $wp_customize->add_setting( 'bric_si_city', [
+                    'default' => '',
+                    'transport' => 'refresh',
+                    'type' => 'option',
+                    'capability' => 'edit_theme_options',
+                    'sanitize_callback' => 'wp_filter_nohtml_kses'
+               ]);           
+        
+        
+                $wp_customize->add_control( 'bric_si_city', [
+                    'label' => __( 'City' ),
+                    'description' => null,
+                    'section' => 'title_tagline',
+                    'priority' => 100,
+                    'type' => 'text',
+                    'capability' => 'edit_theme_options'
+                ]);
+        
+        
+                $wp_customize->add_setting( 'bric_si_state', [
+                    'default' => '',
+                    'transport' => 'refresh',
+                    'type' => 'option',
+                    'capability' => 'edit_theme_options',
+                    'sanitize_callback' => 'wp_filter_nohtml_kses'
+               ]);           
+        
+        
+                $wp_customize->add_control( 'bric_si_state', [
+                    'label' => __( 'State' ),
+                    'description' => null,
+                    'section' => 'title_tagline',
+                    'priority' => 100,
+                    'type' => 'text',
+                    'capability' => 'edit_theme_options'
+                ]);
+        
+        
+        
+                $wp_customize->add_setting( 'bric_si_zip', [
+                    'default' => '',
+                    'transport' => 'refresh',
+                    'type' => 'option',
+                    'capability' => 'edit_theme_options',
+                    'sanitize_callback' => 'wp_filter_nohtml_kses'
+               ]);           
+        
+        
+                $wp_customize->add_control( 'bric_si_zip', [
+                    'label' => __( 'Zip' ),
+                    'description' => null,
+                    'section' => 'title_tagline',
+                    'priority' => 100,
+                    'type' => 'text',
+                    'capability' => 'edit_theme_options'
+                ]);
+        
+                $wp_customize->add_setting( 'bric_si_phone_prefix', [
+                    'default' => '',
+                    'transport' => 'refresh',
+                    'type' => 'option',
+                    'capability' => 'edit_theme_options',
+                    'sanitize_callback' => 'wp_filter_nohtml_kses'
+               ]);           
+        
+        
+                $wp_customize->add_control( 'bric_si_phone_prefix', [
+                    'label' => __( 'Phone Prefix' ),
+                    'description' => null,
+                    'section' => 'title_tagline',
+                    'priority' => 100,
+                    'type' => 'tel',
+                    'capability' => 'edit_theme_options'
+                ]);
+        
+        
+                $wp_customize->add_setting( 'bric_si_phone', [
+                    'default' => '',
+                    'transport' => 'refresh',
+                    'type' => 'option',
+                    'capability' => 'edit_theme_options',
+                    'sanitize_callback' => 'wp_filter_nohtml_kses'
+               ]);           
+        
+        
+                $wp_customize->add_control( 'bric_si_phone', [
+                    'label' => __( 'Phone' ),
+                    'description' => null,
+                    'section' => 'title_tagline',
+                    'priority' => 100,
+                    'type' => 'tel',
+                    'capability' => 'edit_theme_options'
+                ]);
+        
+                $wp_customize->add_setting( 'bric_si_fax_prefix', [
+                    'default' => '',
+                    'transport' => 'refresh',
+                    'type' => 'option',
+                    'capability' => 'edit_theme_options',
+                    'sanitize_callback' => 'wp_filter_nohtml_kses'
+               ]);           
+        
+        
+                $wp_customize->add_control( 'bric_si_fax_prefix', [
+                    'label' => __( 'Fax Prefix' ),
+                    'description' => null,
+                    'section' => 'title_tagline',
+                    'priority' => 100,
+                    'type' => 'tel',
+                    'capability' => 'edit_theme_options'
+                ]);
+        
+        
+                $wp_customize->add_setting( 'bric_si_fax', [
+                    'default' => '',
+                    'transport' => 'refresh',
+                    'type' => 'option',
+                    'capability' => 'edit_theme_options',
+                    'sanitize_callback' => 'wp_filter_nohtml_kses'
+               ]);           
+        
+        
+                $wp_customize->add_control( 'bric_si_fax', [
+                    'label' => __( 'Fax' ),
+                    'description' => null,
+                    'section' => 'title_tagline',
+                    'priority' => 100,
+                    'type' => 'tel',
+                    'capability' => 'edit_theme_options'
+                ]);
+        
+        
+                $wp_customize->add_setting( 'bric_si_email', [
+                    'default' => '',
+                    'transport' => 'refresh',
+                    'type' => 'option',
+                    'capability' => 'edit_theme_options',
+                    'sanitize_callback' => 'sanitize_email'
+               ]);           
+        
+        
+                $wp_customize->add_control( 'bric_si_email', [
+                    'label' => __( 'Email' ),
+                    'description' => null,
+                    'section' => 'title_tagline',
+                    'priority' => 100,
+                    'type' => 'tel',
+                    'capability' => 'edit_theme_options'
+                ]);
+        
+        
+        
+        
+        
+        
+        
+            }
+        
+        
+        
+        
+        
+
+    /**
+     *  Social Media in the Customizer
+     * 
+     * 
+     * 
+     */
+
+
+     public function register_social_media_customizer( $wp_customize ) {
+
+ 
+        $wp_customize->add_panel( 'bric_social_media', [
+            'title' => __( 'Social Media' ),
+            'description' => __( 'Add social media accounts.' ),
+            'priority' => 160,
+            'capability' => 'edit_theme_options',
+        ]);
+
+        $wp_customize->add_section( 'bric_social_media_accounts', [
+            'title' => __( 'Social Media'),
+            'panel' => 'bric_social_media'
+        ]);
+
+
+        
+
+        $wp_customize->add_control( new \Bric_Font_Awesome_Select_Custom_Control( $wp_customize,  'bric_social_media_facebook' ),
+            [
+                'label' => __( 'Facebook' ),
+                'description' => __( 'Facebook account info' ),
+                'section' => $section_id,
+                'settings' => 'bric_social_media_facebook',
+                'input_attrs' => array(
+                    'font_count' => 'all',
+
+                ),
+            ]
+        );
+                    
+          
+     }
 
 
 
+
+
+    /**
+     *  Breadcrumb Options in the Customizer
+     * 
+     *  This will only load if Yoast SEO is active.
+     * 
+     * 
+     */
+
+
+    public function add_breadcrumb_options_to_customizer( $wp_customize ) {
+
+ 
+        $wp_customize->add_setting( 'bric_bc_container', [
+            'default' => 'container-xxl',
+            'transport' => 'refresh',
+            'type' => 'theme_mod',
+            'capability' => 'edit_theme_options',
+            'sanitize_callback' => 'wp_filter_nohtml_kses'
+       ]);           
+
+
+        $wp_customize->add_control( 'bric_bc_container', [
+            'label' => __( 'Breadcrumb Container Class' ),
+            'description' => __( '' ),
+            'section' => 'wpseo_breadcrumbs_customizer_section',
+            'priority' => 100,
+            'type' => 'select',
+            'capability' => 'edit_theme_options',
+            'choices' => [ 
+                'container-xxl' => __( 'Container XXL'),
+                'container-xl'  => __( 'Container XL'),
+                'container-lg'  => __( 'Container LG'),
+                'container-md' =>  __( 'Container MD'),
+                'container'     => __( 'Container'),
+                'container-fluid' => __( 'Container Fluid'),
+            ]
+        ]);
+
+            
+          
+     }
+
+
+
+
+
+
+
+    /**
+     *  Just get the Theme Default Colors
+     *  from the defaults object
+     *     
+     * 
+     * 
+     */
 
 
     public function get_theme_default_colors() {
@@ -264,10 +634,13 @@ class Customizer {
 
 
 
-
-
-
-
+   /**
+    *   Get all the Theme Defaults
+    *   from theme-defaults.json
+    *
+    *
+    *
+    */
 
 
     public function get_theme_defaults() {
@@ -318,6 +691,13 @@ class Customizer {
 
 
 
+    /**
+     *  Gets a single Theme Default value
+     *  from the theme-defaults.json 
+     *  object
+     * 
+     * 
+     */
 
 
     public function get_theme_default( $section, $setting ) {
@@ -346,7 +726,13 @@ class Customizer {
 
 
 
-    
+    /**
+     *  Wrapper for get_theme_mod
+     *  which auto-injects the 
+     *  default value from our 
+     *  theme-defaults.json
+     *  
+     */
 
 
     public function get_theme_mod( $section, $setting ) {
@@ -354,6 +740,8 @@ class Customizer {
         return get_theme_mod( "{$section}__{$setting}", $this->get_theme_default( $section, $setting ) );
 
     }
+
+
 
 
 
@@ -422,6 +810,8 @@ class Customizer {
 
 
 
+
+
     /**
      * 
      *  Initialize the SCSS Compiler
@@ -453,8 +843,11 @@ class Customizer {
      }
 
 
+
+
+
     /**
-     *  Compile SCSS
+     *  Compile SCSS using PHP SCSS class
      * 
      * 
      * 
@@ -484,7 +877,7 @@ class Customizer {
  
         } catch ( \Exception $e ) {
 
-            error_log( 'SCSS Compiler Error:' . $e->getMessage() );
+            error_log( 'SCSS Compiler Error: ' . $e->getMessage() );
 
         }
 
@@ -513,13 +906,26 @@ class Customizer {
 
 
 
+
+
+     /**
+      *   Wrapper to get and write the
+      *   SCSS Variables
+      *
+      *
+      *
+      */
+
+
      public function write_css_variables( $theme_mods ) {
 
         //Colors
-        $theme_colors = $theme_mods['theme_colors'];
+        //$theme_colors = $theme_mods['theme_colors'];
         
         $scss_path = \get_stylesheet_directory() . '/assets/src/css/_theme-colors-auto.scss';
 
+        //Used by the included files
+        $write_file = true;
 
         ob_start();
 
@@ -554,25 +960,25 @@ class Customizer {
 
 
     /**
-     *  Write the SCSS 
+     *  Write the SCSS after Customizer is "Published"
+     * 
+     * 
      * 
      *  colors
      *  variables
      */
 
-
-
     public function after_theme_mod_update( $old_value, $value, $option ) {
 
-        error_log( json_encode( $value ) );
+        //error_log( json_encode( $value ) );
 
         //$theme_defaults = $this->get_theme_defaults();
        
-        $theme_mods = $this->get_merged_theme_mods( $value );
+        //$theme_mods = $this->get_merged_theme_mods( $value );
 
         //error_log( json_encode( $theme_mods ) );
 
-        $this->write_css_variables( $theme_mods );
+        $this->write_css_variables( $value ); //$theme_mods );
 
         $this->compile_scss();
 
@@ -585,48 +991,23 @@ class Customizer {
 
 
 
-    public function merge_theme_colors( $defaults, $theme ) {
-
-
-        //Defaults are set up like [ 'slug' => '', 'name' => '', 'hex' => '' ]
-        //Theme are set up like [ 'slug' => 'color' ]
-        //We'll make it like the theme, so that way we can output our SCSS
-
-        $merged_colors = [];
-
-        foreach( $defaults as $default ) {
-
-            if ( array_key_exists( $default->slug, $theme ) ) {
-
-               $merged_colors[ $default->slug ] = $theme[ $default->slug ];
-
-            } else {
-
-                $merged_colors[ $default->slug ] = $default->hex;
-            }
-
-
-        }
-
-
-        return $merged_colors;
-
-
-    }
 
 
 
 
-
-
-
+    /** 
+     *  Wrapper function to output CSS Vars
+     *  Gets called by wp_head
+     * 
+     * 
+     * 
+     * 
+     */
 
     public function write_css_vars() {
 
-            if ( true) { //} is_customize_preview() ) {
+            if ( is_customize_preview() || ( isset( $_GET['preview_css'] ) ) ) {
                 
-                //wp_add_inline_style( 'bric', bric_write_css_vars() );
-                //echo bric_write_css_vars();
                 echo $this->get_vars_stylesheet();
         
             }
@@ -635,548 +1016,46 @@ class Customizer {
 
 
 
-    public function get_theme_mods_preview() {
-
-        $preview_theme_mods = [];
-
-        $defaults = $this->get_theme_defaults();
 
 
-      //  var_dump( $defaults );
-
-
-        foreach( $defaults->sections as $section ) {
-
-            $section_id = $section->id;
-
-            $settings = $defaults->$section_id;
-
-            foreach ( $settings as $setting ) {
-
-                $preview_theme_mods[ sprintf( '%s__%s', $section_id, $setting->prop ) ] = $this->get_theme_mod( $section_id, $setting->prop );
-
-            }
-
-        }
-
-    
-
-        return $preview_theme_mods;
-
-    }
-
+    /**
+     *  Prints the CSS Variables
+     *  for the preview 
+     * 
+     * 
+     * 
+     */
 
 
 
     public function get_vars_stylesheet() {
 
-/*
-        $theme_mods = $this->get_merged_theme_mods( $this->get_theme_mods_preview() );
 
-        var_dump( $theme_mods );
-
-        $this->write_css_variables( $theme_mods );
-
-        
-        
-
-        $compiler = $this->scss_init();
-
-        $css = $compiler->compileString( file_get_contents( get_stylesheet_directory() . '/assets/src/css/bric-customizer-vars.scss' ) );
-
-        return '<style id="bric-css-vars">' . $css->getCss() . '</style>';
-        
-
-
-
-        return;
-*/
-
+        $write_inline = true;
 
         ob_start();
-            
-        $scss_prefix = $this->get_theme_defaults()->scss->prefix;
-
-
-        
-            ?>
+?>
 <style id="bric-css-vars">
-:root{
+:root {
 <?php
+        include locate_template( 'template-parts/scss/child-colors-auto.php' );
+        include locate_template( 'template-parts/scss/child-variables-auto.php' );
+?>
 
-            //Get the theme colors
-            $colors = $this->get_theme_default_colors();
+}
+</style>
+<?php
+        $css = ob_get_clean();
 
-            foreach ( $colors as $color ) {
+        return $css;
 
-                $value = $this->get_theme_mod( 'theme_colors', $color->prop );
-
-
-                printf ( "--%s%s: %s;\r\n", $scss_prefix, $color->prop, $value );
-                printf ( "--%s%s-rgb: %s;\r\n", $scss_prefix, $color->prop, hex2rgb( $value ) );
-
-            }
-
-
-            //Do fonts
-           //$fonts = $this->get_theme_defaults()->fonts;
-           //$body_els =  $this->get_theme_defaults()->body;
-
-            //$fonts = array_merge( $fonts, $body_els );
-
-            //var_dump( $fonts );
-
-            $defaults = $this->get_theme_defaults();
-
-            //var_dump( $defaults );
-
-            
-            foreach( $defaults->sections as $section ) {
-
-                if ( $section->id == 'theme_colors' ) {
-                    continue;
-                } 
-
-                $section_id = $section->id;
-
-                foreach( $defaults->$section_id as $setting ) {
-
-                    //var_dump( $setting );
-
-                    $value = maybe_json_decode( $this->get_theme_mod( $section_id, $setting->prop ) );
-
-
-                    //var_dump( $value );
-
-
-                    if ( isset( $setting->css_var ) ) {
-
-                        if ( $setting->css_var === false ) {
-                            
-                            //skip it
-                            continue;
-
-                        }
-
-                        $css_variable = $setting->css_var;
     
-                    } else {
-    
-                        $css_variable = str_replace( '_', '-', $setting->prop );
-                    }
-                               
-                    
-                   
-    
-    
-    
-                    if ( empty( $value ) || $value == 'null' ) {
+}
 
-                        //var_dump( $section_id . '__' . $setting->prop );
-                                               
-                        continue;
-    
-                    } elseif ( is_object( $value ) ) { //it's a font family
-    
-                        printf ( "--%s%s: \"%s\", %s;\r\n", $scss_prefix, $css_variable, $value->font, $value->category );
-                    
-                    } elseif ( is_numeric( $value ) ) {
 
-                            $converted_value = $value;
 
-                            //var_dump( $setting );
 
-                            if (  isset( $setting->units ) && $setting->units == 'px' ) {
 
-                                $converted_value = intval( $value ) / 16;
-
-                                printf ( "--%s%s: %srem;\r\n", $scss_prefix, $css_variable, $converted_value );
-                           
-                            } else {
-
-                                printf ( "--%s%s: %s;\r\n", $scss_prefix, $css_variable, $value );
-                            }
-    
-                           
-    
-                    } elseif ( isset( $setting->choices ) && is_array( $setting->choices) ) {
-
-                        //Assume the value is a variable
-                        printf ( "--%s%s: var( --%s%s );\r\n", $scss_prefix, $css_variable, $scss_prefix, $value );
-                    
-                    
-                    } else {
-                        
-                        printf ( "--%s%s: %s;\r\n", $scss_prefix, $css_variable, $value );
-
-                        
-                    }
-    
-                       
-                    
-
-                }
-
-            }
-
-            /*
-
-            foreach( $fonts as $font ) {
-
-                if ( isset( $font->css_var ) ) {
-
-                    $css_variable = $font->css_var;
-
-                } else {
-
-                    $css_variable = str_replace( '_', '-', $font->prop );
-                }
-                           
-                
-                $value = maybe_json_decode( $this->get_theme_mod( 'fonts', $font->prop ) );
-
-
-
-                if ( empty( $value ) ) {
-                    
-                    continue;
-
-                } elseif ( is_object( $value ) ) { //it's a font family
-
-                    printf ( '--%s%s: "%s", %s;', $scss_prefix, $css_variable, $value->font, $value->category );
-                
-                } else {
-
-                    //Convert the value into rems 
-                    if ( is_int( $value ) ) {
-
-                        $value_in_rem = $value / 16;
-
-                        printf ( '--%s%s: %srem;', $scss_prefix, $css_variable, $value_in_rem );
-
-                    } else {
-                        
-                        printf ( '--%s%s: %s;', $scss_prefix, $css_variable, $value );
-
-                        
-                    }
-
-                   
-                }
-            }
-
-            //Do body
-            $body_rules = $this->get_theme_defaults()->body;
-
-            //        color: var( --#{$variable-prefix}link-hover-color );
-        //text-decoration: var( --#{$variable-prefix}link-hover-decoration );
-
-            foreach( $body_rules as $body_rule ) {
-
-
-            }
-*/
-            ?>
-        }
-        </style>
-            <?php
-        
-            $styles = ob_get_clean();
-        
-            return $styles;
-
-            
-            
-
-
-
-    }
-
-
-
-
-
-
-    public function add_google_fonts_to_customizer( $wp_customize ) {
-
-
-            $wp_customize->add_setting( 'google_font_base', [  
-                'default' => '{"font":"Open Sans","regularweight":"regular","italicweight":"italic","boldweight":"700","category":"sans-serif"}',
-                'sanitize_callback' => 'skyrocket_google_font_sanitization',
-                'type' => 'theme_mod'
-            ]);
-
-
-            
-            
-            $wp_customize->add_control( new \Skyrocket_Google_Font_Select_Custom_Control( $wp_customize, 'google_font_base',
-                [
-                    'label' => __( 'Google Font Control' ),
-                    'description' => esc_html__( 'Sample custom control description' ),
-                    'section' => 'body',
-                    'input_attrs' => array(
-                        'font_count' => 'all',
-                        'orderby' => 'alpha',
-                    ),
-                ]
-            ) );
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /**
-     *      Add the Site Info fields
-     *      to customizer
-     *      Opted to manually code into theme without json file
-     * 
-     * 
-     */
-
-    public function add_site_info_to_customizer( $wp_customize ) {
-
-/*
-        $wp_customize->add_panel( 'bric_si', [
-            'title' => __( 'Site Info' ),
-            'description' => __( 'Define business info.' ),
-            'priority' => 160,
-            'capability' => 'edit_theme_options',
-        ]);
-*/
-
-/*
-        $wp_customize->add_section( 'bric_si', [
-            'title' => __( 'Site Info'),
-            'panel' => 'bric_si'
-        ]);
-*/
-
-
-        $wp_customize->add_setting( 'bric_si_name', [
-            'default' => get_bloginfo( 'title' ),
-            'transport' => 'refresh',
-            'type' => 'option',
-            'capability' => 'edit_theme_options',
-            'sanitize_callback' => 'wp_filter_nohtml_kses'
-       ]);           
-
-
-        $wp_customize->add_control( 'bric_si_name', [
-            'label' => __( 'Company Name' ),
-            'description' => __( 'Company name, or whatever the main entity is on the website.' ),
-            'section' => 'title_tagline',
-            'priority' => 100,
-            'type' => 'text',
-            'capability' => 'edit_theme_options'
-        ]);
-
-
-        
-
-        $wp_customize->add_setting( 'bric_si_address_1', [
-            'default' => '',
-            'transport' => 'refresh',
-            'type' => 'option',
-            'capability' => 'edit_theme_options',
-            'sanitize_callback' => 'wp_filter_nohtml_kses'
-       ]);           
-
-
-        $wp_customize->add_control( 'bric_si_address_1', [
-            'label' => __( 'Address' ),
-            'description' => null,
-            'section' => 'title_tagline',
-            'priority' => 100,
-            'type' => 'text',
-            'capability' => 'edit_theme_options'
-        ]);
-
-
-
-        $wp_customize->add_setting( 'bric_si_address_2', [
-            'default' => '',
-            'transport' => 'refresh',
-            'type' => 'option',
-            'capability' => 'edit_theme_options',
-            'sanitize_callback' => 'wp_filter_nohtml_kses'
-       ]);           
-
-
-        $wp_customize->add_control( 'bric_si_address_2', [
-            'label' => __( 'Address Line 2' ),
-            'description' => null,
-            'section' => 'title_tagline',
-            'priority' => 100,
-            'type' => 'text',
-            'capability' => 'edit_theme_options'
-        ]);
-
-
-        $wp_customize->add_setting( 'bric_si_city', [
-            'default' => '',
-            'transport' => 'refresh',
-            'type' => 'option',
-            'capability' => 'edit_theme_options',
-            'sanitize_callback' => 'wp_filter_nohtml_kses'
-       ]);           
-
-
-        $wp_customize->add_control( 'bric_si_city', [
-            'label' => __( 'City' ),
-            'description' => null,
-            'section' => 'title_tagline',
-            'priority' => 100,
-            'type' => 'text',
-            'capability' => 'edit_theme_options'
-        ]);
-
-
-        $wp_customize->add_setting( 'bric_si_state', [
-            'default' => '',
-            'transport' => 'refresh',
-            'type' => 'option',
-            'capability' => 'edit_theme_options',
-            'sanitize_callback' => 'wp_filter_nohtml_kses'
-       ]);           
-
-
-        $wp_customize->add_control( 'bric_si_state', [
-            'label' => __( 'State' ),
-            'description' => null,
-            'section' => 'title_tagline',
-            'priority' => 100,
-            'type' => 'text',
-            'capability' => 'edit_theme_options'
-        ]);
-
-
-
-        $wp_customize->add_setting( 'bric_si_zip', [
-            'default' => '',
-            'transport' => 'refresh',
-            'type' => 'option',
-            'capability' => 'edit_theme_options',
-            'sanitize_callback' => 'wp_filter_nohtml_kses'
-       ]);           
-
-
-        $wp_customize->add_control( 'bric_si_zip', [
-            'label' => __( 'Zip' ),
-            'description' => null,
-            'section' => 'title_tagline',
-            'priority' => 100,
-            'type' => 'text',
-            'capability' => 'edit_theme_options'
-        ]);
-
-        $wp_customize->add_setting( 'bric_si_phone_prefix', [
-            'default' => '',
-            'transport' => 'refresh',
-            'type' => 'option',
-            'capability' => 'edit_theme_options',
-            'sanitize_callback' => 'wp_filter_nohtml_kses'
-       ]);           
-
-
-        $wp_customize->add_control( 'bric_si_phone_prefix', [
-            'label' => __( 'Phone Prefix' ),
-            'description' => null,
-            'section' => 'title_tagline',
-            'priority' => 100,
-            'type' => 'tel',
-            'capability' => 'edit_theme_options'
-        ]);
-
-
-        $wp_customize->add_setting( 'bric_si_phone', [
-            'default' => '',
-            'transport' => 'refresh',
-            'type' => 'option',
-            'capability' => 'edit_theme_options',
-            'sanitize_callback' => 'wp_filter_nohtml_kses'
-       ]);           
-
-
-        $wp_customize->add_control( 'bric_si_phone', [
-            'label' => __( 'Phone' ),
-            'description' => null,
-            'section' => 'title_tagline',
-            'priority' => 100,
-            'type' => 'tel',
-            'capability' => 'edit_theme_options'
-        ]);
-
-        $wp_customize->add_setting( 'bric_si_fax_prefix', [
-            'default' => '',
-            'transport' => 'refresh',
-            'type' => 'option',
-            'capability' => 'edit_theme_options',
-            'sanitize_callback' => 'wp_filter_nohtml_kses'
-       ]);           
-
-
-        $wp_customize->add_control( 'bric_si_fax_prefix', [
-            'label' => __( 'Fax Prefix' ),
-            'description' => null,
-            'section' => 'title_tagline',
-            'priority' => 100,
-            'type' => 'tel',
-            'capability' => 'edit_theme_options'
-        ]);
-
-
-        $wp_customize->add_setting( 'bric_si_fax', [
-            'default' => '',
-            'transport' => 'refresh',
-            'type' => 'option',
-            'capability' => 'edit_theme_options',
-            'sanitize_callback' => 'wp_filter_nohtml_kses'
-       ]);           
-
-
-        $wp_customize->add_control( 'bric_si_fax', [
-            'label' => __( 'Fax' ),
-            'description' => null,
-            'section' => 'title_tagline',
-            'priority' => 100,
-            'type' => 'tel',
-            'capability' => 'edit_theme_options'
-        ]);
-
-
-        $wp_customize->add_setting( 'bric_si_email', [
-            'default' => '',
-            'transport' => 'refresh',
-            'type' => 'option',
-            'capability' => 'edit_theme_options',
-            'sanitize_callback' => 'sanitize_email'
-       ]);           
-
-
-        $wp_customize->add_control( 'bric_si_email', [
-            'label' => __( 'Email' ),
-            'description' => null,
-            'section' => 'title_tagline',
-            'priority' => 100,
-            'type' => 'tel',
-            'capability' => 'edit_theme_options'
-        ]);
-
-
-
-
-
-
-
-    }
 
 
 
