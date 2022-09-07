@@ -2,6 +2,8 @@
 This is the core theme for Creare Web Solutions websites. Creates a child theme when activated in the Wordpress dashboard.
 
 ### Changelog
+#### 9/7/2022
+- Tweaked the testimonials "plugin" on the develop_hbs branch
 #### v2.1.5
 - Updates for Bootstrap 5
 - Tweaks made during the YB Fire buildout 
