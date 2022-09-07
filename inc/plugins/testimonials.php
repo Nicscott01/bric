@@ -40,7 +40,7 @@ class BricTestimonials
     {
 
         include_once(__DIR__ . '/testimonials/acf-blocks.php');
-        include_once(__DIR__ . '../acf-fields/testimonials.php');
+        include_once(__DIR__ . '/../acf-fields/testimonials.php');
 
         $this->register_post_type();
     }
