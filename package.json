@@ -4,14 +4,14 @@
   "description": "Wordpress theme developed by BRianna and nIC Scott",
   "main": "index.js",
   "dependencies": {
-    "bootstrap": "^5.1.3",
+    "bootstrap": "5.2.2",
     "in-view": "^0.6.1",
     "slideout": "^1.0.1",
     "stickyfilljs": "^2.1.0",
     "waypoints": "^4.0.1"
   },
   "devDependencies": {
-    "autoprefixer": "^9.4.10",
+    "autoprefixer": "9.8.3",
     "fibers": "^5.0.0",
     "grunt": "^1.4.1",
     "grunt-contrib-concat": "^1.0.1",
@@ -26,12 +26,12 @@
     "jquery": "^3.5.1",
     "node-sass": "^4.13.1",
     "photoswipe": "^4.1.3",
-    "popper.js": "^1.14.7",
-    "sass": "^1.17.2"
+    "popper.js": "^1.14.7"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install_cookie_banner" :  "git clone https://github.com/kolappannathan/bootstrap-cookie-banner.git vendor/bootstrap-cookie-banner"
+    "install_cookie_banner" :  "git clone https://github.com/kolappannathan/bootstrap-cookie-banner.git vendor/bootstrap-cookie-banner",
+    "update-bootstrap": "cp -r node_modules/bootstrap/scss/* assets/src/css/vendor/bootstrap/"
   },
   "author": "BRianna and nIC Scott",
   "license": "ISC"

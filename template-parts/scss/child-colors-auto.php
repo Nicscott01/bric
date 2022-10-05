@@ -50,9 +50,14 @@ foreach ( $colors as $color ) {
 
     } elseif ( $write_file ) {
 
-        $value = $theme_mods[ 'theme_colors__' . $color->prop ];
+        $value = isset( $theme_mods[ 'theme_colors__' . $color->prop ] ) ? $theme_mods[ 'theme_colors__' . $color->prop ] : $color->val;
      
-        printf( "$%s: %s;\r\n", $color->prop, $value );
+        if ( !empty( $value ) ) {
+
+            printf( "$%s: %s;\r\n", $color->prop, $value );
+
+        }
+
     }
 
     
@@ -69,7 +74,11 @@ if ( !empty( $theme_colors ) && is_array( $theme_colors ) ) {
 
     foreach ( $theme_colors as $slug => $color ) {
 
-        $scss[] = sprintf( '$%s: %s;', $slug, $color );
+        if ( !empty( $color ) ) {
+
+            $scss[] = sprintf( '$%s: %s;', $slug, $color );
+
+        }
 
     }
 

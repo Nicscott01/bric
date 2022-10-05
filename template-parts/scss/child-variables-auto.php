@@ -101,12 +101,13 @@ foreach( $theme_defaults->sections as $theme_default_section ) {
 /*
             ob_start();
 
+            var_dump( $setting );
             var_dump($theme_mods[$section_id][$setting->prop]);
 
             $log = ob_get_clean();
             error_log($log);
-        
-*/
+*/ 
+
 
             if ( $write_inline && isset( $setting->css_var ) && !empty( $setting->css_var ) ) {
 
@@ -116,20 +117,20 @@ foreach( $theme_defaults->sections as $theme_default_section ) {
 
                 $css_var = $setting->scss_var;
 
-            } else {
+            } elseif ( isset( $setting->prop ) && is_string( $setting->prop ) ) {
                 
                 $css_var = str_replace( '_', '-', $setting->prop ); //dashes, no underscores
                 
             }
 
           
-            if ( $write_file ) {
+            if ( $write_file && is_string( $theme_mods[ $section_id ][ $setting->prop ] ) ) {
 
                 $val = str_replace( '_', '-', $theme_mods[ $section_id ][ $setting->prop ] );
 
             }
 
-            if ( $write_inline ) {
+            if ( $write_inline && is_string( bric_get_theme_mod( $section_id, $setting->prop ) ) ) {
 
                 $val = str_replace( '_', '-', bric_get_theme_mod( $section_id, $setting->prop ) );
 
@@ -138,7 +139,8 @@ foreach( $theme_defaults->sections as $theme_default_section ) {
             }
 
             //All the reasons to skip this for file
-            if ( $val == null 
+            if ( !isset( $val ) 
+            || $val == null 
             || $val == 'null' 
             || ( isset( $setting->css_var ) && $setting->css_var == false ) 
             ) {
@@ -154,12 +156,27 @@ foreach( $theme_defaults->sections as $theme_default_section ) {
 
                     $val = maybe_json_decode( $val );
 
-                    $val = sprintf( '"%s", %s', $val->font, $val->category ); //"Montserrat", sans-serif
+                    if ( isset( $val->font ) ) {
 
-                    $expression = "$%s: %s;";
+                        $val = sprintf( '"%s", %s', $val->font, $val->category ); //"Montserrat", sans-serif
+                    
+                        $expression = "$%s: %s;";
 
-                    $expression_inline = "--%s%s: %s;";
+                        $expression_inline = "--%s%s: %s;";
+    
 
+                    } else {
+
+                        $val = 'inherit';
+
+                        $expression = "$%s: %s;";
+
+                        $expression_inline = "--%s%s: %s;";
+    
+                    }
+
+                                        
+                    
                     break;
 
 

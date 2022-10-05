@@ -27,6 +27,7 @@ class Customizer {
 
         add_action( 'update_option_theme_mods_' . get_stylesheet(), [ $this, 'after_theme_mod_update' ], 10, 3 );
      
+       // add_action( 'init', [ $this, 'remove_action_update_option' ]);
 
         add_action( 'wp_head', [ $this, 'write_css_vars' ], 10 ); 
         
@@ -38,6 +39,21 @@ class Customizer {
 
 
 
+
+    public function remove_action_update_option() {
+
+        $stylesheet = get_option( 'theme_switched' );
+
+        error_log( 'Init check theme switched: ' . $stylesheet );
+       
+
+        if ( !empty( $stylesheet ) ) {
+
+            remove_action( 'update_option_theme_mods_' . $stylesheet, [ $this, 'after_theme_mod_update' ], 10, 3 );
+
+        }
+
+    }
 
 
 
@@ -825,6 +841,7 @@ class Customizer {
 
         $import_paths = [
             get_template_directory() . '/assets/src/css/bric/',
+            get_template_directory() . '/assets/src/css/vendor/bootstrap/',
             //get_template_directory() . '/assets/src/css/bric/acf-blocks/',
             //get_template_directory() . '/assets/src/css/bric/blocks/',
             //get_template_directory() . '/assets/src/css/bric/bric-mixins/',
@@ -969,6 +986,19 @@ class Customizer {
      */
 
     public function after_theme_mod_update( $old_value, $value, $option ) {
+
+        error_log( sprintf( "Update option old value: %s
+        new value: %s
+        option: $option", json_encode( $old_value ), json_encode( $value ) ) );
+
+        error_log( json_encode( $_REQUEST ) );
+
+
+        if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'activate' ) {
+
+            return;
+        }
+
 
         //error_log( json_encode( $value ) );
 

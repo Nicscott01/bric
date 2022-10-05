@@ -221,14 +221,14 @@ if ( !function_exists( 'maybe_json_decode' ) ) {
 		//var_dump( strpos( $thing, '{' ) );
 		//var_dump( strpos( $thing, '{' ) === 0  );
 
-
+			
 		if ( is_object( $thing ) ) {
 		
 			return $thing;
 		
-		} elseif ( strpos( $thing, '{' ) === 0 ) {
+		} elseif ( strpos( trim( $thing ), '{' ) === 0 ) {
 
-			$new_thing = json_decode( $thing );
+			$new_thing = json_decode( trim( $thing ) );
 
 		} else {
 

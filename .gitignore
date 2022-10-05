@@ -13,4 +13,4 @@ _notes/dwsync.xml
 _notes/*
 
 #ignore Vendor
-vendor/
+#vendor/

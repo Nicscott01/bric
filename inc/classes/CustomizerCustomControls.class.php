@@ -674,7 +674,11 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			$this->fontValues = json_decode( $this->value() );
 
 			// Find the index of our default font within our list of Google fonts
-			$this->fontListIndex = $this->skyrocket_getFontIndex( $this->fontList, $this->fontValues->font );
+			if ( isset( $this->fontValues->font ) ) {
+				$this->fontListIndex = $this->skyrocket_getFontIndex( $this->fontList, $this->fontValues->font );
+			} else {
+				//$this->fontListIndex = 0;
+			}
             
 		}
 		/**

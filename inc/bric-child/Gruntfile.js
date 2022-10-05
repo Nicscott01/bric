@@ -12,7 +12,7 @@ module.exports = function (grunt) {
 				implementation: sass,
 				sourceMap: true,
 				outputStyle: 'compressed',
-				includePaths: ['../bric/assets/src/css/bric/', '../bric/assets/src/css/photoswipe/', 'node_modules/bootstrap/scss/']
+				includePaths: ['../bric/assets/src/css/bric/', '../bric/assets/src/css/vendor/bootstrap/', '../bric/assets/src/css/photoswipe/', 'node_modules/bootstrap/scss/']
 			},
 			dev: {
 				files: {

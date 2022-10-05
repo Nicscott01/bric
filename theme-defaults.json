@@ -118,7 +118,7 @@
         {
             "prop": "font_family_alt",
             "label": "Alternate Font Family",
-            "val": null,
+            "val": {},
             "type": "google_font",
             "sanitize_callback": "skyrocket_google_font_sanitization",
             "css_var": "font-sans-serif-alt"
