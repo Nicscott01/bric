@@ -123,7 +123,7 @@ class GoogleFontLoader {
 
         foreach( $fonts as $key => $font ) {
 
-            if ( empty( $font ) ) {
+            if ( empty( $font ) || empty( $font->font ) ) {
                 continue;
             }
 
@@ -131,7 +131,6 @@ class GoogleFontLoader {
             $font_families[ $font->font ] = $this->map_fonts_for_url_encoding( $font );
 
         }
-
 
 
 
