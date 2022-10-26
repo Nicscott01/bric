@@ -13,6 +13,10 @@ include get_template_directory().'/inc/classes/CustomizerCustomControls.class.ph
 //Vendor (phpscss)
 include get_template_directory().'/vendor/autoload.php';
 
+//For some reason action-scheduler was not auto-loading
+include get_template_directory().'/vendor/woocommerce/action-scheduler/action-scheduler.php';
+
+
 //ACF Fields
 include get_template_directory().'/inc/acf-fields/site_info.php';
 

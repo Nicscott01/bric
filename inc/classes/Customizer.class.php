@@ -44,7 +44,7 @@ class Customizer {
 
         $stylesheet = get_option( 'theme_switched' );
 
-        error_log( 'Init check theme switched: ' . $stylesheet );
+        //error_log( 'Init check theme switched: ' . $stylesheet );
        
 
         if ( !empty( $stylesheet ) ) {
@@ -894,6 +894,10 @@ class Customizer {
 
                 as_enqueue_async_action( 'compile_css' );
             }
+            
+        } else {
+
+            error_log( 'Looks like ActionScheduler is not loaded' );
         }
 
     }

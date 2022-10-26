@@ -130,14 +130,14 @@ foreach ($theme_defaults->sections as $theme_default_section) {
             $val = str_replace('_', '-', bric_get_theme_mod($section_id, $setting->prop));
         }
 
-        ob_start();
+        /*ob_start();
 
         var_dump( $css_var );
         var_dump( $val );
         var_dump( bric_get_theme_mod($section_id, $setting->prop) );
 
-        $log = ob_get_clean();
-        error_log($log);
+        $log = ob_get_clean();*/
+        //error_log($log);
 
 
 
