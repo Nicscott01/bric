@@ -55,7 +55,7 @@ add_action( 'wp', array( $BricLoop, 'home_carousel'), 10 );
 
 
 //SVG output
-add_action( 'wp_footer', function() {
+add_action( 'init', function() {
    
     get_template_part( 'template-parts/svg/sprite-sheet' );
     

@@ -17,7 +17,7 @@
 
 .navbar-brand {
     flex-shrink: 0;
-    img {
+    img, svg {
         @extend .img-fluid;
     }
 }
@@ -33,7 +33,7 @@
             flex-basis: auto;
         }
         .navbar-toggler {
-            max-width: 58px;
+            //max-width: 58px;
             align-self: flex-end;
         }
     }

@@ -1,0 +1,33 @@
+//
+// Extends BS columns using our Custom Bric Columns Block
+//
+
+.row {
+
+    &.cols-mobile-12 {
+        
+        > .col {
+            @extend .col-12;
+        }
+    }
+
+    &.cols-tab-4 {
+        
+        > .col {
+            @extend .col-md-4;
+        }
+
+    }
+
+    &.cols-large-4 {
+        
+        > .col {
+            @extend .col-xl-4;
+        }
+
+    }
+
+    
+
+
+}

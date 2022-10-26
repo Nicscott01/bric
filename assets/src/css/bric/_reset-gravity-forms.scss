@@ -343,3 +343,8 @@
         }
     }
 }
+
+
+.gfield--type-honeypot {
+    @extend .visually-hidden;
+}

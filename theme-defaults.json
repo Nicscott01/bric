@@ -50,9 +50,15 @@
             "scss": "html",
             "transport": "postMessage",
             "partial": true,
-            "selector": ".footer-lower",
+            "selector": ".main-content",
             "callback": "get_template_part_footer_lower",
             "container_inclusive": true
+        },
+        {
+            "id": "backgrounds",
+            "label": "Backgrounds",
+            "scss": "html",
+            "transport": "refresh"
         }
     ],
     "theme_colors": [
@@ -192,6 +198,23 @@
             "val": null,
             "type": "number",
             "sanitize_callback": "absint"
+        },
+        {
+            "prop": "heading_transform_uppercase",
+            "label": "Transform Headings to Uppercase",
+            "description": "",
+            "val": "true",
+            "type": "select",
+            "choices": [
+                {
+                    "prop": "true",
+                    "val": "True"
+                },
+                {
+                    "prop": "false",
+                    "val": "False"
+                }
+            ]
         }
     ],
     "navbar": [
@@ -501,7 +524,7 @@
             "prop": "paragraph_margin_bottom",
             "val": "16",
             "label": "Paragraph Margin Bottom",
-            "description":"Amount of margin in rems",
+            "description":"Amount of margin in px",
             "type": "number",
             "units": "px",
             "sanitize_callback": "bric_floatval"
@@ -662,7 +685,7 @@
             "description": "First year of copyright (leave blank to always display current year)",
             "type": "number",
             "css_var": false,
-            "sanitize_callback": "intval"
+            "sanitize_callback": "bric_intval"
         },
         {
             "prop": "copyright_holder",
@@ -681,7 +704,97 @@
             "type": "select",
             "choices": "wp_get_nav_menus",
             "css_var": false,
-            "sanitize_callback": "intval"
+            "sanitize_callback": "bric_intval"
+        }
+    ],
+    "backgrounds" : [
+        {
+            "prop": "background_image",
+            "val": null,
+            "label": "Background Image",
+            "description": "Background image in body of page",
+            "type": "image",
+            "css_var": false,
+            "sanitize_callback": "esc_url_raw"
+        },{
+            "prop": "background_repeat",
+            "val": "no-repeat",
+            "label": "Background Image",
+            "description": "Repeat behavior of background image.",
+            "type": "select",
+            "css_var": false,
+            "choices": [
+                {
+                    "prop": "no-repeat",
+                    "val": "Don't Repeat"
+                }, {
+                    "prop": "repeat-x",
+                    "val": "Repeat X"
+                }, {
+                    "prop": "repeat-y",
+                    "val": "Repeat Y"
+                }
+            ]
+        },{
+            "prop": "background_position",
+            "val": "center",
+            "label": "Background Position",
+            "description": "Position of background image.",
+            "type": "select",
+            "css_var": false,
+            "choices": [
+                {
+                    "prop": "center",
+                    "val": "Center"
+                }, {
+                    "prop": "top",
+                    "val": "Top"
+                }, {
+                    "prop": "bottom",
+                    "val": "Bottom"
+                }, {
+                    "prop": "left",
+                    "val": "Left"
+                }, {
+                    "prop": "right",
+                    "val": "Right"
+                }
+            ]
+            
+        },{
+            "prop": "background_size",
+            "val": "cover",
+            "label": "Background Size",
+            "description": "Size of background image.",
+            "type": "select",
+            "css_var": false,
+            "choices": [
+                {
+                    "prop": "cover",
+                    "val": "Fill the available area"
+                }, {
+                    "prop": "contain",
+                    "val": "Show the entire image"
+                }
+            ]
+            
+        },{
+            "prop": "background_attachment",
+            "val": "scroll",
+            "label": "Background Attachment",
+            "description": "Attachment of background image.",
+            "type": "select",
+            "css_var": false,
+            "choices": [
+                {
+                    "prop": "scroll",
+                    "val": "Scroll with the page"
+                }, {
+                    "prop": "fixed",
+                    "val": "Stay in one place"
+                }
+            ]
+            
         }
     ]
 }

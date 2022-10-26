@@ -119,11 +119,13 @@ class GoogleFontLoader {
         $fonts[] = maybe_json_decode( bric_get_theme_mod( 'fonts', 'font_family_base' ) );
         $fonts[] = maybe_json_decode( bric_get_theme_mod( 'fonts', 'font_family_alt' ) );
       
-       
+        $fonts = apply_filters( 'bric_fonts', $fonts );
+
+        //var_dump( $fonts );
 
         foreach( $fonts as $key => $font ) {
 
-            if ( empty( $font ) || empty( $font->font ) ) {
+            if ( empty( $font ) ) {
                 continue;
             }
 
@@ -131,6 +133,7 @@ class GoogleFontLoader {
             $font_families[ $font->font ] = $this->map_fonts_for_url_encoding( $font );
 
         }
+
 
 
 
@@ -171,6 +174,7 @@ class GoogleFontLoader {
             $has_italic               = false;
             $load_additional_variants = false;
 
+         
 
             foreach ( $variants as $variant ) {
 

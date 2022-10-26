@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'da99903cf30d6c11b8c7cd5df0dc1fe16f0ce292',
+    'reference' => '366f61d050dd1dae23dd198467c9971ab2c30406',
     'name' => 'bric/bric',
   ),
   'versions' => 
@@ -44,7 +44,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'da99903cf30d6c11b8c7cd5df0dc1fe16f0ce292',
+      'reference' => '366f61d050dd1dae23dd198467c9971ab2c30406',
     ),
     'padaliyajay/php-autoprefixer' => 
     array (
@@ -66,12 +66,21 @@ private static $installed = array (
     ),
     'scssphp/scssphp' => 
     array (
-      'pretty_version' => 'v1.10.5',
-      'version' => '1.10.5.0',
+      'pretty_version' => 'v1.11.0',
+      'version' => '1.11.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6d44282ccf283e133ab70b6282f8e068ff2f9bf9',
+      'reference' => '33749d12c2569bb24071f94e9af828662dabb068',
+    ),
+    'woocommerce/action-scheduler' => 
+    array (
+      'pretty_version' => '3.5.2',
+      'version' => '3.5.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '519cfa20db89eb85511cad08301d3fa33522ed8b',
     ),
   ),
 );

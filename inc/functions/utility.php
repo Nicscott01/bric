@@ -151,7 +151,7 @@ function get_landing_page()
 
 
 
-	if (is_home()) {
+	if (is_home() || is_single() ) {
 
 		$page_id = get_option('page_for_posts');
 

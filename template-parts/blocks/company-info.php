@@ -8,6 +8,10 @@
 
 $orientation = get_field( 'orientation' );
 
+$include = get_field( 'include' );
+
+var_dump( $include );
+
  ?>
  <div class="block company-info-block <?php echo !empty( $block['className'] ) ? $block['className'] : ''; ?> d-flex justify-content-center">
     <address class="row <?php echo $orientation == 'stacked' ? 'justify-content-center align-items-center text-center' : ''; ?>">

@@ -396,7 +396,8 @@ class Bric {
 
 		register_nav_menus( array(
 			'primary'   => 'Main Site Menu',
-			'primary_l' => 'Main Site Menu (Left Side of logo)'
+			'primary_l' => 'Main Site Menu (Left Side of logo)',
+			'lower_footer' => 'Lower Footer, typically for Privacy Policy, etc.'
 		) );
 	
 		

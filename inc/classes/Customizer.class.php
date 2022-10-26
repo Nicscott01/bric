@@ -16,7 +16,7 @@ class Customizer {
     public function __construct() {
 
 
-        self::$defaults_file =  \get_template_directory() . '/theme-defaults.json';
+        self::$defaults_file =  \get_stylesheet_directory() . '/theme-defaults.json';
 
         add_action( 'customize_register', [ $this, 'add_theme_defaults_to_customizer'] );
 
@@ -33,8 +33,9 @@ class Customizer {
         
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_customizer_preview_styles' ] );
        
+        add_action( 'compile_css', [ $this, 'compile_scss' ] );
 
-
+       
     }
 
 
@@ -154,7 +155,10 @@ class Customizer {
 
                                     $nav_menus = wp_get_nav_menus();
 
+                                    $choices[0] = 'None';
+
                                     foreach ( $nav_menus as $nav_menu ) {
+
                                         $choices[ $nav_menu->term_id ] = $nav_menu->name;
                                     }
 
@@ -170,6 +174,19 @@ class Customizer {
                             case "color" :
 
                                 $wp_customize->add_control( new \WP_Customize_Color_Control( $wp_customize, sprintf( "%s__%s", $section_id, $default_prop ), [
+                                    'label' => __( $default->label ),
+                                    //'description' => __( $default->description ),
+                                    'section' => $section_id,
+                                    'settings' => sprintf( "%s__%s", $section_id, $default_prop )
+                                ] ));
+
+
+
+                                break;
+                            
+                                case "image" :
+
+                                $wp_customize->add_control( new \WP_Customize_Image_Control( $wp_customize, sprintf( "%s__%s", $section_id, $default_prop ), [
                                     'label' => __( $default->label ),
                                     //'description' => __( $default->description ),
                                     'section' => $section_id,
@@ -862,6 +879,26 @@ class Customizer {
 
 
 
+    /**    
+     *     Schedule the Compile
+     * 
+     */
+
+    public function schedule_compile_scss( ) {
+
+
+        if ( function_exists( 'as_has_scheduled_action' ) ) {
+
+            if ( false === as_has_scheduled_action( 'compile_css' ) ) {
+
+                error_log( 'schedule compile css' );
+
+                as_enqueue_async_action( 'compile_css' );
+            }
+        }
+
+    }
+
 
     /**
      *  Compile SCSS using PHP SCSS class
@@ -873,6 +910,19 @@ class Customizer {
 
      public function compile_scss() {
 
+
+        if ( defined( 'COMPILE_CSS' ) ) {
+
+            if ( ! COMPILE_CSS ) {
+                error_log( 'COMPILE_CSS set to false. Did not compile CSS via PHP.' );
+                return;
+                
+            }
+        }
+
+
+
+        error_log( 'begin compile css' );
 
         $stylesheet = '';
 
@@ -916,6 +966,8 @@ class Customizer {
             //Write the file
             file_put_contents( get_stylesheet_directory() . '/assets/css/bric-style.css', $stylesheet );
 
+            error_log( 'complete compile css' );
+
         }
 
 
@@ -936,9 +988,15 @@ class Customizer {
 
      public function write_css_variables( $theme_mods ) {
 
+        //If we're not a child, then forget writing custom scss
+        if ( !is_child_theme() ) {
+
+            return;
+
+        }
+
         //Colors
         //$theme_colors = $theme_mods['theme_colors'];
-        
         $scss_path = \get_stylesheet_directory() . '/assets/src/css/_theme-colors-auto.scss';
 
         //Used by the included files
@@ -987,12 +1045,12 @@ class Customizer {
 
     public function after_theme_mod_update( $old_value, $value, $option ) {
 
-        error_log( sprintf( "Update option old value: %s
+        /*error_log( sprintf( "Update option old value: %s
         new value: %s
         option: $option", json_encode( $old_value ), json_encode( $value ) ) );
 
         error_log( json_encode( $_REQUEST ) );
-
+*/
 
         if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'activate' ) {
 
@@ -1010,7 +1068,8 @@ class Customizer {
 
         $this->write_css_variables( $value ); //$theme_mods );
 
-        $this->compile_scss();
+        $this->schedule_compile_scss();
+       // $this->compile_scss();
 
         return;
 
@@ -1081,8 +1140,6 @@ class Customizer {
 
     
 }
-
-
 
 
 

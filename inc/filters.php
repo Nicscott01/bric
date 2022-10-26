@@ -87,7 +87,7 @@ class BricFilters {
 	
 	public function get_the_archive_title( $title, $original_title, $prefix ) {
 
-		if ( has_landing_page() || is_home() ) {
+		if ( has_landing_page() || is_home() || is_single() ) {
 
 			$page = get_landing_page();
 			
@@ -184,7 +184,7 @@ class BricFilters {
 			$cache = str_replace( $matches[1], $new_url, $cache );
 
 			//add responsive div and return new iframe HTML
-			return '<div class="embed-responsive embed-responsive-16by9">'.$cache.'</div>';
+			return '<div class="ratio ratio-16x9">'.$cache.'</div>';
 		
 		}
 		

@@ -35,8 +35,9 @@ body {
 #total-page-wrapper {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     overflow-x: hidden;
+    
     .main-content {
         flex-grow: 1;
         flex-shrink: 0;
@@ -159,7 +160,7 @@ body {
 //		WIDGETS
 //
 .widget {
-    margin-bottom: 1em;
+
     ul {
         @extend .list-unstyled;
     }
@@ -352,29 +353,6 @@ $space-below-h: $spacer*1.25;
 
 
 
-
-h1,
-h2,
-h3,
-h4,
-.h1,
-.h2,
-.h3,
-.h4 {
-    margin-bottom: $space-below-h;
-}
-
-h1,
-h2,
-h3,
-h4,
-.h1,
-.h2,
-.h3,
-.h4 {
-    margin-top: $space-above-h;
-}
-
 .page-title {
     &.page-title-sc {
         margin-top: 0;
@@ -382,64 +360,4 @@ h4,
     }
 }
 
-//
-//		OPERATING HOURS
-//
-.operating-hours {
-    .day {
-        font-weight: bold;
-    }
-}
 
-//
-//		SOCIAL ICONS
-//
-ul.social-media {
-    margin-bottom: 0;
-}
-
-.social-account {
-    font-size: 1.5rem;
-    &.list-inline-item:not(:last-child) {
-        margin-right: $social-icon-spacing;
-    }
-}
-
-//
-//		SITE FOOTER
-//
-.site-footer {
-
-    .footer-widgets {
-        h4 {
-            font-size: 1.25rem;
-        }
-        h5 {
-            font-size: 1rem;
-        }
-        .widget {
-            margin-bottom: 0;
-        }
-    }
-}
-
-/*
-.copyright-credits-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: $spacer 0;
-    @include media-breakpoint-up( md) {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-    }
-}
-*/
-
-//
-//	Prevent post nav from having padding left
-//
-ul.page-numbers {
-    padding-left: 0;
-}

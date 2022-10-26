@@ -32,4 +32,18 @@
         }
     }
 
+
+    .btn {
+
+        @each $key, $color in $theme-colors  {
+
+            &.has-#{$key}-background-color {
+                @extend .btn-#{$key};
+            }
+
+        }
+
+    }
+
 }
+

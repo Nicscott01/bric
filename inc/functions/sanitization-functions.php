@@ -18,4 +18,8 @@ function bric_floatval( $val ) {
 }
 
 
+function bric_intval( $val ) {
 
+    return intval( $val );
+
+}

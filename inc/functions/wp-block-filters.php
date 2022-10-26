@@ -32,7 +32,8 @@ function has_parent_block( $context, $parsed_block, $parent_block ) {
 
     $catch_these = [
         'core/paragraph',
-        'core/heading'
+        'core/heading',
+        'core/quote'
     ];
 
     if ( in_array( $parsed_block['blockName'], $catch_these)  ) {
@@ -53,10 +54,27 @@ function has_parent_block( $context, $parsed_block, $parent_block ) {
 
 
 
-add_filter( 'render_block_core/heading', function( $content, $parsed_block, $wp_block ) {
+add_filter( 'render_block_core/heading', 'bric_filter_heading_block', 10, 3 );
 
-    //var_dump( $parsed_block );
-    //var_dump( $wp_block );
+
+add_action( 'dynamic_sidebar_before', function() {
+
+    remove_filter( 'render_block_core/heading', 'bric_filter_heading_block', 10, 3 );
+
+});
+
+add_action( 'dynamic_sidebar_after', function() {
+
+    add_filter( 'render_block_core/heading', 'bric_filter_heading_block', 10, 3 );
+
+});
+
+function bric_filter_heading_block( $content, $parsed_block, $wp_block ) {
+
+   // var_dump( $parsed_block );
+   // var_dump( $wp_block );
+  //error_log( json_encode( $wp_block ) );
+
 
 
 
@@ -66,7 +84,7 @@ add_filter( 'render_block_core/heading', function( $content, $parsed_block, $wp_
 
         $has_parent_block = false;
 
-        return  $content;
+        return $content;
 
     } else {
 
@@ -95,7 +113,7 @@ add_filter( 'render_block_core/heading', function( $content, $parsed_block, $wp_
         
     }
 
-},  10, 3 );
+}
 
 
 
@@ -105,25 +123,6 @@ add_filter( 'render_block_core/heading', function( $content, $parsed_block, $wp_
 
 
 add_filter( 'render_block_core/paragraph', function( $content, $parsed_block, $wp_block ) {
-
-    //var_dump( $parsed_block );
-    //var_dump( $wp_block );
-
-    //Get the classes
-  /*  $classes = $parsed_block['attrs']['className'];
-
-    $classes = explode( ' ', $classes );
-
-    $flex_classes = [];
-
-    foreach( $classes as $class ) {
-
-        if ( $class == 'right-side' ) {
-            $flex_classes[] = 'justify-content-end';
-        }
-
-    }
-*/
 
     global $has_parent_block;
 
@@ -141,6 +140,33 @@ add_filter( 'render_block_core/paragraph', function( $content, $parsed_block, $w
     }
 
 },  10, 3 );
+
+
+
+
+add_filter( 'render_block_core/quote', function( $content, $parsed_block, $wp_block ) {
+
+    global $has_parent_block;
+
+    if ( $has_parent_block || get_post_type() == 'post' ) {
+
+
+        $has_parent_block = false;
+
+        return '<div class="plain-quote mb-4">' . $content . '</div>';
+
+    } else {
+
+        return sprintf( '<div class="container-xxl">%s</div>', $content );
+
+    }
+
+},  10, 3 );
+
+
+
+
+
 
 
 
@@ -171,6 +197,10 @@ function inject_class_column_count( $content, $block ) {
 }
 
 add_filter( 'render_block', 'inject_class_column_count', 10, 2 );
+
+
+
+
 
 /**
  * is_block_type
@@ -204,24 +234,34 @@ function is_block_type( $block, $type ) {
 
     $search = [
         'are-vertically-aligned-top',
+        'is-vertically-aligned-top',
         'has-black-color',
         'has-white-color',
         'has-primary-color',
         'has-secondary-color',
+        'has-tertiary-color',
         'has-dark-color',
         'has-light-color',
-        'wp-block-button__link'
+        'wp-block-button__link',
+        'has-primary-background-color',
+        'wp-block-columns',
+        'wp-block-column'
     ];
 
     $replace = [
         'align-items-start',
+        'align-self-start',
         'text-black',
         'text-white',
         'text-primary',
         'text-secondary',
+        'text-tertiary',
         'text-dark',
         'text-light',
-        'btn'
+        'btn',
+        'btn-primary',
+        'row',
+        'col'
     ];
 
 

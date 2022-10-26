@@ -17,7 +17,7 @@
     ));
 
 
-
+/*
     acf_register_block_type( [
         'name'              => 'company-info',
         'title'             => __( 'Company Contact Info' ),
@@ -28,7 +28,7 @@
         'keywords'          => [ 'business', 'info', 'address', 'phone', 'contact' ],
         'mode'              => 'preview'
     ]);
-
+*/
 
 
     acf_register_block_type( [

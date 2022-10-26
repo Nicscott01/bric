@@ -146,38 +146,7 @@ class BricLoop {
 	
 	public function get_archive_header() {
 		
-		global $post;
-
-		if ( has_landing_page() || is_home() ) {
-			
-			$page = get_landing_page();
-
-			$post = $page;	
-				
-
-		}
-		
-  
-        
-		
-		if ( is_archive() || is_home() || is_tax() ) {
-			
-			//v_dump( $post );
-			setup_postdata( $post );
-
-			get_template_part( 'template-parts/archive', 'heading' );
-
-			wp_reset_postdata();
-		
-			
-		}
-
-
-
-
-
-		
-		
+		get_template_part( 'template-parts/archive-heading' );
 		
 	}
 	
