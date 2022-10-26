@@ -15,8 +15,7 @@ class Customizer {
 
     public function __construct() {
 
-
-        self::$defaults_file =  \get_stylesheet_directory() . '/theme-defaults.json';
+        self::$defaults_file =  file_exists( \get_stylesheet_directory() . '/theme-defaults.json' ) ?  \get_stylesheet_directory() . '/theme-defaults.json' :  \get_template_directory() . '/theme-defaults.json';
 
         add_action( 'customize_register', [ $this, 'add_theme_defaults_to_customizer'] );
 
