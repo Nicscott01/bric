@@ -200,22 +200,29 @@
             "sanitize_callback": "absint"
         },
         {
-            "prop": "heading_transform_uppercase",
-            "label": "Transform Headings to Uppercase",
+            "prop": "heading_transform",
+            "label": "Transform Headings",
             "description": "",
-            "val": "true",
+            "val": "uppercase",
             "type": "select",
+            "facevalue": true,
             "choices": [
                 {
-                    "prop": "true",
-                    "val": "True"
+                    "prop": "uppercase",
+                    "val": "Uppercase"
                 },
                 {
-                    "prop": "false",
-                    "val": "False"
+                    "prop": "lowercase",
+                    "val": "Lowercase"
+                },
+                {
+                    "prop": "none",
+                    "val": "None"
                 }
             ]
+
         }
+
     ],
     "navbar": [
         {
