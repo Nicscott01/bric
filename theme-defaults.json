@@ -322,6 +322,45 @@
             ]
         },
         {
+            "prop": "color",
+            "val": "null",
+            "label": "Color",
+            "description": "Color of navbar",
+            "type": "select",
+            "css_var":"navbar-color",
+            "scss_var": "navbar-color",
+            "choices": [
+                {
+                    "prop": "null",
+                    "val": "Default"
+                },
+                {
+                    "prop": "primary",
+                    "val": "Primary"
+                },
+                {
+                    "prop": "secondary",
+                    "val": "Secondary"
+                },
+                {
+                    "prop": "light",
+                    "val": "Light"
+                },
+                {
+                    "prop": "dark",
+                    "val": "Dark"
+                },
+                {
+                    "prop": "white",
+                    "val": "White"
+                },
+                {
+                    "prop": "black",
+                    "val": "Black"
+                }
+            ]
+        },
+        {
             "prop": "active_style",
             "val": "underline",
             "label": "Active Style",
@@ -371,6 +410,14 @@
                 {
                     "prop": "dark",
                     "val": "Dark"
+                },
+                {
+                    "prop": "white",
+                    "val": "White"
+                },
+                {
+                    "prop": "black",
+                    "val": "Black"
                 }
             ]
         }
