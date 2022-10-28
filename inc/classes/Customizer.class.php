@@ -969,6 +969,9 @@ class Customizer {
             //Write the file
             file_put_contents( get_stylesheet_directory() . '/assets/css/bric-style.css', $stylesheet );
 
+            //Update the cache
+            update_option( 'theme_asset_ver', time() );
+
             error_log( 'complete compile css' );
 
         }

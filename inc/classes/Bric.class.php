@@ -129,7 +129,17 @@ class Bric {
 			
 		} else {
 			
-			$ver = null;
+			$db_ver = get_option( 'theme_asset_ver' );
+
+			if ( !empty( $db_ver ) ) {
+
+				$ver = $db_ver;
+			
+			} else {
+
+				$ver = null;
+
+			}
 		}
 		
 		
