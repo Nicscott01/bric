@@ -1,4 +1,4 @@
-/*! bric 2022-07-05 */
+/*! bric 2022-10-27 */
 //Initialize the Bric JS object.
 var Bric = {};;//Normalize Heights on Carousel
 
@@ -126,7 +126,7 @@ var Bric = {};;//Normalize Heights on Carousel
 
 
         //document.querySelector('.navbar-toggler').addEventListener('click')
-        $('.navbar-toggler').click(function() {
+        $('#main-navbar-toggler').click(function() {
             Bric.mainmenu.toggle();
         });
 

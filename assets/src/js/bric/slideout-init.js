@@ -44,7 +44,7 @@
 
 
         //document.querySelector('.navbar-toggler').addEventListener('click')
-        $('.navbar-toggler').click(function() {
+        $('#main-navbar-toggler').click(function() {
             Bric.mainmenu.toggle();
         });
 
