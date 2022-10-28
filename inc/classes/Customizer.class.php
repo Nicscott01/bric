@@ -1018,6 +1018,22 @@ class Customizer {
         \file_put_contents( $scss_path, $scss_contents );
 
 
+
+        //Write the theme.json
+        $theme_json_path = \get_stylesheet_directory() . '/theme.json';
+
+
+        ob_start();
+
+        include( locate_template( 'template-parts/scss/child-colors-theme-json.php' ) );
+      
+        $theme_json_contents = ob_get_clean();
+
+        \file_put_contents( $theme_json_path, $theme_json_contents );
+
+
+
+
           
         //Variables
         $scss_path = \get_stylesheet_directory() . '/assets/src/css/_theme-variables-auto.scss';

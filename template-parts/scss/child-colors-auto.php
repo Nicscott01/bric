@@ -67,22 +67,3 @@ foreach ( $colors as $color ) {
 
 return;
 
-
-
-
-if ( !empty( $theme_colors ) && is_array( $theme_colors ) ) {
-
-    foreach ( $theme_colors as $slug => $color ) {
-
-        if ( !empty( $color ) ) {
-
-            $scss[] = sprintf( '$%s: %s;', $slug, $color );
-
-        }
-
-    }
-
-    $scss_contents = implode( "\r\n", $scss );
-
-    echo $scss_contents;
-}

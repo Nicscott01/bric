@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '58186c7340c5a6845a57c3498d6f09ff9fb6cb7f',
+    'reference' => 'ab441ada529bec60af748e1a284238f66e98d808',
     'name' => 'bric/bric',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '58186c7340c5a6845a57c3498d6f09ff9fb6cb7f',
+      'reference' => 'ab441ada529bec60af748e1a284238f66e98d808',
     ),
     'padaliyajay/php-autoprefixer' => 
     array (

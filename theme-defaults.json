@@ -585,6 +585,15 @@
             "sanitize_callback": "bric_floatval"
         },
         {
+            "prop": "page_header_min_height",
+            "val": "25vw",
+            "label": "Page Header Minimum Height",
+            "description":"Min height of the page header banner. Include units: px, %, vw, vh, em, rem",
+            "type": "text",
+            "facevalue": true,
+            "sanitize_callback": "bric_value_with_units"
+        },
+        {
             "prop": "lead_font_size",
             "val": "21",
             "label": "Lead/Feature Copy Font Size",

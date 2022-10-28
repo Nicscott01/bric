@@ -266,10 +266,13 @@ $space-below-h: $spacer*1.25;
     position: relative;
     display: flex;
     flex-direction: column-reverse;
+    justify-content: center;
     overflow: hidden;
     z-index: 0;
     //padding: 0 $spacer;
     margin-bottom: $space-above-h;
+    min-height: $page-header-min-height;
+
     &.has-header-image {
         padding-top: $spacer*4;
         padding-bottom: $spacer*4;

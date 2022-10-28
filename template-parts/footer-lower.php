@@ -5,36 +5,36 @@ global $BricLoop;
 
 
 ?>
-<div class="footer-lower d-flex flex-wrap justify-content-center align-items-center p-2 small copyright-credits-wrapper text-<?php echo bric_get_theme_mod( 'lower_footer', 'text_color' ); ?> bg-<?php echo get_theme_mod( 'lower_footer__background_color' ); ?>">
-	<?php echo $BricLoop->get_copyright(); ?><span class="px-2">|</span>
-    <?php 
+<div class="footer-lower d-flex flex-wrap justify-content-center align-items-center p-2 small copyright-credits-wrapper text-<?php echo bric_get_theme_mod('lower_footer', 'text_color'); ?> bg-<?php echo get_theme_mod('lower_footer__background_color'); ?>">
+    <?php echo $BricLoop->get_copyright(); ?><span class="px-2">|</span>
+    <?php
 
     //Get the lower nav menu
     $menu = get_nav_menu_locations();
 
-    if ( isset( $menu['lower_footer'] ) && !empty( $menu['lower_footer'] ) ) {
+    if (isset($menu['lower_footer']) && !empty($menu['lower_footer'])) {
 
         $menu = $menu['lower_footer'];
-
     } else {
 
-        $menu = bric_get_theme_mod( 'lower_footer', 'menu' );
-
+        $menu = bric_get_theme_mod('lower_footer', 'menu');
     }
 
 
-    if ( $menu ) {
+    if ($menu) {
 
 
-    wp_nav_menu( [
-        'menu' => $menu,
-        'menu_class' => 'menu d-flex m-0 list-unstyled text-' . bric_get_theme_mod( 'lower_footer', 'text_color' )
-    ] );
+        wp_nav_menu([
+            'menu' => $menu,
+            'menu_class' => 'menu d-flex m-0 list-unstyled text-' . bric_get_theme_mod('lower_footer', 'text_color')
+        ]);
 
     ?><span class="px-2">|</span><?php
-    
-}
-    
-    echo $BricLoop->get_developer_credits(); ?>
+
+    }
+        
+        echo $BricLoop->get_developer_credits(); 
+        
+    ?>
 </div>
-<?php 
+<?php
