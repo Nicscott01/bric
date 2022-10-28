@@ -515,6 +515,7 @@
             "label": "Link Hover Decoration",
             "description": "Style of hyperlinks on hover",
             "type": "select",
+            "facevalue": true,
             "choices": [
                 {
                     "prop": "null",
