@@ -1,3 +1,11 @@
 <?php
+/**
+ *  Search form template
+ * 
+ * 
+ */
 
-echo get_search_form(0);
+ ?>
+ <div class="mb-3 search-form-wrapper">
+    <?php echo get_search_form(0); ?>
+</div>

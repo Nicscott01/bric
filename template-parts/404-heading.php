@@ -2,7 +2,12 @@
 
 global $post;
 
+if ( !isset( $post->post_title ) ) {
+    $post = new stdClass();
+}
+
 $post->post_title = "404: This Doesn't exist";
+
 
 setup_postdata( $post );
 

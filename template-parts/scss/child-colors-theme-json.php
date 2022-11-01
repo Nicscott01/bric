@@ -8,13 +8,8 @@
 use function Bric\Customizer;
 
  //Get the theme.json
- $theme_json_path = get_stylesheet_directory(  ) . '/theme.json';
+ $theme_json_path = locate_template( 'theme.json' );
 
- if ( !file_exists( $theme_json_path ) ) {
-
-    return;
-
- }
 
  $theme_json = file_get_contents( $theme_json_path );
 
@@ -22,8 +17,10 @@ use function Bric\Customizer;
 
     $theme_json = json_decode( $theme_json );
 
+ } else {
+    //Just in case the file in our child directory is empty
+    $theme_json = json_decode( file_get_contents( get_template_directory(  ) . '/theme.json' ) );
  }
-
 
 
 //Get the theme colors
