@@ -95,7 +95,11 @@ foreach ($theme_defaults->sections as $theme_default_section) {
 
     foreach ($theme_defaults->$section_id as $setting) {
 
-        
+       /* ob_start();
+        var_dump( $setting );
+        $log = ob_get_clean();
+        error_log( $log );
+*/
 
 
 
@@ -116,7 +120,7 @@ foreach ($theme_defaults->sections as $theme_default_section) {
 
         if ($write_file && 
             is_string( $theme_mods[$section_id][$setting->prop] ) ||
-            is_numeric( $theme_mods[$section_id][$setting->prop] )
+            ( isset( $theme_mods[$section_id][$setting->prop])  && is_numeric( $theme_mods[$section_id][$setting->prop] ) )
             )  {
 
             $val = str_replace('_', '-', $theme_mods[$section_id][$setting->prop]);
@@ -158,7 +162,16 @@ foreach ($theme_defaults->sections as $theme_default_section) {
 
             case "google_font":
 
+
+
                 $val = maybe_json_decode($val);
+/*
+                ob_start();
+                var_dump( $val );
+                $log = ob_get_clean();
+                error_log( $log );
+*/
+
 
                 if (isset($val->font)) {
 
@@ -167,6 +180,7 @@ foreach ($theme_defaults->sections as $theme_default_section) {
                     $expression = "$%s: %s;";
 
                     $expression_inline = "--%s%s: %s;";
+
                 } else {
 
                     $val = 'inherit';
@@ -176,6 +190,77 @@ foreach ($theme_defaults->sections as $theme_default_section) {
                     $expression_inline = "--%s%s: %s;";
                 }
 
+
+                /**
+                 *  Write the font weights based on selections
+                 * 
+                 */
+
+                $fonts_base = bric_get_theme_mod( 'fonts', 'font_family_base' );
+
+               /* ob_start();
+                var_dump( json_decode( $fonts_base ) );
+                $log = ob_get_clean();
+                error_log( $log );
+                */
+                if ( !empty( $fonts_base ) ) {
+
+                    $fonts_base = json_decode( $fonts_base );
+
+                    if ( is_object( $fonts_base ) ) {
+
+                        foreach( $fonts_base as $attr => $_val ) {
+
+                            switch( $attr ) {
+
+                                case 'regularweight' :
+
+
+                                    if ( $write_file ) {
+
+                                        $css_lines['font_base_normal'] = sprintf( '$font-weight-normal: %s;', $_val );
+
+
+                                    } elseif ( $write_inline ) {
+
+                                        $css_lines['font_base_normal'] = sprintf('--%sbody-font-weight: %s;', $scss_prefix, $_val);
+
+                                    }
+
+
+                                    break;
+
+
+                                case 'italicweight' :
+
+                                    //$css_lines['font_base_'] = sprintf( '$font-weight-normal: %s', $val );
+
+                                    break;
+
+
+                                case 'boldweight' :
+
+
+                                    if ( $write_file ) {
+
+                                        $css_lines['font_base_bold'] = sprintf( '$font-weight-bold: %s;', $_val );
+
+                                    } elseif( $write_inline ) {
+
+                                        $css_lines['font_base_bold'] = sprintf('--%sbody-font-weight-bold: %s;', $scss_prefix, $_val);
+                                    
+                                    }
+
+
+                                    break;
+                            }
+
+                        }
+
+                    }
+                    
+
+                }
 
 
                 break;
@@ -308,6 +393,12 @@ foreach ($theme_defaults->sections as $theme_default_section) {
             $css_lines[] = sprintf($expression_inline, $scss_prefix, $css_var, $val);
         }
     }
+
+   /* ob_start();
+    var_dump( $css_lines );
+    $log = ob_get_clean();
+    error_log( $log );
+*/
 }
 
 

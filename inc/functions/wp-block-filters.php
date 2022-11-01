@@ -244,8 +244,16 @@ function is_block_type( $block, $type ) {
         'has-light-color',
         'wp-block-button__link',
         'has-primary-background-color',
+        'has-secondary-background-color',
+        'has-tertiary-background-color',
+        'has-dark-background-color',
+        'has-light-background-color',
         'wp-block-columns',
-        'wp-block-column'
+        'wp-block-column',
+        'wp-block-search__inside-wrapper',
+        'wp-block-search__input',
+        'wp-block-search__button',
+        'wp-block-search__label'
     ];
 
     $replace = [
@@ -259,9 +267,17 @@ function is_block_type( $block, $type ) {
         'text-dark',
         'text-light',
         'btn',
-        'btn-primary',
+        'bg-primary',
+        'bg-secondary',
+        'bg-tertiary',
+        'bg-dark',
+        'bg-light',
         'row',
-        'col'
+        'col',
+        'input-group',
+        'wp-block-search__input form-control',
+        'wp-block-search__button btn',
+        'wp-block-search__label visually-hidden'
     ];
 
 

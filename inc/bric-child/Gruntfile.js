@@ -16,7 +16,8 @@ module.exports = function (grunt) {
 			},
 			dev: {
 				files: {
-					'assets/css/bric-style-customizer.css': 'assets/src/css/bric-style.scss'
+					'assets/css/bric-style-customizer.css': 'assets/src/css/bric-style.scss',
+					'assets/css/bric-block-editor.css': 'assets/src/css/bric-block-editor.scss'
 				}
 			},
 			dist: {

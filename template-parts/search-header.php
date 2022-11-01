@@ -6,7 +6,11 @@
  * 
  */
 ?>
-<div class="col-12 mb-2 search-header">
-    <h1>Search Results for: <?php echo get_search_query() ?></h1>
-    <?php echo get_search_form(0); ?>
+<div class="row search-header bg-dark py-5">
+    <div class="col-12 py-5">
+        <div class="container-xxl">
+            <h1>You searched for: <?php echo get_search_query() ?></h1>
+            <?php echo get_search_form(0); ?>
+        </div>
+    </div>
 </div>

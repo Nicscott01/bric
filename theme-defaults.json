@@ -35,6 +35,11 @@
             "scss": "passthrough"
         },
         {
+            "id": "buttons",
+            "label": "Buttons",
+            "scss": "passthrough"
+        },
+        {
             "id": "footer",
             "label": "Footer",
             "scss": "html",
@@ -431,6 +436,34 @@
             "type": "number",
             "units": "px",
             "sanitize_callback": "absint"           
+        }
+    ],
+    "buttons": [
+        {
+            "prop": "btn_padding_x",
+            "val": ".75",
+            "label": "Button Padding X",
+            "description": "Padding on left/right of button.",
+            "type": "number",
+            "units": "rem",
+            "sanitize_callback": "bric_floatval"           
+        }, {
+            "prop": "btn-font-weight",
+            "val": "font-weight-normal",
+            "label": "Button Font Weight",
+            "description": "",
+            "type": "select",
+            "css_var": true,
+            "choices": [
+                {
+                    "prop": "font-weight-normal",
+                    "val": "Normal"
+                },
+                {
+                    "prop": "font-weight-bold",
+                    "val": "Bold"
+                }
+            ]
         }
     ],
     "body": [

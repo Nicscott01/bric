@@ -12,11 +12,28 @@ global $BricLoop;
 
 //Add in the archive header
 add_action( 'bric_before_loop', array( $BricLoop, 'get_archive_header' ), 5 );
+add_action( 'bric_before_loop', function() {
+
+    if ( is_404() ) {
+
+        get_template_part( 'template-parts/404-heading' );
+    }
+
+}, 5 );
 
 
 //add_action( 'bric_before_loop', array( $BricLoop, 'get_sidebar'), 5 );
 add_action( 'bric_before_loop', array( $BricLoop, 'get_before_loop_posts'), 10 );
-add_action( 'bric_before_loop', array( $BricLoop, 'get_before_loop'), 10 ); 
+
+add_action( 'bric_before_loop', function() {
+
+    if ( is_404() ) {
+        get_template_part( 'template-parts/404-content' );
+    }
+    
+});
+
+//add_action( 'bric_before_loop', array( $BricLoop, 'get_before_loop'), 10 ); 
 
 add_action( 'bric_loop', array( $BricLoop, 'get_content'), 10 );
 //add_action( 'bric_after_loop', array( $BricLoop, 'get_after_loop') );

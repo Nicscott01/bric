@@ -11,7 +11,7 @@ global $BricLoop;
 <?php 
 
 if ( is_active_sidebar('posts-sidebar-main') ) { ?>
-<div class="sidebar <?php echo $BricLoop->get_content_class('sidebar'); ?>">
+<div class="sidebar sticky-top">
 	<?php dynamic_sidebar( 'posts-sidebar-main' ); ?>
 </div>
 <?php }

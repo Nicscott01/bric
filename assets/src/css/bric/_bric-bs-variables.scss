@@ -16,6 +16,7 @@ $font-family-base: $font-family-sans-serif;
 $lead-font-weight: 300;
 
 
+
 //BUTTONS
 
 
@@ -31,3 +32,17 @@ $navbar-dark-active-color: $navbar-active-color !default;
 
 //PAGE HEADER
 $page-header-min-height: 25vw !default;
+
+
+
+//Currently not a BS variable, only our own. We need to re-write
+//the utilities we want to use these values in our utilties map (bric-vairables file)
+$opacities: (
+    10: .1,
+    25: .25,
+    50: .5,
+    62: .62,
+    75: .75,
+    100: 1
+) !default;
+

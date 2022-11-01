@@ -32,8 +32,8 @@ if ( !empty( $bg_image ) ) {
 
 
 ?>
-<main class="main-content container<?php echo get_post_type() == 'page' ? '-fluid' : ''; ?>" <?php echo $style; ?> role="main">
-<div class="row">
+<main class="main-content container-fluid<?php //echo get_post_type() == 'page' ? '-fluid' : ''; ?>" <?php echo $style; ?> role="main">
+<div class="row<?php echo ! is_page() ? '-d' : ''; ?>">
 <?php
 
 do_action( 'bric_before_loop');
@@ -53,6 +53,7 @@ endwhile;
 else :
     
 do_action( 'bric_no_posts');
+
     
 endif;
     

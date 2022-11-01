@@ -12,21 +12,23 @@
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( $extra_classes ); ?>>
 	<?php 
-	if ( get_post_type() == 'post' ) {
+	
+	get_template_part( 'template-parts/heading' );
+	
+	
 
-		echo '<div class="card mt-0 p-5">';
+	if ( is_singular() && !is_page() ) {
 
+		?>
+		<div class="container-xxl">
+			<div class="row">
+				<div class="col-12 col-md-8">
+		<?php
 	}
 
 
-	do_action( 'bric_before_page_header');
-	
-	get_template_part( 'template-parts/heading' );
-
-	do_action( 'bric_after_page_header');
-	
-	
 	$extra_entry_content_classes[] = get_post_type() == 'post' ? 'pt-3' : '';
+
 
  	?>
 	<div class="<?php entry_content_class( $extra_entry_content_classes ); ?>">
@@ -52,6 +54,20 @@
 		?>
 	</div>
 <?php 
+
+	if ( is_singular() && !is_page() ) {
+
+		?>
+		</div>
+		<div class="col-12 col-md-4">
+			<?php get_sidebar(); ?>
+		</div>
+	</div>
+</div>
+		<?php
+	}
+	
+
 	
 	if ( $wp_query->max_num_pages > 1 ) {
 ?>		
@@ -63,10 +79,6 @@
 <?php
 	}
 	
-	
-	if ( get_post_type() == 'post' ) {
-		echo '</div>';
-	}
 
 ?>
 </article>

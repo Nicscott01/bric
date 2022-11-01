@@ -163,6 +163,12 @@ body {
 
     ul {
         @extend .list-unstyled;
+
+        li {    
+            padding-top: $list-group-item-padding-y;
+            padding-bottom: $list-group-item-padding-y;
+            font-weight: $font-weight-bold;
+        }
     }
 }
 

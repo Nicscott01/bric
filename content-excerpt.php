@@ -16,7 +16,7 @@
 			<?php the_excerpt(); ?>
 		</div>
 		<div class="read-more">
-			<a class="arrow" href="<?php the_permalink(); ?>">Read More</a>
+			<a class="fw-bold" href="<?php the_permalink(); ?>">Read More</a>
 		</div>
 	</div>
 	

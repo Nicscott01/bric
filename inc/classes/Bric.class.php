@@ -53,6 +53,8 @@ class Bric {
 
 		
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'register_styles' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_footer', array( $this, 'enqueue_footer_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
@@ -115,13 +117,6 @@ class Bric {
 	
 	public function register_styles() {
 		
-		//var_dump(get_stylesheet_directory_uri().'/assets/css/bric-style.css' );
-		/*
-		if ( is_child_theme() ) {
-			wp_register_style( 'bric-child', get_stylesheet_directory_uri().'/assets/css/bric-style.css' );
-		} 
-		else {
-*/	
 		
 		if ( defined( 'THEME_ASSET_VER' ) ) {
 			
@@ -144,12 +139,12 @@ class Bric {
 		
 		
 		wp_register_style( 'bric', get_stylesheet_directory_uri().'/assets/css/bric-style.css', [], $ver );
-		//}
 		
-		
-		//wp_register_style( 'bric-customizer', get_template_directory_uri().'/assets/css/bric-customizer.css' );
-		
-		
+	
+    	wp_register_style( 'bric-block-editor', get_stylesheet_directory_uri() . '/assets/css/bric-block-editor.css', [], $ver );
+
+
+
 		
 		
 	}
@@ -178,8 +173,18 @@ class Bric {
 			
 		}
 
+
 	}	
 	
+
+
+
+	public function enqueue_block_editor_assets() {
+
+			wp_enqueue_style( 'bric-block-editor' );
+
+	}
+
 	
 	
 	/**
@@ -451,8 +456,8 @@ class Bric {
 		//	if( $this->SiteInfo->breadcrumbs['hide_on_home'] ) {
 				
 				if ( !is_front_page() && function_exists( 'yoast_breadcrumb' ) ) {
-					
-					add_action( $this->SiteInfo->breadcrumbs['action'], array( $this, 'print_breadcrumbs') );
+
+					add_action( 'bric_' . get_theme_mod( 'bric_bc_location' ), array( $this, 'print_breadcrumbs') );
 					//var_dump($this->SiteInfo->breadcrumbs['action']);
 				}
 				

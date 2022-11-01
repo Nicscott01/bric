@@ -4,6 +4,10 @@
  *
  */
 ?>
-	</div><!--.row-->
+		</div><!--.row-->
+	</div><!--.col-->
+	<div class="col-12 col-md-4">
+		<?php get_sidebar(); ?>
+	</div>
+	</div>
 </div><!--.archive-posts-wrapper-->
-<?php get_sidebar(); ?>

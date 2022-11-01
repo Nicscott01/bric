@@ -1,3 +1,63 @@
+//General column > child relationship
+
+$wp-columns-count: 8;
+
+//Starts with wp-container
+[class^="wp-container"] {
+    //@extend .row;
+    gap: 0 !important;
+    //margin-left:auto;
+    //margin-right: auto;
+
+    ul {
+
+        &.wp-block-post-template {
+
+            &, li {
+                list-style: none;
+            }
+        }
+
+    }
+    
+}
+
+
+@while $wp-columns-count > 0 {
+
+    .columns-#{$wp-columns-count} {
+        @extend .row;
+
+        > * {
+            @extend .col-12; //baseline for mobile
+            
+            @include media-breakpoint-up( md ) {
+                @include make-col( divide( $grid-columns, $wp-columns-count ) );                
+            }
+        }
+    }
+
+    $wp-columns-count: $wp-columns-count - 1;
+}
+
+
+.columns-default {
+    @extend .row;
+
+    > * {
+        @include make-col();
+    }
+
+}
+
+
+
+ul.wp-block-post-template {
+    @extend .list-unstyled;
+}
+
+
+
 //WP Block Columns
 
 .wp-block-columns {

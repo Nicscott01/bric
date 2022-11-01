@@ -37,3 +37,48 @@ $nav-link-active-underline-width: 45px;
     $navbar-light-active-color: $navbar-active-color;
 
 }
+
+
+//FONTS
+$font-weight-bolder: $font-weight-bold;
+
+
+
+//Utilities
+$utilities: (
+    "bg-image-no-repeat": (
+        property: background-repeat,
+        class: bg-image,
+        values: no-repeat
+    ),
+    "bg-position": (
+        property: background-position,
+        class: bg-position,
+        values: (
+            center: center center,
+            center-left: center left,
+            center-right: center right,
+            top-left: top left,
+            top-right: top right,
+            top-center: top center,
+            bottom-left: bottom left,
+            bottom-right: bottom right,
+            bottom-center: bottom center
+        )
+    ),
+    "bg-size" : (
+        property: background-size,
+        class: bg-size,
+        values: (
+            contain: contain,
+            cover: cover,
+            a-100: auto 100%
+        )
+    ),
+    "bg-opacity": (
+      css-var: true,
+      class: bg-opacity,
+      values: $opacities
+    )
+
+);

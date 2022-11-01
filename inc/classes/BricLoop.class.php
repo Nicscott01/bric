@@ -108,7 +108,7 @@ class BricLoop {
 		}
 
 		
-		if ( is_archive() || is_home() || is_single() || is_search() || is_404() ) {
+		if ( is_archive() || is_home() || is_search() || is_404() ) {
 			
             
 			get_template_part( 'template-parts/archive-start' );
@@ -156,30 +156,6 @@ class BricLoop {
 	
 	
 	
-	public function get_before_loop() {
-		
-		if ( is_search() ) {
-			
-
-			get_template_part( 'template-parts/search-header' );
-				
-		
-		}
-		elseif ( is_404() ) {
-			
-					
-			//$this->get_pusher();
-			echo( '<div class="col-12 mb-2"><h1>Sorry, that page doesn\'t exist here.</h1></div>' );
-			
-		//	add_action( 'bric_after_loop', array( $this, 'close_div'), 20 );	//call early so we can slide in the sidebar
-			//add_action( 'bric_after_loop', array( $this, 'close_div'), 50 );	
-			//add_action( 'bric_after_loop', array( $this, 'close_div'), 50 );	
-		
-		}
-		
-		
-		
-	}
 	
 	
 	
@@ -233,11 +209,13 @@ class BricLoop {
 		$this->set_post_class();
 
 		
-		
-		if ( !is_404() ) {
-			
+		if ( is_search() ) {
+
+			get_template_part( 'template-parts/search-result' );
+
+		} elseif ( !is_404() ) {
+
 			get_template_part( 'content', $this->contentTemplate );
-			
 		}
 		
 		
@@ -332,7 +310,7 @@ class BricLoop {
 		}
 
 		
-		if ( is_archive() || is_home() || is_post_type_archive() ) {
+		if ( is_archive() || is_home() || is_post_type_archive() || is_search() ) {
 			
 			the_posts_pagination( array( 'mid_size' => 1, 'type' => 'list' ) );
 

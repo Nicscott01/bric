@@ -1,0 +1,12 @@
+//OOTB WP Gallery Block Styling
+
+
+
+.wp-block-gallery {
+    justify-content: center;
+
+    > figure {
+        padding: $spacer *2;
+    }
+
+}

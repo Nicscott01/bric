@@ -5,6 +5,8 @@
  * 
  */
 
+ include_once( __DIR__ . '/acf-fields/acf-fields.php' );
+
 //register_block_type( get_stylesheet_directory( ) . '/blocks/bg-image-group/'  );
 //register_block_type( get_stylesheet_directory( ) . '/blocks/footer/'  );
 //register_block_type( get_stylesheet_directory( ) . '/blocks/content-image-row/'  );

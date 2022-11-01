@@ -29,3 +29,11 @@
     }
 
 }
+
+
+
+
+.entry-title,
+.wp-block-post-template .wp-block-post-title {
+    text-transform: $heading-transform;
+}

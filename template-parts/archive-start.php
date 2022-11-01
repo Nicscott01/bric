@@ -4,6 +4,9 @@
  *
  */
 
+
 ?>
-<div class="archive-posts-wrapper recent-posts <?php echo BricLoop()->get_content_class( 'main' ); ?> ">
+<div class="archive-posts-wrapper recent-posts container-xxl">
 	<div class="row">
+		<div class="col-12 col-md-8">
+			<div class="row">

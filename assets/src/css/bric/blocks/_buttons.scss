@@ -5,6 +5,12 @@
     margin-bottom: 2.5rem;
 }
 
+[class^="wp-container"] {
+    .wp-block-button {
+        @extend .col-auto;
+    }
+}
+
 
 .wp-block-button {
 
@@ -21,6 +27,13 @@
             //@extend .btn-outline-primary;
             @include button-outline-variant($primary);
             border-width: var( --#{$variable-prefix}btn-border-width );
+
+
+            @each $key, $color in $utilities-text {
+                &.text-#{$key} {
+                   --#{$prefix}btn-border-color: rgb( #{$color} );
+                }
+            }
         }
     }
 
