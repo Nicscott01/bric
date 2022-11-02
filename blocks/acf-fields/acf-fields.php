@@ -407,4 +407,102 @@ acf_add_local_field_group(array(
 	'show_in_rest' => 0,
 ));
 
-endif;		
+
+
+
+	acf_add_local_field_group(array(
+		'key' => 'group_635fea365d5aa',
+		'title' => 'Block: Hero Header',
+		'fields' => array(
+			array(
+				'key' => 'field_635feaf7e3c47',
+				'label' => 'Minimum Height',
+				'name' => 'minimum_height',
+				'aria-label' => '',
+				'type' => 'group',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'layout' => 'block',
+				'sub_fields' => array(
+					array(
+						'key' => 'field_635fea36807d7',
+						'label' => 'Value',
+						'name' => 'value',
+						'aria-label' => '',
+						'type' => 'number',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'default_value' => 25,
+						'min' => 1,
+						'max' => '',
+						'placeholder' => '',
+						'step' => '',
+						'prepend' => '',
+						'append' => '',
+					),
+					array(
+						'key' => 'field_635fea65807d8',
+						'label' => 'Units',
+						'name' => 'units',
+						'aria-label' => '',
+						'type' => 'select',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'choices' => array(
+							'px' => 'px',
+							'%' => '%',
+							'vw' => 'vw',
+							'vh' => 'vh',
+							'rem' => 'rem',
+							'em' => 'em',
+						),
+						'default_value' => 'px',
+						'return_format' => 'value',
+						'multiple' => 0,
+						'allow_null' => 0,
+						'ui' => 0,
+						'ajax' => 0,
+						'placeholder' => '',
+					),
+				),
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'block',
+					'operator' => '==',
+					'value' => 'acf/hero-header',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'normal',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+		'show_in_rest' => 0,
+	));
+	
+	endif;		

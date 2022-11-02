@@ -219,98 +219,179 @@ function is_block_type( $block, $type ) {
 
 
 
+function has_child_block_type( $block, $type ) {
+
+    if ( isset( $block['innerBlocks'] ) && !empty( $block['innerBlocks'] ) ){
+        
+        foreach( $block['innerBlocks'] as $innerBlock ) {
+
+            if ( is_block_type( $innerBlock, $type ) ) {
+                
+                return true;
+
+            } elseif ( has_child_block_type( $innerBlock, $type ) ) {
+
+                return true;
+            
+            }
+        }
+
+    }
+
+    return false;
+
+}
+
+
 
 
 
 
 /**
- *  Replace WP classes with BS equivalents
- * 
+ *  Core/Button Block
+ *  filter classes
  * 
  */
+ //add_filter( 'render_block_core/button', 'bric_filter_core_button', 10, 3 );
+ //add_filter( 'render_block_core/buttons', 'bric_filter_core_button', 10, 3 );
+
+ function bric_filter_core_button( $content, $block, $instance = null ) {
+
+   // var_dump( $block );
+
+    //Baseline Button
+    $content = str_replace( 'wp-block-button__link', 'btn', $content );
+
+
+    if ( isset( $block['attrs']['className'] ) ) {
+
+        if( strpos( $block['attrs']['className'], 'is-style-outline') !== false ) {
+          
+            $btn_type_class = 'btn-outline-';
+
+        } elseif( strpos( $block['attrs']['className'], 'is-style-fill') !== false  ) {
+
+            $btn_type_class = 'btn-';
+        }
+    }
+
+    //Pick up the colors
+    $bg_color = isset( $block['attrs']['backgroundColor'] ) ? $block['attrs']['backgroundColor'] : null;
+    $text_color = isset( $block['attrs']['textColor'] ) ? $block['attrs']['textColor'] : null;
+
+    $btn_color =  empty( $bg_color ) ? $text_color : $bg_color;
+
+    $content = str_replace( 'btn', 'btn ' . $btn_type_class . $btn_color, $content );
+
+    
+    if ( !($btn_color == $text_color ) ) { 
+
+        $content = str_replace( 'has-' . $text_color . '-color', 'text-' . $text_color, $content );
+    
+    } else {
+        //Remove the wp classes that get extended since it will mess up rollover states
+        $content = str_replace( 'has-' . $text_color . '-color', '', $content );
+    }
+
+    if ( $btn_color == $bg_color ) {
+
+        $content = str_replace( 'has-' . $bg_color . '-background-color', '', $content );
+    }
+
+
+    return $content;
+
+ }
+ 
+
+
+
+
+
+
 
  add_filter( 'render_block', function( $content, $block ) {
 
 
-    $search = [
-        'are-vertically-aligned-top',
-        'is-vertically-aligned-top',
-        'has-black-color',
-        'has-white-color',
-        'has-primary-color',
-        'has-secondary-color',
-        'has-tertiary-color',
-        'has-dark-color',
-        'has-light-color',
-        'wp-block-button__link',
-        'has-primary-background-color',
-        'has-secondary-background-color',
-        'has-tertiary-background-color',
-        'has-dark-background-color',
-        'has-light-background-color',
-        'wp-block-columns',
-        'wp-block-column',
-        'wp-block-search__inside-wrapper',
-        'wp-block-search__input',
-        'wp-block-search__button',
-        'wp-block-search__label'
-    ];
+    switch( $block['blockName'] ) {
 
-    $replace = [
-        'align-items-start',
-        'align-self-start',
-        'text-black',
-        'text-white',
-        'text-primary',
-        'text-secondary',
-        'text-tertiary',
-        'text-dark',
-        'text-light',
-        'btn',
-        'bg-primary',
-        'bg-secondary',
-        'bg-tertiary',
-        'bg-dark',
-        'bg-light',
-        'row',
-        'col',
-        'input-group',
-        'wp-block-search__input form-control',
-        'wp-block-search__button btn',
-        'wp-block-search__label visually-hidden'
-    ];
+        case 'core/button' :
+  
+
+           $content = bric_filter_core_button( $content, $block );
 
 
 
-/*
-    if ( is_block_type( $block, 'core/button' ) ) {
 
-        if( isset( $block['attrs']['className'] ) ) {
+            break;
 
-            $button_classes = explode( ' ', $block['attrs']['className'] );
+        default :
 
-            foreach( $button_classes as $button_class ) {
 
-                if ( $button_class == 'is-style-outline' ) {
+            $search = [
+                'are-vertically-aligned-top',
+                'is-vertically-aligned-top',
+                'has-black-color',
+                'has-white-color',
+                'has-primary-color',
+                'has-secondary-color',
+                'has-tertiary-color',
+                'has-dark-color',
+                'has-light-color',
+                //'wp-block-button__link',
+                'has-primary-background-color',
+                'has-secondary-background-color',
+                'has-tertiary-background-color',
+                'has-dark-background-color',
+                'has-light-background-color',
+                'wp-block-columns',
+                'wp-block-column',
+                'wp-block-search__inside-wrapper',
+                'wp-block-search__input',
+                'wp-block-search__button',
+                'wp-block-search__label',
+                'wp-block-post-excerpt__more-link'
+            ];
 
-                    $search[] = 'btn';
-                    $replace[] = 'btn btn-outline';
-                }
-            }
-        }
-        
+            $replace = [
+                'align-items-start',
+                'align-self-start',
+                'text-black',
+                'text-white',
+                'text-primary',
+                'text-secondary',
+                'text-tertiary',
+                'text-dark',
+                'text-light',
+                //'btn',
+                'bg-primary',
+                'bg-secondary',
+                'bg-tertiary',
+                'bg-dark',
+                'bg-light',
+                'row',
+                'col',
+                'input-group',
+                'wp-block-search__input form-control',
+                'wp-block-search__button btn',
+                'wp-block-search__label visually-hidden',
+                'wp-block-post-excerpt--more-link fw-bold'
+            ];
+
+
+    
+
+            $content = str_replace( $search, $replace, $content );
+
     }
-*/
 
 
-
-
-
-    //var_dump( $content );
-
-    return str_replace( $search, $replace, $content );
+    return $content;
 
  }, 10, 2 );
+
+
+
 
 
 

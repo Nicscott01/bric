@@ -20,7 +20,7 @@ $min_height_str = $min_height['value'] . $min_height['units'];
     <div class="col-12 position-relative">
         <div class="container-xxl">
             <div class="row position-relative">
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-lg-auto">
                     <div class="bg-secondary bg-opacity-62 px-5 py-4">
                         <h1 class="text-white mb-4 entry-title"><?php echo $post->post_title; ?></h1>
                         <?php
@@ -35,12 +35,15 @@ $min_height_str = $min_height['value'] . $min_height['units'];
                 </div>
             </div>
         </div>
+        <?php if ( !empty( $featured_image ) ) { ?>
         <div class="col-12 col-lg-7 featured-image p-3">
                         <?php   
 
                         echo wp_get_attachment_image($featured_image['id'], 'medium_large', false, [ 'class' => 'img-fit img-contain']);
                         ?>
                 </div>
-
+        <?php
+        }
+        ?>
     </div>
 </div>

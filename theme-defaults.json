@@ -464,6 +464,28 @@
                     "val": "Bold"
                 }
             ]
+        }, {
+            "prop": "btn-text-transform",
+            "val": "none",
+            "label": "Button Text Transform",
+            "description": "",
+            "type": "select",
+            "css_var": true,
+            "facevalue": true,
+            "choices": [
+                {
+                    "prop": "uppercase",
+                    "val": "Uppercase"
+                },
+                {
+                    "prop": "lowercase",
+                    "val": "Lowercase"
+                },
+                {
+                    "prop": "none",
+                    "val": "None"
+                }
+            ]
         }
     ],
     "body": [
