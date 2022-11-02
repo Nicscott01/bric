@@ -227,7 +227,7 @@ class BricLoop {
 	
 	public function set_post_class() {
 		
-		add_filter( 'post_class', array( $this, '_set_post_class'), 10, 3 );
+		//add_filter( 'post_class', array( $this, '_set_post_class'), 10, 3 );
 		
 	}
 	

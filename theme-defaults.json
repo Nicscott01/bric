@@ -226,6 +226,47 @@
                 }
             ]
 
+        },
+        {
+            "prop": "headings_color",
+            "label": "Headings Color",
+            "description": "",
+            "val": "null",
+            "type": "select",
+            "facevalue": false,
+            "css_var": true,
+            "choices": [
+                {
+                    "prop": "null",
+                    "val": "Default"
+                },
+                {
+                    "prop": "primary",
+                    "val": "Primary"
+                },
+                {
+                    "prop": "secondary",
+                    "val": "Secondary"
+                },
+                {
+                    "prop": "light",
+                    "val": "Light"
+                },
+                {
+                    "prop": "dark",
+                    "val": "Dark"
+                },
+                {
+                    "prop": "white",
+                    "val": "White"
+                },
+                {
+                    "prop": "black",
+                    "val": "Black"
+                }
+
+            ]
+
         }
 
     ],

@@ -6,9 +6,9 @@
  */
 
 ?>
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'excerpt'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'excerpt col-12 col-lg-6'); ?>>
 	<div class="inner-content">
-		<h1 class="entry-title h2">
+		<h1 class="entry-title h3">
 				<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 			</h1>
 	
@@ -22,12 +22,12 @@
 	
 	<?php if ( has_post_thumbnail() ) : ?>
 	<div class="featured-image">
-		<div class="img-wrapper">
+		<a class="img-wrapper d-block" href="<?php the_permalink(); ?>">
 		<?php
 
 		the_post_thumbnail( 'medium' );
 		?>
-		</div>
+		</a>
 	</div>
 	
 	<?php endif; ?>

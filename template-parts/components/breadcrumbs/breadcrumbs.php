@@ -7,7 +7,7 @@
 
 $classes = get_theme_mod( 'bric_bc_container', 'container-xxl' );
 
-$open_tag = sprintf( '<p id="breadcrumbs" class="mt-3 %s">', $classes );
+$open_tag = sprintf( '<p id="breadcrumbs" class="mt-3 small %s">', $classes );
 $close_tag = "</p>";
 
 

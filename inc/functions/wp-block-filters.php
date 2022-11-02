@@ -260,8 +260,9 @@ function has_child_block_type( $block, $type ) {
    // var_dump( $block );
 
     //Baseline Button
-    $content = str_replace( 'wp-block-button__link', 'btn', $content );
+    $content = str_replace( [ 'wp-block-button__link', 'wp-block-search__button' ], 'btn', $content );
 
+    $btn_type_class = 'btn-';
 
     if ( isset( $block['attrs']['className'] ) ) {
 
@@ -272,8 +273,10 @@ function has_child_block_type( $block, $type ) {
         } elseif( strpos( $block['attrs']['className'], 'is-style-fill') !== false  ) {
 
             $btn_type_class = 'btn-';
-        }
+        } 
+
     }
+
 
     //Pick up the colors
     $bg_color = isset( $block['attrs']['backgroundColor'] ) ? $block['attrs']['backgroundColor'] : null;
@@ -302,6 +305,30 @@ function has_child_block_type( $block, $type ) {
     return $content;
 
  }
+
+
+
+
+ function bric_filter_core_search( $content, $block, $instance = null ) {
+
+    $search = [
+        'wp-block-search__label',
+        'wp-block-search__inside-wrapper',
+        'wp-block-search__input',
+        'wp-block-search__button-inside'
+
+    ];
+
+    $replace = [
+        'wp-block-search--label visually-hidden',
+        'wp-block-search--inside-wrapper btn-group',
+        'wp-block-search--input form-control',
+        'wp-block-search--button-inside' //so the other search/replace doesn't add a btn style
+    ];
+
+    return str_replace( $search, $replace, $content );
+
+ }
  
 
 
@@ -316,16 +343,23 @@ function has_child_block_type( $block, $type ) {
     switch( $block['blockName'] ) {
 
         case 'core/button' :
-  
 
            $content = bric_filter_core_button( $content, $block );
 
-
-
-
             break;
 
+        case 'core/search' :  
+
+           $content = bric_filter_core_search( $content, $block );
+           $content = bric_filter_core_button( $content, $block );
+           
+           break;
+
+
+
         default :
+
+        //var_dump( $block );
 
 
             $search = [

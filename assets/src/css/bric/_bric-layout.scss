@@ -156,6 +156,28 @@ body {
     }
 }
 
+
+//Excerpt overrides
+//class="text-decoration-none" style="--bric-link-color: var( --bric-body-color );"
+.excerpt, 
+.wp-block-post {
+
+    h1, .h1, 
+    h2, .h2,
+    h3, .h3 {
+        > a {
+            --bric-link-color: var( --bric-body-color );
+            text-decoration: none;
+        }
+    }
+ }
+
+
+
+
+
+
+
 //
 //		WIDGETS
 //
