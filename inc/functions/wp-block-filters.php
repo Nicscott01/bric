@@ -302,6 +302,10 @@ function has_child_block_type( $block, $type ) {
     }
 
 
+    $content = str_replace( 'wp-block-button', 'wp-block-button flex-shrink-1', $content );
+
+
+
     return $content;
 
  }

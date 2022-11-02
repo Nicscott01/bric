@@ -385,12 +385,46 @@ class BricFilters {
 
 
 
-	public function gform_submit_button( $button, $form ) {
 
-		return "<button class='btn btn-primary' id='gform_submit_button_{$form['id']}'>Submit</button>";
+	public function bric_lower_footer_menu( $menu_items, $args ) {
+
+
+		if ( !empty( $menu_items ) ) {
+
+			$count = count( $menu_items );
+			
+			$c = 1;
+			foreach( $menu_items as $k => $menu_item ) {
+
+
+				if ( $count > $c ) {
+
+					$menu_items[$k]->classes[] = 'pe-2';
+				}
+
+				$c++;
+
+			}
+		}
+
+
+		return $menu_items;
+
+	
 	}
 
- 	
+
+
+
+
+
+
+		public function gform_submit_button( $button, $form ) {
+
+			return "<button class='btn btn-primary' id='gform_submit_button_{$form['id']}'>Submit</button>";
+		}
+
+		
 
 
 	/**

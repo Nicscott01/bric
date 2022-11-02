@@ -10,4 +10,4 @@ if ( empty( $copyright_holder ) ) {
 
 
 //printf( '<div class="copyright">%s %s</div>', $copyright_text, $this->SiteInfo->copyright_owner ); 
-printf( '<div class="copyright">%s %s</div>', $copyright_text, $copyright_holder ); 
+printf( '<div class="copyright text-center">%s %s</div>', $copyright_text, $copyright_holder ); 
