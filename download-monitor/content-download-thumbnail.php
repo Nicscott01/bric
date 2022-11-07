@@ -27,4 +27,3 @@
 <?php
 
 DLM_Modals()->register_modal( $download_id, $form_id, $download_slug );
-

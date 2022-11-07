@@ -180,6 +180,33 @@
             "sanitize_callback": "absint"
         },
         {
+            "prop": "h4_font_size",
+            "label": "H4 Font Size",
+            "description": "Size in px",
+            "val": "19",
+            "type": "number",
+            "units": "px",
+            "sanitize_callback": "absint"
+        },
+        {
+            "prop": "h5_font_size",
+            "label": "H5 Font Size",
+            "description": "Size in px",
+            "val": "18",
+            "type": "number",
+            "units": "px",
+            "sanitize_callback": "absint"
+        },
+        {
+            "prop": "h6_font_size",
+            "label": "H6 Font Size",
+            "description": "Size in px",
+            "val": "16",
+            "type": "number",
+            "units": "px",
+            "sanitize_callback": "absint"
+        },
+        {
             "prop": "headings_font_family",
             "label": "Headings Font Family",
             "val": "font_family_base",

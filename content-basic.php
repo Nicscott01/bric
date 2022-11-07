@@ -36,15 +36,31 @@
 		
 		if ( is_singular( 'post' ) ) {
 
-			if ( has_post_thumbnail() ) {
 
-				echo '<div class="mb-4 featured-image">';
+			switch( get_post_format() ) {
 
-				the_post_thumbnail( 'full' );
 
-				echo '</div>';
+				case 'video' :
+					//We don't want the featured image
+					break;
+
+
+				
+				default :
+				
+
+					if ( has_post_thumbnail() ) {
+
+						echo '<div class="mb-4 featured-image">';
+
+						the_post_thumbnail( 'full' );
+
+						echo '</div>';
+
+					}
 
 			}
+
 
 		}
 

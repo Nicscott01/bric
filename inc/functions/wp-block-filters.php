@@ -5,7 +5,7 @@
  * 
  */
 
-
+use function PHPSTORM_META\map;
 
 /**
  *  Edit some markup of the blocks
@@ -18,7 +18,7 @@
 
 
 
-add_filter( 'render_block_context', 'has_parent_block', 10, 3 ); 
+add_filter( 'render_block_context', 'has_parent_block', 5, 3 ); 
 
 function has_parent_block( $context, $parsed_block, $parent_block ) {
 
@@ -33,7 +33,9 @@ function has_parent_block( $context, $parsed_block, $parent_block ) {
     $catch_these = [
         'core/paragraph',
         'core/heading',
-        'core/quote'
+        'core/quote',
+        'core/group',
+        'core/list',
     ];
 
     if ( in_array( $parsed_block['blockName'], $catch_these)  ) {
@@ -80,7 +82,7 @@ function bric_filter_heading_block( $content, $parsed_block, $wp_block ) {
 
     global $has_parent_block;
 
-    if ( $has_parent_block ) {
+    if ( $has_parent_block || is_singular( ['post']) ) {
 
         $has_parent_block = false;
 
@@ -126,6 +128,8 @@ add_filter( 'render_block_core/paragraph', function( $content, $parsed_block, $w
 
     global $has_parent_block;
 
+
+    
     if ( $has_parent_block || get_post_type() == 'post' ) {
 
 
@@ -343,8 +347,63 @@ function has_child_block_type( $block, $type ) {
 
  add_filter( 'render_block', function( $content, $block ) {
 
+    global $has_parent_block;
 
     switch( $block['blockName'] ) {
+
+       
+        case 'core/group' :
+
+
+            if ( $has_parent_block ) {
+                
+                $has_parent_block = false;
+
+                break;
+            
+            } 
+
+            //var_dump( $block );
+
+            $align = isset( $block['attrs']['align'] ) ? $block['attrs']['align'] : 'none';
+            $layout = isset( $block['attrs']['layout']['type'] ) ? $block['attrs']['layout']['type'] : '';
+
+            $search = 'align' . $align;
+
+            switch( $align ) {
+
+                case 'wide':
+
+                    $alignment_class = 'container-xxl';
+
+                    break;
+
+                case 'full' :
+                case 'center' :
+
+                    $alignment_class = 'container-fluid';
+
+                    break;
+
+
+                case 'none' :
+
+                    $search = 'wp-block-group'; //they don't put out a class
+                    $alignment_class = 'wp-block-group container';
+
+
+                    break;
+                
+            }
+
+
+            $content = str_replace( $search, $alignment_class, $content );
+            
+            $content = bric_block_general_css_replacement( $content );
+
+
+            break;
+            
 
         case 'core/button' :
 
@@ -360,66 +419,62 @@ function has_child_block_type( $block, $type ) {
            break;
 
 
+        case 'core/list' :
+
+            //Wrap bullets in a container if it doesn't have a parent block
+            if ( $has_parent_block ) {
+                
+                $has_parent_block = false;
+
+                break;
+            
+            } else {
+
+                $content = '<div class="container-xxl">' . $content . '</div>';
+
+            }
+            
+
+
+            break;
+
+        case 'core/embed' :
+
+//var_dump( $block );
+
+            $has_ratio = strpos( $block['attrs']['className'], 'wp-has-aspect-ratio' );
+
+            if ( $has_ratio !== false ) {
+
+                $re = '/wp-embed-aspect-(\d+)-(\d+)\s?/m';
+                $str = $block['attrs']['className'];
+
+                preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
+
+                // Print the entire match result
+                //var_dump($matches);
+
+                if ( !empty( $matches ) ) {
+
+                    $ratio_w = $matches[0][1];
+                    $ratio_h = $matches[0][2];
+
+
+                    $content = str_replace( 'wp-block-embed__wrapper', 'ratio ratio-' . $ratio_w . 'x' . $ratio_h, $content );
+
+
+                }
+
+
+
+            }
+            break;
 
         default :
 
+        $content = bric_block_general_css_replacement( $content );
         //var_dump( $block );
 
-
-            $search = [
-                'are-vertically-aligned-top',
-                'is-vertically-aligned-top',
-                'has-black-color',
-                'has-white-color',
-                'has-primary-color',
-                'has-secondary-color',
-                'has-tertiary-color',
-                'has-dark-color',
-                'has-light-color',
-                //'wp-block-button__link',
-                'has-primary-background-color',
-                'has-secondary-background-color',
-                'has-tertiary-background-color',
-                'has-dark-background-color',
-                'has-light-background-color',
-                'wp-block-columns',
-                'wp-block-column',
-                'wp-block-search__inside-wrapper',
-                'wp-block-search__input',
-                'wp-block-search__button',
-                'wp-block-search__label',
-                'wp-block-post-excerpt__more-link'
-            ];
-
-            $replace = [
-                'align-items-start',
-                'align-self-start',
-                'text-black',
-                'text-white',
-                'text-primary',
-                'text-secondary',
-                'text-tertiary',
-                'text-dark',
-                'text-light',
-                //'btn',
-                'bg-primary',
-                'bg-secondary',
-                'bg-tertiary',
-                'bg-dark',
-                'bg-light',
-                'row',
-                'col',
-                'input-group',
-                'wp-block-search__input form-control',
-                'wp-block-search__button btn',
-                'wp-block-search__label visually-hidden',
-                'wp-block-post-excerpt--more-link fw-bold'
-            ];
-
-
-    
-
-            $content = str_replace( $search, $replace, $content );
 
     }
 
@@ -431,7 +486,70 @@ function has_child_block_type( $block, $type ) {
 
 
 
+function bric_block_general_css_replacement( $content ) {
 
+    $search = [
+        'are-vertically-aligned-top',
+        'is-vertically-aligned-top',
+        'has-black-color',
+        'has-white-color',
+        'has-primary-color',
+        'has-secondary-color',
+        'has-tertiary-color',
+        'has-dark-color',
+        'has-light-color',
+        //'wp-block-button__link',
+        'has-primary-background-color',
+        'has-secondary-background-color',
+        'has-tertiary-background-color',
+        'has-dark-background-color',
+        'has-light-background-color',
+        'wp-block-columns',
+        'wp-block-column',
+        'wp-block-search__inside-wrapper',
+        'wp-block-search__input',
+        'wp-block-search__button',
+        'wp-block-search__label',
+        'wp-block-post-excerpt__more-link',
+        'is-layout-flex',
+        'is-content-justification-center',
+        'has-small-font-size'
+    ];
+
+    $replace = [
+        'align-items-start',
+        'align-self-start',
+        'text-black',
+        'text-white',
+        'text-primary',
+        'text-secondary',
+        'text-tertiary',
+        'text-dark',
+        'text-light',
+        //'btn',
+        'bg-primary',
+        'bg-secondary',
+        'bg-tertiary',
+        'bg-dark',
+        'bg-light',
+        'row',
+        'col',
+        'input-group',
+        'wp-block-search__input form-control',
+        'wp-block-search__button btn',
+        'wp-block-search__label visually-hidden',
+        'wp-block-post-excerpt--more-link fw-bold',
+        'd-flex',
+        'justify-content-center',
+        'small'
+    ];
+
+
+
+
+    return str_replace( $search, $replace, $content );
+
+}
 
 
 

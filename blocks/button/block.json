@@ -1,0 +1,69 @@
+{
+    "name": "button",
+    "title": "Bric Button",
+    "description": "Button with deep theme integration",
+    "category": "theme",
+    "icon": "button",
+    "apiVersion": 2,
+    "keywords": [
+        "button",
+        "buttons"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "postTypes": []
+    },
+    "styles": [
+       {
+        "name" : "solid",
+        "label" : "Solid",
+        "isDefault" : true
+       }, {
+        "name" : "outline",
+        "label" : "Outline"
+       }, {
+        "name" : "link",
+        "label" : "Link"
+       }
+    ],
+    "supports": {
+        "align": true,
+        "alignWide": false,
+        "anchor": false,
+        "alignContent": false,
+        "color": {
+            "text": true,
+            "background": true,
+            "link": false
+        },
+        "alignText": true,
+        "spacing": {
+            "margin": {
+                "top" : "value",
+                "bottom" : "value"
+            },
+            "padding": true
+        },
+        "typography": {
+            "lineHeight": false,
+            "fontSize": false
+        },
+        "fullHeight": false,
+        "customClassName": true,
+        "jsx": true
+    },
+    "attributes": {
+       
+    },
+    "example": {
+        "attributes": {
+            "data" : {
+                "link" : {
+                    "title" : "My Button",
+                    "url" : "#"
+                }
+            }
+        }
+    }
+}

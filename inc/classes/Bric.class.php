@@ -34,6 +34,12 @@ class Bric {
 		add_filter( 'xmlrpc_enabled', '__return_false' );
 
 
+		// Remove generated CSS for blocks
+		//remove_action( 'wp_enqueue_scripts', 'wp_enqueue_stored_styles' );
+		//remove_action( 'wp_footer', 'wp_enqueue_stored_styles', 1 );
+
+
+
 
 	}
 	
@@ -118,7 +124,7 @@ class Bric {
 	public function register_styles() {
 		
 		
-		if ( defined( 'THEME_ASSET_VER' ) ) {
+		if ( defined( 'THEME_ASSET_VER' ) && THEME_ASSET_VER !== false ) {
 			
 			$ver = THEME_ASSET_VER;
 			
@@ -354,8 +360,8 @@ class Bric {
 		add_theme_support( 'post-thumbnails' );
 
 		add_theme_support( 'custom-logo', array(
-			'height'      => 100,
-			'width'       => 400,
+			'height'      => 0,
+			'width'       => 0,
 			'flex-height' => true,
 			'flex-width'  => true,
 			'header-text' => array( 'site-title', 'site-description' ),

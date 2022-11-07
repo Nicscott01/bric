@@ -17,7 +17,8 @@
     "styles": [
     ],
     "supports": {
-        "align": true,
+        "align": [ "full", "wide" ],
+        "alignWide": true,
         "anchor": true,
         "alignContent": true,
         "color": {

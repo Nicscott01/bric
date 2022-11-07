@@ -421,7 +421,28 @@ class BricFilters {
 
 		public function gform_submit_button( $button, $form ) {
 
-			return "<button class='btn btn-primary' id='gform_submit_button_{$form['id']}'>Submit</button>";
+
+			//get the option about recaptcha
+
+			$recap_opt = get_option( 'gravityformsaddon_gravityformsrecaptcha_settings' );
+			
+			//Reset button
+			$button = '';
+
+			if ( isset( $recap_opt['disable_badge_v3']) && intval( $recap_opt['disable_badge_v3'] ) && $recap_opt['recaptcha_keys_status_v3'] ) {
+
+				ob_start();
+
+				include locate_template( 'template-parts/components/gravity-forms/google-recaptcha-v3-terms.php' );
+
+				$button .= ob_get_clean();
+
+			}
+
+
+			$button .= "<button class='btn btn-primary' id='gform_submit_button_{$form['id']}'>Submit</button>";
+
+			return $button;
 		}
 
 		

@@ -32,35 +32,31 @@ if( empty( $other_posts ) ) {
 }
 
 
-//Filter the class of the excerpt
-add_filter( 'post_class', function($classes) {
 
-	if ( get_post_type() == 'post' ) {
+//Get the title of the page for posts and use that for this heading
+$page_for_posts = get_option( 'page_for_posts' );
 
-		$classes = str_replace( 'col-12', 'col', $classes );
+if ( !empty( $page_for_posts ) ) {
 
-	}
+	$pfp = get_post( $page_for_posts );
 
-
-	return $classes;
-
-});
+}
 
 
 ?>
-<div class="recent-posts other-posts col-12 mb-5">
+<div class="recent-posts other-posts container-xxl col-12 mb-5">
+	<h3 class="text-center h2 mb-4" style="color:revert;">Additional <?php echo $pfp->post_title; ?></h3>
 	<div class="row">
 	<?php
 	foreach( $other_posts as $post ) {
 		setup_postdata( $post );
 
-		get_template_part( 'content-excerpt' );
-
-
+		get_template_part( 'content-excerpt-adjacent' );
 
 	}
 
 	wp_reset_postdata(  );
+
 	?>
 	</div>
 </div>	

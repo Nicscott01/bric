@@ -20,4 +20,4 @@ register_block_type( locate_template(  'blocks/site-identity/'  ) );
 //register_block_type( get_stylesheet_directory( ) . '/blocks/cta-row/'  );
 //register_block_type( get_stylesheet_directory( ) . '/blocks/shop-nav/'  );
 //register_block_type( get_stylesheet_directory( ) . '/blocks/taxonomy-term-list/'  );
-
+register_block_type( locate_template(  'blocks/button/'  ) );

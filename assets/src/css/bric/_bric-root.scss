@@ -1,4 +1,5 @@
 :root {
     --#{$variable-prefix}border-width: #{$border-width};
     --#{$variable-prefix}btn-border-width: var( --#{$variable-prefix}border-width );
+    --wp--style--gallery-gap-default: 0; //Ensure that the wp block gap variable is 0
 }

@@ -10,3 +10,20 @@
     }
 
 }
+
+
+
+.logo-gallery {
+
+
+    figure {
+        max-height: 250px;
+        display:flex;
+
+        img {
+            @extend .img-fit, .img-contain;
+        }
+    }
+
+
+}

@@ -1,0 +1,11 @@
+//SCSS related to Yoast Elements
+
+//FAQ
+.schema-faq-section {
+    margin-bottom: $spacer*3;
+}
+
+.schema-faq-question {
+    @extend .h5;
+    display: block;
+}

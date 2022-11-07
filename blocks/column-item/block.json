@@ -3,6 +3,7 @@
     "title": "Column Item",
     "description": "Column item",
     "category": "theme",
+    "parent": ["acf/columns"],
     "icon": "feedback",
     "apiVersion": 2,
     "keywords": [
@@ -17,7 +18,7 @@
     "styles": [
     ],
     "supports": {
-        "align": true,
+        "align": false,
         "anchor": true,
         "alignContent": true,
         "color": {

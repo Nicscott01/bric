@@ -46,6 +46,10 @@
                     "color": "#ffffff"
                 }
             ]
-        }
+        },
+        "layout": {
+			"contentSize": "991px",
+			"wideSize": "1199px"
+		}
     }
 }

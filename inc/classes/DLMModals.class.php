@@ -39,7 +39,7 @@
 
             
 
-            $this->dlm_modals[] = [ 
+            $this->dlm_modals[ $download_id ] = [ 
                 'download_id' => $download_id, 
                 'form_id' => $form_id,
                 'download_slug' => $download_slug 

@@ -212,7 +212,8 @@
 
 //Try to put the form in the BS grid
 .gform_fields,
-.ginput_complex {
+.ginput_complex,
+.gform_footer {
     @include make-row();
 }
 
@@ -289,7 +290,12 @@
 
 .gfield_error {
     .ginput_container {
-        border: 2px solid $yellow;
+        //border: 2px solid $yellow;
+    }
+
+
+    input {
+        @extend .is-invalid;
     }
 }
 
@@ -345,6 +351,7 @@
 }
 
 
-.gfield--type-honeypot {
+.gfield--type-honeypot,
+.gform_validation_container {
     @extend .visually-hidden;
 }
