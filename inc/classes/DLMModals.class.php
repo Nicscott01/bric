@@ -31,6 +31,20 @@
 
             add_action( 'wp_footer', [ $this, 'print_modal' ], 2 ); 
 
+            /**
+             *  Ajax load template part
+             *  for modal/gated content
+             * 
+             * 
+             */
+
+            add_action( 'wp_ajax_nopriv_dlm_modal', [ $this, 'ajax_dlm_modal' ] );
+            add_action( 'wp_ajax_dlm_modal', [ $this, 'ajax_dlm_modal' ] );
+
+          
+
+
+
 
         }
 
@@ -62,9 +76,44 @@
 
 
 
+        public function ajax_dlm_modal() {
+
+            $download = new DLM_Download;
+            $post = get_post( $_REQUEST['download_id'] );
+
+            $download->set_id( $post->ID );
+            $download->set_slug( $post->post_name );
+            
+
+            $has_access = apply_filters( 'dlm_can_download', false, $download );
+        
+            $result = [];
+            $result['has_access'] = $has_access;
+            $result['download_id'] = $_REQUEST['download_id'];
+
+            if ( $has_access ) {
+
+                ob_start();
+                include locate_template( 'template-parts/modal/dlm/title.php' );
+                $result['title'] = ob_get_clean();
+
+                ob_start();
+                include locate_template( 'template-parts/modal/dlm/body.php' );
+                $result['body'] = ob_get_clean();
+                
+            }
+
+            echo wp_send_json_success( $result );
+
+            exit();
+
+        }
+
+
+
         public function print_modal() {
             
-            get_template_part( 'template-parts/modal-form' );
+            get_template_part( 'template-parts/modal/dlm/modal' );
             
         }
 
