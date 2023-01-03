@@ -20,13 +20,10 @@ $social-icon-width: $font-size-lg !default;
 //  NEW THEME CUSTOMIZER
 //
 $blocks-margin-bottom: 3.75rem;
-
 $headings-margin-top: 6rem;
-
 $columns-margin-bottom: $blocks-margin-bottom;
-
-
 $nav-link-active-underline-width: 45px;
+$list-group-item-font-weight: $font-weight-bold !default;
 
 //
 //  CUSTOMIZE BOOTSTRAP
@@ -82,3 +79,35 @@ $utilities: (
     )
 
 );
+
+//NAVBAR
+//$navbar-color: $black !default;
+//$navbar-active-color: rgba( $black, .9 ) !default;
+
+//$navbar-active-color: $primary !default;
+@if variable-exists( navbar-color ) {
+   
+    $navbar-light-color: $navbar-color;
+    $navbar-dark-color: $navbar-color;
+    
+}
+
+@if variable-exists( navbar-active-color ) {
+
+    $navbar-light-active-color: $navbar-active-color;
+    $navbar-dark-active-color: $navbar-active-color;
+
+}
+
+
+
+
+
+
+//MAPS
+
+@if variable-exists( theme-colors-custom ) {
+
+    $theme-colors: map-merge( $theme-colors, $theme-colors-custom );
+
+}

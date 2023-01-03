@@ -124,33 +124,9 @@ body {
 
 //Order the content in recent posts
 .excerpt {
-    display: flex;
-    flex-flow: column wrap;
-    margin-bottom: 1.5em;
-    .inner-content {
-        flex: 1 0 auto;
-        order: 2;
-        max-width: 100%;
-    }
-    .featured-image {
-        flex: 0 0 auto;
-        order: 1;
-        width: 100%;
-        margin-bottom: .5em;
-        .img-wrapper {
-            padding-top: $excerpt-image-ratio * 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        img {
-            @include img-cover();
-            position: absolute;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-            width: 100%;
-        }
-    }
+
+
+
     * {
         word-wrap: break-word;
     }
@@ -189,7 +165,7 @@ body {
         li {    
             padding-top: $list-group-item-padding-y;
             padding-bottom: $list-group-item-padding-y;
-            font-weight: $font-weight-bold;
+            font-weight: $list-group-item-font-weight; 
         }
     }
 }
@@ -222,6 +198,7 @@ body {
 //
 //		COMMENTS
 //
+/*
 .comment-list {
     padding-left: calc( 74px + 1em); //74x74 is avatar size
 }
@@ -255,6 +232,8 @@ body {
         flex-direction: column-reverse;
     }
 }
+*/
+
 
 //
 //		PAGINATION

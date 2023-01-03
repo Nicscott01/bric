@@ -493,6 +493,37 @@
                     "val": "Black"
                 }
             ]
+        },
+        {
+            "prop": "expand_breakpoint",
+            "val": "lg",
+            "label": "Navbar Expand Breakpoint",
+            "description": "What screensize the navbar should come out of hamburger",
+            "type": "select",
+            "css_var":false,
+            "scss_var": false,
+            "choices": [
+                {
+                    "prop": "sm",
+                    "val": "Small"
+                },
+                {
+                    "prop": "md",
+                    "val": "Medium"
+                },
+                {
+                    "prop": "lg",
+                    "val": "Large"
+                },
+                {
+                    "prop": "xl",
+                    "val": "Xtra Large"
+                },
+                {
+                    "prop": "xxl",
+                    "val": "XXtra Large"
+                }
+            ]
         }
     ],
     "borders": [

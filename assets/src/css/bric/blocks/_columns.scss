@@ -23,6 +23,8 @@ $wp-columns-count: 8;
 }
 
 
+//Todo: test to see if as of WP 6.3 that these are needed.
+/*
 @while $wp-columns-count > 0 {
 
     .columns-#{$wp-columns-count} {
@@ -39,7 +41,7 @@ $wp-columns-count: 8;
 
     $wp-columns-count: $wp-columns-count - 1;
 }
-
+*/
 
 .columns-default {
     @extend .row;

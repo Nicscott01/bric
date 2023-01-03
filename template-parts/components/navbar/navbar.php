@@ -20,7 +20,7 @@ $main_nav_menu = wp_nav_menu( array(
 
 
 ?>
-<nav class="navbar navbar-expand-lg navbar-<?php echo bric_get_theme_mod( 'navbar', 'theme' ); ?> bg-<?php echo bric_get_theme_mod( 'navbar', 'bg_color' ) ?>">
+<nav class="navbar navbar-expand-<?php echo bric_get_theme_mod( 'navbar', 'expand_breakpoint'); ?> navbar-<?php echo bric_get_theme_mod( 'navbar', 'theme' ); ?> bg-<?php echo bric_get_theme_mod( 'navbar', 'bg_color' ) ?>">
   <div class="container-xxl">
 	<?php
 	

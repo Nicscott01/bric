@@ -253,14 +253,14 @@ acf_add_local_field_group(array(
 		),
 	),
 	'location' => array(
-/*		array(
+		array(
 			array(
 				'param' => 'block',
 				'operator' => '==',
 				'value' => 'acf/hero-header',
 			),
 		),
-*/		array(
+		array(
 			array(
 				'param' => 'block',
 				'operator' => '==',
@@ -386,6 +386,32 @@ acf_add_local_field_group(array(
 			'toggle' => 0,
 			'save_custom' => 0,
 		),
+		array(
+			'key' => 'field_638f7f63f100d',
+			'label' => 'Orientation',
+			'name' => 'orientation',
+			'aria-label' => '',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'stacked' => 'Stacked',
+				'wide' => 'Wide',
+			),
+			'default_value' => false,
+			'return_format' => 'value',
+			'multiple' => 0,
+			'allow_null' => 0,
+			'ui' => 0,
+			'ajax' => 0,
+			'placeholder' => '',
+		),
 	),
 	'location' => array(
 		array(
@@ -406,8 +432,6 @@ acf_add_local_field_group(array(
 	'description' => '',
 	'show_in_rest' => 0,
 ));
-
-
 
 
 	acf_add_local_field_group(array(

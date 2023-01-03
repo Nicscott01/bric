@@ -38,6 +38,8 @@
 //Get the theme colors
 $colors = $this->get_theme_default_colors();
 
+$theme_colors_map = [];
+
 foreach ( $colors as $color ) {
 
 
@@ -56,6 +58,7 @@ foreach ( $colors as $color ) {
 
             printf( "$%s: %s;\r\n", $color->prop, $value );
 
+            $theme_colors_map[$color->prop] = sprintf( '$%s', $color->prop );
         }
 
     }
@@ -66,4 +69,29 @@ foreach ( $colors as $color ) {
 }
 
 return;
+
+/**
+ *  This is experimental and might not work here
+ * 
+ * 
+ */
+/*
+if ( $write_file && !empty( $theme_colors_map )) {
+
+    ?>
+$theme-colors: (
+    <?php
+    foreach( $theme_colors_map as $key => $val ) {
+    
+        printf('"%s": %s,
+', $key, $val );
+    }
+    ?>
+);
+    <?php
+
+}
+
+*/
+
 

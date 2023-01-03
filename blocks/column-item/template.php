@@ -19,5 +19,7 @@ $class .= !empty( $columns_per_row_large ) ? ' col-lg-' . $columns_per_row_large
 
 $class = empty( $class ) ? 'col' : $class;
 
+//var_dump( $block );
+
 ?>
-<InnerBlocks parent="<?php echo esc_attr( wp_json_encode( [ 'acf/columns' ])) ?>" class="d-flex <?php echo $class; ?>  <?php echo isset( $attributes['className'] ) ? $attributes['className'] : ''; ?>" /> 
+<InnerBlocks parent="<?php echo esc_attr( wp_json_encode( [ 'acf/columns' ])) ?>" class="d-flex <?php echo $class; ?>  <?php echo isset( $block['className'] ) ? $block['className'] : ''; ?>" /> 

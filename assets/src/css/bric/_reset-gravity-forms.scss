@@ -355,3 +355,12 @@
 .gform_validation_container {
     @extend .visually-hidden;
 }
+
+
+
+//Spam honeypot
+.gform_validation_container, .gform_wrapper.gravity-theme .gform_validation_container, body .gform_wrapper.gravity-theme .gform_body .gform_fields .gfield.gform_validation_container, body .gform_wrapper.gravity-theme .gform_fields .gfield.gform_validation_container, body .gform_wrapper.gravity-theme .gform_validation_container {
+    display: none !important;
+    position: absolute !important;
+    left: -9000px;
+  }

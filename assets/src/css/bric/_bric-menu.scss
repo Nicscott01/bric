@@ -77,6 +77,21 @@
             width: $nav-link-active-underline-width;
             height: $border-width;
             background-color: var( --#{$variable-prefix}primary );
+
+        }
+    }
+
+    &.slideout-menu {
+
+        .nav-link {
+            margin-bottom: $spacer;
+        
+            &.active {
+            
+                &:after {
+                 margin-left: 0;
+                }
+            }
         }
     }
 }

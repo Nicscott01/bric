@@ -323,7 +323,8 @@ function has_child_block_type( $block, $type ) {
         'wp-block-search__label',
         'wp-block-search__inside-wrapper',
         'wp-block-search__input',
-        'wp-block-search__button-inside'
+        'wp-block-search__button-inside',
+        'wp-block-search__button '
 
     ];
 
@@ -331,7 +332,8 @@ function has_child_block_type( $block, $type ) {
         'wp-block-search--label visually-hidden',
         'wp-block-search--inside-wrapper btn-group',
         'wp-block-search--input form-control',
-        'wp-block-search--button-inside' //so the other search/replace doesn't add a btn style
+        'wp-block-search--button-inside', //so the other search/replace doesn't add a btn style
+        'wp-block-search--button btn btn-primary ' //so the other search/replace doesn't add a btn style
     ];
 
     return str_replace( $search, $replace, $content );
@@ -414,7 +416,7 @@ function has_child_block_type( $block, $type ) {
         case 'core/search' :  
 
            $content = bric_filter_core_search( $content, $block );
-           $content = bric_filter_core_button( $content, $block );
+           //$content = bric_filter_core_button( $content, $block );
            
            break;
 

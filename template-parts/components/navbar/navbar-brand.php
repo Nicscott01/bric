@@ -24,7 +24,7 @@ $title = get_bloginfo( 'name' );
 
 
 ?>
-  <a class="navbar-brand" href="<?php echo get_home_url( ); ?>" style="max-width:<?php echo $navbar_brand_width; ?>px;">
+  <a class="navbar-brand" href="<?php echo get_home_url( ); ?>" style="--bric-navbar-brand-max-width:<?php echo $navbar_brand_width; ?>px;">
 		<?php
 
 		if ( !empty( $site_logo ) ) {

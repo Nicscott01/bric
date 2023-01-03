@@ -34,7 +34,8 @@
 }
 
 .search-submit,
-.submit {
+a.submit,
+button.submit {
     @extend .btn,
     .btn-primary;
 }

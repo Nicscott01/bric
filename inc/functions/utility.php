@@ -159,8 +159,6 @@ function get_landing_page()
 
 	} elseif (is_tax()) {
 
-		var_dump( 'is_tax' );
-
 		global $wp_taxonomies;
 		$query = get_queried_object();
 
