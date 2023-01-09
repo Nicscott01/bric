@@ -366,8 +366,16 @@ class BricStaff {
 
 
 function BricStaff() {
+
+
+    if ( class_exists( 'BricStaff' ) ) {
     
-    return BricStaff::get_instance();
+        return BricStaff::get_instance();
+    
+    } else {
+
+        return false;
+    }
     
 }
 
