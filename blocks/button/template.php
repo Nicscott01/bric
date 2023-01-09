@@ -5,6 +5,9 @@
  * 
  * 
  */
+
+$attributes = $block;
+
 $link = get_field( 'link' );
 $download = get_field( 'download' );
 $theme_color = get_field( 'theme_color' );
@@ -20,11 +23,13 @@ if ( ! $is_preview ) {
 //Init the default
 $style_type = 'solid';
 
+
+//var_dump( $block );
 //Get the Style Attribute from the className field
-if ( isset( $attributes['className'] ) ) {
+if ( isset( $block['className'] ) ) {
     
     $re = '/(?>^|\s)is-style-([^\s]+)/m';
-    $str = $attributes['className'];
+    $str = $block['className'];
 
     preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
 
@@ -36,6 +41,8 @@ if ( isset( $attributes['className'] ) ) {
     }
 
 }
+
+//var_dump( $style_type );
 
 
 

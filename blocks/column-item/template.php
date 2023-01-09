@@ -21,5 +21,12 @@ $class = empty( $class ) ? 'col' : $class;
 
 //var_dump( $block );
 
+//Get the bg color
+$bg_color = isset( $block['backgroundColor'] ) ? 'bg-' . $block['backgroundColor'] : '';
+
+//Get the text color
+$text_color = isset( $block['textColor']) ? 'text-' . $block['textColor'] : '';
+
+
 ?>
-<InnerBlocks parent="<?php echo esc_attr( wp_json_encode( [ 'acf/columns' ])) ?>" class="d-flex <?php echo $class; ?>  <?php echo isset( $block['className'] ) ? $block['className'] : ''; ?>" /> 
+<InnerBlocks parent="<?php echo esc_attr( wp_json_encode( [ 'acf/columns' ])) ?>" class="d-flex <?php echo $class; ?> <?php echo $bg_color; ?> <?php echo $text_color; ?> <?php echo isset( $block['className'] ) ? $block['className'] : ''; ?>" /> 

@@ -234,7 +234,8 @@ class BricStaff {
             'order' => 'ASC',
             'tax_query' => false,
             'taxonomy' => null,
-            'term' => null
+            'term' => null,
+            'btn' => 'btn-primary'
         ], $atts );
         
         

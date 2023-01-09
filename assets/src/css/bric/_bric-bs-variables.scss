@@ -10,8 +10,8 @@ $variable-prefix: bric-;
 
 
 //TYPOGRAPHY
-$font-family-sans-serif: "Monteserrat", sans-serif;
-$font-family-base: $font-family-sans-serif;
+$font-family-sans-serif: "Monteserrat", sans-serif !default;
+$font-family-base: $font-family-sans-serif !default;
 
 $lead-font-weight: 300;
 

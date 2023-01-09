@@ -22,8 +22,8 @@
         "anchor": true,
         "alignContent": true,
         "color": {
-            "text": false,
-            "background": false,
+            "text": true,
+            "background": true,
             "link": false
         },
         "alignText": true,

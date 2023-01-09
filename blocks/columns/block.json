@@ -23,7 +23,7 @@
         "alignContent": true,
         "color": {
             "text": false,
-            "background": false,
+            "background": true,
             "link": false
         },
         "alignText": true,

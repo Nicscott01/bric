@@ -7,7 +7,7 @@
  */
 
 
-$include = get_field( 'orientation' );
+$orientation = get_field( 'orientation' );
 $include = get_field( 'include' );
 $inc = [];
 

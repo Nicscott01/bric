@@ -277,7 +277,7 @@ $space-below-h: $spacer*1.25;
     overflow: hidden;
     z-index: 0;
     //padding: 0 $spacer;
-    margin-bottom: $space-above-h;
+    margin-bottom: $page-header-margin-bottom;
     min-height: $page-header-min-height;
 
     &.has-header-image {
@@ -375,7 +375,7 @@ $space-below-h: $spacer*1.25;
 .footer-lower {
 
     .sep {
-        &:last-of-type {
+        &:last-of-type:not(:first-of-type) {
             display: none;
         }
     }
