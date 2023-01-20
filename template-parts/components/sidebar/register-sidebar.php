@@ -15,8 +15,8 @@
 register_sidebar( array(
     'name'          => 'Upper Header',
     'id'            => 'upper-header',
-    'before_widget' => '<div id="%1$s" class="widget mb-0 %2$s">',
-    'after_widget'  => '</div>',
+    'before_widget' => '', //'<div id="%1$s" class="widget mb-0 %2$s">',
+    'after_widget'  => '', //'</div>',
     'before_title'  => '<h3 class="widget-title">',
     'after_title'   => '</h3>',	
 ) );

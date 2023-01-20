@@ -173,7 +173,18 @@ module.exports = function (grunt) {
 			dist: {
 				src: 'assets/css/*.css'
 			}
-		}
+		},
+		svgstore: {
+			options: {
+			  prefix : '', // This will prefix each <g> ID
+			},
+			default: {
+				files: {
+			  'assets/svgs/bric-theme-icons.svg': ['assets/src/svgs/social/*.svg', 'assets/src/svgs/shop/*.svg' ]
+			  }
+		  }
+	  	}
+
 
 
 	});
@@ -193,6 +204,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	
+	grunt.loadNpmTasks('grunt-svgstore');
 	
 	
 	

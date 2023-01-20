@@ -7,8 +7,10 @@
 }
 
 .social-media-accounts {
+    margin-bottom: 0;
 
     li svg {
         min-height: $font-size-lg;
+        height: var( --#{$prefix}social-icon-size );
     }
 }

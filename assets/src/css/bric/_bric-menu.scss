@@ -17,6 +17,8 @@
 
 .navbar-brand {
     flex-shrink: 0;
+    max-width: var(--#{$prefix}navbar-brand-max-width);
+
     img, svg {
         @extend .img-fluid;
     }

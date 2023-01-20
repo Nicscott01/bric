@@ -11,6 +11,7 @@ class ComposerStaticInit7801db77404d3131dca8e2364abc429b
         array (
             'ScssPhp\\ScssPhp\\' => 16,
             'Sabberworm\\CSS\\' => 15,
+            'SVG\\' => 4,
         ),
         'P' => 
         array (
@@ -26,6 +27,10 @@ class ComposerStaticInit7801db77404d3131dca8e2364abc429b
         'Sabberworm\\CSS\\' => 
         array (
             0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
+        ),
+        'SVG\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/meyfa/php-svg/src',
         ),
         'Padaliyajay\\PHPAutoprefixer\\' => 
         array (

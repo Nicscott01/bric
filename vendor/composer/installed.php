@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'ab441ada529bec60af748e1a284238f66e98d808',
+    'reference' => 'a4684ae3260a429298d13538621fcab7cc8cc0cf',
     'name' => 'bric/bric',
   ),
   'versions' => 
@@ -18,7 +18,16 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'ab441ada529bec60af748e1a284238f66e98d808',
+      'reference' => 'a4684ae3260a429298d13538621fcab7cc8cc0cf',
+    ),
+    'meyfa/php-svg' => 
+    array (
+      'pretty_version' => 'v0.11.3',
+      'version' => '0.11.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a3588b16a65258c95b49b054ef143d0e7ddb44fe',
     ),
     'padaliyajay/php-autoprefixer' => 
     array (
@@ -49,12 +58,12 @@
     ),
     'woocommerce/action-scheduler' => 
     array (
-      'pretty_version' => '3.5.2',
-      'version' => '3.5.2.0',
+      'pretty_version' => '3.5.4',
+      'version' => '3.5.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '519cfa20db89eb85511cad08301d3fa33522ed8b',
+      'reference' => '9533e71b0eba4a519721dde84a34dfb161f11eb8',
     ),
   ),
 );

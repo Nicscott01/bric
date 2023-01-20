@@ -1,0 +1,49 @@
+{
+    "name": "social-media",
+    "title": "Social Media",
+    "description": "Display site social media icons.",
+    "category": "theme",
+    "icon": "feedback",
+    "apiVersion": 2,
+    "keywords": [
+        "social",
+        "facebook",
+        "twitter",
+        "media"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "postTypes": []
+    },
+    "styles": [
+    ],
+    "supports": {
+        "align": true,
+        "anchor": true,
+        "alignContent": true,
+        "color": {
+            "text": true,
+            "background": false,
+            "link": false
+        },
+        "alignText": true,
+        "spacing": {
+            "margin": [
+                "top",
+                "bottom"
+            ],
+            "padding": true
+        },
+        "typography": {
+            "lineHeight": false,
+            "fontSize": false
+        },
+        "fullHeight": false,
+        "customClassName": true,
+        "jsx": true
+    },
+    "attributes": {
+
+    }
+}

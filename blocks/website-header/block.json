@@ -1,0 +1,50 @@
+{
+    "name": "website-header",
+    "title": "Website Header",
+    "description": "Display the website header content in a block.",
+    "category": "theme",
+    "icon": "feedback",
+    "apiVersion": 2,
+    "keywords": [
+        "header",
+        "navbar",
+        "nav",
+        "upper header",
+        "logo"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "postTypes": []
+    },
+    "styles": [
+    ],
+    "supports": {
+        "align": true,
+        "anchor": true,
+        "alignContent": true,
+        "color": {
+            "text": false,
+            "background": false,
+            "link": false
+        },
+        "alignText": true,
+        "spacing": {
+            "margin": [
+                "top",
+                "bottom"
+            ],
+            "padding": true
+        },
+        "typography": {
+            "lineHeight": false,
+            "fontSize": false
+        },
+        "fullHeight": false,
+        "customClassName": true,
+        "jsx": true
+    },
+    "attributes": {
+
+    }
+}

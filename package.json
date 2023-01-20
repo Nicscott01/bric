@@ -30,7 +30,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install_cookie_banner" :  "git clone https://github.com/kolappannathan/bootstrap-cookie-banner.git vendor/bootstrap-cookie-banner",
+    "install_cookie_banner": "git clone https://github.com/kolappannathan/bootstrap-cookie-banner.git vendor/bootstrap-cookie-banner",
     "update-bootstrap": "cp -r node_modules/bootstrap/scss/* assets/src/css/vendor/bootstrap/"
   },
   "author": "BRianna and nIC Scott",

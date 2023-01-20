@@ -51,7 +51,7 @@ class Slideout {
 		global $Navbar;
 
 
-		$main_menu = Navbar::get_primary_nav_menu_obj();
+		$main_menu = \Bric\Navbar::get_primary_nav_menu_obj();
 			
 
 
@@ -74,7 +74,7 @@ class Slideout {
 			'side' => $SiteInfo->navbar->slideout['side'],
 			'target_id' => 'menu-'. $main_menu->slug,
 			'target_id_left' => ( isset( $Navbar->main_nav_menu_obj_left ) ) ? 'menu-' . $Navbar->main_nav_menu_obj_left->slug : '',
-			'close_button' => $SiteInfo->navbar->slideout['close_button'],
+			'close_button' => true, //$SiteInfo->navbar->slideout['close_button'],
 			'id' => 'slideout-primary-menu'
 		] );
 		
@@ -82,73 +82,6 @@ class Slideout {
 	}
 	
 	
-	public function init_slideout_d() {
-		
-		?>
-<script>
-	var mainmenu = {};
-	
-	( function($){
-		$(document).ready( function(e) { 
-			
-			//if ( $(window).width() < 768 ) {
-			
-				$('body > *').wrapAll('<div id="total-page-wrapper" />');
-				$('.navbar-collapse').clone().appendTo('body').attr('id', 'slideout').removeClass('navbar-collapse collapse');
-
-				$('#slideout a').each(function(i) {
-					$(this).attr('data-toggle', '');
-				});
-
-				mainmenu = new Slideout({
-					'panel': document.getElementById( 'total-page-wrapper' ),
-					'menu': document.getElementById( 'slideout' ),
-					'side': 'right'
-				});
-
-				//document.querySelector('.navbar-toggler').addEventListener('click')
-				$('.navbar-toggler').click( function() {
-					mainmenu.toggle();
-				});
-				$(document).trigger('bricSlideOutComplete');
-				
-			//}
-			
-		});
-		
-	})(jQuery);
-	
-	/**
-	 *		Dropdown Behavior
-	 *
-	 *		perform on doc ready to wait for any other 
-	 *		DOM manipulation by other plugins.
-	 *
-	 */
-	(function($){
-		$(document).ready( function(){ 
-
-			$('.dropdown-toggle').on( 'click', function(e) {
-				if ( $(window).width() > 768 ) {
-					e.stopPropagation();
-				}
-			});	
-			
-			$('.nav-item.dropdown').hover( function(e) {
-				$(this).addClass('hover').find('.dropdown-menu').addClass('show');	
-			},
-			function(e) {
-				$(this).removeClass('hover').find('.dropdown-menu').removeClass('show');
-			});
-			
-		})
-		
-	})(jQuery);
-	
-</script>
-		<?php
-		
-	}
 	
 	
 	

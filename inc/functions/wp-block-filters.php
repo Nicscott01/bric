@@ -185,6 +185,7 @@ add_filter( 'render_block_core/quote', function( $content, $parsed_block, $wp_bl
  */
 function inject_class_column_count( $content, $block ) {
 
+
 	if ( ! is_block_type( $block, "core/columns" ) ) {
 
 		return $content;
@@ -534,7 +535,7 @@ function bric_block_general_css_replacement( $content ) {
         'bg-tertiary',
         'bg-dark',
         'bg-light',
-        'row',
+        'wp-block-columns row',
         'col',
         'input-group',
         'wp-block-search__input form-control',

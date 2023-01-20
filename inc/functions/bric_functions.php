@@ -51,6 +51,8 @@ include get_template_directory().'/inc/classes/ComingSoon.class.php';
 include get_template_directory().'/inc/classes/SortByTaxTerm.class.php';
 include get_template_directory().'/inc/classes/BricSitemapImages.class.php';
 include get_template_directory().'/inc/classes/DLMModals.class.php';
+include get_template_directory().'/inc/classes/SocialMedia.class.php';
+include get_template_directory().'/inc/classes/SvgSpriteSheet.class.php';
 
 
 //ACF Block 6.0 integration (more native wordpress)

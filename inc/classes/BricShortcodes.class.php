@@ -4,7 +4,10 @@
 
 class BricShortcodes {
 	
-	
+
+	public static $instance;
+
+
 	
 	function __construct() {
 		
@@ -90,14 +93,14 @@ class BricShortcodes {
 	
 	
 	
-	function social_media_sc( $atts, $content ) {
+	function social_media_sc( $atts = [], $content = '' ) {
 		
 		global $SiteInfo;
-		
+		$o = '';
+
+
 		if ( !empty( $SiteInfo->social ) ) {
-			
-			$o = '';
-						
+							
 			foreach ( $SiteInfo->social as $social ) {
 					
 				ob_start();
@@ -116,6 +119,38 @@ class BricShortcodes {
 			
 			
 			
+		} elseif ( class_exists( 'WPSEO_Option_Social' ) ) {
+
+
+			//Get the social links
+			$seo_data = get_option( 'wpseo_social' );
+
+
+			if ( !empty( $seo_data ) && is_array( $seo_data ) ) {
+
+				var_dump( $seo_data );
+
+				foreach( $seo_data as $service => $url ) {
+					
+
+					ob_start();
+				
+					include locate_template( 'template-parts/social-media-item.php' );
+					
+					$o .= ob_get_clean();
+	
+				}
+
+				ob_start();
+			
+				include locate_template( 'template-parts/social-media-wrapper.php' );
+				
+				return ob_get_clean();
+	
+
+			}
+
+
 		}
 		
 		
@@ -319,8 +354,36 @@ class BricShortcodes {
 		
 	}
 	
+
+
+
+
+
+
+	/**
+	 * 	Get Instance
+	 * 
+	 */
+
+	public static function get_instance() {
+
+		if ( self::$instance == null ) {
+
+			self::$instance = new self;
+
+		}
+
+		return self::$instance;
+
+	}
 	
 }
 
 
-new BricShortcodes();
+function BricShortcodes() {
+
+	return BricShortcodes::get_instance();
+
+}
+
+BricShortcodes();

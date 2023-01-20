@@ -1,6 +1,62 @@
 {
     "packages": [
         {
+            "name": "meyfa/php-svg",
+            "version": "v0.11.3",
+            "version_normalized": "0.11.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/meyfa/php-svg.git",
+                "reference": "a3588b16a65258c95b49b054ef143d0e7ddb44fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/meyfa/php-svg/zipball/a3588b16a65258c95b49b054ef143d0e7ddb44fe",
+                "reference": "a3588b16a65258c95b49b054ef143d0e7ddb44fe",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "meyfa/phpunit-assert-gd": "^1.2",
+                "phpmd/phpmd": "@stable",
+                "phpunit/phpunit": "^4.8"
+            },
+            "suggest": {
+                "ext-gd": "Needed to rasterize images",
+                "ext-simplexml": "Needed to read SVG strings and files"
+            },
+            "time": "2022-02-18T11:53:57+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "SVG\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabian Meyer",
+                    "homepage": "http://meyfa.net"
+                }
+            ],
+            "description": "Read, edit, write, and render SVG files with PHP",
+            "homepage": "https://github.com/meyfa/php-svg",
+            "keywords": [
+                "svg"
+            ],
+            "support": {
+                "issues": "https://github.com/meyfa/php-svg/issues",
+                "source": "https://github.com/meyfa/php-svg/tree/v0.11.3"
+            },
+            "install-path": "../meyfa/php-svg"
+        },
+        {
             "name": "padaliyajay/php-autoprefixer",
             "version": "1.4",
             "version_normalized": "1.4.0.0",
@@ -183,17 +239,17 @@
         },
         {
             "name": "woocommerce/action-scheduler",
-            "version": "3.5.2",
-            "version_normalized": "3.5.2.0",
+            "version": "3.5.4",
+            "version_normalized": "3.5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/woocommerce/action-scheduler.git",
-                "reference": "519cfa20db89eb85511cad08301d3fa33522ed8b"
+                "reference": "9533e71b0eba4a519721dde84a34dfb161f11eb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/519cfa20db89eb85511cad08301d3fa33522ed8b",
-                "reference": "519cfa20db89eb85511cad08301d3fa33522ed8b",
+                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/9533e71b0eba4a519721dde84a34dfb161f11eb8",
+                "reference": "9533e71b0eba4a519721dde84a34dfb161f11eb8",
                 "shasum": ""
             },
             "require-dev": {
@@ -202,7 +258,7 @@
                 "wp-cli/wp-cli": "~2.5.0",
                 "yoast/phpunit-polyfills": "^1.0"
             },
-            "time": "2022-09-16T15:31:00+00:00",
+            "time": "2023-01-17T20:20:43+00:00",
             "type": "wordpress-plugin",
             "extra": {
                 "scripts-description": {
@@ -220,7 +276,7 @@
             "homepage": "https://actionscheduler.org/",
             "support": {
                 "issues": "https://github.com/woocommerce/action-scheduler/issues",
-                "source": "https://github.com/woocommerce/action-scheduler/tree/3.5.2"
+                "source": "https://github.com/woocommerce/action-scheduler/tree/3.5.4"
             },
             "install-path": "../woocommerce/action-scheduler"
         }

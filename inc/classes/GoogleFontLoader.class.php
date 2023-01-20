@@ -141,6 +141,11 @@ class GoogleFontLoader {
         $request_url = $base_url;
 
         foreach ( $font_families as $family => $variants ) {
+
+            if ( empty( $family ) ) {
+                continue;
+            }
+
             // Sort variant tuples.
             usort(
                 $variants,

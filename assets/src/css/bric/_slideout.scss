@@ -45,6 +45,11 @@ body {
     .navbar-nav {
         padding-bottom: $spacer*4;
     }
+
+
+    svg {
+      height: 1rem;
+    }
 }
 
 .slideout-menu-left {
@@ -73,3 +78,5 @@ body {
 .slideout-open .slideout-menu {
   display: block;
 }
+
+

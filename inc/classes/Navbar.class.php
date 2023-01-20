@@ -1,9 +1,11 @@
 <?php
 
-
+namespace Bric;
 
 class Navbar {
 	
+	public static $instance;
+
 	public $logo_id = null;
 	public $logo = null;
 	public $title = '';
@@ -363,7 +365,27 @@ class Navbar {
 				
 	}
 	
+
+
+
+	/**
+	 * 	Get Instance
+	 * 
+	 * 
+	 * 
+	 */
 	
+
+	 public static function get_instance() {
+
+		if ( self::$instance == null ) {
+
+			self::$instance = new self;
+		}
+
+		return self::$instance;
+
+	 }
 	
 	
 	
@@ -372,8 +394,16 @@ class Navbar {
 
 global $Navbar;
 
-$Navbar = new Navbar;
 
 
+if ( !function_exists('BricNavbar') ) {
+	
+	function BricNavbar() {
 
-?>
+		return \Bric\Navbar::get_instance();
+
+	}
+
+}
+
+$Navbar = BricNavbar();

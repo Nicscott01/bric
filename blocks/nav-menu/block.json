@@ -1,0 +1,47 @@
+{
+    "name": "nav-menu",
+    "title": "Bric Nav Menu",
+    "description": "For use within the website header block.",
+    "category": "theme",
+    "icon": "feedback",
+    "apiVersion": 2,
+    "keywords": [
+        "nav",
+        "menu"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "postTypes": []
+    },
+    "styles": [
+    ],
+    "supports": {
+        "align": true,
+        "anchor": true,
+        "alignContent": true,
+        "color": {
+            "text": false,
+            "background": false,
+            "link": false
+        },
+        "alignText": true,
+        "spacing": {
+            "margin": [
+                "top",
+                "bottom"
+            ],
+            "padding": true
+        },
+        "typography": {
+            "lineHeight": false,
+            "fontSize": false
+        },
+        "fullHeight": false,
+        "customClassName": true,
+        "jsx": true
+    },
+    "attributes": {
+
+    }
+}

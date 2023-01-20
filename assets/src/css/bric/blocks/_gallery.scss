@@ -2,14 +2,52 @@
 
 
 
+
+//
+//      WP BLOCK GALLERY
+//
+$max_columns: 8;
+
+
 .wp-block-gallery {
     justify-content: center;
+    flex-wrap: wrap;
 
-    > figure {
-        padding: $spacer *2;
+    .wp-block-image {
+        padding: $spacer;
     }
 
+    &.is-cropped {
+        
+        .wp-block-image {
+
+            img {
+                display: block;
+                @extend .img-fit, .img-cover;
+            }
+        }
+    }
+
+
+    @include media-breakpoint-up( md ) {
+        @while ( $max_columns > 0 ) {
+
+            &.columns-#{$max_columns} {
+
+                .wp-block-image {
+                    flex-basis: 100% / $max_columns;
+                }
+            }
+
+
+            $max_columns: $max_columns - 1;
+        }
+    }
+
+
 }
+
+
 
 
 

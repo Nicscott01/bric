@@ -4,7 +4,7 @@ global $Navbar;
 
 add_action( 'bric_header', [$Navbar, 'get_upper_header'], 10 ); 
     
-add_action( 'bric_header', array( $Navbar, 'get_navbar' ), 10 );
+//add_action( 'bric_header', array( $Navbar, 'get_navbar' ), 10 );
 
 
 //Do the loop
@@ -72,7 +72,7 @@ add_action( 'wp', array( $BricLoop, 'home_carousel'), 10 );
 
 
 //SVG output
-add_action( 'init', function() {
+add_action( 'init-d', function() {
    
     get_template_part( 'template-parts/svg/sprite-sheet' );
     
@@ -94,7 +94,7 @@ add_action( 'init', function() {
     $output_cookie_consent = apply_filters( 'bric_enable_cookie_consent', true );
 
 
-    if ( $output_cookie_consent ) {
+    if ( !is_admin() && $output_cookie_consent ) {
 
         //Load the template before the script. It matters.
         add_action( 'wp_footer', function() {
