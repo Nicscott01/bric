@@ -244,9 +244,6 @@ class SocialMedia {
         //Get the social links
 		$social_urls = get_option( 'wpseo_social' );
 
-        error_log( json_encode( $social_urls ) );
-
-
         if ( !empty( $social_urls ) && is_array( $social_urls ) ) {
 
             foreach( $social_urls as $service => $url ) {
