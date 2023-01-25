@@ -19,6 +19,7 @@ include get_template_directory().'/vendor/woocommerce/action-scheduler/action-sc
 
 //ACF Fields
 include get_template_directory().'/inc/acf-fields/site_info.php';
+include get_template_directory().'/inc/acf-fields/privacy-options.php';
 
 
 
