@@ -65,21 +65,19 @@ class BootstrapNavwalker extends Walker_Nav_Menu {
 			$output .= $indent . '<li class="dropdown-header">' . esc_attr( $item->attr_title );
 		} else {
 
+			//See if the URL has a hash and make it not active if that's the case
+			$really_current = $item->current && ( strpos( $item->url, '#' ) == false );
+
 			$class_names = $value = '';
 			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
-			$classes[] = ($item->current) ? 'active' : '';
+			$classes[] = ( $really_current ) ? 'active' : ''; 
 			$classes[] = 'menu-item-' . $item->ID;
 			
 			//Added for BS4Beta 1
 			
 			
 			$classes[] = ( $item->menu_item_parent) ? '' : 'nav-item' ;
-			/*
-			echo '<h1>Item</h1>';
-			var_dump( $item );
-			echo '<br><br>';				
-			var_dump( $args );
-			*/
+
 			
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 
@@ -102,9 +100,9 @@ class BootstrapNavwalker extends Walker_Nav_Menu {
 			
 			//Editted for BS4 Beta 1 -- class .nav-link
 			//Editted for BS5 - adding .active to the .nav-link
-			if( $item->current && $depth > 0 ) {
+			if( $really_current && $depth > 0 ) {
 				$anchor_classes = 'dropdown-item active';
-			} elseif( $item->current ) {
+			} elseif( $really_current ) {
 				$anchor_classes = 'nav-link active';
 			} elseif ( $depth > 0 ){
 				$anchor_classes = 'dropdown-item';

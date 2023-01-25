@@ -34,7 +34,7 @@ if ( $img_overlay_color != 'none' ) {
 	$img_overlay_opacity = bric_get_theme_mod( 'body', 'page_header_background_overlay_opacity');
 
 	?>
-	<div class="overlay bg-<?php echo $img_overlay_color; ?> position-absolute w-100 h-100" style="--bric-bg-opacity: <?php echo $img_overlay_opacity / 100; ?>; z-index:0;">
+	<div class="overlay bg-<?php echo $img_overlay_color; ?> position-absolute w-100 h-100" style="--bric-bg-opacity: <?php echo (int) $img_overlay_opacity / 100; ?>; z-index:0;">
 
 	</div>
 	<?php
