@@ -45,6 +45,11 @@ class BricStaff {
         add_shortcode( 'bric_staff', [ $this, 'bric_staff_sc'] );
         
 
+        add_action( 'acf/init', function() {
+
+            include_once( __DIR__ .'/acf-fields/staff.php' );
+
+        });
         
         
         /**

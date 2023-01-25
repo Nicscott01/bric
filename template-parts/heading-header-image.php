@@ -24,8 +24,25 @@
 		}
 	
 	?></h1>
-	<div class="header-image-wrapper p-0">		
-		<div class="header-image ratio ratio-9x2 bg-<?php echo is_search() ? 'light' : 'primary'; ?>">
+	<div class="header-image-wrapper p-0">
+	<?php
+
+$img_overlay_color = bric_get_theme_mod( 'body', 'page_header_background_image_overlay');
+
+if ( $img_overlay_color != 'none' ) {
+
+	$img_overlay_opacity = bric_get_theme_mod( 'body', 'page_header_background_overlay_opacity');
+
+	?>
+	<div class="overlay bg-<?php echo $img_overlay_color; ?> position-absolute w-100 h-100" style="--bric-bg-opacity: <?php echo $img_overlay_opacity / 100; ?>; z-index:0;">
+
+	</div>
+	<?php
+
+}
+
+	?>
+		<div class="header-image ratio ratio-9x2 bg-<?php echo is_search() ? 'light' : 'primary'; ?>" style="z-index:-1;">
 			<?php 
 
 	

@@ -1,0 +1,57 @@
+{
+    "name": "accordion",
+    "title": "Accordion",
+    "description": "Accordion",
+    "category": "theme",
+    "icon": "feedback",
+    "apiVersion": 2,
+    "keywords": [
+        "accordion",
+        "collapse"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "postTypes": []
+    },
+    "styles": [
+    ],
+    "supports": {
+        "align": [ "full", "wide" ],
+        "alignWide": true,
+        "anchor": true,
+        "alignContent": true,
+        "color": {
+            "text": true,
+            "background": true,
+            "link": false,
+            "border": true
+        },
+        "alignText": true,
+        "spacing": {
+            "margin": [
+                "top",
+                "bottom"
+            ],
+            "padding": true
+        },
+        "typography": {
+            "lineHeight": false,
+            "fontSize": false
+        },
+        "fullHeight": true,
+        "customClassName": true,
+        "jsx": true
+    },
+    "attributes": {
+
+    },
+    "example": {
+        "attributes": {
+            "data": {
+                "text": "This is an example text field",
+                "text_area": "This is an example text area field"
+            }
+        }
+    }
+}

@@ -8,6 +8,27 @@
 
 $container = get_field( 'container' );
 $bg_color_location = get_field( 'background_color_container' );
+$bg_image = get_field( 'background_image' );
+
+
+$bg_classes = '';
+$bg_style = '';
+
+if ( !empty( $bg_image ) ) {
+
+    $bg_size = get_field( 'background_size' );
+    $bg_position = get_field( 'background_position' );
+    $bg_repeat= get_field( 'background_repeat' );
+    $overlay_percentage = get_field( 'overlay_percentage' );
+    
+    //var_dump( $overlay_percentage );
+
+    $bg_style = sprintf( 'background-image: url(%s); --bric-overlay-opacity: %s;', $bg_image['url'], intval( $overlay_percentage ) /100 );
+
+    $bg_classes = sprintf( 'has-bg-img bg-size-%s bg-position-%s %s', $bg_size, $bg_position, $bg_repeat );
+
+}
+
 
 $columns_per_row_mobile = get_field( 'columns_per_row_mobile' );
 $columns_per_row_tablet = get_field( 'columns_per_row_tablet' );
@@ -16,27 +37,27 @@ $columns_per_row_large = get_field( 'columns_per_row_large_screen' );
 //var_dump( $block['anchor'] );
 
 
-if ( isset( $block['backgroundColor'] ) && $bg_color_location == 'outside' ) {
+if ( ( isset( $block['backgroundColor'] ) || !empty( $bg_image ) ) && $bg_color_location == 'outside' ) {
 
 
         ?>
-<div <?php echo isset( $block['anchor'] ) ? 'id="' . $block['anchor'] . '"' : ''; ?> class="block bric-columns-block bg-<?php echo $block['backgroundColor']; ?> row">
-    <div class="col-12">
+<div <?php echo isset( $block['anchor'] ) ? 'id="' . $block['anchor'] . '"' : ''; ?> class="block bric-columns-block bg-<?php echo $block['backgroundColor']; ?> row <?php echo $bg_classes; ?>" style="<?php echo $bg_style; ?>">
+    <div class="col-12 p-0" style="z-index:1;">
         <div class="<?php echo $container; ?>">
         <?php
     
-} elseif ( ( isset( $block['backgroundColor'] ) && $bg_color_location == 'inside' )) {
+} elseif ( ( ( isset( $block['backgroundColor'] )  || !empty( $bg_image ) ) && $bg_color_location == 'inside' )) {
 
         ?>
 <div class="block bric-columns-block row">
-    <div class="col-12">
-    <div class="<?php echo $container; ?> bg-<?php echo $block['backgroundColor']; ?>">
+    <div class="col-12 p-0" style="z-index:1;">
+    <div class="<?php echo $container; ?> bg-<?php echo $block['backgroundColor']; ?> <?php echo $bg_classes; ?>" style="<?php  echo $bg_style; ?>">
         <?php
 
 } else {
     ?>
 <div class="block bric-columns-block row">
-    <div class="col-12">
+    <div class="col-12 p-0">
     <div class="no-bg-color <?php echo $container; ?>">
     <?php
 }

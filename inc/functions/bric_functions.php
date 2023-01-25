@@ -77,12 +77,15 @@ include get_template_directory().'/inc/classes/Integrations.class.php';
 include get_template_directory().'/inc/functions/utility.php';
 include get_template_directory().'/inc/functions/sanitization-functions.php';
 include get_template_directory().'/inc/functions/callback-functions.php';
+include get_template_directory().'/inc/functions/acf-load-values-filters.php';
+
 
 
 //Register Actions
 include get_template_directory().'/inc/actions.php';
 include get_template_directory().'/inc/filters.php';
 include get_template_directory().'/inc/functions/wp-block-filters.php';
+include get_template_directory().'/inc/acf-options/privacy-options.php';
 
 
 
@@ -340,4 +343,16 @@ function bric_get_theme_mod( $section, $setting ) {
 
 	return \Bric\Customizer()->get_theme_mod( $section, $setting );
 
+}
+
+
+
+
+if (!function_exists('BricSvgSpriteSheet')) {
+
+    function BricSvgSpriteSheet()
+    {
+
+        return \Bric\SvgSpriteSheet::get_instance();
+    }
 }

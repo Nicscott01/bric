@@ -84,6 +84,22 @@
             "sanitize_callback": "sanitize_hex_color"
         },
         {
+            "prop": "tertiary",
+            "label": "Tertiary",
+            "val": "#6c757d",
+            "description": "Tertiary theme color",
+            "type": "color",
+            "sanitize_callback": "sanitize_hex_color"
+        },
+        {
+            "prop": "quaternary",
+            "label": "Quaternary",
+            "val": "#6c757d",
+            "description": "Tertiary theme color",
+            "type": "color",
+            "sanitize_callback": "sanitize_hex_color"
+        },
+        {
             "prop": "light",
             "label": "Light",
             "val": "#f8f9fa",
@@ -230,6 +246,14 @@
             "val": null,
             "type": "number",
             "sanitize_callback": "absint"
+        },
+        {
+            "prop": "headings_line_height",
+            "label": "Headings Line Height",
+            "description": "Set the line height (no units)",
+            "val": 1.2,
+            "type": "number",
+            "sanitize_callback": "bric_floatval"
         },
         {
             "prop": "heading_transform",
@@ -730,9 +754,27 @@
 
         },
         {
+            "prop": "headings_margin_bottom",
+            "val": "16",
+            "label": "Headings Margin Bottom",
+            "description":"Amount of margin in px",
+            "type": "number",
+            "units": "px",
+            "sanitize_callback": "bric_floatval"
+        },
+        {
             "prop": "paragraph_margin_bottom",
             "val": "16",
             "label": "Paragraph Margin Bottom",
+            "description":"Amount of margin in px",
+            "type": "number",
+            "units": "px",
+            "sanitize_callback": "bric_floatval"
+        },
+        {
+            "prop": "page_header_margin_bottom",
+            "val": "16",
+            "label": "Page header margin bottom",
             "description":"Amount of margin in px",
             "type": "number",
             "units": "px",
@@ -748,6 +790,23 @@
             "sanitize_callback": "bric_value_with_units"
         },
         {
+            "prop": "page_header_background_image_overlay",
+            "val": "null",
+            "label": "Page Header Background Image Overlay",
+            "description":"",
+            "type": "select",
+            "choices": "theme_colors" 
+        },
+        {
+            "prop": "page_header_background_overlay_opacity",
+            "val": "",
+            "label": "Page Header Overlay Opacity",
+            "description":"in %",
+            "type": "number",
+            "units": "%",
+            "sanitize_callback": "bric_floatval"
+        },
+        {
             "prop": "lead_font_size",
             "val": "21",
             "label": "Lead/Feature Copy Font Size",
@@ -755,6 +814,14 @@
             "type": "number",
             "units": "px",
             "sanitize_callback": "bric_floatval"
+        },
+        {
+            "prop": "lead_line_height",
+            "val": "1.5",
+            "label": "Lead/Feature Copy Line Height",
+            "type": "number",
+            "sanitize_callback": "bric_floatval",
+            "css_var": "lead-line-height"
         }
     ],
     "footer": [

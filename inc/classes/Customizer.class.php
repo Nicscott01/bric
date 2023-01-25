@@ -163,6 +163,21 @@ class Customizer {
 
                                     break;
 
+                                case "theme_colors" :
+
+                                    $choices = [
+                                        '0' => 'None',
+                                        'primary' => 'Primary',
+                                        'secondary' => 'Secondary',
+                                        'tertiary' => 'Tertiary',
+                                        'quaternary' => 'Quaternary',
+                                        'light' => 'Light',
+                                        'dark' => 'Dark',
+                                        'white' => 'White',
+                                        'black' => 'Black',
+                                    ];
+
+                                    break;
 
                             }
 
@@ -183,7 +198,7 @@ class Customizer {
 
                                 break;
                             
-                                case "image" :
+                            case "image" :
 
                                 $wp_customize->add_control( new \WP_Customize_Image_Control( $wp_customize, sprintf( "%s__%s", $section_id, $default_prop ), [
                                     'label' => __( $default->label ),

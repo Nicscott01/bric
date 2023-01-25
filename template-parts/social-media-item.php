@@ -22,5 +22,5 @@ if ( is_admin() ) {
 
 
 ?>
-<li class="social-account list-inline-item"><a href="<?php echo $social['url']; ?>" class="<?php echo $text_color; ?>" target="_blank" aria-label="Follow us on <?php echo $social['platform']; ?>"><?php echo $svg ?>
+<li class="social-account list-inline-item <?php echo isset( $margin ) ? 'px-'. $margin : ''; ?>"><a href="<?php echo $social['url']; ?>" class="<?php echo $text_color; ?>" target="_blank" aria-label="Follow us on <?php echo $social['platform']; ?>"><?php echo $svg ?>
 </a></li>

@@ -172,8 +172,7 @@ foreach ($theme_defaults->sections as $theme_default_section) {
                 error_log( $log );
 */
 
-
-                if (isset($val->font)) {
+              if (isset($val->font) && $val->font != 'None' ) {
 
                     $val = sprintf('"%s", %s', $val->font, $val->category); //"Montserrat", sans-serif
 
@@ -183,7 +182,16 @@ foreach ($theme_defaults->sections as $theme_default_section) {
 
                 } else {
 
-                    $val = 'inherit';
+                    if ( $val->font == 'None') {
+
+                        $val = 'null';
+                    
+
+                    } else {
+
+                        $val = 'inherit';
+                    
+                    }
 
                     $expression = "$%s: %s;";
 
@@ -197,12 +205,14 @@ foreach ($theme_defaults->sections as $theme_default_section) {
                  */
 
                 $fonts_base = bric_get_theme_mod( 'fonts', 'font_family_base' );
-
-               /* ob_start();
+/*
+                ob_start();
                 var_dump( json_decode( $fonts_base ) );
                 $log = ob_get_clean();
                 error_log( $log );
-                */
+  */             
+
+  
                 if ( !empty( $fonts_base ) ) {
 
                     $fonts_base = json_decode( $fonts_base );

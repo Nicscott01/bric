@@ -1,0 +1,59 @@
+{
+    "name": "gallery",
+    "title": "Bric Gallery",
+    "description": "Image gallery without the fuss",
+    "category": "theme",
+    "icon": "gallery",
+    "apiVersion": 2,
+    "keywords": [
+        "gallery",
+        "image"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "postTypes": []
+    },
+    "styles": [
+       {
+        "name" : "solid",
+        "label" : "Solid",
+        "isDefault" : true
+       }, {
+        "name" : "outline",
+        "label" : "Outline"
+       }, {
+        "name" : "link",
+        "label" : "Link"
+       }
+    ],
+    "supports": {
+        "align": true,
+        "alignWide": false,
+        "anchor": false,
+        "alignContent": false,
+        "color": {
+            "text": false,
+            "background": false,
+            "link": false
+        },
+        "alignText": true,
+        "spacing": {
+            "margin": {
+                "top" : "value",
+                "bottom" : "value"
+            },
+            "padding": true
+        },
+        "typography": {
+            "lineHeight": false,
+            "fontSize": false
+        },
+        "fullHeight": false,
+        "customClassName": true,
+        "jsx": true
+    },
+    "attributes": {
+       
+    }
+}

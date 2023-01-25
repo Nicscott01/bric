@@ -559,6 +559,42 @@ function bric_block_general_css_replacement( $content ) {
 
 
 
+/**
+ *  Add Block ID to accordion block
+ * 
+ * 
+ * 
+ */
+
+
+add_filter(
+    'acf/pre_save_block',
+    function( $attributes ) {
+
+        if ( $attributes['name'] == 'acf/accordion' && empty( $attributes['anchor'] ) ) {
+            $attributes['anchor'] = 'accordion-' . uniqid();
+        }
+
+        return $attributes;
+    }
+);
 
 
 
+
+
+add_filter( 'render_block_data', function( $parsed_block, $source_block, $parent_block ) {
+
+
+    if ( $source_block['blockName'] == 'acf/collapse' ) {
+        
+         $parsed_block['attrs']['parentAnchor'] = $parent_block->parsed_block['attrs']['anchor'];
+  //     var_dump( $parsed_block );
+
+    }
+
+
+    return $parsed_block;
+
+
+}, 10, 3 );

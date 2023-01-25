@@ -75,8 +75,11 @@ class GoogleFontLoader {
 
         foreach( $font as $key => $value ) {
             
-    
-            if ( strpos( $key, 'weight' ) > 0 ) {
+            if( $key == 'font' && $value == 'None' ) {
+              
+                continue;
+
+            } elseif ( strpos( $key, 'weight' ) > 0 ) {
 
                 if ( $value == 'regular' ) {
 
@@ -142,7 +145,7 @@ class GoogleFontLoader {
 
         foreach ( $font_families as $family => $variants ) {
 
-            if ( empty( $family ) ) {
+            if ( empty( $family ) || $family == 'None' ) {
                 continue;
             }
 

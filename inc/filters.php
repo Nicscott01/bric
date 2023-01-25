@@ -394,9 +394,10 @@ class BricFilters {
 			$count = count( $menu_items );
 			
 			$c = 1;
+			
 			foreach( $menu_items as $k => $menu_item ) {
 
-
+				//Add padding
 				if ( $count > $c ) {
 
 					$menu_items[$k]->classes[] = 'pe-2';
@@ -405,6 +406,8 @@ class BricFilters {
 				$c++;
 
 			}
+
+			
 		}
 
 
@@ -440,7 +443,13 @@ class BricFilters {
 			}
 
 
-			$button .= "<button class='btn btn-primary' id='gform_submit_button_{$form['id']}'>Submit</button>";
+			ob_start();
+
+
+			include locate_template( 'template-parts/components/gravity-forms/submit-button.php' );
+
+
+			$button .= ob_get_clean();
 
 			return $button;
 		}

@@ -35,13 +35,7 @@ class SocialMedia {
 
     public function populate_social_accounts( $value, $post_id, $field ) {
 
-        /*
-        ob_start();
-        var_dump( $value );
-        $log = ob_get_clean();
-        error_log( $log );
-        */
-
+    
         $social_accounts = $this->get_social_accounts();
 
         if ( is_admin() ) {
@@ -250,6 +244,8 @@ class SocialMedia {
         //Get the social links
 		$social_urls = get_option( 'wpseo_social' );
 
+        error_log( json_encode( $social_urls ) );
+
 
         if ( !empty( $social_urls ) && is_array( $social_urls ) ) {
 
@@ -263,22 +259,28 @@ class SocialMedia {
             
                         case 'facebook_site' :
             
-                            $this->social_accounts['facebook'] = [
-                                'url' => $url,
-                                'platform' => 'Facebook',
-                            ];
-            
+                            if ( !empty( $url ) ) {
+
+                                $this->social_accounts['facebook'] = [
+                                    'url' => $url,
+                                    'platform' => 'Facebook',
+                                ];
+
+                            }
             
                             break;
             
                         case 'twitter_site' : 
             
-                            $this->social_accounts['twitter'] = [
-                                'url' => 'https://twitter.com/' . $url,
-                                'platform' => 'Twitter',
-                            ];
-            
-            
+
+                            if ( !empty( $url ) ) {
+
+                                $this->social_accounts['twitter'] = [
+                                    'url' => 'https://twitter.com/' . $url,
+                                    'platform' => 'Twitter',
+                                ];
+                
+                            }
             
                             break;
             

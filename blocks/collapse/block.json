@@ -1,0 +1,56 @@
+{
+    "name": "collapse",
+    "title": "Collapse",
+    "description": "Collapse items (includes a title and content)",
+    "category": "theme",
+    "icon": "feedback",
+    "apiVersion": 2,
+    "keywords": [
+        "accordion",
+        "collapse"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "postTypes": []
+    },
+    "styles": [
+    ],
+    "supports": {
+        "align": [ "full", "wide" ],
+        "alignWide": true,
+        "anchor": true,
+        "alignContent": true,
+        "color": {
+            "text": false,
+            "background": true,
+            "link": false
+        },
+        "alignText": true,
+        "spacing": {
+            "margin": [
+                "top",
+                "bottom"
+            ],
+            "padding": true
+        },
+        "typography": {
+            "lineHeight": false,
+            "fontSize": false
+        },
+        "fullHeight": true,
+        "customClassName": true,
+        "jsx": true
+    },
+    "attributes": {
+
+    },
+    "example": {
+        "attributes": {
+            "data": {
+                "text": "This is an example text field",
+                "text_area": "This is an example text area field"
+            }
+        }
+    }
+}

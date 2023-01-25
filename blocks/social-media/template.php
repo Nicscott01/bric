@@ -11,6 +11,7 @@ use function Bric\BricSocialMedia;
 
 $icons = get_field( 'social_accounts' );
 $icon_size = get_field( 'icon_size' );
+$margin = get_field( 'margin' );
 
 
 
@@ -31,6 +32,7 @@ if ( is_admin() ) {
     $social_icons = BricSocialMedia()->social_icons;
 
 }
+
 
 
 ob_start(); 

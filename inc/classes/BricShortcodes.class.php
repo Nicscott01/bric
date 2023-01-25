@@ -128,7 +128,7 @@ class BricShortcodes {
 
 			if ( !empty( $seo_data ) && is_array( $seo_data ) ) {
 
-				var_dump( $seo_data );
+				//var_dump( $seo_data );
 
 				foreach( $seo_data as $service => $url ) {
 					
