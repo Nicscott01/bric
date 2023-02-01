@@ -1,0 +1,44 @@
+{
+    "name": "site-copyright",
+    "title": "Website Copyright",
+    "description": "Display copyright.",
+    "style": null,
+    "category": "theme",
+    "icon": "welcome-write-blog",
+    "apiVersion": 2,
+    "keywords": [
+        "copyright"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "postTypes": []
+    },
+    "supports": {
+        "spacing": {
+            "margin": true,
+            "padding": true,
+            "blockGap": true
+        },
+        "align": true,
+        "anchor": true,
+        "alignContent": true,
+        "alignText": true,
+        "color": {
+            "text": true,
+            "background": false,
+            "link": true
+        },
+        "defaultStylePicker": true,
+        "typography": {
+            "lineHeight": false,
+            "fontSize": false
+        },
+        "fullHeight": false,
+        "customClassName": true,
+        "jsx": true
+    },
+    "attributes": {
+
+    }
+}

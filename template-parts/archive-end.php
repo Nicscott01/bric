@@ -1,13 +1,12 @@
 <?php
+
 /**
  *	Archive End
  *
  */
 ?>
-		</div><!--.row-->
-	</div><!--.col-->
-	<div class="col-12 col-md-4 sidebar-in-here">
-		<?php get_sidebar(); ?>
-	</div>
-	</div>
+</div><!--.row-->
+</div><!--.col-->
+<?php get_template_part( 'template-parts/blog/sidebar' ); ?>
+</div>
 </div><!--.archive-posts-wrapper-->

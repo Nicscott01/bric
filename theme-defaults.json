@@ -528,6 +528,10 @@
             "scss_var": false,
             "choices": [
                 {
+                    "prop": "never",
+                    "val": "Never"
+                },
+                {
                     "prop": "sm",
                     "val": "Small"
                 },

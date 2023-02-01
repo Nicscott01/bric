@@ -6,6 +6,8 @@
  * 
  */
 
+//var_dump( $block );
+
 $block_css = [];
 
 //var_dump( $block['backgroundColor']);

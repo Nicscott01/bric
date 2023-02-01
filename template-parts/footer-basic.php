@@ -23,7 +23,7 @@ global $BricLoop;
 
 	}
 
-	get_template_part( 'template-parts/footer-lower' );
+	//get_template_part( 'template-parts/footer-lower' );
 
 	?>	
 </div>

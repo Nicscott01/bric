@@ -8,6 +8,8 @@
  */
 
 $flex_direction = get_field( 'layout' );
+$navbar_expand_breakpoint = bric_get_theme_mod('navbar', 'expand_breakpoint');
+
 
 if ( $flex_direction == 'row' ) {
 
@@ -18,10 +20,6 @@ if ( $flex_direction == 'row' ) {
     $flex_class = 'flex-column align-items-end';
 
 }
-
-
-
-$navbar_expand_breakpoint = bric_get_theme_mod('navbar', 'expand_breakpoint');
 
 
 

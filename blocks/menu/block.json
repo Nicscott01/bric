@@ -1,0 +1,46 @@
+{
+    "name": "menu",
+    "title": "Bric Menu",
+    "description": "Put a menu somewhere in a block.",
+    "category": "theme",
+    "icon": "menu",
+    "apiVersion": 2,
+    "keywords": [
+        "menu"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "postTypes": []
+    },
+    "styles": [
+    ],
+    "supports": {
+        "align": true,
+        "anchor": true,
+        "alignContent": true,
+        "color": {
+            "text": true,
+            "background": true,
+            "link": false
+        },
+        "alignText": false,
+        "spacing": {
+            "margin": [
+                "top",
+                "bottom"
+            ],
+            "padding": true
+        },
+        "typography": {
+            "lineHeight": false,
+            "fontSize": false
+        },
+        "fullHeight": false,
+        "customClassName": true,
+        "jsx": true
+    },
+    "attributes": {
+
+    }
+}

@@ -17,7 +17,7 @@
     "styles": [
     ],
     "supports": {
-        "align": [ "full", "wide" ],
+        "align": true,
         "alignWide": true,
         "anchor": true,
         "alignContent": true,
@@ -38,7 +38,7 @@
             "lineHeight": false,
             "fontSize": false
         },
-        "fullHeight": true,
+        "fullHeight": false,
         "customClassName": true,
         "jsx": true
     },

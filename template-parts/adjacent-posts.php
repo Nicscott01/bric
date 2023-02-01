@@ -42,10 +42,21 @@ if ( !empty( $page_for_posts ) ) {
 
 }
 
+$post_type = get_post_types([
+		'name' => 'post',
+	], 'objects' );
+//var_dump( $post_type );
+
+if ( !empty( $post_type ) ) {
+	
+	$post_type_label = $post_type['post']->label; 
+
+}
+
 
 ?>
 <div class="recent-posts other-posts container-xxl col-12 mb-5">
-	<h3 class="text-center h2 mb-4" style="color:revert;">Additional <?php echo $pfp->post_title; ?></h3>
+	<h3 class="text-center h2 mb-4" style="color:revert;">Additional <?php echo $pfp->post_title; ?> <?php echo $post_type_label; ?></h3>
 	<div class="row">
 	<?php
 	foreach( $other_posts as $post ) {

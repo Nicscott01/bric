@@ -24,10 +24,13 @@
 	<?php if ( has_post_thumbnail() ) : ?>
 	<div class="featured-image col-12 col-sm-5 col-lg-12 order-0 mb-3">
 		<a class="img-wrapper d-block" href="<?php the_permalink(); ?>">
-		<?php
+		<div class="ratio ratio-4x3">
+			<?php
 
-		the_post_thumbnail( 'medium_large' );
-		?>
+			the_post_thumbnail( 'medium_large', ['class' => 'img-fit img-cover'] );
+
+			?>
+		</div>
 		</a>
 	</div>
 	

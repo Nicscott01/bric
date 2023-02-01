@@ -15,7 +15,6 @@ $id = $block['parentAnchor'];
 $collapse_id = sanitize_title( $header_copy );
 $heading_id = 'heading-' . $collapse_id;
 
-
 //var_dump( $block );
 
 ?>

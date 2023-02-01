@@ -18,7 +18,7 @@
     "styles": [
     ],
     "supports": {
-        "align": false,
+        "align": true,
         "anchor": true,
         "alignContent": true,
         "color": {
@@ -32,7 +32,8 @@
                 "top",
                 "bottom"
             ],
-            "padding": true
+            "padding": true,
+            "blockGap": true
         },
         "typography": {
             "lineHeight": false,

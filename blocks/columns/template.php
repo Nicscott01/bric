@@ -41,7 +41,7 @@ if ( ( isset( $block['backgroundColor'] ) || !empty( $bg_image ) ) && $bg_color_
 
 
         ?>
-<div <?php echo isset( $block['anchor'] ) ? 'id="' . $block['anchor'] . '"' : ''; ?> class="block bric-columns-block bg-<?php echo $block['backgroundColor']; ?> row <?php echo $bg_classes; ?>" style="<?php echo $bg_style; ?>">
+<div <?php echo isset( $block['anchor'] ) ? 'id="' . $block['anchor'] . '"' : ''; ?> class="block bric-columns-block <?php echo get_block_classes( $block ); ?> row <?php echo $bg_classes; ?>" style="<?php echo $bg_style; ?>">
     <div class="col-12 p-0" style="z-index:1;">
         <div class="<?php echo $container; ?>">
         <?php
@@ -51,21 +51,21 @@ if ( ( isset( $block['backgroundColor'] ) || !empty( $bg_image ) ) && $bg_color_
         ?>
 <div class="block bric-columns-block row">
     <div class="col-12 p-0" style="z-index:1;">
-    <div class="<?php echo $container; ?> bg-<?php echo $block['backgroundColor']; ?> <?php echo $bg_classes; ?>" style="<?php  echo $bg_style; ?>">
+    <div class="<?php echo $container; ?> <?php echo get_block_classes( $block ); ?> <?php echo $bg_classes; ?>" style="<?php  echo $bg_style; ?>">
         <?php
 
 } else {
     ?>
 <div class="block bric-columns-block row">
     <div class="col-12 p-0">
-    <div class="no-bg-color <?php echo $container; ?>">
+    <div class="no-bg-color <?php echo $container; ?> <?php echo get_block_classes( $block ); ?>">
     <?php
 }
 
 
 
 ?>
-    <InnerBlocks allowedBlocks="<?php echo esc_attr( wp_json_encode( [ 'acf/column-item' ])) ?>" class="row cols-mobile-<?php echo $columns_per_row_mobile; ?> cols-tab-<?php echo $columns_per_row_tablet; ?> cols-large-<?php echo $columns_per_row_large; ?> <?php echo isset( $block['className'] ) ? $block['className'] : '';?>"/>
+    <InnerBlocks allowedBlocks="<?php echo esc_attr( wp_json_encode( [ 'acf/column-item' ])) ?>" class="row <?php echo get_bootstrap_flex_classes( $block, 'grid-row' ); ?> cols-mobile-<?php echo $columns_per_row_mobile; ?> cols-tab-<?php echo $columns_per_row_tablet; ?> cols-large-<?php echo $columns_per_row_large; ?> <?php echo isset( $block['className'] ) ? $block['className'] : '';?>"/>
     </div>
 </div>
 </div>

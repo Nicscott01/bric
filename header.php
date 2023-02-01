@@ -32,6 +32,7 @@
 			do_action( 'bric_header' );
 		
 		?>
+		
 	</header>
 <?php 
 

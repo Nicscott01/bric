@@ -1,0 +1,10 @@
+.menu-block {
+
+    &.has-separator {
+        .menu-item a:after {
+            content: attr( data-separator );
+            padding-left: var( --#{$prefix}separator-padding-x );
+
+        }
+    }
+}

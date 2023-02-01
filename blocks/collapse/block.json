@@ -45,6 +45,7 @@
     "attributes": {
 
     },
+    "usesContext": [ "bricAccordionId" ],
     "example": {
         "attributes": {
             "data": {

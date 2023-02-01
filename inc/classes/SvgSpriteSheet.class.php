@@ -34,9 +34,19 @@ class SvgSpriteSheet
 
     public function add_svg( $svg, $id ) {
 
+       /* echo '<pre>';
+        var_dump( $svg );
+        echo '</pre>';
+*/
+
+        if ( empty( $svg ) ) {
+            return;
+        }
+
         require_once ( get_template_directory(  ) . '/vendor/autoload.php' );
 
         //var_dump( $svg );
+
 
         $svg = SVG::fromString( $svg );
 

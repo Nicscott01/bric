@@ -1,0 +1,46 @@
+{
+    "name": "website-credits",
+    "title": "Website Credits",
+    "description": "Display website credits.",
+    "style": null,
+    "category": "theme",
+    "icon": "pets",
+    "apiVersion": 2,
+    "keywords": [
+        "credits",
+        "website",
+        "site"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "postTypes": []
+    },
+    "supports": {
+        "spacing": {
+            "margin": true,
+            "padding": true,
+            "blockGap": true
+        },
+        "align": false,
+        "anchor": false,
+        "alignContent": false,
+        "alignText": true,
+        "color": {
+            "text": true,
+            "background": false,
+            "link": false
+        },
+        "defaultStylePicker": false,
+        "typography": {
+            "lineHeight": false,
+            "fontSize": false
+        },
+        "fullHeight": false,
+        "customClassName": true,
+        "jsx": true
+    },
+    "attributes": {
+
+    }
+}

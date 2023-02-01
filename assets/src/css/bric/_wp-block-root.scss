@@ -1,0 +1,9 @@
+//Some root variables to map WP to BS
+
+:root {
+
+    @each $key, $val in $spacers {
+        --wp--preset--spacing--#{$key}: #{$val};
+    }
+
+}

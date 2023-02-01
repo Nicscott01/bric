@@ -210,7 +210,7 @@ foreach ($theme_defaults->sections as $theme_default_section) {
                 var_dump( json_decode( $fonts_base ) );
                 $log = ob_get_clean();
                 error_log( $log );
-  */             
+  */           
 
   
                 if ( !empty( $fonts_base ) ) {
@@ -221,10 +221,29 @@ foreach ($theme_defaults->sections as $theme_default_section) {
 
                         foreach( $fonts_base as $attr => $_val ) {
 
+
+                            //error_log( 'before: ' . $_val );
+
+                            if ( strpos( $_val, 'regular' ) === 0 || strpos( $_val, 'italic' ) === 0 ) {
+
+                                $_val = '400';
+                            
+                            } elseif(  strpos( $_val, 'italic' ) > 0  ) {
+
+                                $_val = str_replace( 'italic', '', $_val );
+                            
+                            } elseif ( strpos( $_val, 'bold' ) === 0 ) {
+
+                                $_val = '700';
+                            }
+
+                            //error_log( 'after: ' . $_val );
+
+
                             switch( $attr ) {
 
                                 case 'regularweight' :
-
+                               
 
                                     if ( $write_file ) {
 

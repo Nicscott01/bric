@@ -36,13 +36,13 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    overflow-x: hidden;
     
     .main-content {
         flex-grow: 1;
         flex-shrink: 0;
         flex-basis: auto;
     }
+
 }
 
 //
@@ -157,7 +157,7 @@ body {
 //
 //		WIDGETS
 //
-.widget {
+.widget:not(.widget_block) {
 
     ul {
         @extend .list-unstyled;
@@ -379,3 +379,11 @@ $space-below-h: $spacer*1.25;
         }
     }
 }*/
+
+
+.sidebar {
+
+    &.sticky-top {
+        top: $spacer;
+    }
+}

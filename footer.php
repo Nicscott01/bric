@@ -8,7 +8,7 @@
 global $SiteInfo;
 
 ?>
-<footer class="site-footer" role="contentinfo">
+<footer class="site-footer container-fluid" role="contentinfo">
 		<?php 
 		
 			/**

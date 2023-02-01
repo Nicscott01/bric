@@ -22,12 +22,12 @@
 		?>
 		<div class="container-xxl">
 			<div class="row">
-				<div class="col-12 col-md-8">
+				<div class="col-12 col-md-8 col-lg-9 order-1 order-md-0 ">
 		<?php
 	}
 
 
-	$extra_entry_content_classes[] = get_post_type() == 'post' ? 'pt-3' : '';
+	$extra_entry_content_classes[] = get_post_type() == 'post' ? '' : '';
 
 
  	?>
@@ -75,9 +75,8 @@
 
 		?>
 		</div>
-		<div class="col-12 col-md-4">
-			<?php get_sidebar(); ?>
-		</div>
+		<?php get_template_part( 'template-parts/blog/more-button'); ?>
+		<?php get_template_part( 'template-parts/blog/sidebar' ); ?>
 	</div>
 </div>
 		<?php
@@ -97,4 +96,4 @@
 	
 
 ?>
-</article>
+</article> 

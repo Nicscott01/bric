@@ -120,14 +120,9 @@ function bric_filter_heading_block( $content, $parsed_block, $wp_block ) {
 
 
 
-
-
-
-
 add_filter( 'render_block_core/paragraph', function( $content, $parsed_block, $wp_block ) {
 
     global $has_parent_block;
-
 
     
     if ( $has_parent_block || get_post_type() == 'post' ) {
@@ -135,7 +130,7 @@ add_filter( 'render_block_core/paragraph', function( $content, $parsed_block, $w
 
         $has_parent_block = false;
 
-        return '<div class="plain-paragraph mb-4">' . $content . '</div>';
+        return '<div class="plain-paragraph">' . $content . '</div>';
 
     } else {
 

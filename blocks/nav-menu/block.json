@@ -3,7 +3,7 @@
     "title": "Bric Nav Menu",
     "description": "For use within the website header block.",
     "category": "theme",
-    "icon": "feedback",
+    "icon": "menu-alt",
     "apiVersion": 2,
     "keywords": [
         "nav",

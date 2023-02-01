@@ -26,9 +26,11 @@ class SocialMedia {
 
 
     /**
-     *  Do the filter
+     *  Load the Yoast SEO social fields
+     *  into the repeater field only on admin screens
      *  
-     *  url field = field_63c999429ebba
+     *  
+     *  platform field = field_63c999429ebba
      *  icon field = field_63c999749ebbb
      * 
      */
@@ -40,6 +42,8 @@ class SocialMedia {
 
         if ( is_admin() ) {
 
+
+            //First time, load them up
             if ( empty( $value ) ) {
 
                 //Loop through the social accounts and
@@ -57,6 +61,40 @@ class SocialMedia {
 
                 $c = 0;
 
+                $new_value = [];
+                
+                //Look through the fields and make sure we covered all the ones in yoast
+                //var_dump( $value );
+
+                //var_dump( $social_accounts );
+
+                foreach( $value as $icon_field ) {
+
+                    foreach( $social_accounts as $sa_key => $social_acct ) {
+
+                        if ( $icon_field['field_63c999429ebba'] == $social_acct['platform'] ) {
+                            unset( $social_accounts[$sa_key] );
+                        }
+
+                    }
+
+
+                }
+
+                $new_value = $value;
+
+                //var_dump( $social_accounts );
+
+                if( count( $social_accounts) ) {
+
+                    foreach( $social_accounts as $new_acct ) {
+                        $new_value[] = [
+                            'field_63c999429ebba' => $new_acct['platform']
+                        ];
+                    }
+                }
+
+                /*
                 foreach( $social_accounts as $acct  ) {
 
                     $new_value[] = [
@@ -67,7 +105,7 @@ class SocialMedia {
                     $c++;
 
                 }
-
+                */
 
                 return $new_value;
 
@@ -80,6 +118,46 @@ class SocialMedia {
         return $value;
 
     }
+
+
+
+
+    /**
+     *  ACF Filter
+     * 
+     *  platform field = field_63c999429ebba
+     *  icon field = field_63c999749ebbb
+     *
+     */
+
+     public function preload_svgs_front( $value, $post_id, $field ) {
+
+        if ( !is_admin() && !empty( $value ) ) {
+
+
+ //           var_dump( $value );
+
+            foreach( $value as $social_account ) {
+
+                $social_account_info = json_decode( $social_account['field_63c999749ebbb'] );
+
+                $svg = $this->get_svg( $social_account_info->id, $social_account['field_63c999429ebba'] );
+
+
+
+                if ( !empty( $svg ) ) {
+                    //Add icon to global sprite sheet
+                    BricSvgSpriteSheet()->add_svg( $svg, $social_account_info->id ); //strtolower( $social_account['field_63c999429ebba'] ) );
+                }
+
+            }
+
+        
+        }
+
+        return $value;
+    }
+
 
 
 
@@ -173,39 +251,6 @@ class SocialMedia {
 
 
 
-    /**
-     *  ACF Filter
-     * 
-     * 
-     */
-
-    public function preload_svgs_front( $value, $post_id, $field ) {
-
-        if ( !is_admin() && !empty( $value ) ) {
-
-            //var_dump( $value );
-
-
-            foreach( $value as $social_account ) {
-
-                //var_Dump( json_decode( $social_account['field_63c999749ebbb'] ) );
-
-                $social_account_info = json_decode( $social_account['field_63c999749ebbb'] );
-
-                $svg = $this->get_svg( $social_account_info->id, $social_account['field_63c999429ebba'] );
-
-                //Add icon to global sprite sheet
-                BricSvgSpriteSheet()->add_svg( $svg, strtolower( $social_account['field_63c999429ebba'] ) );
-
-            }
-
-        
-        }
-
-        return $value;
-    }
-
-
 
     /**
      *  Retrieve a social account
@@ -235,11 +280,11 @@ class SocialMedia {
     public function get_social_accounts() {
 
         //Don't do the query if we alreay have it
-        if ( !empty( $this->social_accounts ) ) {
+      /*  if ( !empty( $this->social_accounts ) ) {
 
             return $this->social_accounts;
         }
-
+*/
 
         //Get the social links
 		$social_urls = get_option( 'wpseo_social' );
@@ -250,7 +295,6 @@ class SocialMedia {
 
                 if ( is_string( $url ) ) {
 
-                    //var_dump( $service );
             
                     switch( $service ) {
             
@@ -289,6 +333,7 @@ class SocialMedia {
             
                 } elseif ( is_array( $url ) && $service == 'other_social_urls' ) {
             
+
                     //Other Social URLs
                     foreach( $url as $other_url ) {
             

@@ -323,3 +323,383 @@ if ( ! function_exists( 'get_svg_source' ) ) {
 	}
 	
 }
+
+
+
+
+
+
+/**
+ * 	Helper for translating WP Block Speak 
+ *  into Bootstrap
+ * 
+ * 
+ * 
+ */
+
+ function get_bootstrap_flex_classes( $block, $flex_direction ) {
+
+
+	$direction = !empty( $flex_direction ) ? $flex_direction : 'column';
+	$align_x = isset( $block['align'] ) && !empty( $block['align'] ) ? $block['align'] : 'start';
+	$align_y = isset( $block['align_content'] ) && !empty( $block['align_content'] ) ? $block['align_content'] : 'top';
+
+
+	//var_dump( $direction );
+	//var_dump( $align_x );
+	//var_dump( $align_y );
+
+	$decoder = [
+		'left' => 'start',
+		'right' => 'end',
+		'center' => 'center'
+	];
+
+
+	$classes = [];
+
+	if( $direction == 'column' ) {
+
+		$classes[] = 'flex-column';
+
+		if ( isset( $decoder[$align_x] ) ) {
+			$classes[] = 'align-items-' . $decoder[$align_x];
+		}
+
+		if ( isset( $decoder[$align_y] ) ) {
+			$classes[] = 'justify-content-' . $decoder[$align_y];
+		}
+
+
+	} elseif ( $direction == 'row' ) {
+
+		$classes[] = 'flex-row';
+
+		
+		if ( isset( $decoder[$align_x] ) ) {
+			$classes[] = 'justify-content-' . $decoder[$align_x];
+		}
+
+		if ( isset( $decoder[$align_y] ) ) {
+			$classes[] = 'align-items-' . $decoder[$align_y];
+		}
+	
+	
+	} elseif ( $direction == 'grid-row' ) {
+
+		if ( isset( $decoder[$align_x] ) ) {
+			$classes[] = 'justify-content-' . $decoder[$align_x];
+		}
+
+		if ( isset( $decoder[$align_y] ) ) {
+			$classes[] = 'align-items-' . $decoder[$align_y];
+		}
+
+	}
+
+	return implode( ' ', $classes );
+
+ }
+
+
+
+
+
+
+
+function decode_block_dimensions( $dimensions ) {
+
+	if ( !empty( $dimensions ) && is_array( $dimensions )) {
+
+		$dim = [];
+
+		foreach( $dimensions as $att => $val ) {
+			
+			$dim[$att] = str_replace( 'var:preset|spacing|', '', $val );
+		}
+	
+	}
+
+	return $dim;
+
+}
+
+ /**
+  *		Returns usable dimensions from a block
+  *
+  */
+
+ function get_block_dimensions( $block ) {
+
+
+	$block_dimensions = [];
+
+	$atts_to_look_for = [
+		'padding',
+		'margin',
+		'blockGap'
+	];
+
+
+
+	if ( isset( $block['style']['spacing'] ) && !empty( $block['style']['spacing'] ) ) {
+		
+		
+
+		foreach( $atts_to_look_for as $att ) {
+			
+
+			if ( isset( $block['style']['spacing'][$att] ) ) {
+
+
+				if ( $att == 'blockGap' ) {
+
+					
+					$block_dimensions[$att] = str_replace( 'var:preset|spacing|', '', $block['style']['spacing']['blockGap'] );
+
+				} else {
+
+					$block_dimensions[$att] = decode_block_dimensions( $block['style']['spacing'][$att] );
+
+				}
+			
+			} 
+
+		}
+		
+
+	}
+
+	return $block_dimensions;
+
+ }
+
+
+
+
+
+ function decode_block_dimension_classes( $prefix, $vals ) {
+
+
+	$decoder_ring = [
+		'left' => 's',
+		'right' => 'e',
+		'top' => 't',
+		'bottom' => 'b'
+	];
+
+
+	if ( is_array( $vals ) && !empty( $vals ) ) {
+						
+		foreach( $vals as $attr => $val ) {
+
+			$classes[] = sprintf( '%s%s-%s', $prefix, $decoder_ring[$attr], $val );
+
+		}
+	}
+
+
+	return $classes;
+
+
+
+}
+
+
+
+
+
+
+ function get_block_dimension_classes( $dimensions ) {
+
+	$classes = [];
+
+	foreach( $dimensions as $attr => $vals ) {
+
+		switch( $attr ) {
+
+			case "padding" :
+
+				$classes[] = decode_block_dimension_classes( 'p', $vals );
+
+				break;
+
+
+			case "margin" :
+
+
+				$classes[] = decode_block_dimension_classes( 'm', $vals );
+
+				break;
+
+			case "blockGap" :
+
+				$classes[] = 'gap-' . $vals;
+
+				break;
+		}
+
+	}
+
+	$class_list = [];
+
+
+	//Flatten the array
+	foreach( $classes as $section ) {
+
+		if ( is_array( $section ) ) {
+
+			foreach( $section as $val ) {
+			
+				$class_list[] = $val;
+
+			}
+		} else {
+
+			$class_list[] = $section;
+
+		}
+
+	}
+
+
+	return $class_list;
+
+
+ }
+
+
+
+
+
+
+ function decode_bs_text_align( $data ) {
+
+	if ( isset( $data ) && !empty( $data ) ) {
+
+		$decoder_ring = [
+			'left' => 'text-start',
+			'center' => 'text-center',
+			'right' => 'text-end'
+		];
+
+		return $decoder_ring[$data];
+
+	} else {
+
+		return '';
+	}
+
+
+ }
+
+
+
+
+ /**
+  * 	Take the block from ACF
+  * 	and output a string of classes
+  *		for the block
+  * 
+  */
+
+ function get_block_classes( $block, $flex_direction = '' ) {
+
+	if ( empty( $block ) ) {
+		
+		return '';
+
+	}
+
+
+	//var_dump( $block );
+
+	$classes = [];
+
+	//Array of padding/margin classes
+	$dim_classes = get_block_dimension_classes( get_block_dimensions( $block ) );
+
+	$classes[] = implode( ' ', $dim_classes );
+
+	//Get flex classes if we have a direction
+	if ( !empty( $flex_direction ) ) {
+		
+		//Flex direction classes
+		$classes[] = get_bootstrap_flex_classes( $block, $flex_direction );
+		
+	}
+
+
+	//Text alignment, string
+	if ( isset( $block['alignText'] ) && !empty( $block['alignText'] )) {
+	
+		$classes[] = decode_bs_text_align( $block['alignText'] );
+
+	}
+
+	if ( isset( $block['textColor'] ) && !empty(  $block['textColor'] ) ) {
+
+		$classes[] = 'text-' . $block['textColor'];
+	}
+
+	if ( isset( $block['backgroundColor'] ) && !empty( $block['backgroundColor'] ) ) {
+
+		$classes[] = 'bg-' . $block['backgroundColor'];
+	
+	}
+
+
+
+	/**
+	 * Exceptions
+	 * 
+	 */
+
+	 //Paragraph margin bottom on the copyright
+	if ( $block['name'] == 'acf/site-copyright' && empty( $block['styling']['spacing']['margin'] ) ) {
+
+		$classes[] = 'mb-0';
+	}
+
+
+	return implode( ' ', $classes );
+
+
+ }
+
+
+
+
+
+
+
+ function column_classes( $col_val, $size = '' ) {
+
+    $size = isset( $size ) && !empty( $size ) ? $size : '0';
+
+    $prefix_map = [
+        '0' => 'col',
+        'sm' => 'col-sm',
+        'md' => 'col-md',
+        'lg' => 'col-lg',
+        'xl' => 'col-xl', 
+        'xxl' => 'col-xxl'
+    ];
+
+
+    if ( !empty( $col_val ) && $col_val > 0 ) {
+
+        $class = $prefix_map[$size] . '-' . $col_val;
+    
+    } elseif ( $col_val == -1 ) {
+
+        $class = $prefix_map[$size] . '-auto';
+    
+    } else {
+
+        $class = ''; //$prefix_map[$size];
+    }
+
+    return $class;
+
+ }

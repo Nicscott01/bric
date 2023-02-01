@@ -13,7 +13,7 @@ body {
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 256px;
+  width: var( --#{$prefix}slideout-width ); //256px;
   min-height: 100vh;
   overflow-y: scroll;
 	overflow-x:hidden;

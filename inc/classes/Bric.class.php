@@ -203,7 +203,7 @@ class Bric {
 	public function deregister_styles() {
 		
 		
-		wp_deregister_style( 'wp-block-library' );
+		//wp_deregister_style( 'wp-block-library' );
 
 		wp_dequeue_style( 'wp-block-library' );
 		wp_dequeue_style( 'wp-block-library-theme' );
@@ -299,7 +299,8 @@ class Bric {
 
 		wp_register_script( 'bootstrap', get_template_directory_uri().'/assets/js/bootstrap.bundle.min.js', array( 'jquery' ), null, true );
 	
-		wp_register_script( 'bric', get_template_directory_uri().'/assets/js/bric.min.js', array( 'bootstrap' ), null, true );
+	//1/25/23 - try to do without bric.js
+		//wp_register_script( 'bric', get_template_directory_uri().'/assets/js/bric.min.js', array( 'bootstrap' ), null, true );
 		
 		
 		wp_register_script( 'in-view', get_template_directory_uri() . '/assets/js/in-view.min.js', [ 'jquery' ], null, true );

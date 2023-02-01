@@ -74,6 +74,17 @@ class BricFilters {
 		//add_filter( 'post_thumbnail_id', [ $this, 'post_thumbnail_id' ], 10, 3 );
 
 
+
+		/**
+		 * 	Add link to privacy settings if
+		 * 	cookie policy is found in the nav menu
+		 * 
+		 */
+
+		add_filter( 'wp_nav_menu_items', [ $this, 'privacy_settings_link' ], 10, 2 ); 
+		
+		//add_filter( 'wp_nav_menu_items', [ $this, 'att_data_sep' ], 10, 2 ); 
+
 	}
 
 
@@ -456,6 +467,71 @@ class BricFilters {
 
 		
 
+
+
+
+
+
+
+
+
+
+		
+	/**
+	 *  Maybe add in the privacy settings button link
+	 *  but only if there's a cookie policy and Usercentrics
+	 * 
+	 * 
+	 */
+
+	public function privacy_settings_link( $items, $args ) {
+				
+		//Get the cookie consetn page so we can look to see if it's in this menu
+		$cc_page = get_field( 'cookie_policy_page', 'option' );
+	
+		//var_dump( $cc_page );
+	
+		if ( !empty( $cc_page ) ) {
+	
+		$cc_page_url = get_permalink( $cc_page );
+	
+		}
+	
+		//Get the cookie consent tool code
+		$uc_code = get_field( 'cc_code', 'option' ); 
+	
+		if ( !empty( $uc_code ) && strpos( $items, $cc_page_url ) ) {
+		$items .= sprintf('
+			<li class="menu-item privacy-settings-link"><a href="javascript:UC_UI.showSecondLayer();" id="usercentrics-psl">Privacy Settings</a></li>
+		');
+		}
+	
+		return $items;
+	
+	}
+	
+
+
+	/**
+	 * 	Usese the nav_menu_link_attributes filter
+	 * 
+	 */
+
+	function add_menu_data_attribute( $atts, $menu_item, $args, $depth ) {
+
+		$atts[$this->nav_menu_link_att['att']] = $this->nav_menu_link_att['val']; 
+
+		//var_dump( $this->nav_menu_link_att );
+		//var_dump( $atts );
+
+		return $atts;
+
+	}
+
+
+
+
+	
 
 	/**
 	 * 	Singleton
