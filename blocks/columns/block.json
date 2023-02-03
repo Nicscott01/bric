@@ -16,6 +16,10 @@
     },
     "styles": [
     ],
+    "providesContext": {
+        "acf/fields": "data"
+    },
+    "usesContext":[ "bric/column-item" ],
     "supports": {
         "align": true,
         "alignWide": true,
@@ -43,7 +47,10 @@
         "jsx": true
     },
     "attributes": {
-
+        "bric-columns": {
+            "type": "string",
+            "default": "parent-row"    
+        }
     },
     "example": {
         "attributes": {

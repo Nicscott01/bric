@@ -1,0 +1,45 @@
+{
+    "name": "svg-image",
+    "title": "SVG Image",
+    "description": "Add SVG to page while including in sprite sheet.",
+    "category": "theme",
+    "icon": "format-image",
+    "apiVersion": 2,
+    "keywords": [
+        "svg",
+        "image"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "postTypes": []
+    },
+    "styles": [
+    ],
+    "supports": {
+        "align": false,
+        "alignWide": false,
+        "anchor": false,
+        "alignContent": false,
+        "color": {
+            "text": true,
+            "background": false,
+            "link": false
+        },
+        "alignText": false,
+        "spacing": {
+            "margin": true,
+            "padding": true
+        },
+        "typography": {
+            "lineHeight": false,
+            "fontSize": false
+        },
+        "fullHeight": false,
+        "customClassName": true,
+        "jsx": true
+    },
+    "attributes": {
+       
+    }
+}

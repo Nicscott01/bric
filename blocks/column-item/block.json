@@ -15,6 +15,10 @@
         "renderTemplate": "template.php",
         "postTypes": []
     },
+    "providesContext" : {
+        "bric/column-item": "data"
+    },
+    "usesContext": [ "acf/fields" ],
     "styles": [
     ],
     "supports": {

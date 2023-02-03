@@ -22,6 +22,7 @@
    register_block_type( locate_template(  'blocks/nav-menu/' ) );
    register_block_type( locate_template(  'blocks/site-copyright/' ) );
    register_block_type( locate_template(  'blocks/site-identity/'  ) );
+   register_block_type( locate_template(  'blocks/svg-image/'  ) );
    register_block_type( locate_template(  'blocks/social-media/'  ) );
    register_block_type( locate_template(  'blocks/website-credits/' ) );
    register_block_type( locate_template(  'blocks/website-header/'  ) );

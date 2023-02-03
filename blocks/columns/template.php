@@ -5,6 +5,18 @@
  * 
  * 
  */
+//var_dump( $block );
+//var_dump( $context );
+
+$is_child = false;
+
+//Find out if we're in a nested column item
+if ( isset( $context['bric/column-item'] ) ) {
+
+    $is_child = true;
+
+}
+
 
 $container = get_field( 'container' );
 $bg_color_location = get_field( 'background_color_container' );
@@ -41,23 +53,23 @@ if ( ( isset( $block['backgroundColor'] ) || !empty( $bg_image ) ) && $bg_color_
 
 
         ?>
-<div <?php echo isset( $block['anchor'] ) ? 'id="' . $block['anchor'] . '"' : ''; ?> class="block bric-columns-block <?php echo get_block_classes( $block ); ?> row <?php echo $bg_classes; ?>" style="<?php echo $bg_style; ?>">
-    <div class="col-12 p-0" style="z-index:1;">
+<div <?php echo isset( $block['anchor'] ) ? 'id="' . $block['anchor'] . '"' : ''; ?> class="block bric-columns-block <?php echo get_block_classes( $block ); ?> row <?php echo $bg_classes; ?> <?php echo $is_child ? 'w-100' : '';?>" style="<?php echo $bg_style; ?>">
+    <div class="col-12 <?php echo $is_child ? '' : 'p-0';?>" style="z-index:1;">
         <div class="<?php echo $container; ?>">
         <?php
     
 } elseif ( ( ( isset( $block['backgroundColor'] )  || !empty( $bg_image ) ) && $bg_color_location == 'inside' )) {
 
         ?>
-<div class="block bric-columns-block row">
-    <div class="col-12 p-0" style="z-index:1;">
+<div class="block bric-columns-block row <?php echo $is_child ? 'w-100' : '';?>">
+    <div class="col-12 <?php echo $is_child ? '' : 'p-0';?>" style="z-index:1;">
     <div class="<?php echo $container; ?> <?php echo get_block_classes( $block ); ?> <?php echo $bg_classes; ?>" style="<?php  echo $bg_style; ?>">
         <?php
 
 } else {
     ?>
-<div class="block bric-columns-block row">
-    <div class="col-12 p-0">
+<div class="block bric-columns-block row <?php echo $is_child ? 'w-100' : '';?>">
+    <div class="col-12 <?php echo $is_child ? '' : 'p-0';?>">
     <div class="no-bg-color <?php echo $container; ?> <?php echo get_block_classes( $block ); ?>">
     <?php
 }

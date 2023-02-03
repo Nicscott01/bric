@@ -973,27 +973,6 @@ if (function_exists('acf_add_local_field_group')) :
 				'prepend' => '',
 				'append' => '',
 			),
-			array(
-				'key' => 'field_63d14ed9a405d',
-				'label' => 'Margin',
-				'name' => 'margin',
-				'aria-label' => '',
-				'type' => 'range',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'min' => 0,
-				'max' => 5,
-				'step' => '',
-				'prepend' => '',
-				'append' => '',
-			),
 		),
 		'location' => array(
 			array(
@@ -1064,5 +1043,162 @@ if (function_exists('acf_add_local_field_group')) :
 		'description' => '',
 		'show_in_rest' => 0,
 	));
+
+
+		acf_add_local_field_group(array(
+			'key' => 'group_63d34a5fa4f0f',
+			'title' => 'Block: Menu',
+			'fields' => array(
+				array(
+					'key' => 'field_63d34a5f8c684',
+					'label' => 'Menu',
+					'name' => 'wp_nav_menu',
+					'aria-label' => '',
+					'type' => 'select',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'choices' => array(
+						2 => 'Main Menu',
+						4 => 'Policies',
+					),
+					'default_value' => false,
+					'return_format' => 'value',
+					'multiple' => 0,
+					'allow_null' => 0,
+					'ui' => 0,
+					'ajax' => 0,
+					'placeholder' => '',
+				),
+				array(
+					'key' => 'field_63d3547222ecb',
+					'label' => 'Gap',
+					'name' => 'gap',
+					'aria-label' => '',
+					'type' => 'range',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => 3,
+					'min' => 0,
+					'max' => 5,
+					'step' => '',
+					'prepend' => '',
+					'append' => '',
+				),
+				array(
+					'key' => 'field_63d4079b792a1',
+					'label' => 'Separator',
+					'name' => 'separator',
+					'aria-label' => '',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'maxlength' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+				),
+			),
+			'location' => array(
+				array(
+					array(
+						'param' => 'block',
+						'operator' => '==',
+						'value' => 'acf/menu',
+					),
+				),
+			),
+			'menu_order' => 0,
+			'position' => 'normal',
+			'style' => 'default',
+			'label_placement' => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => true,
+			'description' => '',
+			'show_in_rest' => 0,
+		));
+		
+		acf_add_local_field_group(array(
+			'key' => 'group_63d353b1384b8',
+			'title' => 'Block: Global Flex',
+			'fields' => array(
+				array(
+					'key' => 'field_63d353b15a651',
+					'label' => 'Flex Direction',
+					'name' => 'flex_direction',
+					'aria-label' => '',
+					'type' => 'radio',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'choices' => array(
+						'column' => 'Column',
+						'row' => 'Row',
+					),
+					'default_value' => 'column',
+					'return_format' => 'value',
+					'allow_null' => 0,
+					'other_choice' => 0,
+					'layout' => 'vertical',
+					'save_other_choice' => 0,
+				),
+			),
+			'location' => array(
+				array(
+					array(
+						'param' => 'block',
+						'operator' => '==',
+						'value' => 'acf/column-item',
+					),
+				),
+				array(
+					array(
+						'param' => 'block',
+						'operator' => '==',
+						'value' => 'acf/social-media',
+					),
+				),
+				array(
+					array(
+						'param' => 'block',
+						'operator' => '==',
+						'value' => 'acf/menu',
+					),
+				),
+			),
+			'menu_order' => 50,
+			'position' => 'normal',
+			'style' => 'default',
+			'label_placement' => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => true,
+			'description' => '',
+			'show_in_rest' => 0,
+		));
 
 endif;

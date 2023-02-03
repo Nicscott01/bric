@@ -700,12 +700,12 @@
             "facevalue": true,
             "choices": [
                 {
-                    "prop": "underline",
-                    "val": "Underline"
+                    "prop": "none",
+                    "val": "None"
                 },
                 {
-                    "prop": "null",
-                    "val": "None"
+                    "prop": "underline",
+                    "val": "Underline"
                 }
             ]
         },
@@ -740,14 +740,14 @@
         },
         {
             "prop": "link_hover_decoration",
-            "val": "null",
+            "val": "none",
             "label": "Link Hover Decoration",
             "description": "Style of hyperlinks on hover",
             "type": "select",
             "facevalue": true,
             "choices": [
                 {
-                    "prop": "null",
+                    "prop": "none",
                     "val": "None"
                 },
                 {

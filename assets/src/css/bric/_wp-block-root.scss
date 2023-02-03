@@ -6,4 +6,9 @@
         --wp--preset--spacing--#{$key}: #{$val};
     }
 
+    @each $key, $val in $theme-colors {
+        --wp--preset--color--#{$key}: var( --#{$prefix}#{$key} );
+    }
+
+
 }

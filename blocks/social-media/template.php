@@ -11,7 +11,7 @@ use function Bric\BricSocialMedia;
 
 $social_icons = get_field( 'social_accounts' );
 $icon_size = get_field( 'icon_size' );
-$margin = get_field( 'margin' );
+
 
 //Left/Center/Right
 //$align = $block['align'];
