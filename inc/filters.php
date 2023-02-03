@@ -98,6 +98,17 @@ class BricFilters {
 	
 	public function get_the_archive_title( $title, $original_title, $prefix ) {
 
+		global $wp_query;
+
+		//var_dump( $wp_query->tax_query  );
+
+		//If this archive page is a taxonomy archive, don't overwrite the title
+		if ( isset( $wp_query->tax_query )  && !empty( $wp_query->tax_query->queried_terms  )) {
+
+			return $title;
+
+		}
+
 		if ( has_landing_page() || is_home() || is_single() ) {
 
 			$page = get_landing_page();

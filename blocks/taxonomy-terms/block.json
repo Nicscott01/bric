@@ -1,0 +1,51 @@
+{
+    "name": "taxonomy-terms",
+    "title": "Terms listing for a taxonomy",
+    "description": "Like Categories, but for any taxonomy.",
+    "category": "theme",
+    "icon": "category",
+    "apiVersion": 2,
+    "keywords": [
+        "recent",
+        "category",
+        "taxonomy",
+        "term",
+        "terms"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "postTypes": []
+    },
+    "styles": [
+    ],
+    "supports": {
+        "align": false,
+        "anchor": false,
+        "alignContent": false,
+        "color": {
+            "text": true,
+            "background": false,
+            "link": false
+        },
+        "alignText": false,
+        "spacing": {
+            "margin": [
+                "top",
+                "bottom"
+            ],
+            "padding": true,
+            "blockGap": false
+        },
+        "typography": {
+            "lineHeight": false,
+            "fontSize": false
+        },
+        "fullHeight": false,
+        "customClassName": true,
+        "jsx": true
+    },
+    "attributes": {
+
+    }
+}
