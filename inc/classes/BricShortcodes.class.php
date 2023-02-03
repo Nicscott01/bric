@@ -39,6 +39,11 @@ class BricShortcodes {
 		add_shortcode( 'page_title', [ $this, 'page_title_sc' ], 10, 2 );
 		//add_action( 'wp', [ $this, 'evaluate_page_title_sc' ] );
 		
+
+
+		//Post Type Name
+		add_shortcode( 'current_post_type_name', [ $this, 'current_post_type_name' ], 10, 2 );
+
 	}
 	
 	
@@ -356,6 +361,38 @@ class BricShortcodes {
 	
 
 
+
+
+
+
+	/**
+	 * 	Return the post type name
+	 * 	of wherever we are
+	 * 
+	 * 
+	 * 
+	 */
+
+
+	public function current_post_type_name( $args, $content ) {
+
+		$args = shortcode_atts( [], $args );
+
+		$pt = get_post_type();
+
+		if( $pt !== 'page' ) {
+		$post_types = get_post_types( [
+			'name' => $pt
+		], 'object' );
+		} else {
+			return 'Posts';
+		}
+
+		//var_dump( $post_types );
+
+		return $post_types[$pt]->label;
+
+	}
 
 
 

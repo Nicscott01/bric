@@ -105,7 +105,7 @@ class SvgSpriteSheet
         if ( isset( $this->svgs[$id]) ) {
         
             
-            return sprintf( '<svg viewBox="%s"><use xlink:href="#%s"></use></svg>', $this->svgs[$id]['viewBox'], $id );
+            return sprintf( '<svg viewBox="%s" class="svg-use"><use xlink:href="#%s"></use></svg>', $this->svgs[$id]['viewBox'], $id );
         }
 
     }

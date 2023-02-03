@@ -34,7 +34,7 @@ if ( $img_overlay_color != 'none' ) {
 	$img_overlay_opacity = bric_get_theme_mod( 'body', 'page_header_background_overlay_opacity');
 
 	?>
-	<div class="overlay bg-<?php echo $img_overlay_color; ?> position-absolute w-100 h-100" style="--bric-bg-opacity: <?php echo (int) $img_overlay_opacity / 100; ?>; z-index:0;">
+	<div class="overlay bg-<?php echo $img_overlay_color; ?> position-absolute w-100 h-100" style="--bric-bg-opacity: <?php echo $img_overlay_opacity / 100; ?>; z-index:0;">
 
 	</div>
 	<?php
@@ -113,11 +113,51 @@ if ( $img_overlay_color != 'none' ) {
 					//Maybe get the featuerd image from a taxonomy term
 					$fi = get_field( 'featured_image', $queried_obj->taxonomy . '_' . $queried_obj->term_id );
 					
+
+
+					//Fall back on the object's landing page
+					if ( empty( $fi ) ) {
+						
+						$queried_taxonomy = get_taxonomy( $queried_obj->taxonomy );
+
+						if ( isset( $queried_taxonomy->object_type ) ) {
+
+							//Post type for quereid object
+							$queried_pt = $queried_taxonomy->object_type;
+
+							//var_dump( $queried_pt );
+
+							$post_types = get_post_types([
+								'public' => true
+							], 'objects');
+
+							//var_dump( $post_types );
+
+							//Take the first of the queried post types and see if we have a slug for a landing page
+							$maybe_slug = isset( $post_types[$queried_pt[0]]->rewrite['slug'] ) ? $post_types[$queried_pt[0]]->rewrite['slug'] : $post_types[$queried_pt[0]]->name;
+
+
+							//maybe get the landing page for this 
+							$maybe_landing_page = get_page_by_path( $maybe_slug );
+
+							if ( !empty( $maybe_landing_page ) ) {
+
+								$landing_page_thumbnail = get_the_post_thumbnail( $maybe_landing_page, 'full' );						
+
+							}
+
+						}
+
+					}
 				} 
 
 				if ( !empty( $fi ) ) {
 					
 					echo wp_get_attachment_image( $fi['id'], 'full', false, [] );
+
+				} elseif ( isset( $landing_page_thumbnail ) ) {
+
+					echo $landing_page_thumbnail;
 
 				} else { //Fallback on the page for posts
 
