@@ -9,9 +9,8 @@
  */
 
 $svg = get_field( 'svg' );
-$id = $block['id'];
+$id = isset( $block['anchor'] ) ? $block['anchor'] : $block['id'];
 
-//var_dump( $svg );
 
 $svg_file = file_get_contents( $svg['url'] );
 

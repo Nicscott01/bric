@@ -14,6 +14,9 @@ $theme_color = get_field( 'theme_color' );
 $size = get_field( 'size' );
 $border = get_field( 'border' );
 
+
+$block_classes = get_block_dimension_classes( get_block_dimensions( $block ) );
+
 if ( ! $is_preview ) {
     //var_dump( $block );
    // var_dump( $attributes );
@@ -45,25 +48,27 @@ if ( isset( $block['className'] ) ) {
 //var_dump( $style_type );
 
 
+$base_button_class = '';
+
 
 //Define button class.
 switch( $style_type ) {
 
     case "link" :
     
-        $base_button_class = 'btn btn-link';
+        $base_button_class .= ' btn btn-link';
 
         break;
 
     case "outline" :
 
-        $base_button_class = 'btn btn-outline-' . $theme_color;
+        $base_button_class .= ' btn btn-outline-' . $theme_color;
 
         break;
 
     default : 
 
-        $base_button_class = 'btn btn-' . $theme_color;
+        $base_button_class .= ' btn btn-' . $theme_color;
 }
 
 
@@ -123,11 +128,12 @@ if ( isset( $attributes['align'] ) ) {
 
 }
 
+
 //Overall Alignment
-if ( !empty( $alignment ) ) {
+if ( !empty( $alignment ) || !empty( $block_classes ) ) {
 
     ?>
-    <div class="d-flex justify-content-<?php echo $alignment; ?>">
+    <div class="d-flex justify-content-<?php echo $alignment; ?> <?php echo implode( ' ', $block_classes); ?>">
     <?php
 
 }

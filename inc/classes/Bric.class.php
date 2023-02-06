@@ -464,7 +464,7 @@ class Bric {
 				
 				if ( !is_front_page() && function_exists( 'yoast_breadcrumb' ) ) {
 
-					add_action( 'bric_' . get_theme_mod( 'bric_bc_location' ), array( $this, 'print_breadcrumbs') );
+					add_action( 'bric_' . get_theme_mod( 'bric_bc_location', 'after_page_header' ), array( $this, 'print_breadcrumbs') );
 					//var_dump($this->SiteInfo->breadcrumbs['action']);
 				}
 				

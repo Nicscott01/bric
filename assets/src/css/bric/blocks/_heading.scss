@@ -1,50 +1,52 @@
 .heading-wrapper {
-
-    h2, .h2 {
+    h2,
+    .h2 {
         text-transform: $heading-transform;
-        margin-top: $headings-margin-top;
-        margin-bottom: $blocks-margin-bottom;
         position: relative;
-        
-        
-        &:after {
-            content:"";
-            position: absolute;
-            right: 0;
-            bottom:-1rem;
-            width: 100vw;
-            border-bottom: var( --#{$variable-prefix}border-width ) solid var( --#{$variable-prefix}primary ); //write in border thickness
-        }
 
+        @if $enable-heading-rule {
+            margin-top: $headings-margin-top;
+            margin-bottom: $blocks-margin-bottom;   
+
+
+            &:after {
+                content: "";
+                position: absolute;
+                right: 0;
+                bottom: -1rem;
+                width: 100vw;
+                border-bottom: var(--#{$variable-prefix}border-width)
+                    solid
+                    var(--#{$variable-prefix}primary); //write in border thickness
+            }
+        }
 
         &.right-side {
             text-align: right;
 
-            &:after {
-                right:auto;
-                left:0;
+            @if $enable-heading-rule {
+                &:after {
+                    right: auto;
+                    left: 0;
+                }
             }
         }
-
     }
-
 }
-
-
-
 
 .page-header .entry-title {
     text-transform: $heading-transform;
 }
 
-
 .sidebar {
-
-    h2, .h2, 
-    h3, .h3,
-    h4, .h4,
-    h5, .h5 {
+    h2,
+    .h2,
+    h3,
+    .h3,
+    h4,
+    .h4,
+    h5,
+    .h5 {
         color: revert;
     }
-
 }

@@ -19,7 +19,7 @@
     "supports": {
         "align": false,
         "alignWide": false,
-        "anchor": false,
+        "anchor": true,
         "alignContent": false,
         "color": {
             "text": true,

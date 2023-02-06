@@ -799,6 +799,7 @@
             "label": "Page Header Background Image Overlay",
             "description":"",
             "type": "select",
+            "css_var": false,
             "choices": "theme_colors" 
         },
         {
@@ -808,6 +809,7 @@
             "description":"in %",
             "type": "number",
             "units": "%",
+            "css_var": false,
             "sanitize_callback": "bric_floatval"
         },
         {
