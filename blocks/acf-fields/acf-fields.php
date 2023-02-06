@@ -1517,4 +1517,147 @@ if (function_exists('acf_add_local_field_group')) :
 		'show_in_rest' => 0,
 	));
 
+
+
+
+
+
+	acf_add_local_field_group(array(
+		'key' => 'group_63cf41c5caa3c',
+		'title' => 'Block: Accordion',
+		'fields' => array(
+			array(
+				'key' => 'field_63cf48771abd5',
+				'label' => 'Accordion Button Color',
+				'name' => 'accordion_button_color_theme_color',
+				'aria-label' => '',
+				'type' => 'select',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'choices' => array(
+					'default' => 'Default',
+					'primary' => 'Primary',
+					'secondary' => 'Secondary',
+					'tertiary' => 'Tertiary',
+					'quaternary' => 'Quaternary',
+					'light' => 'Light',
+					'dark' => 'Dark',
+					'white' => 'White',
+					'black' => 'Black',
+					'transparent' => 'Transparent',
+				),
+				'default_value' => false,
+				'return_format' => 'value',
+				'multiple' => 0,
+				'allow_null' => 0,
+				'ui' => 0,
+				'ajax' => 0,
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_63cf41c603836',
+				'label' => 'Accordion Button Background',
+				'name' => 'accordion_button_background_theme_color',
+				'aria-label' => '',
+				'type' => 'select',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'choices' => array(
+					'default' => 'Default',
+					'primary' => 'Primary',
+					'secondary' => 'Secondary',
+					'tertiary' => 'Tertiary',
+					'quaternary' => 'Quaternary',
+					'light' => 'Light',
+					'dark' => 'Dark',
+					'white' => 'White',
+					'black' => 'Black',
+					'transparent' => 'Transparent',
+				),
+				'default_value' => false,
+				'return_format' => 'value',
+				'multiple' => 0,
+				'allow_null' => 0,
+				'ui' => 0,
+				'ajax' => 0,
+				'placeholder' => '',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'block',
+					'operator' => '==',
+					'value' => 'acf/accordion',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'normal',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+		'show_in_rest' => 0,
+	));
+
+	acf_add_local_field_group(array(
+		'key' => 'group_63cee84bd441b',
+		'title' => 'Block: Collapse',
+		'fields' => array(
+			array(
+				'key' => 'field_63cee84c0c55f',
+				'label' => 'Header',
+				'name' => 'header',
+				'aria-label' => '',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'maxlength' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'block',
+					'operator' => '==',
+					'value' => 'acf/collapse',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'normal',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+		'show_in_rest' => 0,
+	));
+
 endif;
