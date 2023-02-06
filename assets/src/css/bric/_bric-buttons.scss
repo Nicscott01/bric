@@ -1,3 +1,11 @@
 .btn {
     text-transform: $btn-text-transform;
 }
+
+.cta-btn {
+    --bric-cta-btn-hover-opacity: .63;
+
+    &:hover {  
+        opacity: var( --bric-cta-btn-hover-opacity );
+    }
+}

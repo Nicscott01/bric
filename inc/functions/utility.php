@@ -352,7 +352,8 @@ if ( ! function_exists( 'get_svg_source' ) ) {
 	$decoder = [
 		'left' => 'start',
 		'right' => 'end',
-		'center' => 'center'
+		'center' => 'center',
+		"bottom" => 'end'
 	];
 
 

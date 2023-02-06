@@ -1,0 +1,57 @@
+{
+    "name": "cta-image",
+    "title": "CTA Image",
+    "description": "Call to action with background image",
+    "category": "theme",
+    "icon": "megaphone",
+    "apiVersion": 2,
+    "keywords": [
+        "call",
+        "action",
+        "cta"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php",
+        "postTypes": []
+    },
+    "styles": [
+    ],
+    "supports": {
+        "align": true,
+        "alignWide": false,
+        "anchor": false,
+        "alignContent": true,
+        "color": {
+            "text": true,
+            "background": true,
+            "link": false,
+            "border": true
+        },
+        "alignText": true,
+        "spacing": {
+            "margin": true,
+            "padding": true
+        },
+        "typography": {
+            "lineHeight": false,
+            "fontSize": false
+        },
+        "fullHeight": true,
+        "customClassName": true,
+        "jsx": true
+    },
+    "attributes": {
+
+    },
+    "providesContext": {
+    },
+    "example": {
+        "attributes": {
+            "data": {
+                "text": "This is an example text field",
+                "text_area": "This is an example text area field"
+            }
+        }
+    }
+}

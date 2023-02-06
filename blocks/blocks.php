@@ -16,6 +16,7 @@
    register_block_type( locate_template(  'blocks/collapse/'  ) );
    register_block_type( locate_template(  'blocks/column-item/'  ) );
    register_block_type( locate_template(  'blocks/columns/'  ) );
+   register_block_type( locate_template(  'blocks/cta-image/'  ) );
    register_block_type( locate_template(  'blocks/gallery/' ) );
    register_block_type( locate_template(  'blocks/hero-header/' ) );
    register_block_type( locate_template(  'blocks/menu/' ) );
