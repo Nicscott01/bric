@@ -11,7 +11,7 @@ use function Bric\BricSocialMedia;
 
 $social_icons = get_field( 'social_accounts' );
 $icon_size = get_field( 'icon_size' );
-
+$margin = get_field( 'margin' );
 
 //Left/Center/Right
 //$align = $block['align'];
@@ -38,7 +38,7 @@ if ( !empty( $icon_size ) && intval( $icon_size  ) > 0 ) {
 
     $icons_data = BricSocialMedia()->social_icons;
 
-    //var_dump( $social_icons );
+   // var_dump( $icons_data );
   //  var_dump(  BricSocialMedia()->social_icons );
   //  var_dump( $social_accounts );
 
@@ -63,25 +63,32 @@ foreach( $social_icons as $social ) {
 
     $platform = $social['account'];
     $icon_id = $social['icon']->id;
+
+   // var_dump( $social['icon'] );
     //var_dump( strtolower( $social_icon['account'] ) );
-    $url = $social_accounts[ strtolower( $social['account']) ]['url'];
+
+    if (isset( $social_accounts[ strtolower( $social['account']) ]['url'] )) {
+        $url = $social_accounts[ strtolower( $social['account']) ]['url'];
+    }
 
     //var_dump( $url );
-
-    if ( is_admin() ) {
-
-        $svg = $social['icon']->element;
-    
-    } else {
-    
-        //$social['url'] = $social_accounts[strtolower($social['platform'])]['url'];
-
-        $svg = sprintf( '<svg viewBox="%s"><use xlink:href="#%s"></use></svg>', $icons_data[$icon_id]['viewBox'], $icon_id );
-    }
-    
   
     if ( !empty( $url ) ) {
 
+        if ( is_admin() ) {
+
+            $svg = $social['icon']->element;
+        
+        } else {
+        
+            //$social['url'] = $social_accounts[strtolower($social['platform'])]['url'];
+
+            if ( isset( $icons_data[$icon_id]['viewBox'] ) && !empty( $icons_data[$icon_id]['viewBox'] ) ) {
+                $svg = sprintf( '<svg viewBox="%s"><use xlink:href="#%s"></use></svg>', $icons_data[$icon_id]['viewBox'], $icon_id );
+            }
+        }
+
+        if ( !empty( $svg ) ) {
 ?>
 <li class="social-account list-inline-item m-0">
     <a href="<?php echo $url; ?>" class="social-icon" target="_blank" aria-label="Follow us on <?php echo $platform; ?>">
@@ -89,6 +96,7 @@ foreach( $social_icons as $social ) {
     </a>
 </li>
 <?php
+        }
     }
 }
 ?>

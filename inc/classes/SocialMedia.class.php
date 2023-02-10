@@ -191,14 +191,16 @@ class SocialMedia {
 
         $social_account = $this->get_social_account( strtolower( $platform ) );
 
-        $this->social_icons[ $id ] = [
-            'svg' => $svg,
-            'id'  => $id,
-            'viewBox' => self::getViewBox( $svg ),
-            'platform' => $platform,
-            'url' => $social_account['url']
-        ];
+        if ( isset( $social_account['url'] ) && !empty( $social_account['url'] ) ) {
 
+            $this->social_icons[ $id ] = [
+                'svg' => $svg,
+                'id'  => $id,
+                'viewBox' => self::getViewBox( $svg ),
+                'platform' => $platform,
+                'url' => $social_account['url']
+            ];
+        }
 
         return $this;
     }
@@ -261,7 +263,15 @@ class SocialMedia {
 
         $accounts = $this->get_social_accounts();
 
-        return $accounts[$id];
+        if ( isset( $accounts[$id] ) && !empty( $accounts[$id] ) ) {
+
+            return $accounts[$id];
+
+        } else {
+         
+            return false;
+        
+        }
 
     }
 
@@ -293,13 +303,15 @@ class SocialMedia {
 
             foreach( $social_urls as $service => $url ) {
 
+             
+
                 if ( is_string( $url ) ) {
 
             
                     switch( $service ) {
             
                         case 'facebook_site' :
-            
+
                             if ( !empty( $url ) ) {
 
                                 $this->social_accounts['facebook'] = [

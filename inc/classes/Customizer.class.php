@@ -211,6 +211,20 @@ class Customizer {
 
                                 break;
 
+                            case "media" :
+
+                                $wp_customize->add_control( new \WP_Customize_Media_Control( $wp_customize, sprintf( "%s__%s", $section_id, $default_prop ), [
+                                    'label' => __( $default->label ),
+                                    'description' => __( $default->description ),
+                                    'section' => $section_id,
+                                    'mime_type' => isset( $default->mime_type ) ? $default->mime_type : 'image, audio, video',
+                                    'settings' => sprintf( "%s__%s", $section_id, $default_prop )
+                                ] ));
+
+
+
+                                break;
+
                             case "google_font" :                   
                                 
                                 $wp_customize->add_control( new \Skyrocket_Google_Font_Select_Custom_Control( $wp_customize,  sprintf( "%s__%s", $section_id, $default_prop ),
