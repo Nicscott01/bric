@@ -1621,7 +1621,7 @@ if (function_exists('acf_add_local_field_group')) :
 		'fields' => array(
 			array(
 				'key' => 'field_63cee84c0c55f',
-				'label' => 'Header',
+				'label' => 'Header/Button',
 				'name' => 'header',
 				'aria-label' => '',
 				'type' => 'text',

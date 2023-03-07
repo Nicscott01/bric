@@ -75,9 +75,11 @@ if ( ( isset( $block['backgroundColor'] ) || !empty( $bg_image ) ) && $bg_color_
 }
 
 
+$block_dimensions = get_block_dimensions( $block );
+
 
 ?>
-    <InnerBlocks allowedBlocks="<?php echo esc_attr( wp_json_encode( [ 'acf/column-item' ])) ?>" class="row <?php echo get_bootstrap_flex_classes( $block, 'grid-row' ); ?> cols-mobile-<?php echo $columns_per_row_mobile; ?> cols-tab-<?php echo $columns_per_row_tablet; ?> cols-large-<?php echo $columns_per_row_large; ?> <?php echo isset( $block['className'] ) ? $block['className'] : '';?>"/>
+    <InnerBlocks allowedBlocks="<?php echo esc_attr( wp_json_encode( [ 'acf/column-item' ])) ?>" class="row <?php echo get_bootstrap_flex_classes( $block, 'grid-row' ); ?> <?php echo 'gap-' . $block_dimensions['blockGap']; ?> cols-mobile-<?php echo $columns_per_row_mobile; ?> cols-tab-<?php echo $columns_per_row_tablet; ?> cols-large-<?php echo $columns_per_row_large; ?> <?php //echo isset( $block['className'] ) ? $block['className'] : '';?>"/>
     </div>
 </div>
 </div>

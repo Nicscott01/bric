@@ -17,12 +17,18 @@ foreach( $include as $item ) {
     
 }
 
+$block_classes = get_block_classes( $block );
+
+$dimensions = get_bootstrap_flex_classes( $block, $orientation == 'wide' ? 'grid-row' : 'column' );
+
+//var_dump( $dimensions );
+
 //var_dump( $attributes );
 
 
  ?>
- <div class="block company-info-block <?php echo isset( $block['className'] ) ? $block['className'] : ''; ?> d-flex justify-content-center">
-    <address class="row <?php echo $orientation == 'stacked' ? 'justify-content-center align-items-center text-center' : ''; ?>">
+ <div class="block company-info-block <?php echo isset( $block['className'] ) ? $block['className'] : ''; ?> <?php echo $block_classes; ?>">
+    <address class="row <?php echo $dimensions; //$orientation == 'stacked' ? 'justify-content-center align-items-center text-center' : ''; ?> mb-0">
             <?php 
 
             if ( isset( $inc['company_name'] ) ) {

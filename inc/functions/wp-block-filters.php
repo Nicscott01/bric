@@ -40,6 +40,14 @@ function has_parent_block( $context, $parsed_block, $parent_block ) {
 
     if ( in_array( $parsed_block['blockName'], $catch_these)  ) {
 
+
+        if( $parsed_block['blockName'] == 'core/group' ) {
+
+            //var_dump( $context );
+
+        }
+
+
         if ( !empty( $parent_block ) ) {
 
             $has_parent_block = true;
@@ -361,7 +369,10 @@ function has_child_block_type( $block, $type ) {
             
             } 
 
-            //var_dump( $block );
+            /*
+            var_dump( $block['attrs'] );
+
+
 
             $align = isset( $block['attrs']['align'] ) ? $block['attrs']['align'] : 'none';
             $layout = isset( $block['attrs']['layout']['type'] ) ? $block['attrs']['layout']['type'] : '';
@@ -398,7 +409,7 @@ function has_child_block_type( $block, $type ) {
             $content = str_replace( $search, $alignment_class, $content );
             
             $content = bric_block_general_css_replacement( $content );
-
+            */
 
             break;
             
@@ -500,6 +511,8 @@ function bric_block_general_css_replacement( $content ) {
         'has-primary-background-color',
         'has-secondary-background-color',
         'has-tertiary-background-color',
+        'has-quaternary-background-color',
+        'has-quinary-background-color',
         'has-dark-background-color',
         'has-light-background-color',
         'wp-block-columns',
@@ -528,6 +541,8 @@ function bric_block_general_css_replacement( $content ) {
         'bg-primary',
         'bg-secondary',
         'bg-tertiary',
+        'bg-quaternary',
+        'bg-quinary',
         'bg-dark',
         'bg-light',
         'wp-block-columns row',

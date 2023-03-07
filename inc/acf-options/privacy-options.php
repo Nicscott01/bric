@@ -31,6 +31,7 @@ add_action( 'bric_head_first', function() {
 
     $cookie_consent_type = get_field( 'cookie_consent_type', 'option' );
 
+
     if ( $cookie_consent_type == 'uc' ) {
 
         get_template_part( 'template-parts/components/privacy/cookie-consent-loader' );

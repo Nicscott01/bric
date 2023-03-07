@@ -137,3 +137,18 @@
 a[href^="tel:"] {
     word-break: keep-all;
 }
+
+
+
+
+//
+//  New BS5 Offcanvas menu
+//
+
+.offcanvas.show {
+
+    .dropdown-menu {
+        display: block;
+        border: none;
+    }
+}

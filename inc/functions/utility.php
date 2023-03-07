@@ -649,6 +649,13 @@ function decode_block_dimensions( $dimensions ) {
 	
 	}
 
+	if ( isset( $block['className'] ) && !empty( $block['className'] ) ) {
+
+		$classes[] = $block['className'];
+	
+	}
+
+
 
 
 	/**
@@ -663,7 +670,7 @@ function decode_block_dimensions( $dimensions ) {
 	}
 
 
-	return implode( ' ', $classes );
+	return trim( implode( ' ', $classes ) );
 
 
  }
@@ -675,6 +682,8 @@ function decode_block_dimensions( $dimensions ) {
 
 
  function column_classes( $col_val, $size = '' ) {
+
+	//var_dump( $col_val );
 
     $size = isset( $size ) && !empty( $size ) ? $size : '0';
 
@@ -688,15 +697,19 @@ function decode_block_dimensions( $dimensions ) {
     ];
 
 
-    if ( !empty( $col_val ) && $col_val > 0 ) {
+    if ( !empty( $col_val ) && (int) $col_val > 0 ) {
 
         $class = $prefix_map[$size] . '-' . $col_val;
     
-    } elseif ( $col_val == -1 ) {
+    } elseif ( (int) $col_val == -1 ) {
 
         $class = $prefix_map[$size] . '-auto';
     
-    } else {
+    } elseif( (int) $col_val == 0 ) {
+		
+		$class = $prefix_map[$size];
+
+	}else {
 
         $class = ''; //$prefix_map[$size];
     }

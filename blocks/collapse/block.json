@@ -22,9 +22,9 @@
         "anchor": true,
         "alignContent": true,
         "color": {
-            "text": false,
+            "text": true,
             "background": true,
-            "link": false
+            "link": true
         },
         "alignText": true,
         "spacing": {

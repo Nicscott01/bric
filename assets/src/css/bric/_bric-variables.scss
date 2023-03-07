@@ -5,7 +5,7 @@
 $theme-colors-custom: (
     "tertiary": $tertiary,
     "quaternary": $quaternary
-);
+) !default;
 
 //BRIC OPTIONS
 $enable-heading-rule: true !default;

@@ -2,6 +2,7 @@
 
 
 include get_template_directory().'/inc/classes/BootstrapNavwalker.class.php';
+include get_template_directory().'/inc/classes/Bootstrap5Navwalker.class.php';
 
 
 include get_template_directory().'/inc/classes/BricNotices.class.php';

@@ -50,7 +50,7 @@
 <?php
  $main_nav_menu = wp_nav_menu( [
     'menu' => $menu,
-    'menu_class' => 'd-flex flex-' . $flex_direction . ' list-unstyled m-0 gap-' . $gap,
+    'menu_class' => 'd-flex flex-' . $flex_direction . ' flex-wrap justify-content-center list-unstyled m-0 gap-' . $gap,
     'container_class' => 'menu-container ' . get_block_classes( $block ),
  ]);
  ?>

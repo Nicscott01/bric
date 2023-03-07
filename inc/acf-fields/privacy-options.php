@@ -30,6 +30,32 @@ if( function_exists('acf_add_local_field_group') ):
                 'ui' => 1,
             ),
             array(
+                'key' => 'field_63d15c3c1352d',
+                'label' => 'Cookie Consent Type',
+                'name' => 'cookie_consent_type',
+                'aria-label' => '',
+                'type' => 'select',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'choices' => array(
+                    'uc' => 'Usercentrics / Termageddon',
+                    'basic' => 'Basic Banner',
+                ),
+                'default_value' => false,
+                'return_format' => 'value',
+                'multiple' => 0,
+                'allow_null' => 0,
+                'ui' => 0,
+                'ajax' => 0,
+                'placeholder' => '',
+            ),
+            array(
                 'key' => 'field_63d13d16bdbfb',
                 'label' => 'Usercentrics Code',
                 'name' => 'cc_code',
@@ -37,7 +63,15 @@ if( function_exists('acf_add_local_field_group') ):
                 'type' => 'text',
                 'instructions' => 'Just the code within "data-settings-id" of the Usermetrics JS code.',
                 'required' => 0,
-                'conditional_logic' => 0,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_63d15c3c1352d',
+                            'operator' => '==',
+                            'value' => 'uc',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',
@@ -57,7 +91,15 @@ if( function_exists('acf_add_local_field_group') ):
                 'type' => 'true_false',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' => 0,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_63d15c3c1352d',
+                            'operator' => '==',
+                            'value' => 'uc',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',

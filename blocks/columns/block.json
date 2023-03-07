@@ -36,7 +36,8 @@
                 "top",
                 "bottom"
             ],
-            "padding": true
+            "padding": true,
+            "blockGap": true
         },
         "typography": {
             "lineHeight": false,
